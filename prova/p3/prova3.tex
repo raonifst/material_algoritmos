@@ -1,0 +1,301 @@
+\documentclass[11pt]{article}
+\usepackage[brazil]{babel}
+\usepackage{isolatin1}
+\usepackage{charter}
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{fancybox}
+\usepackage{tikz}
+
+
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.7}
+
+
+\newcommand{\esp}{$\;\;\;\;\;$}
+\setlength{\parskip}{.5pc} 
+\setlength{\paperwidth}{216mm}  % tamanho carta
+\setlength{\paperheight}{219mm}
+\setlength{\textwidth}{41pc}
+\setlength{\textheight}{60pc}
+\setlength{\oddsidemargin}{-1cm}
+\setlength{\evensidemargin}{-1cm}
+\setlength{\topmargin}{-1cm}
+\begin{document}
+\parindent=0pt
+
+\begin{center}
+{\bf {\large Algoritmos e Programação de Computadores}} \\
+
+3\raisebox{1ex}{\underline{a}} Prova
+\end{center}\vspace*{-7mm}
+
+\begin{minipage}{13cm}
+\framebox[13cm][l]{{\bf Nome:}}
+\vspace{\baselineskip}
+\framebox[8cm][l]{{\bf RGA:}} 
+
+\noindent
+{\bf Instruções:} {\bf Não é
+permitida consulta} a qualquer material. {\em Somente serão
+consideradas respostas nos espaços marcados.} Use os versos das folhas
+como rascunho.
+\end{minipage} \hfill 
+\begin{minipage}{5cm}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Questão & Valor & Nota \\ \hline \hline
+1 & 3,0 & \\ \hline
+2 & 2,5 & \\ \hline
+3 & 2,5 & \\ \hline
+4 & 2,0 & \\ \hline \hline
+Total & 10,0 & \\ \hline
+\end{tabular}\hspace*{-2cm}
+\end{center}
+\end{minipage}
+
+\vspace*{-4mm}
+
+
+\vspace{\baselineskip} {\bf 1.} O programa a seguir faz a leitura de seu RGA e 
+armazena os quatro últimos dígitos em um vetor de inteiros. Este vetor é utilizado para preencher uma matriz de inteiros.
+\begin{verbatim}
+1 #include <stdio.h>
+2
+3 int main() {
+4     int vetor[4], matriz[4][4], i, j, coluna, x, maior;
+5     long rga;
+6     scanf("%ld", &rga);
+7     for(i = 4; i > 0; i--)  { /* Leitura dos quatros últimos dígitos do seu RGA */
+8          vetor[i-1] = rga % 10;
+9          rga /= 10;
+10    }
+11
+12    /* Início da etapa de preenchimento */
+13    for(i = 0;  i < 4; i++) 
+14         for(j = 0; j < 4; j++)
+15              matriz[i][j] = i + j; 
+16
+17    for(i = 0;  i < 4; i++) 
+18         matriz[i][i] = vetor[i]; 
+19    /* Fim da etapa de preenchimento */
+20                              
+21    coluna = 3;
+22    maior = matriz[3][coluna]; 
+23    for(i = 3; i >= 0; i--) {
+24         for(j = 3; j >= 0; j--) {
+25              if(matriz[i][j] > maior) {
+26                   maior = matriz[i][j];
+27                   coluna = j;
+28              }
+29         }
+30     }
+31     x = 0;
+32     for(i = 0; i < 4; i++)
+33          x += matriz[i][coluna];
+34
+35     printf("x = %d\n", x);
+36     return 0;
+37 }
+\end{verbatim}
+\newpage
+ {\bf a)} Mostre a matriz obtida por este programa após a etapa de preenchimento.  
+
+{\Large\begin{tabular}{|c|}
+\hline
+\hspace*{\textwidth} \\ \hline % 1
+\mbox{}\\ \hline %2
+\mbox{}\\ \hline %3
+\mbox{}\\ \hline %4
+\mbox{}\\ \hline %5
+\mbox{}\\ \hline %6
+\end{tabular}}\\
+
+{\bf b)} Qual o valor é impresso na linha 35? O que a variável {\it x} representa?  
+
+{\Large\begin{tabular}{|c|}
+\hline
+\hspace*{\textwidth} \\ \hline % 1
+\mbox{}\\ \hline %2
+\mbox{}\\ \hline %3
+\mbox{}\\ \hline %4
+\mbox{}\\ \hline %5
+\mbox{}\\ \hline %6
+\end{tabular}}\\
+
+ {\bf c)} Mostre uma matriz de tamanho $4\times 4$, para a qual, em uma execu\c{c}ão deste código, é máxima a quantidade de vezes em que as instru\c{c}ões das linhas 26 e 27 são executadas.
+ 
+{\Large\begin{tabular}{|c|}
+\hline
+\hspace*{\textwidth} \\ \hline % 1
+\mbox{}\\ \hline %2
+\mbox{}\\ \hline %3
+\mbox{}\\ \hline %4
+\mbox{}\\ \hline %5
+\mbox{}\\ \hline %6
+\end{tabular}}
+
+\newpage
+
+
+\vspace{\baselineskip} {\bf 2.} A seguinte fun\c{c}ão recursiva recebe um número inteiro positivo $n$ e um vetor $v$ contendo $n$ números inteiros em ordem crescente. Preencha os espa\c{c}os deixados em branco para que a fun\c{c}ão verifique se $v$ possui números repetidos.  Os valores $1$ e $0$ devem ser devolvidos, respectivamente, para indicar se há ou não repeti\c{c}ões.\\
+
+
+\verb+1 int rep(int v[], int n)  {+\\
+\verb+     +\\
+\verb+2     if(+ \ovalbox{\begin{minipage}{5cm}\hfill\vspace{0.8cm}\end{minipage}} \verb+) //Base da recursão+ \\ 
+\verb+3          return 0;+\\
+\verb+    +\\
+\verb+4     return+ \ovalbox{\begin{minipage}{5cm}\hfill\vspace{0.8cm}\end{minipage}} \verb+||+ \ovalbox{\begin{minipage}{5cm}\hfill\vspace{0.8cm}\end{minipage}}\verb+;+\\
+\verb+5 }+\\
+%%4     int vetor[4], matriz[4][4], i, j, coluna, x, maior;
+%\end{verbatim}
+
+%Observe que os espa\c{c}os
+
+
+\newpage
+
+\vspace{\baselineskip} {\bf 3.} Escreva uma fun\c{c}ão recursiva que recebe dois números inteiros $a$ e $b$ como parâmetro e calcula, utilizando somente subtra\c{c}ões, o resultado da divisão inteira de $a$ por $b$. Para $a = 10$ e $b = 3$, por exemplo, a fun\c{c}ão deve devolver $3$.
+
+{\Large\begin{tabular}{|l|} \hline
+\\ \hline % 1
+\hspace*{\textwidth} \mbox{}\\ \hline %2
+\mbox{}\\ \hline %3
+\mbox{}\\ \hline %4
+\mbox{}\\ \hline %5
+\mbox{}\\ \hline %6
+\mbox{}\\ \hline %7
+\mbox{}\\ \hline %8
+\mbox{}\\ \hline %9
+\mbox{}\\ \hline %10
+\mbox{}\\ \hline %11
+\mbox{}\\ \hline %12
+\mbox{}\\ \hline %13
+\mbox{}\\ \hline %14
+\mbox{}\\ \hline %15
+\mbox{}\\ \hline %16
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %18
+\mbox{}\\ \hline %19
+\mbox{}\\ \hline %15
+\mbox{}\\ \hline %16
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %18
+\mbox{}\\ \hline %19
+\mbox{}\\ \hline %15
+\mbox{}\\ \hline %16
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %18
+\mbox{}\\ \hline %19
+\mbox{}\\ \hline 
+\mbox{}\\ \hline
+\mbox{}\\ \hline 
+\end{tabular}}\vspace*{-2cm}\newpage
+
+
+\vspace{\baselineskip} {\bf 4.} O programa a seguir recebe uma cadeia de caracteres contendo uma mensagem escondida. A mensagem foi codificada considerando as diagonais de uma matriz de tamanho $n \times n$ (veja exemplo). O programa deverá mostrar a mensagem na tela. As fun\c{c}ões {\tt main} e {\tt tamanho\_frase} são dadas. Implemente as outras duas fun\c{c}ões.\\
+
+\hline
+\noindent Exemplo de mensagem de entrada\\
+{\tt 1lcpskl+y5mcpj3bpbsllcrehfmeokecwitsnglrex(tj(xypynbqfxx)uvgfaj)}\\
+\hline
+
+\noindent Mensagem em formato matricial
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+\cellcolor{Gray} 1 & l & c & p & s & k & l & \cellcolor{Gray}+ \\ \hline
+y & \cellcolor{Gray} 5 & m & c & p & j & \cellcolor{Gray}3 & b \\ \hline
+p & b & \cellcolor{Gray} s & l & l & \cellcolor{Gray}c & r & e \\ \hline
+h & f & m & \cellcolor{Gray} e & \cellcolor{Gray}o & k & e & c \\ \hline
+w & i & t & \cellcolor{Gray}s & \cellcolor{Gray} n & g & l & r \\ \hline
+e & x & \cellcolor{Gray}( & t & j & \cellcolor{Gray}( & x & y \\ \hline
+p & \cellcolor{Gray}y & n & b & q & f & \cellcolor{Gray}x & x \\ \hline
+\cellcolor{Gray}) & u & v & g & f & a & j & \cellcolor{Gray}) \\ \hline
+\end{tabular}
+\end{center}
+
+\hline
+\noindent Mensagem escondida
+
+{\tt 15sen(x)+3cos(y)}\\
+\hline
+
+
+\begin{verbatim}
+#include <stdio.h>
+#include <math.h>
+
+int tamanho_frase(char frase[]);
+void preencher_matriz(char frase[], char matriz[100][100], int n);
+void mostrar_mensagem(char matriz[100][100], int n);
+
+int main()
+{
+    char matriz[100][100];
+    char frase[10000];
+    int n;
+
+    scanf("%s", frase);
+    n = sqrt(tamanho_frase(frase));
+    preencher_matriz(frase, matriz, n);
+    mostrar_mensagem(matriz, n);
+
+    return 0;
+}
+
+\end{verbatim}
+\newpage
+\begin{verbatim}
+int tamanho_frase(char frase[])
+{
+    int i = 0;
+    while(frase[i]!= `\0') i++;
+    return i;
+}
+
+\end{verbatim}
+ {\bf a)} Implemente a fun\c{c}ão {\tt preencher\_matriz}, que recebe uma cadeia de caracteres de tamanho $n \times n$ e preenche a matriz com estes caracteres.
+ 
+{\Large\begin{tabular}{|l|} \hline
+{\Small\verb+void preencher_matriz(char frase[], char matriz[100][100], int n) { +} \\ \hline % 1
+\hspace*{\textwidth} \mbox{}\\ \hline %2
+\mbox{}\\ \hline %3
+\mbox{}\\ \hline %4
+\mbox{}\\ \hline %5
+\mbox{}\\ \hline %6
+\mbox{}\\ \hline %7
+\mbox{}\\ \hline %8
+\mbox{}\\ \hline %9
+\mbox{}\\ \hline %10
+\mbox{}\\ \hline %11
+\verb+}+\\ \hline
+\end{tabular}}
+\\ 
+
+{\bf b)} Implemente a fun\c{c}ão {\tt mostrar\_mensagem} que imprime a mensagem escondida nas diagonais da matriz.
+
+{\Large\begin{tabular}{|l|} \hline
+{\Small\verb+void mostrar_mensagem(char matriz[100][100], int n) {+} \\ \hline % 1
+\hspace*{\textwidth} \mbox{}\\ \hline %2
+\mbox{}\\ \hline %3
+\mbox{}\\ \hline %4
+\mbox{}\\ \hline %5
+\mbox{}\\ \hline %6
+\mbox{}\\ \hline %7
+\mbox{}\\ \hline %8
+\mbox{}\\ \hline %9
+\mbox{}\\ \hline %10
+\mbox{}\\ \hline %11
+\mbox{}\\ \hline %12
+\mbox{}\\ \hline %12
+\verb+}+\\ \hline
+\end{tabular}}
+
+
+
+\end{document}

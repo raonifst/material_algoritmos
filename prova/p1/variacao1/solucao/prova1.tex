@@ -1,0 +1,268 @@
+\documentclass[11pt]{article}
+\usepackage[brazil]{babel}
+\usepackage{isolatin1}
+\usepackage{charter}
+\usepackage[usenames]{color}
+
+\newcommand{\esp}{$\;\;\;\;\;$}
+\setlength{\parskip}{.5pc} 
+\setlength{\paperwidth}{216mm}  % tamanho carta
+\setlength{\paperheight}{219mm}
+\setlength{\textwidth}{41pc}
+\setlength{\textheight}{60pc}
+\setlength{\oddsidemargin}{-1cm}
+\setlength{\evensidemargin}{-1cm}
+\setlength{\topmargin}{-1cm}
+\begin{document}
+\parindent=0pt
+
+\begin{center}
+{\bf {\large Algoritmos e Programação de Computadores}} \\
+
+1\raisebox{1ex}{\underline{a}} Prova
+\end{center}\vspace*{-7mm}
+
+\begin{minipage}{13cm}
+\framebox[13cm][l]{{\bf Nome:}}
+
+\vspace{\baselineskip}
+\framebox[8cm][l]{{\bf RGA:}} 
+
+\noindent
+{\bf Instruções:} {\bf Não é
+permitida consulta} a qualquer material. {\em Somente serão
+consideradas respostas nos espaços marcados.} Use os versos das folhas
+como rascunho.
+\end{minipage} \hfill 
+\begin{minipage}{5cm}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Questão & Valor & Nota \\ \hline \hline
+1 & 2,0 & \\ \hline
+2 & 2,0 & \\ \hline
+3 & 2,0 & \\ \hline
+4 & 2,0 & \\ \hline
+5 & 2,0 & \\ \hline \hline
+Total & 10,0 & \\ \hline
+\end{tabular}\hspace*{-2cm}
+\end{center}
+\end{minipage}
+
+\vspace*{-4mm}
+
+
+\vspace{\baselineskip} {\bf 1.} Considere o código a seguir e responda as perguntas abaixo.
+\begin{verbatim}
+#include <stdio.h>
+int main()
+{
+   int i, j, n, m;
+   scanf("%d %d", &n, &m);
+   for(i = 1; i <= n; i++)	{
+      for(j = i; j <= m; j++)	{
+         printf("*");
+      }
+      printf("\n");
+   }
+   return 0;
+}
+
+\end{verbatim}
+
+\vspace{\baselineskip} {\bf a)} Mostre a saída da execução deste programa para $m$ igual a 5 e $n$ igual a 5.  
+
+{\Large\begin{tabular}{|l|}
+\hline
+{\textcolor{red}{\bf *****}} \\ \hline % 1
+{\textcolor{red}{\bf ****}}\mbox{}\\ \hline %2
+{\textcolor{red}{\bf ***}}\mbox{}\\ \hline %3
+{\textcolor{red}{\bf **}} \mbox{}\\ \hline %4
+{\textcolor{red}{\bf *}}\mbox{}\\ \hline %5
+\mbox{}\hspace*{\textwidth}\\ \hline %6
+\mbox{}\\ \hline %7
+\end{tabular}}
+
+\vspace{\baselineskip} {\bf b)} Supondo que os valores lidos da entrada são 7 e 7, respectivamente, quantas vezes este programa imprime o caractere asterisco (`*')?
+
+{\Large\begin{tabular}{|l|}
+\hline
+\textcolor{red}{O caractere asterisco será impresso 28 vezes.} \\ \hline % 1
+\hspace*{\textwidth}\mbox{}\\ \hline %2
+\end{tabular}}\vspace*{-2cm} \newpage
+
+
+\vspace{\baselineskip} {\bf 2.} Escreva um programa em linguagem C que calcula a soma dos 100 primeiros termos da seguinte série:
+\[s = \frac{1}{2} - \frac{3}{4} + \frac{5}{6} - \frac{7}{8} + ... \]
+{\Large\begin{tabular}{|l|} \hline
+\textcolor{red}{$\#$include $<$stdio.h$>$} \\ \hline % 1
+\mbox{}\\ \hline %2
+{\hspace{0cm}\textcolor{red}{int main( )}\mbox{}\\ \hline %3
+{\hspace{0cm}\textcolor{red}{\{}\mbox{}\\ \hline %4
+{\hspace{1.5cm}\textcolor{red}{double soma= 0.0;}\mbox{}\\ \hline %5
+{\hspace{1.5cm}\textcolor{red}{int i, denominador = 2, numerador = 1, sinal = 1;}\mbox{}\\ \hline %6
+\mbox{}\\ \hline %7
+{\hspace{1.5cm}\textcolor{red}{for( i = 1; i $<= 100$ ; i++ )	\{}\mbox{}\\ \hline %8
+{\hspace{3cm}\textcolor{red}{soma +=  sinal*(numerador+0.0)/denominador;}\mbox{}\\ \hline %9
+{\hspace{3cm}\textcolor{red}{denominador += 2;}\mbox{}\\ \hline %10
+{\hspace{3cm}\textcolor{red}{numerador += 2;}\mbox{}\\ \hline %11
+{\hspace{3cm}\textcolor{red}{sinal *=-1;}\mbox{}\\ \hline %12
+{\hspace{1.5cm}\textcolor{red}{\}}\mbox{}\\ \hline %13
+\mbox{}\\ \hline %14
+{\hspace{1.5cm}\textcolor{red}{printf(``\%lf\n'', soma); }\mbox{}\\ \hline %15
+\mbox{}\\ \hline %16
+{\hspace{1.5cm}\textcolor{red}{return 0;}\mbox{}\\ \hline %17
+{\hspace{0cm}\textcolor{red}{\}}\mbox{}\\ \hline %18
+\mbox{}\hspace*{\textwidth}\\ \hline %19
+\mbox{}\\ \hline %15
+\mbox{}\\ \hline %16
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %18
+\mbox{}\\ \hline %19
+\mbox{}\\ \hline %15
+\mbox{}\\ \hline %16
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %18
+\mbox{}\\ \hline %19
+\mbox{}\\ \hline 
+\mbox{}\\ \hline 
+\mbox{}\\ \hline 
+\mbox{}\\ \hline 
+\end{tabular}}\vspace*{-2cm}\newpage
+
+\vspace{\baselineskip} {\bf 3.} Um número inteiro é dito {\it abundante} se a soma dos seus divisores (excluindo o próprio número)
+é maior do que ele próprio. Por exemplo, o número $12$ é denominado abundante pois a soma dos seus divisores (1, 2, 3, 4 e 6)
+é igual a 16. Sabendo disso, escreva um programa em linguagem C que dado um número, lido do teclado, imprima ``SIM" ~se este 
+número é abundante e ``NAO"~ caso contrário.
+{\Large\begin{tabular}{|l|} \hline
+\textcolor{red}{$\#$include $<$stdio.h$>$} \\ \hline % 1
+\mbox{}\\ \hline %2
+{\hspace{0cm}\textcolor{red}{int main( )}\mbox{}\\ \hline %3
+{\hspace{0cm}\textcolor{red}{\{}\mbox{}\\ \hline %4
+{\hspace{1.5cm}\textcolor{red}{int i, n, soma = 1;}\mbox{}\\ \hline %5
+\mbox{}\\ \hline %6
+{\hspace{1.5cm}\textcolor{red}{scanf(``\%d'',\&n);}\mbox{}\\ \hline %7
+\mbox{}\\ \hline %8
+{\hspace{1.5cm}\textcolor{red}{for(i=2; i $<=$ n/2 ; i++)~\{}\mbox{}\\ \hline %9
+{\hspace{3cm}\textcolor{red}{if (n\%i == 0)}\mbox{}\\ \hline %10
+{\hspace{4.5cm}\textcolor{red}{soma += i;}\mbox{}\\ \hline %11
+{\hspace{1.5cm}\textcolor{red}{\}}\mbox{}\\ \hline %13
+\mbox{}\\ \hline %13
+{\hspace{1.5cm}\textcolor{red}{if(soma $>$ n)}\mbox{}\\ \hline %12
+{\hspace{3cm}\textcolor{red}{printf("SIM\n");}\mbox{}\\ \hline %13
+{\hspace{1.5cm}\textcolor{red}{else}\mbox{}\\ \hline %14
+{\hspace{3cm}\textcolor{red}{printf("NAO\n");}\mbox{}\\ \hline %15
+\mbox{}\\ \hline %16
+{\hspace{1.5cm}\textcolor{red}{return 0;}\mbox{}\\ \hline %17
+{\hspace{-0cm}\textcolor{red}{\}}\mbox{}\\ \hline %18
+\mbox{}\hspace*{\textwidth}\\ \hline %19
+\mbox{}\\ \hline %16
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %18
+\mbox{}\\ \hline %19
+\mbox{}\\ \hline %15
+\mbox{}\\ \hline %18
+\mbox{}\\ \hline %19
+\mbox{}\\ \hline 
+\mbox{}\\ \hline
+\mbox{}\\ \hline 
+\mbox{}\\ \hline 
+\mbox{}\\ \hline 
+\end{tabular}}\vspace*{-2cm}\newpage
+
+
+
+\vspace{\baselineskip} {\bf 4.} Considere o seguinte código que encontra e imprime o menor número 
+em uma sequência de $n$ números digitados.
+\begin{verbatim}
+1  #include <stdio.h>
+2  int main()	{
+3     int numero, i, n, menor;	
+4     printf("Informe a quantidade de numeros: ");
+5     scanf("%d", &n);	
+6     if(n<=0){
+7        printf("Quantidade invalida\n");
+8        return 1;
+9     }	
+10    printf("Informe um numero: ");
+11    scanf("%d", &numero);
+12    menor = numero;
+13    for( i = 2; i <=n; i++)	{
+14       printf("Informe um numero: ");
+15       scanf("%d", &numero);
+16       if(numero < menor)
+17          menor = numero;
+18    }
+19    printf("O menor numero digitado foi: %d\n", menor);	
+20    return 0;
+21  }
+
+\end{verbatim}
+
+\vspace{\baselineskip} {\bf a)} Mostre uma sequência de $5$ números para qual, em uma execução deste programa, a quantidade de vezes 
+em que a instrução da linha $17$ é executada é máxima.
+
+{\Large\begin{tabular}{|l|} \hline
+ \textcolor{red}{Qualquer sequência estritamente decrescente como, por exemplo, 5, 4, 3, 2, 1.}\\ \hline % 
+\end{tabular}}
+
+\vspace{\baselineskip} {\bf b)} Mostre o que deve ser alterado neste código para que o maior número da sequência seja
+encontrado e impresso.
+
+{\Large\begin{tabular}{|l|} \hline
+\textcolor{red}{03 - int numero, i, n, maior;} \\ \hline
+\textcolor{red}{12 - maior = numero;} \\ \hline
+\textcolor{red}{16 - if(numero $>$ maior)} \\ \hline
+\textcolor{red}{17 - maior = numero;} \\ \hline
+\textcolor{red}{19 - printf(``O maior numero digitado foi: \%d$\backslash${\tt n}'', maior);} \\ \hline
+\hspace*{\textwidth} \\ \hline % 6
+\hspace*{\textwidth} \\ \hline % 7
+\end{tabular}}\newpage
+
+
+\vspace{\baselineskip} {\bf 5.} Escreva um programa em linguagem C que dado um número inteiro $n$, lido do teclado,
+calcula e imprime a soma dos algorismos deste número. 
+Por exemplo, para $n$ valendo $867$ deve-se imprimir $21$ que é o resultado da soma de $8$, $6$ e $7$. \\
+{\Large\begin{tabular}{|l|} \hline
+\textcolor{red}{$\#$include $<$stdio.h$>$} \\ \hline % 1
+\mbox{}\\ \hline %2
+\textcolor{red}{int main( )}\mbox{}\\ \hline %3
+\textcolor{red}{\{}\mbox{}\\ \hline %4
+\hspace{1.5cm}\textcolor{red}{int n, soma = 0;}\mbox{}\\ \hline %5
+\hspace{1.5cm}\textcolor{red}{scanf(``\%d'',\&n);}\mbox{}\\ \hline %6
+\mbox{}\\ \hline %7
+\hspace{1.5cm}\textcolor{red}{while(n $>$ 0)~\{}\mbox{}\\ \hline %8
+\hspace{3cm}\textcolor{red}{soma += n \% 10;} \mbox{}\\ \hline %9
+\hspace{3cm}\textcolor{red}{n = n / 10;}\mbox{}\\ \hline %10
+\hspace{1.5cm}\textcolor{red}{\}}\mbox{}\\ \hline %11
+\mbox{}\\ \hline %12
+\hspace{1.5cm}\textcolor{red}{printf(``\%d\n'', soma);}\mbox{}\\ \hline %13
+\hspace{1.5cm}\textcolor{red}{return 0;}\mbox{}\\ \hline %14
+\textcolor{red}{\}}\mbox{}\\ \hline %15
+\mbox{}\\ \hline %16
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %18
+\mbox{}\\ \hline %19
+\mbox{}\\ \hline %15
+\mbox{}\\ \hline %16
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %18
+\mbox{}\\ \hline %19
+\mbox{}\\ \hline %15
+\hspace*{\textwidth}\mbox{}\\ \hline %16
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %18
+\mbox{}\\ \hline %19
+\mbox{}\\ \hline 
+\mbox{}\\ \hline
+\mbox{}\\ \hline 
+\mbox{}\\ \hline 
+\end{tabular}}\vspace*{-2cm}\newpage
+
+
+
+
+
+\end{document}

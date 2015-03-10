@@ -1,0 +1,8 @@
+a) 1 2 3 4 5
+
+b) linha 3  - soma;
+   linha 12 - soma = numero;
+   linha 16 - 
+   linha 17 - soma += numero;
+   linha 18 -
+   linha 19 - printf("A media dos numeros digitos e: %f\n", soma/n);

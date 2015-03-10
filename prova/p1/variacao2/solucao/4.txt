@@ -1,0 +1,7 @@
+a) 5 4 3 2 1
+
+b) linha 3  - maior;
+   linha 12 - maior = numero;
+   linha 16 - if( numero > maior)
+   linha 17 - maior = numero;
+   linha 19 - printf("O maior numero digitado foi: %d\n", maior);

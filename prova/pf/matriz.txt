@@ -1,0 +1,35 @@
+Em álgebra linear, uma matriz $M$ de tamanho $n \times m$ está na forma de {\it escada} quando, para cada linha $l \in \{0, 1 \ldots, n-1\}$, as condições a seguir forem satisfeitas:
+\begin{itemize}
+\item Se todos os elementos da linha $l$ são iguais à zero, então todos os elementos das linhas abaixo de $l$ também são iguais à zero.
+\item Caso contrário, seja $a_{lj}$ (linha $l$ e coluna $j$) o elemento diferente de zero mais à esquerda  da linha $l$; então, para todas as
+linhas abaixo de $l$, todos os elementos nas colunas $c$, $c <= j$,  são
+iguais à zero.
+\end{itemize} 
+
+As matrizes de tamanho $4 \times 6$ e $5 \times 8$ a seguir, por exemplo, estão em formato de escada.
+\[ \left( \begin{array}{cccccc}
+1 & 2 & 9 & 9 & 9 & 9\\
+0 & 0 & 3 & 9 & 9 & 9 \\
+0 & 0 & 0 & 0 &5 &9 \\
+0 &0 &0 &0 &0 &6
+\end{array} \right)\]
+
+\[ \left( \begin{array}{cccccccc}
+0 &5 &1 &0 &3 &2 &2 &0\\
+0 &0 &0 &0 &4 &0 &1 &2\\
+0 &0 &0 &0 &0 &0 &3 &2\\
+0 & 0 &0 &0 &0 &0 &0 &0\\
+0 & 0 &0 &0 &0 &0 &0 &0\\
+\end{array} \right)\]
+
+A seguinte matriz de tamanho $5 \times 5$, por outro lado, não está em forma de escada.
+\[ \left( \begin{array}{ccccc}
+1 & 1 &2 &3 &4\\
+0 &1 &1 &4 &5\\
+0 &1 &2 &3 &6\\
+0 &0& 0 &2 &0\\
+0 &0 &0 &0 &0
+\end{array} \right)\]
+
+Escreva uma fun\c{c}ão que recebe uma matriz de números inteiros $M$ e o tamanho de suas dimensões, $n$ e $m$, e verifica se $M$ está em formato de escada.
+Sua fun\c{c}ão deve devolver o valor $1$ caso a matriz esteja no formato, ou $0$, caso contrário.

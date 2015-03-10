@@ -1,0 +1,277 @@
+\documentclass[11pt]{article}
+\usepackage[brazil]{babel}
+\usepackage{isolatin1}
+\usepackage{charter}
+\usepackage{graphicx}
+\usepackage[usenames]{color}
+
+
+\newcommand{\esp}{$\;\;\;\;\;$}
+\setlength{\parskip}{.5pc} 
+\setlength{\paperwidth}{216mm}  % tamanho carta
+\setlength{\paperheight}{219mm}
+\setlength{\textwidth}{41pc}
+\setlength{\textheight}{60pc}
+\setlength{\oddsidemargin}{-1cm}
+\setlength{\evensidemargin}{-1cm}
+\setlength{\topmargin}{-1cm}
+\begin{document}
+\parindent=0pt
+
+\begin{center}
+{\bf {\large Algoritmos e Programação de Computadores}} \\
+
+2\raisebox{1ex}{\underline{a}} Prova
+\end{center}\vspace*{-7mm}
+
+\begin{minipage}{13cm}
+\framebox[13cm][l]{{\bf Nome:}}
+\vspace{\baselineskip}
+\framebox[8cm][l]{{\bf RGA:}} 
+
+\noindent
+{\bf Instruções:} {\bf Não é
+permitida consulta} a qualquer material. {\em Somente serão
+consideradas respostas nos espaços marcados.} Use os versos das folhas
+como rascunho.
+\end{minipage} \hfill 
+\begin{minipage}{5cm}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Questão & Valor & Nota \\ \hline \hline
+1 & 2,5 & \\ \hline
+2 & 2,5 & \\ \hline
+3 & 2,5 & \\ \hline
+4 & 2,5 & \\ \hline \hline
+Total & 10,0 & \\ \hline
+\end{tabular}\hspace*{-2cm}
+\end{center}
+\end{minipage}
+
+\vspace*{-4mm}
+
+
+\vspace{\baselineskip} {\bf 1.} Considere o código a seguir e responda a pergunta abaixo.
+Observe que os valores da variáveis $j$ e $k$ na fun\c{c}ão {\it main} correspondem aos dois últimos dígitos de {\bf seu} RGA, respectivamente. Assim, se o seu RGA é 201121902014, $j=1$ e $k=4$.
+\begin{verbatim}
+#include <stdio.h>
+
+void E(int *ri) {
+  *ri = *ri + 2;
+}
+
+void F(int vj, int *rk) {
+  int i = *rk;  
+  E(&i);
+  printf ("%d %d %d\n",i, *rk, vj);
+}
+
+int main() {
+  long rga;
+  int j, k;
+  scanf("%ld", &rga);
+  j = (rga/10)%10;
+  k = rga%10;
+  F(j, &k);
+  printf("%d %d %d\n", j, k, k+2);
+
+  return 0;
+}
+\end{verbatim}
+\
+ {\bf a)} Mostre a saída da execução deste programa para o {\bf seu RGA}.  
+
+{\Large\begin{tabular}{|l|}
+\hline
+{\textcolor{red}{\bf 6 4 1}}\\ \hline %2
+{\textcolor{red}{\bf 1 4 6}}\\ \hline %2
+\mbox{}\\ \hline %3
+\mbox{}\\ \hline %4
+\hspace*{\textwidth}\\ \hline %5
+\mbox{}\\ \hline %6
+\end{tabular}}
+
+\newpage
+
+
+\vspace{\baselineskip} {\bf 2.} Escreva uma fun\c{c}ão chamada {\tt diferen\c{c}a} que recebe dois conjuntos de mesmo tamanho {\tt n}, armazenados nos vetores {\tt A} e {\tt B}.
+Esta fun\c{c}ão deve calcular a diferen\c{c}a entre {\tt A} e {\tt B} e armazenar o resultado no vetor {\tt C}. Desta maneira, {\tt C} deverá conter os elementos que estiverem em {\tt A} e {\bf não} estiverem em {\tt B}. A fun\c{c}ão deverá devolver o tamanho do vetor {\tt C}.
+
+{\Large\begin{tabular}{|l|} \hline
+\verb+int diferenca(int A[], int B[], int C[], int n) {+ \\ \hline
+\hspace{1.5cm}\textcolor{red}{int i, j, k = 0;}\mbox{}\\ \hline %1
+\hspace{1.5cm}\textcolor{red}{for(i = 0; i $<$ n; i++) \{}\mbox{}\\ \hline %1
+\hspace{3cm}\textcolor{red}{for(j = 0; j $<$ n \&\& A[i] != B[j]; j++) ;}\mbox{}\\ \hline %1
+\hspace{3cm}\textcolor{red}{if(j == n) \{}\mbox{}\\ \hline %1
+\hspace{4.5cm}\textcolor{red}{C[k] = A[i];}\mbox{}\\ \hline %1
+\hspace{4.5cm}\textcolor{red}{k++;}\mbox{}\\ \hline %1
+\hspace{3cm}\textcolor{red}{\}}\mbox{}\\ \hline %1
+\hspace{1.5cm}\textcolor{red}{\}}\mbox{}\\ \hline %1
+\hspace{1.5cm}\textcolor{red}{return k;}\mbox{}\\ \hline %1
+\hspace*{\textwidth} \mbox{}\\ \hline %2
+\mbox{}\\ \hline %3
+\mbox{}\\ \hline %4
+\mbox{}\\ \hline %8
+\mbox{}\\ \hline %9
+\mbox{}\\ \hline %10
+\mbox{}\\ \hline %11
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %18
+\mbox{}\\ \hline %19
+\mbox{}\\ \hline %15
+\mbox{}\\ \hline %16
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %18
+\mbox{}\\ \hline %19
+\mbox{}\\ \hline %15
+\mbox{}\\ \hline %16
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %18
+\mbox{}\\ \hline %19
+\mbox{}\\ \hline 
+\verb+}+\mbox{}\\ \hline 
+\end{tabular}}\vspace*{-2cm}\newpage
+
+\vspace{\baselineskip} {\bf 3.} Escreva uma fun\c{c}ão chamada {\tt produto\_escalar} que recebe dois vetores de tamanho {\tt n}, denominados {\tt A} e {\tt B}.
+Esta fun\c{c}ão deve calcular o produto escalar de {\tt A} e {\tt B} e devolver o resultado obtido.
+
+{\Large\begin{tabular}{|l|} \hline
+\verb+float produto_escalar(float A[], float B[], int n) {+ \\ \hline % 1
+\hspace{1.5cm}\textcolor{red}{int i, r = 0;}\mbox{}\\ \hline %1
+\hspace{1.5cm}\textcolor{red}{for(i=0; i $<$ n; i++)}\mbox{}\\ \hline %1
+\hspace{3cm}\textcolor{red}{r = r + A[i]*B[i];}\mbox{}\\ \hline %1
+\hspace{1.5cm}\textcolor{red}{return r;}\mbox{}\\ \hline %1
+\hspace*{\textwidth} \mbox{}\\ \hline %2
+\mbox{}\\ \hline %3
+\mbox{}\\ \hline %9
+\mbox{}\\ \hline %10
+\mbox{}\\ \hline %11
+\mbox{}\\ \hline %12
+\mbox{}\\ \hline %13
+\mbox{}\\ \hline %14
+\mbox{}\\ \hline %15
+\mbox{}\\ \hline %16
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %18
+\mbox{}\\ \hline %19
+\mbox{}\\ \hline %15
+\mbox{}\\ \hline %16
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %18
+\mbox{}\\ \hline %19
+\mbox{}\\ \hline %15
+\mbox{}\\ \hline %16
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %18
+\mbox{}\\ \hline %19
+\mbox{}\\ \hline 
+\mbox{}\\ \hline
+\mbox{}\\ \hline 
+\verb+}+\mbox{}\\ \hline 
+\end{tabular}}\vspace*{-2cm}\newpage
+
+\begin{minipage}{11cm}
+\vspace{\baselineskip} {\bf 4.} Serviço de mensagens curtas (= {\it Short Message Service}, SMS) é um serviço disponível em telefones celulares que permite o envio de pequenas mensagens entre diferentes dispositivos.
+É notório que, para escrever estas mensagens em aparelhos que não possuem teclados alfabéticos, é necessário realizar algumas combinações com as teclas numéricas. Neste caso, deve-se observar que cada número é associado à um conjunto de letras (veja {\bf Figura 1}).\\
+
+Escreva uma fun\c{c}ão que recebe uma cadeia de caracteres contendo uma 
+frase (em letras minúsculas) e imprime na tela a sequência de números que representa esta frase 
+em um teclado não alfabético.
+% a ser enviada pelo servi\c{c}o SMS em um celular que não possui um teclado alfabético.
+%A fun\c{c}ão deve computar a  e imprimir o resultado na tela.
+%Uma pausa, para ser possível obter duas letras referenciadas pelo mesmo número, deve ser indicada como _.
+\end{minipage}
+\begin{minipage}{7cm}
+\includegraphics[width=4cm]{./teclado.png}
+\centering
+\\{\bf Figura 1} {- Leiaute de um teclado não alfabético.}
+\end{minipage}
+
+
+Esta fun\c{c}ão deve se chamar {\tt transcrever\_SMS} e ter o seguinte protótipo:
+
+\hspace{2cm}{\tt void transcrever\_SMS(char frase[]);}
+
+%\vspace{0.5cm}
+Utilize o caracter `x' para indicar uma pausa na digita\c{c}ão. Esta pausa é necessária para representar letras diferentes que são retratadas pelo mesmo número.  Por exemplo, a frase ``monalisa esta no louvre'' corresponde à sequência ``6x666x66255544477772033777782066x666055566688x88877733''. Observe como o caracter `x' separa a representa\c{c}ão das letras `m', `o' e `n', por exemplo.
+
+
+Ao escrever esta fun\c{c}ão, pode-se assumir que a frase a ser processada não possui números, sinais de pontua\c{c}ão, acentos, caracteres maiúsculos etc.
+
+Além disto, para facilitar a codifica\c{c}ão, utilize as fun\c{c}ões {\tt codigo\_letra} e {\tt  imprimir\_codigos\_letra}, a seguir.
+
+\begin{verbatim}
+int codigo_letra(char letra) {
+    int codigo[]={2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,7,7,7,8,8,8,9,9,9,9};
+    if(letra == ` ') return 0;
+    return codigo[letra-`a'];
+}
+\end{verbatim}
+
+A fun\c{c}ão {\tt codigo\_letra} recebe um caracter representando uma letra e devolve o seu código numérico. Desta maneira,  após a execu\c{c}ão da instru\c{c}ão {\tt c = codigo\_letra(`b')}, por exemplo, a variável {\tt c} armazenará o valor $2$.
+
+
+\begin{verbatim}
+void imprimir_codigos_letra(char letra) {
+    int rep[]={1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,4,1,2,3,1,2,3,4};
+    int i;
+    if(letra == ` ') printf("%d", codigo_letra(letra));
+    if(letra >= `a' && letra <= `z')
+        for(i = 0; i < rep[letra-`a']; i++ )
+            printf("%d", codigo_letra(letra));
+}
+\end{verbatim}
+
+
+A fun\c{c}ão {\tt imprimir\_codigos\_letra}, por sua vez, recebe um caracter que representa uma letra entre  `a' e `z' e já imprime na tela a sequência de dígitos correspondentes. Neste caso, por exemplo, após a execu\c{c}ão da instru\c{c}ão {\tt imprimir\_codigos\_letra(`b')} será impresso ``22'' na tela.
+
+
+\newpage
+
+{\Large\begin{tabular}{|l|} \hline
+\verb+void transcrever_SMS(char frase[]) {+ \\ \hline % 1
+\hspace{1.5cm}\textcolor{red}{int i;}\mbox{}\\ \hline %1
+\hspace{1.5cm}\textcolor{red}{for(i = 0; frase[i] != `\textbackslash 0'; i++) \{}\mbox{}\\ \hline %1
+\hspace{3cm}\textcolor{red}{if(i $>$ 0 \&\& codigo\_letra(frase[i]) == codigo\_letra(frase[i-1]))}\mbox{}\\ \hline %1
+\hspace{4.5cm}\textcolor{red}{printf(``x'');}\mbox{}\\ \hline %1
+\hspace{3cm}\textcolor{red}{imprimir\_codigos\_letra(frase[i]);}\mbox{}\\ \hline %1
+\hspace{1.5cm}\textcolor{red}{\}}\mbox{}\\ \hline %1
+\hspace*{\textwidth} \mbox{}\\ \hline %2
+\mbox{}\\ \hline %3
+\mbox{}\\ \hline %9
+\mbox{}\\ \hline %10
+\mbox{}\\ \hline %11
+\mbox{}\\ \hline %12
+\mbox{}\\ \hline %13
+\mbox{}\\ \hline %14
+\mbox{}\\ \hline %15
+\mbox{}\\ \hline %16
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %18
+\mbox{}\\ \hline %19
+\mbox{}\\ \hline %15
+\mbox{}\\ \hline %16
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %18
+\mbox{}\\ \hline %19
+\mbox{}\\ \hline %15
+\mbox{}\\ \hline %16
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %17
+\mbox{}\\ \hline %18
+\mbox{}\\ \hline %19
+\mbox{}\\ \hline 
+\mbox{}\\ \hline
+\mbox{}\\ \hline 
+\verb+}+\mbox{}\\ \hline 
+\end{tabular}}\vspace*{-2cm}
+
+
+
+
+
+
+\end{document}
