@@ -1,0 +1,140 @@
+\documentclass[10pt]{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage[portuges]{babel}
+\usepackage{fullpage}
+\usepackage{url}
+\usepackage{ulem}
+
+\def\exerc{\mathop{\it exerc}\nolimits}
+\def\prova{\mathop{\it prova}\nolimits}
+\def\prog{\mathop{\it prog}\nolimits}
+\def\parcial{\mathop{\it parcial}\nolimits}
+\def\final{\mathop{\it final}\nolimits}
+
+\newcommand{\quest}[1] {\noindent {\bf {#1})}}
+\newcommand{\prob}[3] {{\bf ENTRADA:} {\tt #1}
+
+{\bf SAÍDA:} {\tt #2}
+
+{\bf DICA:} {#3\\}}
+
+\newcommand{\proba}[3] {{\bf ENTRADA:} {\tt #1}
+
+{\bf SAÍDA:} {\tt #2}
+
+{\bf DESCRIÇÃO:} {#3\\}}
+
+
+\pagestyle{empty}
+
+\title{ {\footnotesize
+    \hrule\vspace{1pt}\hrule\vspace{1ex}
+    Instituto de Engenharia \hfill Universidade Federal de Mato Grosso
+    \smallskip 
+    \hrule\vspace{1pt}\hrule}\vspace{10pt}
+  Algoritmos e Programação de Computadores \\[-6pt]}
+
+\author{{\bf Professor}\\[3pt]
+	Raoni Florentino da Silva Teixeira {\small \tt <raonifst@gmail.com>} 
+}
+
+\date{\bf Segundo Semestre de 2014}
+
+\begin{document}
+ 
+\maketitle
+
+
+%\vspace{-0.5cm}
+
+%{\Large \centering
+
+%{\bf \normalsize Maiores Informações} 
+
+%\url{http://www.students.ic.unicamp.br/~ra089067/mc102/index.html}
+
+%}
+
+%\vspace{0.5cm}
+\thispagestyle{empty}
+
+
+\begin{center} \Large \bf Exercícios \end{center}
+
+\quest{1} Considere as funções a seguir e responda as perguntas abaixo~\footnote{Mais informações em http://en.wikipedia.org/wiki/Exponentiation}.
+
+\begin{verbatim}
+double power(double a, int n)
+{
+   if(n == 0) return 1;
+   if(n == 1) return a;
+   return a*power(a, n-1);
+}
+
+double power2(double a, int n)
+{
+   double m;
+   if(n == 0) return 1;
+   if(n == 1) return a;
+   m = power2(a, n/2);
+   if(n % 2)	return m*m*a;
+   else return m*m;		
+}
+\end{verbatim}
+
+\vspace{\baselineskip} {\bf a)} Qual a finalidade destas duas funções e qual o resultado das chamadas power(2, 5) e power2(2, 5)?
+
+\vspace{\baselineskip} {\bf b)} Supondo $n$ igual a 15, quantas multiplicações são realizadas por {power} e {power2}?\\
+
+\quest{2} Escreva um programa em C que dado um número $n$, lido do teclado, calcule 
+a soma repetida~\footnote{Mais informa\c{c}\~oes em http://en.wikipedia.org/wiki/Digital\_root} dos d\'igitos de $n$. A soma repetida dos dígitos de um número $n$ 
+é um número $j$ de apenas um dígito, que é o resultado da soma dos dígitos
+de $n$ somados até que o resultado tenha um dígito apenas. Crie duas funções
+recursivas, uma para somar apenas os dígitos de um número e outra
+para controlar a repetição.
+
+\proba{9999}{9}{Neste caso, deve-se somar, primeiro, os dígitos de $9$, $9$, $9$ e $9$, 
+obter o número $36$ e depois somar $3$ e $6$. Como o resultado, $9$, 
+tem apenas um dígito, a soma repetida termina.}
+
+
+\quest{3} Escreva uma função recursiva que recebe um número $n$ como parâmetro e devolve
+a quantidade de dígitos 1 presentes na  representação binária~\footnote{Mais informações em http://en.wikipedia.org/wiki/Binary\_numeral\_system} de $n$.
+
+\proba{5}{2}{A função deve devolver 2 que é a quantidade de dígitos 1's na representação binária de 5 (101).}
+
+\quest{4} Escreva uma versão recursiva do algoritmo de ordena\c{c}ão por sele\c{c}ão. 
+Você consegue percebe alguma semelha\c{c}a entre este algoritmo e o da ordena\c{c}ão rápida (por particionamento)?\\
+
+\quest{5} Escreva uma versão recursiva do algoritmo de busca sequencial.
+\\
+
+\quest{6} Escreva fun\c{c}ões recursivas para calcular:
+
+\begin{itemize} 
+	\item a média dos elementos de um vetor;
+	\item o maior elemento de um vetor;
+	\item o resto da divisão entre dois números inteiros (utilizando somente subtra\c{c}ões) e
+	\item o tamanho de uma cadeia de caracteres.
+\end{itemize}
+
+
+\quest{7} Escreva uma fun\c{c}ão recursiva que determina se os elementos de um vetor $v$ formam
+ um palíndromo. Note, por exemplo, que:
+\begin{itemize}
+\item  se $v$ é igual a [1, 10, 40, 10, 1], então $v$ é um palíndromo e
+\item  se $v$ é igual a [20, 50, 31, 20], então $v$ {\bf não} é um palíndromo.
+\end{itemize}
+
+\quest{8} Escreva uma fun\c{c}ão recursiva que recebe um número inteiro positivo $n$, um vetor $v$ contendo $n$ números inteiros e verifica se este vetor está ordenado crescentemente. Esta fun\c{c}ão deve devolver os valores $1$ e $0$, indicando, respectivamente, se $v$ está ou não ordenado.
+
+%\bibliographystyle{abbrv}{\bibliography{mc}}
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% portug-mode: t
+%%% TeX-master: t
+%%% End: 

@@ -1,0 +1,178 @@
+\documentclass[10pt]{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage[portuges]{babel}
+%\usepackage{fullpage}
+\usepackage{url}
+\usepackage{ulem}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{charter}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{tkz-berge}
+
+
+
+\def\exerc{\mathop{\it exerc}\nolimits}
+\def\prova{\mathop{\it prova}\nolimits}
+\def\prog{\mathop{\it prog}\nolimits}
+\def\parcial{\mathop{\it parcial}\nolimits}
+\def\final{\mathop{\it final}\nolimits}
+
+\newcommand{\quest}[1] {\noindent {\bf {#1})}}
+\newcommand{\prob}[3] {{\bf ENTRADA:} {\tt #1}
+
+{\bf SAÍDA:} {\tt #2}
+
+{\bf DICA:} {#3\\}}
+
+\newcommand{\proba}[3] {{\bf ENTRADA:} {\tt #1}
+
+{\bf SAÍDA:} {\tt #2}
+
+{\bf DESCRIÇÃO:} {#3\\}}
+
+
+\pagestyle{empty}
+
+\title{ {\footnotesize
+    \hrule\vspace{1pt}\hrule\vspace{1ex}
+    Instituto de Engenharia \hfill Universidade Federal de Mato Grosso
+    \smallskip 
+    \hrule\vspace{1pt}\hrule}\vspace{10pt}
+  Algoritmos e Programação de Computadores \\[-6pt]}
+
+\date{\bf Segundo Semestre de 2014}
+
+\begin{document}
+ 
+\maketitle
+
+
+%\vspace{-0.5cm}
+
+%{\Large \centering
+
+%{\bf \normalsize Maiores Informações} 
+
+%\url{http://www.students.ic.unicamp.br/~ra089067/mc102/index.html}
+
+%}
+
+%\vspace{0.5cm}
+\thispagestyle{empty}
+
+%\begin{minipage}{18cm}
+%\noindent
+%%\begin{center}
+%\framebox[12.1cm][l]{\bf Para esta lista use apenas expressões, desvios condicionais e estruturas de %repeti\c{c}ão.\\ 
+%Seu programa não deve fazer uso de variáveis que não sejam de tipo básico.} 
+%\end{center}
+%\end{minipage}
+
+\begin{center} \Large \bf Exercícios \end{center}
+
+\quest{1} Escreva fun\c{c}ões que calculam as seguintes opera\c{c}ões sobre matrizes quadradas com dimensão $10 \times 10$:
+\begin{itemize}
+\item adi\c{c}ão de duas matrizes;
+\item subtra\c{c}ão de duas matrizes;
+\item transposta de uma matriz e
+\item multiplica\c{c}ão de duas matrizes.
+\end{itemize}
+
+
+\quest{2} Escreva uma fun\c{c}ão que verifica se ocorreu {\it xeque} em um determinado jogo xadrez. 
+O tabuleiro de xadrez é representado por uma matriz inteira $8 \times 8$.
+Neste matriz, o valor $0$ indica a ausência de pe\c{c}a em uma daterminada posi\c{c}ão do tabuleiro. Pe\c{c}as são representadas pelos valores indicados na Tabela 1.
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|} \hline
+Valor & Pe\c{c}a\\ \hline
+1 & Peão preto\\ \hline
+2 & Cavalo preto\\ \hline
+3 & Torre preta\\ \hline
+4 & Bispo preto\\ \hline
+5 & Rei preto\\ \hline
+6 & Rainha preta\\ \hline
+7 & Peão preto\\ \hline
+8 & Cavalo preto\\ \hline
+9 & Torre preta\\ \hline
+10 & Bispo preto\\ \hline
+11 & Rei preto\\ \hline
+12 & Rainha preta\\ \hline
+\end{tabular}
+\caption{Valores que representam as pe\c{c}as de um jogo de xadrez.}
+\end{table}
+ 
+
+\quest{3} Escreva um programa que recebe uma matriz de caracteres (letras ou números) e uma palavra e determina se esta palavra está na matriz. 
+Uma palavra está em uma matriz se sua seqüência de letras pode ser encontrada na matriz, de tal maneira que:
+\begin{itemize}
+\item a primeira letra da palavra existe na matriz e
+\item o restante da palavra está disposto em uma reta que se inicia na posição da primeira letra e segue em um dos oito sentidos diferentes (N, NE, L, SE, S, SO, O, NO);
+\end{itemize}
+Seu programa deve imprimir todas as posições iniciais em que a palavra  pode ser encontrada na matriz (caso exista alguma).\\
+
+\noindent Por exemplo, para a matriz $6 \times 3$\\
+
+\begin{tabular}{|c|c|c|c|c|c|} \hline
+1 & 2 & 3 & 4 & T &R\\ \hline
+{\bf A} & {\bf S} & {\bf A} & {\bf C} & R &T\\ \hline
+0 & X & G & T & B &K\\ \hline
+\end{tabular}\\
+
+\noindent e a palavra ``CASA'', seu programa deve imprimir a posi\c{c}ão (1, 3).\\
+
+\noindent Lembre-se de que seu programa deve também ler tamanho das dimensões da matriz. Assuma que o número de linhas e colunas desta matriz é sempre menor ou igual a 10.\\
+
+\quest{4} O Jogo da Vida simula o comportamento de ``células'' em um universo discreto bidimensional governado por um conjunto de regras simples para nascimento, morte e sobrevivência. O universo é representado por um reticulado sobre um toro, isto é, todas as posições no universo têm oito posições vizinhas (quatro vizinhos de lado e quatro de canto). Cada posição do universo é ocupada por uma célula viva ou morta. O universo começa com uma população inicial de células vivas. A cada passo de tempo (iteração) uma nova geração de células é gerada baseada na população da geração anterior de acordo com as seguintes regras:
+\begin{itemize}
+\item sobrevivência: um célula passa da geração corrente para a geração seguinte se ela tiver duas ou três células vizinhas vivas na geração corrente;
+\item morte: uma célula viva morre ao fim da geração corrente se ela tem menos de duas (solidão) ou mais de três células vivas (inanição) na sua vizinhança;
+\item nascimento: uma célula morta (re)nasce na geração seguinte caso ela tiver exatamente três células vivas na sua vizinhança na geração anterior.
+
+\end{itemize}
+
+\noindent Desenvolva um programa que implemente o jogo da vida seguindo estas regras em um reticulado $50 \times 50$. Gere a primeira geração de forma aleatória.\\
+
+\quest{5} Em processamento de imagens, usualmente, as imagens digitais são representadas utilizando matrizes bi-dimensionais e algumas opera\c{c}ões básicas são definidas a partir de transforma\c{c}ões matriciais. Em geral,estas transforma\c{c}ões levam em conta os valores de células desta matriz localizadas em uma determinada
+vizinha\c{c}a. Por exemplo, a transforma\c{c}ão chamada erosão, em uma vizinha\c{c}a $3 \times 3$, calcula, para cada
+célula da matriz, o mínimo entre o valor da própria célula e o de seus vizinhos distantes em até uma célula
+(incluindo diagonais). \\
+
+\noindent Escreva um programa que lê os tamanhos das duas dimensões de uma matriz, $M$, e a
+própria matriz (ou seja, os valores de suas células) e, subsequentemente, calcula e mostra na tela o resultado
+da erosão de $M$. Note que a vizinha\c{c}a é válida somente dentro da matriz.\\
+
+\noindent Por exemplo, para a matriz $5 \times 5$  \\
+
+
+\begin{tabular}{ccccc}
+1 & 1 & 1 & 1 & 0 \\
+1 & 1 & 1 & 1 & 1 \\
+1 & 1 & 0 & 1 & 1 \\
+1 & 1 & 1 & 1 & 1 \\
+1 & 1 & 1 & 1 & 1 \\
+\end{tabular}
+
+\noindent deve-se imprimir \\
+ 
+\begin{tabular}{ccccc}
+1 & 1 & 1 & 0 & 0 \\
+1 & 0 & 0 & 0 & 0 \\
+1 & 0 & 0 & 0 & 1 \\
+1 & 0 & 0 & 0 & 1 \\
+1 & 1 & 1 & 1 & 1 \\
+\end{tabular}\\
+
+\noindent Assuma que o número de linhas e colunas desta matriz é sempre menor ou igual a 30.\\
+
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% portug-mode: t
+%%% TeX-master: t
+%%% End: 

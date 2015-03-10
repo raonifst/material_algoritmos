@@ -1,0 +1,135 @@
+\documentclass[10pt]{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage[portuges]{babel}
+%\usepackage{fullpage}
+\usepackage{url}
+\usepackage{ulem}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{charter}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{tkz-berge}
+
+
+
+\def\exerc{\mathop{\it exerc}\nolimits}
+\def\prova{\mathop{\it prova}\nolimits}
+\def\prog{\mathop{\it prog}\nolimits}
+\def\parcial{\mathop{\it parcial}\nolimits}
+\def\final{\mathop{\it final}\nolimits}
+
+\newcommand{\quest}[1] {\noindent {\bf {#1})}}
+\newcommand{\prob}[3] {{\bf ENTRADA:} {\tt #1}
+
+{\bf SAÍDA:} {\tt #2}
+
+{\bf DICA:} {#3\\}}
+
+\newcommand{\proba}[3] {{\bf ENTRADA:} {\tt #1}
+
+{\bf SAÍDA:} {\tt #2}
+
+{\bf DESCRIÇÃO:} {#3\\}}
+
+
+\pagestyle{empty}
+
+\title{ {\footnotesize
+    \hrule\vspace{1pt}\hrule\vspace{1ex}
+    Instituto de Engenharia \hfill Universidade Federal de Mato Grosso
+    \smallskip 
+    \hrule\vspace{1pt}\hrule}\vspace{10pt}
+  Algoritmos e Programação de Computadores \\[-6pt]}
+
+\date{\bf Segundo Semestre de 2014}
+
+\begin{document}
+ 
+\maketitle
+
+
+%\vspace{-0.5cm}
+
+%{\Large \centering
+
+%{\bf \normalsize Maiores Informações} 
+
+%\url{http://www.students.ic.unicamp.br/~ra089067/mc102/index.html}
+
+%}
+
+%\vspace{0.5cm}
+\thispagestyle{empty}
+
+%\begin{minipage}{18cm}
+%\noindent
+%%\begin{center}
+%\framebox[12.1cm][l]{\bf Para esta lista use apenas expressões, desvios condicionais e estruturas de %repeti\c{c}ão.\\ 
+%Seu programa não deve fazer uso de variáveis que não sejam de tipo básico.} 
+%\end{center}
+%\end{minipage}
+
+\begin{center} \Large \bf Exercícios \end{center}
+
+\quest{1}
+Escreva um programa que lê duas palavras do teclado e verifica se elas formam um {anagrama}. 
+Duas ou mais palavras formam um anagrama quando todas as letras de uma palavra ocorrem em mesmo número (independente da posi\c{c}ão) em outra palavra. As palavras {\tt roma}, {\tt mora}, {\tt oram}, {\tt amor} e {\tt ramo}, por exemplo, formam anagramas.
+\\
+
+\quest{2}  Escreva um programa que leia uma palavra do teclado e determine se esta é um palíndromo ou não.\\
+
+\quest{3} Faça um programa que lê uma frase $F$ e uma palavra $p$ do teclado. Em seguida, seu programa deve imprimir todas as posições em que a palavra $p$ ocorre em $F$.
+Para $F$ = ``duas bananas e 4 abacates. Nao havera mais bananas.'' e p = ``bananas'', por exemplo, seu
+ programa deve imprimir 5 e 43.\\
+
+\quest{4} Escreva uma fun\c{c}ão que recebe duas cadeias de caracteres e verifica se elas são iguais. Sua fun\c{c}ão deve devolver o valor $-1$ para indicar que a primeira cadeia é lexigraficamente menor que a segunda. O valor $1$ deve ser devolvido quando a segunda cadeia é menor que a primeira. Quando as duas cadeias forem iguais, a fun\c{c}ão deve devolver zero.   
+\\
+
+\quest{5}
+Escreva uma função que recebe uma string como parâmetro e devolve o número de palavras 
+encontradas. Cada palavra pode estar separada por um ou mais caracteres de espaço, ou por algum
+sinal de pontuação (`.', `?', `;' etc).
+\\
+
+\quest{6} Escreva uma fun\c{c}ão com o seguinte protótipo:\\
+
+{\bf int} {\tt concatena}({\bf char} {\tt str1}[], {\bf char} {\tt str2}[], {\bf char} {\tt res}[]);\\
+
+\noindent Esta fun\c{c}ão deve concatenar as cadeias de caracteres {\tt str1} e {\tt str2} e armazenar o resultado em {\tt res}. O tamanho da cadeia {\tt res} deve ser devolvido pela fun\c{c}ão.
+\\
+
+\quest{7} 
+Como todos nós sabemos, em trabalhos científicos, é comum usarmos abreviaturas para citar autores. De acordo com a norma da ABNT (Associação Brasileira de Normas Técnicas), por exemplo, cada autor deve ser referenciado pelo último sobrenome, em letras maiúsculas, seguido(s) do(s) prenome(s) e outro(s) sobrenome(s), abreviados. 
+Para ilustrar, em um hipotético trabalho o cantor {\tt Humberto Gessinger} deve ser citado pela abreviatura {\tt ``GESSINGER, H.''}.
+
+Há uma lista contendo centenas de autores que devem ser citados em seu trabalho. Infelizmente, 
+não há tempo para abreviar cada um deles manualmente, pois, dentre outras coisas, você precisa estudar para várias provas.
+
+Considerando seus conhecimentos de programa\c{c}ão, você decidiu escrever um programa para resolver este problema. 
+O objetivo do seu programa é abreviar adequadamente uma lista de nomes completos e imprimir o resultado na tela do computador.
+Deste modo, se a lista a ser processada contiver o nome do autor {\tt ``Luis Fernando Verissimo''},
+seu programa deve imprimir  a cadeia de caracteres {\tt ``VERISSIMO, L. F.'' } na tela do computador.\\
+
+%Assim, recapitulando, se a lista a ser processada contiver o nome do autor {\tt ``Luis Fernando Verissimo''}
+%seu programa deve imprimir  a cadeia de caracteres {\tt ``VERISSIMO, L. F.'' } na tela do computador.
+Você pode assumir que em {\bf todos} os nomes a serem abreviados: 
+\begin{itemize}
+ \item haverá no mínimo um prenome e um sobrenome; 
+ \item haverá somente um espa\c{c}o separando uma palavra (nome, sobrenome ou prenome) da outra;
+ \item haverá somente caracteres {\it puros} e espaços `\ \ ' (não havendo acentuação de qualquer tipo, pontuação, números ou outros símbolos que não pertencem ao alfabeto ocidental)  e
+ \item não haverá preposições.
+
+
+\end{itemize}
+ 
+%\bibliographystyle{abbrv}{\bibliography{mc}}
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% portug-mode: t
+%%% TeX-master: t
+%%% End: 

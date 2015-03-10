@@ -1,0 +1,151 @@
+\documentclass[10pt]{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage[portuges]{babel}
+\usepackage{fullpage}
+\usepackage{url}
+\usepackage{ulem}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+
+\def\exerc{\mathop{\it exerc}\nolimits}
+\def\prova{\mathop{\it prova}\nolimits}
+\def\prog{\mathop{\it prog}\nolimits}
+\def\parcial{\mathop{\it parcial}\nolimits}
+\def\final{\mathop{\it final}\nolimits}
+
+\newcommand{\quest}[1] {\noindent {\bf {#1})}}
+\newcommand{\prob}[3] {{\bf ENTRADA:} {\tt #1}
+
+{\bf SAÍDA:} {\tt #2}
+
+{\bf DICA:} {#3\\}}
+
+\newcommand{\proba}[3] {{\bf ENTRADA:} {\tt #1}
+
+{\bf SAÍDA:} {\tt #2}
+
+{\bf DESCRIÇÃO:} {#3\\}}
+
+
+\pagestyle{empty}
+
+\title{ {\footnotesize
+    \hrule\vspace{1pt}\hrule\vspace{1ex}
+    Instituto de Engenharia \hfill Universidade Federal de Mato Grosso
+    \smallskip 
+    \hrule\vspace{1pt}\hrule}\vspace{10pt}
+  Algoritmos e Programação de Computadores \\[-6pt]}
+
+
+
+\date{\bf Segundo Semestre de 2014}
+
+\begin{document}
+ 
+\maketitle
+
+
+%\vspace{-0.5cm}
+
+%{\Large \centering
+
+%{\bf \normalsize Maiores Informações} 
+
+%\url{http://www.students.ic.unicamp.br/~ra089067/mc102/index.html}
+
+%}
+
+%\vspace{0.5cm}
+\thispagestyle{empty}
+
+
+\begin{center} \Large \bf Exercícios \end{center}
+
+\quest{1} Escreva um programa que lê 5 valores inteiros e imprime o maior e o menor deles.
+\\
+
+\quest{2} Escreva um programa que lê dez números e imprime o segundo maior deles.\\
+
+
+\quest{3} Num determinado estado, o DETRAN cobra uma taxa sobre o valor do carro para realizar transferência entre municípios. Esta taxa é de $1\%$ para veículos fabricados antes do ano 2000 e de $1.5\%$ para aqueles fabricados a partir de 2000. Escreva um programa que lê o ano e o valor de um carro e, a seguir, calcula e imprime o imposto a ser pago.
+\\
+
+\quest{4} Uma empresa concederá um aumento de salário aos seus funcionários de acordo com  a tabela abaixo. Escreva um programa que lê o salário e o cargo de um funcionário e calcula o seu novo salário. Se o cargo do funcionário não estiver na tabela, utilize um percentual de $40\%$ de aumento. Seu programa deve imprimir o salário antigo, o novo salário e a diferença. 
+
+\begin{table}[h]
+\begin{tabular}{lll}
+ Código &  Cargo & Percentual \\
+101  &               Gerente  &                  $10\%$ \\
+102  &               Técnico      &             $20\%$ \\
+103  &            Engenheiro     &           $30\%$ \\
+\end{tabular}
+\end{table}
+
+
+\quest{5} Em uma empresa prestadora de serviços, existem 3 tipos de serviços que podem ser contratados. Os valores destes servi\c{c}oes são apresentados a seguir.
+
+\begin{table}[h]
+\begin{tabular}{lll}
+Servi\c{c}o &  Valor da hora \\
+A  &  R$\$ 50,00$\\
+B  &  R$\$ 75,00$\\
+C  &   R$\$ 120,00$\\
+\end{tabular}
+\end{table}
+
+
+\noindent Escreva um programa que lê o número de horas e tipo de serviço prestado e calcula e imprime o valor a ser pago.\\
+
+\quest{6} Escreva um programa que lê o comprimento de três segmentos de reta e determina se estes segmentos podem formar um triângulo. Caso seja possível,  seu programa deve informar se o triângulo é equilátero, isósceles ou escaleno. Lembre-se de que o comprimento de cada lado de um triângulo é sempre menor que a soma dos outros dois lados.\\
+
+\quest{7} Escreva um programa que lê um valor em reais e calcula o menor número possível de notas ou moedas de 100, 50, 10, 5, 2 e 1 em que este valor pode ser decomposto. Seu programa deve imprimir o valor lido e a relação de notas necessárias.
+\\
+
+\quest{8} Escreva um programa que calcula o IMC (Índice de Massa Corpórea) e a situação de um indivíduo de acordo com as seguintes especificações:
+
+\begin{equation}
+\nonumber
+\mathtt{IMC} = {\frac{\text{massa~ do~ indivíduo}}{(\text{altura~ do~ indivíduo})^2}}.
+\end{equation}
+
+\begin{table}[h]
+\begin{tabular}{ll}
+Condição & Situação\\
+IMC abaixo de 20 & Abaixo do peso\\
+IMC entre 20 e 24 & Peso normal\\
+IMC entre 25 e 29 & Sobrepeso\\
+IMC entre 30 e 39 & Obesidade\\
+IMC acima de 40 & Obesidade Mórbida\\
+\end{tabular}
+\end{table}
+
+
+
+\quest{9} Escreva um programa que lê um ano e calcula e imprime a data da Páscoa neste ano. Você deve fazer uma pesquisa para encontrar como calcular esta data.
+\\
+
+\quest{10} Você quer convidar quatro colegas (Ana, Joana, Maria e Paulo) para passar as férias em sua casa este ano. Cada um destes colegas, no entanto, mora em uma cidade diferente.  Como há pedágios na entrada das cidades, seus amigos precisam decidir qual rota seguir para chegar em sua casa e economizar um pouco de dinheiro. O mapa com a localização das cidades e as estradas entre elas é apresentado a seguir.
+\\
+
+Você está tão empolgado com estas férias, que decidiu ajudar neste planejamento. Sua tarefa é escrever um programa que leia cinco números inteiros que representam os valores do pedágio (em reais) em cada cidade (A, B, C, D e E). Depois disso, seu programa deve determinar a rota a ser seguida por Ana (A), Maria (B), Paulo (C) e Joana (D), para chegar em sua casa (E) gastando o mínimo possível com pedágios.
+
+\begin{figure}[h!]
+  \centering
+    
+      \includegraphics[width=0.5\textwidth]{penta.png}
+  \caption{Localização dos seus amigos.}
+\end{figure}
+
+
+
+%\bibliographystyle{abbrv}{\bibliography{mc}}
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% portug-mode: t
+%%% TeX-master: t
+%%% End: 

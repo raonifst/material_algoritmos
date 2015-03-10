@@ -1,0 +1,248 @@
+\documentclass[10pt]{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage[portuges]{babel}
+%\usepackage{fullpage}
+\usepackage{url}
+\usepackage{ulem}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{charter}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{tkz-berge}
+
+
+
+\def\exerc{\mathop{\it exerc}\nolimits}
+\def\prova{\mathop{\it prova}\nolimits}
+\def\prog{\mathop{\it prog}\nolimits}
+\def\parcial{\mathop{\it parcial}\nolimits}
+\def\final{\mathop{\it final}\nolimits}
+
+\newcommand{\quest}[1] {\noindent {\bf {#1})}}
+\newcommand{\prob}[3] {{\bf ENTRADA:} {\tt #1}
+
+{\bf SAÍDA:} {\tt #2}
+
+{\bf DICA:} {#3\\}}
+
+\newcommand{\proba}[3] {{\bf ENTRADA:} {\tt #1}
+
+{\bf SAÍDA:} {\tt #2}
+
+{\bf DESCRIÇÃO:} {#3\\}}
+
+
+\pagestyle{empty}
+
+\title{ {\footnotesize
+    \hrule\vspace{1pt}\hrule\vspace{1ex}
+    Instituto de Engenharia \hfill Universidade Federal de Mato Grosso
+    \smallskip 
+    \hrule\vspace{1pt}\hrule}\vspace{10pt}
+  Algoritmos e Programação de Computadores \\[-6pt]}
+
+\date{\bf Segundo Semestre de 2014}
+
+\begin{document}
+ 
+\maketitle
+
+
+%\vspace{-0.5cm}
+
+%{\Large \centering
+
+%{\bf \normalsize Maiores Informações} 
+
+%\url{http://www.students.ic.unicamp.br/~ra089067/mc102/index.html}
+
+%}
+
+%\vspace{0.5cm}
+\thispagestyle{empty}
+
+%\begin{minipage}{18cm}
+%\noindent
+%%\begin{center}
+%\framebox[12.1cm][l]{\bf Para esta lista use apenas expressões, desvios condicionais e estruturas de %repeti\c{c}ão.\\ 
+%Seu programa não deve fazer uso de variáveis que não sejam de tipo básico.} 
+%\end{center}
+%\end{minipage}
+
+\begin{center} \Large \bf Exercícios \end{center}
+
+\quest{1} Escreva um programa que lê um número $n$ e, em seguida, lê $n$ valores inteiros e imprime o maior deles na tela.
+\\
+
+\quest{2} Escreva um programa que lê um número inteiro $n$ e imprime o resultado de $n!$ Caso $n$ seja negativo, seu programa deve exibir a mensagem ``Entrada incorreta!". Como extra, tente imprimir a expressão ``$1*2*3*4*5*\ldots *n = n!$". Para n = 7, por exemplo, seu programa deve imprimir ``$1*2*3*4*5*6*7 = 5040$".
+\\
+
+\quest{3} Escreva um programa que lê um número inteiro positivo $n$ e, em seguida, imprime $n$ linhas do chamado triângulo de Floyd.
+Um exemplo de triângulo de Floyd com 6 linhas é apresentado a seguir:\\
+{\tt 1}\\
+{\tt 2 3}\\
+{\tt 4 5 6}\\
+{\tt 7 8 9 10}\\
+{\tt 11 12 13 14 15}\\
+{\tt 16 17 18 19 20 21}
+\\
+
+\quest{4} Escreva um programa que recebe um número $n$ e imprime na tela $n$ sequências de inteiros (cada uma delas em uma linha). Na primeira linha, deve-se imprimir a sequência `$1~2~\ldots~ n$'. Nas linhas seguintes imprime-se a sequência da linha anterior invertida. Para $n = 4$, por exemplo, seu programa deve produzir a seguinte saída:\\
+{\tt 1 2 3 4}\\
+{\tt 4 3 2 1}\\
+{\tt 1 2 3 4}\\
+{\tt 4 3 2 1}\\
+
+\quest{5} Um número inteiro $n$ é dito subnúmero de um outro número $m$, se os dígitos de $n$ aparecem na mesma sequência em $m$. Os números $31$, $63$ e $76$, por exemplo, são subnúmeros de $7631$. Escreva um programa em C que lê dois números, $n$ e $m$, e imprime ``SIM"~ se $n$ é um subnúmero de $m$.  Caso contrário, seu programa deve imprimir ``NAO".\\ 
+
+\quest{6} Escreva um programa em C que lê um número inteiro $n$ e uma sequência $S$ de $n$ números inteiros e, 
+então, imprime o comprimento da maior subsequência crescente contida em $S$. Para $n = 8$ e $S = [4, ~1, ~2, ~3, ~0, ~5, ~7, ~8]$, seu programa deve imprimir $4$. Observe que a maior subsequência de $S$, neste caso, é $[0, ~5, ~7, ~8]$.
+\\
+
+\quest{7}  Escreva um programa que lê um número inteiro $n$ e imprime $n$ sequências de inteiros. A primeira delas é composta pelos valores `$1 ~2~\ldots  ~n$'. Em cada uma das sequências seguintes o primeiro número da sequência anterior é omitido. Por exemplo, para $n = 3$ seu programa deve imprimir:\\
+{{\tt 1 2 3}\\
+{\tt 2 3}\\
+{\tt 3}}\\
+
+\quest{8} Suponha que seu computador consiga executar somente opera\c{c}\~oes de soma e subtra\c{c}ão. Escreva programas que, dados dois números inteiros $a$ e $b$, não necessariamente positivos, calculem:
+\begin{itemize}
+\item[a)] O produto $a\cdot b$.
+\item[b)] O quociente e o resto da divisão de $a$ por $b$.
+\end{itemize}
+
+\quest{9} Escreva um programa que lê um número inteiro e imprime a quantidade de dígitos decimais deste
+número.\\
+
+\quest{10} Escreva um programa que recebe quatro números $l$, $c$, $i$ e $j$ e imprime um ``retângulo" ~de $l$ linhas e $c$ colunas com  caracteres `-' em todas as posi\c{c}ões, exceto em (i,~j). Nesta posi\c{c}ão,  deve-se imprimir o valor de $i \cdot j$. Além disto, caso a entrada seja inválida, seu programa deve imprimir a mensagem ``Entrada incorreta!". Para $l = 4$, $c = 3$, $i = 2$ e $j = 2$, por exemplo, a seguinte saída deve ser produzida:\\
+{\tt - - -}\\
+{\tt - 4 -}\\
+{\tt - - -}\\
+{\tt - - -}\\
+
+\quest{11} Escreva um programa que dado um número $n$, lido do teclado, calcula 
+a soma repetida dos d\'igitos de $n$. A soma repetida dos dígitos de um número $n$ 
+é um número $j$ de apenas um dígito, que é o resultado da soma dos dígitos
+de $n$ somados até que o resultado tenha um dígito apenas. 
+%Crie dois {\it la\c{c}os}, um para somar apenas os dígitos de um número e outro
+%para controlar a repetição deste soma. 
+Por exemplo, para $n = 9999$, seu programa deve imprimir $9$.\\
+
+\quest{12} Escreva um programa para determinar se uma sequência de $n$ números digitados pelo usuário está
+ordenada ou não. 
+\\
+
+\quest{13} Elabore um programa para calcular a raiz quadrada de um número positivo. Use a idéia abaixo,
+baseada no método de aproximações sucessivas de Newton. O programa deverá imprimir o valor da
+vigésima aproximação.\\
+
+\noindent Seja $Y$ um número, sua raiz quadrada é raiz da equação
+\begin{equation}
+f(x) = x^2 - Y.
+\end{equation}
+
+\noindent A primeira aproximação é $x_1 = Y /2$. A (n + 1)-ésima aproximação é:
+\begin{equation}
+x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}.
+\end{equation}
+
+\quest{14} Um número triangular é um número natural que pode ser representado na forma de triângulo equilátero (Fig. 1). Para encontrar o n-ésimo número triangular a partir do anterior basta somar-lhe $n$ unidades. Os primeiros números triangulares são: 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, ...
+
+\newcommand{\ballgolf}[1]{%
+\SetVertexNoLabel
+\foreach \i [evaluate=\i as \j using #1-\i] in {0,...,\number\numexpr#1 - 1\relax}{% 
+     \pgfmathsetmacro\k{\i*sqrt(3)/2}
+      \begin{scope}[shift={(\i*.5 cm,\k cm)}]
+         \grEmptyPath[RA=1]{\j}   
+       \end{scope}}}     
+
+\tikzset{VertexStyle/.style ={circle,ball color= gray!80!yellow,minimum size = 1cm}}      
+\hspace{1.25cm} \tikz{\ballgolf{1}} \hspace{1cm} \tikz{\ballgolf{2}} \hspace{1cm} \tikz{\ballgolf{3}}\\
+\begin{center}
+{Fig. 1 - Três primeiros números triangulares.}
+\end{center} 
+
+\noindent Escreva um programa que lê um número $n$ e imprime a soma dos $n$ primeiros números triangulares.\\
+
+\quest{15} Um jogador da Mega-Sena é supersticioso e só faz jogos em que o primeiro número do jogo é par, o segundo é ímpar, o terceiro é par, o quarto é ímpar, o quinto é par e o sexto é ímpar. Escreva um programa
+que imprime todas as possibilidades de jogos que este jogador supersticioso pode jogar.
+\\
+
+\quest{16} Dentre outras coisas, um número natural $n$ pode ser classificado de acordo com o arranjo de seus dígitos. Um interessente critério de classificação pode, por exemplo, considerar a ordenação dos dígitos. De acordo com este critério, um número é dito ordenado (ou está ordenado) se os seus dígitos aparecem ordenados de maneira crescente, da esquerda para a direita. Assim, os números 1357, 13399, 9 e 22 estão ordenados, enquanto os números 110, 17787 e 12345678895 não estão.\\
+
+\noindent Considerando isso, escreva um programa que lê um número inteiro positivo e determina se ele  está ou não ordenado. {\bf Importante}: Use o tipo {\it int} em C, mas não use nenhuma informação que limite o tamanho do número lido.
+\\
+
+\quest{17} Escreva um  programa que recebe como entrada um valor inteiro não negativo $n$ e imprime
+uma figura, com $2\cdot n + 1$ linhas e $2\cdot n + 1$ colunas, similar àquelas  exemplificadas a seguir. \\
+
+
+\begin{tabular}{ccccc}
+   
+  n = 1    &               &n = 2             &              & n = 3\\
+{\tt *~.~*}& \hspace{1cm} & {\tt * . . . *}   & \hspace{1cm} & {\tt * . . . . . *}\\
+{\tt *~*~*}&              &{\tt * * ~. * ~*}  &              & {\tt * * ~. . . * ~*}\\
+{\tt *~.~*}&              &{\tt * * ~* ~* ~*} &              & {\tt * * ~* ~. * ~* ~*}\\
+		   &              &{\tt * * ~. * ~*}  &              & {\tt * * ~* ~* ~* ~* ~*}\\
+		   &              &{\tt * . . . *}    &              & {\tt * * ~* ~. * ~* ~*}\\
+		   &              &                   &              & {\tt * * ~. . . * ~*}\\
+		   &              &                   &              & {\tt * . . . . . *}\\
+   \end{tabular} \\
+
+
+
+%\quest{17}  Escreva um programa que recebe como entrada um número inteiro não negativo $n$, seguido de uma
+%sequência de $n$ números inteiros, e determina o comprimento da maior subsequência de elementos
+%repetidos. Isto é, para $n = 9$ e sequência igual à\\
+%\begin{equation*}
+% 2~2 ~3 ~10 ~10 ~10 ~12 ~13 ~13
+%\end{equation*}
+%o programa deve retornar 3.
+%\\
+
+%\quest{18}
+%\\
+\vspace{2cm}
+\quest{18$^\star$} Escreva um programa que lê um número inteiro positivo e imprime a representa\c{c}ão deste número em algarismos romanos.
+\\
+
+
+
+\quest{19} Em matemática, o número ${\pi}$ é uma proporção numérica que tem origem na relação entre o perímetro de uma circunferência e seu diâmetro. 
+Como você deve saber, $\pi$ é um número irracional próximo à $3.14$. 
+%Egípcios e babilônios, por exemplo, consideravam $\pi = \frac{256}{81}$. 
+Ao longo da história, cientistas de diversas nacionalidades contribuíram para aumentar a precisão de seu  cálculo. 
+Algumas das aproxima\c{c}ões propostas são apresentadas a seguir:
+
+\begin{itemize}
+\item $\frac{\pi}{2} = \frac{2}{1} \cdot \frac{2}{3} \cdot \frac{4}{3} \cdot \frac{4}{5} \cdot \frac{6}{5} \cdot \frac{6}{7} \cdot \frac{8}{7} \cdot \frac{8}{9} \ldots$
+
+\item $\frac{\pi}{2} = \prod_{k = 1}^n \frac{(2k)^2}{(2k)^2 - 1} = \frac{4}{3} \cdot \frac{16}{15} \cdot \frac{36}{35} \cdot \frac{64}{63} \ldots$
+
+\item ${\pi} = \sum_{k = 0}^{n-1} \frac{4\cdot(-1)^k}{2k + 1} = \frac{4}{1} - \frac{4}{3} + \frac{4}{5} - \frac{4}{7} + \frac{4}{9} - \frac{4}{11} + \frac{4}{13} \cdots$
+
+\item $\pi = {{3}} + \frac{{4}}{2\times3\times4} - \frac{{4}}{4\times5\times6} + \frac{{4}}{6\times7\times8} \cdots$
+
+\item $\frac{1}{\pi} = \frac{12}{640320^{3/2}} \sum_{k=0}^n \frac{(6k)! (13591409 + 545140134k)}{(3k)!(k!)^3 (-640320)^{3k}}$
+\end{itemize} 
+
+
+\noindent
+Observe que cada uma destas aproxima\c{c}ões é calculada levando-se em conta um determinado número de termos $n$. 
+Escreva um programa que lê um número inteiro $n$ e calcula os valores de $\pi$ de acordo com as aproxima\c{c}ões anteriores.\\
+
+\quest{20$^\star$} Escreva um programa que lê um número inteiro não negativo $n$ e, em seguida, lê uma sequência de $n$ números inteiros. Seu programa deve calcular a frequência de ocorrência de
+cada um dos números da sequência. {\bf Importante}: Seu programa não deve utilizar vetores ou tipos  compostos de dados.
+
+
+
+%\bibliographystyle{abbrv}{\bibliography{mc}}
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% portug-mode: t
+%%% TeX-master: t
+%%% End: 

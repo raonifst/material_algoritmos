@@ -1,0 +1,122 @@
+\documentclass[10pt]{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage[portuges]{babel}
+%\usepackage{fullpage}
+\usepackage{url}
+\usepackage{ulem}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{charter}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{tkz-berge}
+
+
+
+\def\exerc{\mathop{\it exerc}\nolimits}
+\def\prova{\mathop{\it prova}\nolimits}
+\def\prog{\mathop{\it prog}\nolimits}
+\def\parcial{\mathop{\it parcial}\nolimits}
+\def\final{\mathop{\it final}\nolimits}
+
+\newcommand{\quest}[1] {\noindent {\bf {#1})}}
+\newcommand{\prob}[3] {{\bf ENTRADA:} {\tt #1}
+
+{\bf SAÍDA:} {\tt #2}
+
+{\bf DICA:} {#3\\}}
+
+\newcommand{\proba}[3] {{\bf ENTRADA:} {\tt #1}
+
+{\bf SAÍDA:} {\tt #2}
+
+{\bf DESCRIÇÃO:} {#3\\}}
+
+
+\pagestyle{empty}
+
+\title{ {\footnotesize
+    \hrule\vspace{1pt}\hrule\vspace{1ex}
+    Instituto de Engenharia \hfill Universidade Federal de Mato Grosso
+    \smallskip 
+    \hrule\vspace{1pt}\hrule}\vspace{10pt}
+  Algoritmos e Programação de Computadores \\[-6pt]}
+
+\date{\bf Segundo Semestre de 2014}
+
+\begin{document}
+ 
+\maketitle
+
+
+%\vspace{-0.5cm}
+
+%{\Large \centering
+
+%{\bf \normalsize Maiores Informações} 
+
+%\url{http://www.students.ic.unicamp.br/~ra089067/mc102/index.html}
+
+%}
+
+%\vspace{0.5cm}
+\thispagestyle{empty}
+
+%\begin{minipage}{18cm}
+%\noindent
+%%\begin{center}
+%\framebox[12.1cm][l]{\bf Para esta lista use apenas expressões, desvios condicionais e estruturas de %repeti\c{c}ão.\\ 
+%Seu programa não deve fazer uso de variáveis que não sejam de tipo básico.} 
+%\end{center}
+%\end{minipage}
+
+\begin{center} \Large \bf Exercícios \end{center}
+
+\quest{1} Escreva fun\c{c}ões que calculam:
+\begin{itemize}
+\item a soma dos elementos de um vetor;
+\item a média dos elementos de um vetor;
+\item o desvio padrão dos elementos de um vetor;
+\item o número de elementos repetidos em um vetor;
+\item o elemento que corresponde a mediana de um vetor e
+\item a moda dos elementos de um vetor.
+\end{itemize}
+
+\noindent Estas fun\c{c}ões devem receber como parâmetro um vetor de números reais e um número inteiro indicando o tamanho deste vetor. Tente criar fun\c{c}ões auxiliares para facilitar a organiza\c{c}ão do  código.\\
+
+\quest{2} Escreva uma função que recebe um vetor de inteiros e seu tamanho como parâmetros, e devolve a
+soma dos números pares deste vetor.\\
+
+\quest{3} Escreva um programa que lê um número $n$ (sempre entre $1$ e $100$). Em seguida, seu programa deve ler $n$ números representando a idade (em anos) dos alunos matriculados em um determinado curso e calcular o histograma destas idades. Quais são as restri\c{c}ões da sua solu\c{c}ão?\\
+
+\quest{4} Escreva uma fun\c{c}ão que verifica se um vetor de números inteiros está ou não ordenado crescentemente. Além do vetor de inteiros, sua fun\c{c}ão deve receber, como parâmetro, um número inteiro indicando o tamanho do vetor.\\
+
+\quest{5} Você e seus amigos participam de um bolão {\it online} do jogo da final do campeonato 
+que acontecerá neste fim de semana. 
+Você gostaria de definir sua aposta considerando a quantidade de jogadores titulares escalados, 
+porém, a escalação só sai minutos antes do encerramento das apostas. \\
+
+\noindent Conhecendo o número das camisetas dos jogadores titulares e sabendo que a numeração das camisetas não muda, 
+você decide então codificar um programa para calcular a quantidade de jogadores titulares escalados e realizar a aposta.
+Seu programa deve ler do teclado, primeiro os números das camisetas dos $11$ jogadores titulares 
+e depois os números dos jogadores escalados e, então, imprimir a quantidade de jogadores
+titulares que foram escalados.\\
+
+\quest{6} Você trabalha em uma transportadora que atende o interior do estado de Mato Grosso. A frota desta empresa é composta por caminhões com diferentes limites de pesos. As mercadorias a serem transportadas estão embaladas em grandes caixas que também possuem pesos diferentes. Estas caixas são tão grandes que cada caminhão pode transportar, no máximo, duas delas. Infelizmente, não há na empresa procedimentos que podem ser utilizados para definir quais caixas devem ser transportadas em cada caminhão.\\
+
+\noindent Considerando isto, você decidiu escrever um programa para resolver este problema. Depois de analisá-lo com calma, você conclui que o seu programa deve ler um número inteiro $n$ que representa a quantidade de caixas e, subsequentemente, ler e armazenar 
+em um vetor $n$ números representando o peso das caixas. Em seguida, seu programa deve ler o peso suportado por um determinado caminhão. 
+Depois disto, deve-se verificar (crie uma função para isto) 
+se existem duas caixas que podem ser transportadas neste caminhão. Caso seja possível transportar,  seu programa imprimir os índices das caixas.\\
+
+ 
+%\bibliographystyle{abbrv}{\bibliography{mc}}
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% portug-mode: t
+%%% TeX-master: t
+%%% End: 

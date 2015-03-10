@@ -1,0 +1,6 @@
+Você quer convidar quatro colegas (Ana, Joana, Maria e Paulo) para passar as
+férias em sua casa. Cada um destes colegas, no entanto, mora em uma cidade diferente. 
+Em seu estado, as estradas são ruins e há vários pedágios na entrada de cada uma destas
+cidades, de modo que seus amigos precisam decidir em quais cidades passar para economizar.
+Você está bastante empolgado com este reencontro e, por isso, decidiu ajudá-los.
+

@@ -1,0 +1,174 @@
+\documentclass[10pt]{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage[portuges]{babel}
+%\usepackage{fullpage}
+\usepackage{url}
+\usepackage{ulem}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{charter}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{tkz-berge}
+
+
+
+\def\exerc{\mathop{\it exerc}\nolimits}
+\def\prova{\mathop{\it prova}\nolimits}
+\def\prog{\mathop{\it prog}\nolimits}
+\def\parcial{\mathop{\it parcial}\nolimits}
+\def\final{\mathop{\it final}\nolimits}
+
+\newcommand{\quest}[1] {\noindent {\bf {#1})}}
+\newcommand{\prob}[3] {{\bf ENTRADA:} {\tt #1}
+
+{\bf SAÍDA:} {\tt #2}
+
+{\bf DICA:} {#3\\}}
+
+\newcommand{\proba}[3] {{\bf ENTRADA:} {\tt #1}
+
+{\bf SAÍDA:} {\tt #2}
+
+{\bf DESCRIÇÃO:} {#3\\}}
+
+
+\pagestyle{empty}
+
+\title{ {\footnotesize
+    \hrule\vspace{1pt}\hrule\vspace{1ex}
+    Instituto de Engenharia \hfill Universidade Federal de Mato Grosso
+    \smallskip 
+    \hrule\vspace{1pt}\hrule}\vspace{10pt}
+  Algoritmos e Programação de Computadores \\[-6pt]}
+
+\date{\bf Segundo Semestre de 2014}
+
+\begin{document}
+ 
+\maketitle
+
+
+%\vspace{-0.5cm}
+
+%{\Large \centering
+
+%{\bf \normalsize Maiores Informações} 
+
+%\url{http://www.students.ic.unicamp.br/~ra089067/mc102/index.html}
+
+%}
+
+%\vspace{0.5cm}
+\thispagestyle{empty}
+
+%\begin{minipage}{18cm}
+%\noindent
+%%\begin{center}
+%\framebox[12.1cm][l]{\bf Para esta lista use apenas expressões, desvios condicionais e estruturas de %repeti\c{c}ão.\\ 
+%Seu programa não deve fazer uso de variáveis que não sejam de tipo básico.} 
+%\end{center}
+%\end{minipage}
+
+\begin{center} \Large \bf Exercícios \end{center}
+
+\quest{1} Escreva um programa que implementa algumas opera\c{c}ões de uma calculadora. 
+Seu programa deve ler um símbolo que indica a operação a ser efetuada (um caractere) e dois valores reais (use {\it float} ou {\it double}), com os quais a operação será realizada. O conjunto de operações possíveis, os caracteres que as representam e os valores necessários para o cálculo são apresentados na Tabela 1. 
+\begin{table}[h!]
+\centering
+\begin{tabular}{lccc}\hline
+Opera\c{c}ão & Símbolo & Primeiro argumento & Segundo argumento\\ \hline
+Adi\c{c}ão	& + &	$\textrm{Termo}_1$	& $\textrm{Termo}_2$\\
+Subtração	& - & 	$\textrm{Minuendo}$	& $\textrm{Subtraendo}$\\
+Multiplicação & 	x & $\textrm{Fator}_1$ & 	$\textrm{Fator}_2$\\
+Divisão& 	/ & 	Dividendo	& Divisor\\
+Resto	& \%	& Dividendo	& Divisor \\
+Potenciação	& $\wedge$ & 	Base & 	Expoente\\
+Combinação	& C & 	N& 	P\\ \hline
+\end{tabular}
+\caption{Detalhes sobre as opera\c{c}ões da calculadora.}
+\end{table}
+\\
+
+\noindent Escreva uma fun\c{c}ão para cada uma das opera\c{c}ões. {\bf Observa\c{c}ão:} Tente reutilizar fun\c{c}ões. Para o cálculo de combina\c{c}ões, por exemplo, crie duas fun\c{c}ões. Uma delas deve calcular o fatorial de um número. \\
+
+
+
+\quest{2} Ao analisar o segundo Trabalho Prático com mais calma, você percebeu que é possível calcular aquela probabilidade considerando uma {\it distribui\c{c}ão binomial}. De acordo com seus cálculos, a probabilidade  $p$ de, ao menos, $M$ de um total $N$ canoas chegarem ao destino é definida pela equa\c{c}ão:
+
+
+\begin{equation}
+p =  (0.5)^N \cdot \sum_{x=M}^{N} {N\choose x}.
+\end{equation}
+
+\noindent Escreva uma fun\c{c}ão que implementa esta equa\c{c}ão. Utilize as fun\c{c}ões criadas no exercício anterior. Compare os resultados desta fun\c{c}ão com aqueles obtidos no trabalho.\\
+
+\quest{3} Fa\c{c}a uma fun\c{c}ão que calcule a integral utilizando a seguinte aproxima\c{c}ão:
+\begin{equation}
+\int_0^{n} e^{-x^2} dx =  n - \frac{n^3}{3\cdot 1!} + \frac{n^5}{5\cdot 2!} - \frac{n^7}{7\cdot 3!} \ldots~
+\end{equation}
+
+\noindent Sua fun\c{c}ão deve ter o seguinte protótipo:\\
+
+{\bf double} {\tt aprox\_integral}({\bf float} n, {\bf float} cte),\\
+
+\noindent em que $n$ corresponde ao limite superior da integral e {\it cte} é um valor que deve ser utilizado como critério de parada da aproxima\c{c}ão. Neste caso, sua
+fun\c{c}ão deverá interromper o cálculo quando o {\it i}-ésimo termo, em valor absoluto, ficar menor que {\it cte}.\\
+
+\quest{4} Considere a fun\c{c}ão {\tt desconhecido} e responda os itens abaixo. \\
+
+\noindent {\bf void} {\tt desconhecido}({\bf int} *x, {\bf int} *y)
+\vspace{-0.2cm}
+\begin{verbatim}
+{
+     *x = *x + (*y);
+     (*y)++;
+}
+\end{verbatim}
+
+
+
+
+\noindent {\bf a)} Escreva um programa em C que utiliza  a fun\c{c}ão {\tt desconhecido}.\\
+\noindent {\bf b)} Entenda e descreva o comportamento da fun\c{c}ão {\tt desconhecido}. Simule considerando diferentes valores de {\tt x} e {\tt y}. \\
+
+\quest{5} Escreva uma função que recebe uma data (com dia, mês e ano) e verifica se esta data é válida ou não.\\
+
+\quest{6} Escreva uma função que recebe duas datas válidas (com dia, mês e ano) e devolve o número de dias que decorreram entre elas.\\
+
+
+\quest{7} Escreva uma função que recebe um valor inteiro $n$ que representa a área de um retângulo como parâmetro. Sua função deve imprimir todos os valores inteiros possíveis para as duas laterais deste retângulo.\\
+
+\quest{8} A família de um de seus amigos é proprietária de uma pequena padaria, que produz apenas  pães e bolos. Para produzir estes dois alimentos são utilizados três diferentes matérias primas. A receita seguida por eles utiliza farinha, fermento e ovos. O estoque destes ingredientes é apresentado na Tabela 2.
+\begin{table}[h!]
+\centering
+\begin{tabular}{lc}\hline
+Ingrediente & Quantidade\\ \hline
+Farinha & 60 unidades\\ 
+Fermento & 38 unidades\\
+Ovos & 18 unidades\\ \hline
+\end{tabular}
+\caption{Estoque de ingredientes.}
+\end{table}
+\\
+
+\noindent Você teve acesso a receita utilizada na padaria. Para produzir 1 unidade de pão, por exemplo, mistura-se 1 unidade de farinha e 2 de fermento. Para produzir 1 unidade de bolo são necessárias 3 unidades de farinha e 1 de ovo.\\
+
+\noindent Cada unidade de pão e bolo é vendida por R\$ 5.00 e
+R\$7.00, respectivamente.
+Seu amigo, sabendo que você está em um curso de Engenharia, pediu sua ajuda para determinar a quantidade que deve ser fabricada de cada produto para maximizar os lucros da padaria. Escreva um programa em C para resolver este problema. Obviamente, sua solu\c{c}ão deve respeitar as restrições de estoque.\\
+
+
+
+
+ 
+%\bibliographystyle{abbrv}{\bibliography{mc}}
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% portug-mode: t
+%%% TeX-master: t
+%%% End: 
