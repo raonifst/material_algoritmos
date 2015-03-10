@@ -1,0 +1,3 @@
+sum binomial(10, x)*0.000976563 | 5<=x<=10
+binomial distribution n=10, p=0.5
+

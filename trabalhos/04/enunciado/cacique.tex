@@ -1,0 +1,218 @@
+\documentclass[11pt]{article}
+\usepackage[brazil]{babel}
+\usepackage{isolatin1}
+\usepackage{charter}
+\usepackage[all]{xy}
+\usepackage{graphicx}
+\usepackage{tikz}
+
+\newcommand{\esp}{$\;\;\;\;\;$}
+\setlength{\parskip}{.5pc} 
+\setlength{\paperwidth}{190mm}  % tamanho carta
+\setlength{\paperheight}{219mm}
+\setlength{\textwidth}{41pc}
+\setlength{\textheight}{60pc}
+\setlength{\oddsidemargin}{-1cm}
+\setlength{\evensidemargin}{-1cm}
+\setlength{\topmargin}{-1cm}
+\begin{document}
+\parindent=0pt
+
+\begin{center}
+{\bf {\large Universidade Federal de Mato Grosso}} \\
+{\bf {\large Instituto de Engenharia}} \\ 
+{\bf {\large Algoritmos e Programação de Computadores}} \\
+
+
+Segundo Semestre de 2014
+
+4\raisebox{1ex}{\underline{{\tiny o}}} Trabalho de Prático
+\end{center}\vspace*{-5mm}
+
+
+\begin{minipage}{18cm}
+\noindent
+\begin{center}
+\framebox[7.1cm][l]{\bf Leia com aten\c{c}ão as instruções abaixo.} 
+\end{center}
+\begin{itemize}
+
+
+\item {\bf Obrigatoriamente}, neste trabalho  deve-se criar uma fun\c{c}ão {\bf recursiva}.
+
+\item Escreva quantas fun\c{c}ões achar necessário.
+
+\item A leitura e o entendimento do enunciado são partes da avalia\c{c}ão.
+
+\item O seu programa deve estar completamente contido em um único arquivo denominado {\tt cacique.c}.
+
+\item Para a realização dos testes automáticos, a compilação se dará da seguinte forma: {\tt gcc cacique.c -o cacique -Wall -Werror -ansi -pedantic}.	
+
+\item Não se esqueça de incluir no início do programa uma breve descrição dos objetivos, das variáveis de entrada e saída, das pré-condi\c{c}ões assumidas e de seu nome e RGA. 
+
+\item Organize seu código e comente-o adequadamente.
+
+
+\end{itemize}
+\end{minipage} \hfill 
+
+\vspace*{-4mm}
+
+\newpage
+
+
+\vspace*{0.5cm}
+
+{\Large \centering
+ Enunciado
+ 
+}
+
+
+\noindent
+
+No Brasil, ainda existem muitos povos indígenas com pouco contato com a sociedade globalizada. 
+Os Apiaká's são um destes povos.  Originalmente, eles habitavam regiões dos estados de Mato Grosso e Pará. Posteriormente,  foram deslocados para uma reserva indígena no município de Juara-MT e, em 1989, foi criado o município de Apiacás em Mato Grosso. Desde então, eles tentam reestruturar sua vida tribal.
+
+Os Apiaká's tiveram sua população drasticamente reduzida com a exploração de algumas atividades econômicas (garimpo, extração de borracha etc) em suas terras. Isto aconteceu de tal forma que em 1989 sua população era estimada em apenas 43 pessoas. Em 2009, graças à reserva, sua população passou para aproximadamente 1000 pessoas.
+
+Um fato bastante curioso sobre este povo e que chama bastante atenção dos visitantes da aldeia diz respeito ao seu processo de escolha de líderes. Há duas grandes diferenças com relação ao que é realizado em outras tribos. Primeiro, qualquer membro da tribo pode participar do processo e, eventualmente, pode se tornar um cacique. A segunda diferença é que esta escolha não é realizada por elei\c{c}ão e nem considera fatores hereditários. Surpreendentemente, os Apiaká's escolhem seu líder em uma espécie de sorteio. 
+
+Neste sorteio, todos os $N$ candidatos interessados em ser tornar cacique são numerados de $1$ a $N$ e dispostos em um grande círculo. O processo de escolha é realizado eliminando gradativamente o {\it segundo} candidato restante no círculo. Esta elimina\c{c}ão come\c{c}a pelo canditado numerado com  $1$ e continua em sentido horário até sobrar uma única pessoa. Ao fim do processo, a última pessoa no círculo é o cacique.
+Por exemplo, eis a configura\c{c}ão inicial para $N=10$:
+
+\begin{tikzpicture}[line cap=rect,line width=3pt]
+\filldraw [fill=white] (0,0) circle [radius=2cm];
+\foreach \angle [count=\xi] in {90,54,...,-260}
+{
+  \draw[line width=1pt] (\angle:2cm) -- (\angle:2cm);
+  \node[font=\large] at (\angle:1.36cm) {\textsf{\xi}};
+}
+\foreach \angle in {90}
+  \draw[line width=2pt] (\angle:1.8cm) -- (\angle:2cm);
+%\draw (0,0) -- (120:0.8cm);
+%\draw (0,0) -- (90:1cm);
+\end{tikzpicture}
+
+Neste caso, em um primeiro momento, são eliminados os candidatos $2$, $4$, $6$, $8$ e $10$ e o círculo de candidatos fica com a seguinte configura\c{c}ão:
+
+\begin{tikzpicture}[line cap=rect,line width=3pt]
+\filldraw [fill=white] (0,0) circle [radius=2cm];
+\foreach \angle [count=\xi] in {90,54,...,-260}
+{
+  \draw[line width=1pt] (\angle:2cm) -- (\angle:2cm);
+  \node[font=\large] at (\angle:1.36cm) {\textsf{\xi}};
+}
+\foreach \angle in {90}
+  \draw[line width=2pt] (\angle:1.8cm) -- (\angle:2cm);
+\foreach \angle in {54,-18,...,-260}
+  \draw[line width=2pt] (\angle:1.cm) -- (\angle:1.8cm);
+%\draw (0,0) -- (120:0.8cm);
+%\draw (0,0) -- (90:1cm);
+\end{tikzpicture}
+
+Em seguida, são eliminados, nesta ordem, os candidatos $3$, $7$ e $1$.
+
+\begin{tikzpicture}[line cap=rect,line width=3pt]
+\filldraw [fill=white] (0,0) circle [radius=2cm];
+\foreach \angle [count=\xi] in {90,54,...,-260}
+{
+  \draw[line width=1pt] (\angle:2cm) -- (\angle:2cm);
+  \node[font=\large] at (\angle:1.36cm) {\textsf{\xi}};
+}
+\foreach \angle in {-54}
+  \draw[line width=2pt] (\angle:1.8cm) -- (\angle:2cm);
+\foreach \angle in {54,-18,...,-260}
+  \draw[line width=2pt] (\angle:1.cm) -- (\angle:1.8cm);
+\foreach \angle in {90, 18, -126}
+  \draw[line width=2pt] (\angle:1.cm) -- (\angle:1.8cm);
+%\draw (0,0) -- (120:0.8cm);
+%\draw (0,0) -- (90:1cm);
+\end{tikzpicture}
+
+Observe que agora o processo de elimina\c{c}ão se inicia no candidato de número  $5$. Na última rodada, então, o candidato de número $9$ é eliminado e o número $5$ é o novo cacique da aldeia.
+
+%\newpage
+
+Você foi contratado pelo TSE (Tribunal de Sorteio Especial) da aldeia para escrever uma espécie de urna eletrônica para os Apiaká's. O programa desta urna eletrônica deve informar qual é o número do candidato que deve ser o novo cacique.
+
+%O número de repeti\c{c}ões $NC$ deve ser uma das entradas do programa. As outras entradas devem ser o número total de canoas $N$ e o número a ser avaliado $M$.
+
+
+%\newpage
+
+{\Large \centering
+ Do objetivo e das restri\c{c}ões
+ 
+}
+
+O objetivo do seu programa é determinar o número do candidato escolhido pela tribo para ser o seu novo cacique.
+Para tanto, você pode supor que o número total de candidatos $N$ é no máximo  $500$. 
+
+
+
+
+
+{\Large \centering
+ Da entrada e saída
+ 
+}
+
+Seu programa deve ler um valor inteiro $N$, que representa o número total de candidatos disputando a lideran\c{c}a da aldeia.
+
+Seu programa deve imprimir:
+
+\begin{itemize}
+\item ``Novo Cacique: ", seguido pelo número que representa o candidato escolhido para ser o novo cacique.  Ao final, conforme os exemplos de execução abaixo, deve haver um ponto final e uma quebra de linha (``$\backslash${\tt n}").
+ 
+\end{itemize}	
+
+
+
+%\newpage
+
+Os dados apresentados nas Tabelas 1 e 2 ilustram a execu\c{c}ões esperadas para seu programa.
+
+\begin{table}[h!]
+\begin{center}
+   \begin{tabular}{|l|l| }
+   \hline
+ 	Entrada	& Saída esperada | Tela do computador \\ \hline
+    {\tt 15} & {\tt Novo Cacique: 15.} \\
+   & \\ \hline
+   \end{tabular} \\
+
+\end{center}
+\caption{Primeiro exemplo de execu\c{c}ão. Neste caso, há $15$ candidatos na disputa.}
+\end{table}
+
+\begin{table}[h!]
+\begin{center}
+   \begin{tabular}{|l|l| }
+   \hline
+ 	Entrada	& Saída esperada | Tela do computador \\ \hline
+    {\tt 16} & {\tt Novo Cacique: 1.} \\
+   & \\ \hline
+   \end{tabular} \\
+
+\end{center}
+\caption{Segundo exemplo de execu\c{c}ão. Neste caso, há 16 candidatos na disputa.}
+\end{table}
+
+
+{\Large \centering
+ Do Cálculo da Nota
+ 
+}
+
+A nota desta tarefa será um número inteiro entre zero e dez, proporcional à quantidade de testes acertados pelo seu programa.
+
+
+\newpage
+
+
+
+
+
+
+\end{document}

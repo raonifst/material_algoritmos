@@ -1,0 +1,177 @@
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+        <title>Laboratorio 01</TITLE>
+    </HEAD>
+    <BODY BGCOLOR="#FFF099" TEXT="#000000">
+        <H2>Instituto de Computa&ccedil;&atilde;o da UNICAMP</H2>
+        <H3>MC102: Algoritmos e Programa&ccedil;&atilde;o de Computadores</H3>
+        <H4>Segundo Semestre de 2012 - Turmas A e B</H4>
+        <H3>Laborat&oacute;rio N&ordm; 01</H3>
+        <TABLE>
+            <TR>
+                <TD><em>Docente:</em></TD>
+                <TD><em>C. N. Campos</em></TD>
+            </TR>
+            <TR>
+                <TD><em>Monitores:</em></TD>
+                <TD><em>Vitor Yano</em></TD>
+            </TR>
+            <TR>
+                <TD></TD>
+                <TD><em>Davi Tozoni</em></TD>
+            </TR>
+            <TR>
+                <TD></TD>
+                <TD><em>Celso Ruela</em></TD>
+            </TR>
+        </TABLE>
+        <HR>
+        <center>
+            <p><img src="alma_negra.png" alt="Alma Negra" /><img src="macgyver.png" alt="MacGyver" /></p>
+        </center>
+        <p>
+    <strong>Alma Negra </strong>
+&eacute; l&iacute;der de um bando de piratas que n&atilde;o hesita em matar, seja quem for (inclusive seus subordinados), para conquistar ou esconder riquezas. O que    <strong>Alma Negra</strong> n&atilde;o contava era com o incr&iacute;vel azar de ser capturado logo ap&oacute;s ter roubado o mapa que continha a localiza&ccedil;&atilde;o de todos os
+    tesouros do seu arquiinimigo, o pirata <strong>Jo&atilde;o Pardal</strong>. Ap&oacute;s 10 anos, cansado da pris&atilde;o, principalmente pela p&eacute;ssima qualidade da comida
+    servida no refeit&oacute;rio da pris&atilde;o, conhecido como <strong>El Bandej&ograve;n</strong>, <strong>Alma Negra</strong> decide fugir da ilha em que estava preso.
+</p>
+<p>
+    Ap&oacute;s escapar da pris&atilde;o, utilizando apenas um tapa-olho e tr&ecirc;s penas de seu papagaio albino, com a ajuda de <strong>MacGyver,</strong> que era seu
+    companheiro de cela, conseguiu roubar um navio para escapar da ilha. Seu objetivo agora &eacute; roubar os tesouros de <strong>Jo&atilde;o Pardal</strong>, que est&atilde;o
+escondidos nas quatro ilhas do <strong>Arquip&eacute;lago de Tangamand&aacute;pio</strong>. O problema encontrado por <strong>Alma Negra</strong> e    <strong>MacGyver</strong> &eacute; que o navio roubado pode n&atilde;o suportar todos os tesouros escondidos nas ilhas, de modo que os mesmos precisam decidir quais
+    ilhas pilhar antes de seu destino final. Utilizando seu <strong>Hi-Phone MP15</strong> (e n&atilde;o utilizando linhas da Tim ou Oi), <strong>Alma Negra</strong>
+    ligou para a Unicamp e pediu sua ajuda para encontrar o caminho que eles poderiam tomar para conseguir o <strong>m&aacute;ximo</strong> de grana para gastar com
+    muito Rum e muita farra em seu destino final, a <strong>Isla Siem Nombre</strong>, SEM AFUNDAR O NAVIO.
+</p>
+        <p>
+            No mapa abaixo constam as quatro ilhas do
+            <strong>Arquip&eacute;lago de Tangamand&aacute;pio</strong>, indicadas pelos n&uacute;meros: 1, 2, 3, 4, al&eacute;m do destino final, a
+            <strong>Isla Siem Nombre</strong>, representada pela letra F. A quantidade de tesouro (em kg) em cada ilha &eacute; fornecida como um n&uacute;mero inteiro n&atilde;o-negativo.</p>
+        <p align="center">
+            <img src="mapa_tesouro.png" alt="Mapa dos tesouros"/>
+        </p>
+        <p><strong>Tarefa:</strong></p>
+        <p>
+O objetivo do seu programa &eacute; determinar o caminho pelo qual <strong>Alma Negra </strong>e <strong>MacGyver </strong>devem passar para que acumulem o <strong>m&aacute;ximo</strong> poss&iacute;vel de tesouros. &Eacute; importante lembrar que o navio roubado pelos dois fugitivos possui um limite de carga que    <strong>n&atilde;o </strong>pode ser ultrapassado. Al&eacute;m disso, leve em conta as seguintes considera&ccedil;&otilde;es:
+</p>
+        <ul>
+            <li>
+                Devido &agrave; sua ambi&ccedil;&atilde;o, o pirata
+                <strong>Alma Negra</strong>
+                carrega todo o tesouro que encontra, mesmo que isso fa&ccedil;a o navio afundar e leve &agrave; sua morte. Por isso, a rota n&atilde;o pode passar por uma ilha cujo ac&uacute;mulo de tesouro leve a ultrapassar o limite de carga do navio.
+            </li>
+            <li>
+                Assim que os piratas passam por uma ilha, os nativos se preparam para impedir novas invas&otilde;es, destruindo qualquer navio que se aproxime da costa. Assim, n&atilde;o &eacute; poss&iacute;vel passar mais de uma vez por uma mesma ilha.
+            </li>
+            <li>
+                Devido &agrave;s correntes mar&iacute;timas e aos conhecimentos de navega&ccedil;&atilde;o dos piratas, os &uacute;nicos caminhos poss&iacute;veis entre ilhas s&atilde;o os marcados no mapa (n&atilde;o &eacute; poss&iacute;vel ir da ilha 2 para o destino final, por exemplo).
+            </li>
+        </ul>
+        <p>
+            O programa deve ler cinco valores inteiros
+            <em>A</em>,
+            <em>B</em>,
+            <em>C</em>
+            e
+            <em>D</em>, que representam, respectivamente, a quantidade de tesouro (em kg) existente em cada ilha 1, 2, 3 e 4 e o limite de carga do navio
+            <em>L</em>
+            (tamb&eacute;m em kg).</p>
+        <p>
+            Seu programa deve imprimir:
+        </p>
+        <ul>
+            <li>"<tt>Tesouro:
+                </tt>", seguido pelo valor total acumulado pelo caminho.</li>
+        <li>"<tt>Caminho:
+            </tt>", seguido pela lista das ilhas percorridas (na ordem em que foram invadidas), separadas por v&iacute;rgula e um espa&ccedil;o. Ao final da lista deve haver um ponto final (conforme os exemplos de execu&ccedil;&atilde;o) e uma quebra de linha.</li>
+        </ul>
+        <p>
+        Caso haja mais de um caminho com o m&aacute;ximo valor total acumulado de tesouros, o programa deve usar como crit&eacute;rio de desempate a ordem num&eacute;rica, ou seja, sempre dar prefer&ecirc;ncia a invadir ilhas com n&uacute;meros menores antes. Para as compara&ccedil;&otilde;es, o valor da ilha final (F) deve ser considerado 0. Exemplos:
+        </p>
+        <ul>
+            <li> Se temos os caminhos "1, 3, F." e "1, 4, F." empatados, vence o caminho "1, 3, F.", pois a segunda ilha do caminho vencedor (ilha 3) possui &iacute;ndice inferior em rela&ccedil;&atilde;o &agrave; segunda ilha do caminho perdedor (ilha 4). </li>
+            <li> Se temos os caminhos "1, 3, 4, F." e "2, 4, F." empatados, vence o caminho "1, 3, 4, F.", pois a primeira ilha percorrida no caminho vencedor (ilha 1) possui &iacute;ndice menor em rela&ccedil;&atilde;o &agrave; primeira ilha do caminho perdedor (ilha 2). </li>
+            <li> Se temos os caminhos "2, 3, F." e "2, 3, 4, F." empatados, vence o caminho "2, 3, F.", pois a terceira ilha percorrida no caminho vencedor (ilha F) possui &iacute;ndice menor em rela&ccedil;&atilde;o &agrave; terceira ilha do caminho perdedor (ilha 4). </li>
+        </ul>
+        <hr>
+        <p><strong>Exemplo de execu&ccedil;&atilde;o 1:
+            </strong>
+        </p>
+        <table border="0" hspace="30">
+            <tbody>
+                <tr>
+                    <td>
+                        <tt><font color="BLUE">50 150 50 200 350</font></tt>
+                    </td>
+                </tr>
+                <tr>
+                    <td><tt>Tesouro: 350</tt></td>
+                </tr>
+                <tr>
+                    <td><tt>Caminho: 2, 4, F.</tt></td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>Exemplo de execu&ccedil;&atilde;o 2:
+            </strong>
+        </p>
+        <table border="0" hspace="30">
+            <tbody>
+                <tr>
+                    <td>
+                        <tt><font color="BLUE">3105 2350 1640 320 3650</font></tt>
+                    </td>
+                </tr>
+                <tr>
+                    <td><tt>Tesouro: 3425</tt></td>
+                </tr>
+                <tr>
+                    <td><tt>Caminho: 1, 4, F.</tt></td>
+                </tr>
+            </tbody>
+        </table><br><table>
+            <tbody>
+                <tr>
+                    <td><em>Notas:</em></td>
+                    <td>Textos em
+                        <font color="BLUE"><tt>azul</tt></font>
+                        designam dados de entrada, isto &eacute;, que devem ser lidos pelo seu programa.</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Textos em
+                        <tt>preto</tt>
+                        designam dados de sa&iacute;da, ou seja, que devem ser impressos pelo seu programa.</td>
+                </tr>
+            </tbody>
+        </table><hr>
+        <p><strong>Observa&ccedil;&otilde;es gerais:</strong>
+        </p>
+        <ul>
+            <li>O n&uacute;mero m&aacute;ximo de submiss&otilde;es &eacute; 15;</li>
+            <li>O seu programa deve estar completamente contido em um &uacute;nico arquivo denominado
+                <tt>pirata.c</tt>;</li>
+            <li>Para a realiza&ccedil;&atilde;o dos testes autom&aacute;ticos, a compila&ccedil;&atilde;o se dar&aacute; da seguinte forma:
+                <tt>gcc pirata.c -o pirata -Wall -Werror -ansi -pedantic</tt>;</li>
+            <li>N&atilde;o se esque&ccedil;a de incluir no in&iacute;cio do programa uma breve descri&ccedil;&atilde;o dos objetivos, da entrada, da sa&iacute;da, seu nome e RA;</li>
+            <li>Ap&oacute;s cada submiss&atilde;o, voc&ecirc; deve aguardar um minuto at&eacute; poder submeter seu trabalho novamente.</li>
+        </ul><hr>
+        <p>
+            <strong>Crit&eacute;rios importantes:</strong></p>
+        <ul>
+            <li>O n&atilde;o cumprimento dos crit&eacute;rios abaixo acarretar&aacute; nota zero na atividade, independentemente dos resultados dos testes do SuSy.</li>
+            <li>N&atilde;o ser&atilde;o aceitas solu&ccedil;&otilde;es contendo estruturas n&atilde;o vistas em sala;</li>
+            <li>Para este laborat&oacute;rio, poder&atilde;o ser utilizadas apenas opera&ccedil;&otilde;es aritm&eacute;ticas, de entrada e sa&iacute;da e desvios condicionais (<tt>if</tt>, <tt>else</tt>, <tt>switch</tt>);</li>
+            <li><strong>Todas</strong>
+                as vari&aacute;veis utilizadas em seu programa devem ser do tipo int;</li>
+            <li>Voc&ecirc; pode utilizar uma
+                <strong>&uacute;nica</strong>
+                vari&aacute;vel para armazenar o caminho (tamb&eacute;m do tipo int);</li>
+            <li>O &uacute;nico header aceito para inclus&atilde;o &eacute;
+                <tt>stdio.h</tt>.</li>
+        </ul>
+        <hr><small>
+            <em>08/08/2012</em></small>
+    </body>
+</html>

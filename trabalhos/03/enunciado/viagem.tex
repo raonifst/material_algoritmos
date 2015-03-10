@@ -1,0 +1,183 @@
+\documentclass[11pt]{article}
+\usepackage[brazil]{babel}
+\usepackage{isolatin1}
+\usepackage{charter}
+\usepackage[all]{xy}
+\usepackage{graphicx}
+
+
+\newcommand{\esp}{$\;\;\;\;\;$}
+\setlength{\parskip}{.5pc} 
+\setlength{\paperwidth}{190mm}  % tamanho carta
+\setlength{\paperheight}{219mm}
+\setlength{\textwidth}{41pc}
+\setlength{\textheight}{60pc}
+\setlength{\oddsidemargin}{-1cm}
+\setlength{\evensidemargin}{-1cm}
+\setlength{\topmargin}{-1cm}
+\begin{document}
+\parindent=0pt
+
+\begin{center}
+{\bf {\large Universidade Federal de Mato Grosso}} \\
+{\bf {\large Instituto de Engenharia}} \\ 
+{\bf {\large Algoritmos e Programação de Computadores}} \\
+
+
+Segundo Semestre de 2014
+
+3\raisebox{1ex}{\underline{{\tiny o}}} Trabalho Prático
+\end{center}\vspace*{-5mm}
+
+
+\begin{minipage}{18cm}
+\noindent
+\begin{center}
+\framebox[7.1cm][l]{\bf Leia com atenção as instruções abaixo.} 
+\end{center}
+\begin{itemize}
+
+
+\item Não serão aceitas soluções contendo estruturas não vistas em sala. Para este laboratório, poderão ser utilizadas apenas operações aritméticas, desvios condicionais ({\tt if}, {\tt else} e {\tt switch}),
+la\c{c}os ({\tt for}, {\tt while} e {\tt do while}), fun\c{c}ões, vetores, matrizes e o único {\tt header} permitido para inclusão é {\tt stdio.h}.
+
+\item A leitura e o entendimento do enunciado são partes da avaliação.
+
+\item O seu programa deve estar completamente contido em um único arquivo denominado {\tt viagem.c}.
+
+\item Para a realização dos testes automáticos, a compilação se dará da seguinte forma: {\tt gcc viagem.c -o viagem -Wall -Werror -ansi -pedantic}.	
+
+\item Não se esqueça de incluir no início do programa uma breve descrição dos objetivos, das variáveis de entrada e saída, das pré-condições assumidas e de seu nome e RGA. 
+
+\item Organize seu código e comente-o adequadamente.
+
+
+\end{itemize}
+\end{minipage} \hfill 
+
+\vspace*{-4mm}
+
+\newpage
+
+
+\vspace*{0.5cm}
+
+{\Large \centering
+ Enunciado
+ 
+}
+
+
+\noindent
+
+Enfim, as férias estão chegando. 
+Sua família decidiu passar alguns dias no litoral este ano. 
+Você e seus familiares pré-selecionaram $N$ destinos e estão avaliando os custos de cada um deles. 
+Nesta conversa, ficou estabelecido que vocês podem gastar no máximo $L$ reais com passagens.
+
+Como você está bastante empolgado com esta viagem, se responsabilizou pela análise dos custos do transporte. 
+Você pesquisou bastante e descobriu que é possível chegar aos $N$ destinos, 
+em voos de $K$ companhias distintas. 
+
+Estes dados devem ser armazendos em uma matriz $M$. 
+Nesta matriz, há uma linha para cada um dos $1, 2, \ldots, ~N$ destinos. 
+Cada uma das companhias aéreas é representada em uma coluna ($1, 2, \ldots, ~K$).
+Cada célula $(i,~j)$ de $M$ contém o valor em reais gasto por sua família para chegar na cidade $i$
+voando com a companhia $j$.
+
+Para não perder muito tempo analisando os dados, 
+você decidiu escrever um programa em C que imprime todos os destinos ($1, 2, \ldots, ~N$) que
+podem ser visitados por sua família.  Lembre-se de que vocês podem gastar no máximo $L$ reais.
+
+
+
+{\Large \centering
+ Do objetivo e das restrições
+ 
+}
+
+O objetivo do seu programa é determinar os destinos que podem ser vistados por sua família nestas férias  É importante lembrar que há um limite que pode ser gasto em passagens. 
+
+Nesta atividade, você pode supor que:
+\begin{itemize}
+\item o número total de destinos $N$ é sempre menor que  $100$. 
+\item o número total de companhias $K$ é no máximo $100$. 
+\end{itemize} 
+
+
+
+{\Large \centering
+ Da entrada e saída
+ 
+}
+
+Seu programa deve ler, primeiro, dois valores inteiros $N$ e  $K$, e um valor real $L$. Estes valores representam, respectivamente, a quantidade de destinos, a quantidade de companhias e o valor limite que pode ser gasto com as passagens.
+
+Em seguida, seu programa deve ler a matriz $M$ contendo $N \times K$ valores reais. Cada célula  $(i,~j)$ desta matriz corresponde ao valor cobrado pela companhia $j$ para levar sua família para a cidade $i$.
+
+Caso ao menos uma cidade possa ser visitada, seu programa deve imprimir:
+
+\begin{itemize}
+\item ``Cidades: ", seguido pela lista ordenada das cidades, separadas por vírgula e um espaço. Ao final da lista, deve haver um ponto final e uma quebra de linha (``$\backslash${\tt n}").
+\end{itemize}	
+
+Se o valor cobrado pela companhia aérea não permitir a viagem para ao menos uma cidade, seu programa deve imprimir:
+\begin{itemize}
+\item ``Nao ha cidades.". Novamente, ao final, deve haver uma quebra de linha (``$\backslash${\tt n}").
+\end{itemize}
+\newpage
+Os dados apresentados nas Tabelas 1 e 2 ilustram a execu\c{c}ões esperadas para seu programa.
+
+\begin{table}[h!]
+\begin{center}
+   \begin{tabular}{|l|l| }
+   \hline
+ 	Entrada	& Saída esperada | Tela do computador \\ \hline
+    {\tt 5 4 1000.00} & {\tt Cidades: 1, 5.} \\
+    {\tt 500.00 1000.00 1120.00 1100.00} &   \\
+    {\tt 1500.00 1020.00 1120.00 1100.01} &   \\
+    {\tt 1000.01 1020.00 1120.00 1100.01} &   \\
+    {\tt 1000.02 1121.10 1120.00 1100.01} &   \\
+    {\tt 900.00 1010.00 1220.00 1700.00} &   \\  & \\ \hline
+   \end{tabular} \\
+
+\end{center}
+\caption{Primeiro exemplo de execu\c{c}ão. Neste caso, os números 5 e 4 indicam a quantidade de destinos e de companhias, respectivamente. O  valor limite  é de 1000.00. Os 20 valores seguintes representam cada uma das células da matriz.}
+\end{table}
+
+\begin{table}[h!]
+\begin{center}
+   \begin{tabular}{|l|l| }
+   \hline
+ 	Entrada	& Saída esperada | Tela do computador \\ \hline
+    {\tt 6 4 1000.00} & {\tt Nao ha cidades.} \\
+    {\tt 1510.10 1010.00 1120.00 1100.00} &   \\
+    {\tt 1500.00 1020.00 1120.00 1100.01} &   \\
+    {\tt 1000.01 1020.00 1120.00 1100.01} &   \\
+    {\tt 1000.02 1121.10 1120.00 1100.01} &   \\
+    {\tt 2000.02 2121.10 1120.00 1100.01} &   \\
+    {\tt 1900.20 1010.00 1220.00 1700.00} &   \\  & \\ \hline
+   \end{tabular} \\
+
+\end{center}
+\caption{Primeiro exemplo de execu\c{c}ão. Neste caso, os números 6 e 4 indicam a quantidade de destinos e de companhias, respectivamente. O  valor limite  é de 1000.00. Os 24 valores seguintes representam cada uma das células da matriz.}
+\end{table}
+
+
+
+{\Large \centering
+ Do Cálculo da Nota
+ 
+}
+
+A nota desta tarefa será um número inteiro entre zero e dez, proporcional à quantidade de testes acertados pelo seu programa.
+
+
+\newpage
+
+
+
+
+
+
+\end{document}

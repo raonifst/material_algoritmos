@@ -1,0 +1,179 @@
+\documentclass[11pt]{article}
+\usepackage[brazil]{babel}
+\usepackage{isolatin1}
+\usepackage{charter}
+\usepackage[all]{xy}
+\usepackage{graphicx}
+
+
+\newcommand{\esp}{$\;\;\;\;\;$}
+\setlength{\parskip}{.5pc} 
+\setlength{\paperwidth}{190mm}  % tamanho carta
+\setlength{\paperheight}{219mm}
+\setlength{\textwidth}{41pc}
+\setlength{\textheight}{60pc}
+\setlength{\oddsidemargin}{-1cm}
+\setlength{\evensidemargin}{-1cm}
+\setlength{\topmargin}{-1cm}
+\begin{document}
+\parindent=0pt
+
+\begin{center}
+{\bf {\large Universidade Federal de Mato Grosso}} \\
+{\bf {\large Instituto de Engenharia}} \\ 
+{\bf {\large Algoritmos e Programação de Computadores}} \\
+
+
+Segundo Semestre de 2014
+
+Casos de Testes do 1\raisebox{1ex}{\underline{{\tiny o}}} Trabalho de Prático
+\end{center}\vspace*{-5mm}
+
+
+
+
+
+\vspace*{0.5cm}
+
+
+Os dez casos de testes do primeiro trabalho prático são apresentados nas Tabelas 1-10, a seguir.
+
+\begin{table}[h!]
+\begin{center}
+   \begin{tabular}{|l|l| }
+   \hline
+ 	Entrada | Teclado	& Saída esperada | Tela do computador \\ \hline
+    {\tt 0 0 0 0 0} & {\tt Tesouro: 0.} \\
+ &  {\tt Caminho: F.} \\  & \\ \hline
+   \end{tabular} \\
+
+\end{center}
+\caption{Primeiro caso de teste.}
+\end{table}
+
+\begin{table}[h!]
+\begin{center}
+   \begin{tabular}{|l|l| }
+   \hline
+ 	Entrada | Teclado	& Saída esperada | Tela do computador \\ \hline
+    {\tt 10 10 10 10 100} & {\tt Tesouro: 40.} \\
+ &  {\tt Caminho: 1, 3, 2, 4, F.} \\  & \\ \hline
+   \end{tabular} \\
+
+\end{center}
+\caption{Segundo caso de teste.}
+\end{table}
+
+\begin{table}[h!]
+\begin{center}
+   \begin{tabular}{|l|l| }
+   \hline
+ 	Entrada | Teclado	& Saída esperada | Tela do computador \\ \hline
+    {\tt 10 20 30 40 45} & {\tt Tesouro: 40.} \\
+ &  {\tt Caminho: 1, 3, F.} \\  & \\ \hline
+   \end{tabular} \\
+
+\end{center}
+\caption{Terceiro caso de teste.}
+\end{table}
+
+\begin{table}[h!]
+\begin{center}
+   \begin{tabular}{|l|l| }
+   \hline
+ 	Entrada | Teclado	& Saída esperada | Tela do computador \\ \hline
+    {\tt 10 22 35 10 60} & {\tt Tesouro: 57.} \\
+ &  {\tt Caminho: 2, 3, F.} \\  & \\ \hline
+   \end{tabular} \\
+
+\end{center}
+\caption{Quarto caso de teste.}
+\end{table}
+
+\begin{table}[h!]
+\begin{center}
+   \begin{tabular}{|l|l| }
+   \hline
+ 	Entrada | Teclado	& Saída esperada | Tela do computador \\ \hline
+    {\tt 40 30 20 10 55} & {\tt Tesouro: 50.} \\
+ &  {\tt Caminho: 1, 4, F.} \\  & \\ \hline
+   \end{tabular} \\
+
+\end{center}
+\caption{Quinto caso de teste.}
+\end{table}
+
+\begin{table}[h!]
+\begin{center}
+   \begin{tabular}{|l|l| }
+   \hline
+ 	Entrada | Teclado	& Saída esperada | Tela do computador \\ \hline
+    {\tt 100 50 20 20 110} & {\tt Tesouro: 90.} \\
+ &  {\tt Caminho: 2, 3, 4, F.} \\  & \\ \hline
+   \end{tabular} \\
+
+\end{center}
+\caption{Sexto caso de teste.}
+\end{table}
+
+\begin{table}[h!]
+\begin{center}
+   \begin{tabular}{|l|l| }
+   \hline
+ 	Entrada | Teclado	& Saída esperada | Tela do computador \\ \hline
+    {\tt 100 100 100 100 100} & {\tt Tesouro: 0.} \\
+ &  {\tt Caminho: F.} \\  & \\ \hline
+   \end{tabular} \\
+
+\end{center}
+\caption{Sétimo caso de teste.}
+\end{table}
+
+\begin{table}[h!]
+\begin{center}
+   \begin{tabular}{|l|l| }
+   \hline
+ 	Entrada | Teclado	& Saída esperada | Tela do computador \\ \hline
+    {\tt 156 720 624 10 779} & {\tt Tesouro: 730.} \\
+ &  {\tt Caminho: 2, 4, F.} \\  & \\ \hline
+   \end{tabular} \\
+
+\end{center}
+\caption{Oitavo caso de teste.}
+\end{table}
+
+\begin{table}[h!]
+\begin{center}
+   \begin{tabular}{|l|l| }
+   \hline
+ 	Entrada | Teclado	& Saída esperada | Tela do computador \\ \hline
+    {\tt 50 50 50 50 0} & {\tt Tesouro: 0.} \\
+ &  {\tt Caminho: F.} \\  & \\ \hline
+   \end{tabular} \\
+
+\end{center}
+\caption{Nono caso de teste.}
+\end{table}
+
+\begin{table}[h!]
+\begin{center}
+   \begin{tabular}{|l|l| }
+   \hline
+ 	Entrada | Teclado	& Saída esperada | Tela do computador \\ \hline
+    {\tt 10 10 10 10 40} & {\tt Tesouro: 40.} \\
+ &  {\tt Caminho: 1, 3, 2, 4, F.} \\  & \\ \hline
+   \end{tabular} \\
+
+\end{center}
+\caption{Décimo caso de teste.}
+\end{table}
+
+
+\newpage
+
+
+
+
+
+
+\end{document}

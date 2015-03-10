@@ -1,0 +1,217 @@
+\documentclass[11pt]{article}
+\usepackage[brazil]{babel}
+\usepackage{isolatin1}
+\usepackage{charter}
+\usepackage[all]{xy}
+\usepackage{graphicx}
+
+
+\newcommand{\esp}{$\;\;\;\;\;$}
+\setlength{\parskip}{.5pc} 
+\setlength{\paperwidth}{190mm}  % tamanho carta
+\setlength{\paperheight}{219mm}
+\setlength{\textwidth}{41pc}
+\setlength{\textheight}{60pc}
+\setlength{\oddsidemargin}{-1cm}
+\setlength{\evensidemargin}{-1cm}
+\setlength{\topmargin}{-1cm}
+\begin{document}
+\parindent=0pt
+
+\begin{center}
+{\bf {\large Universidade Federal de Mato Grosso}} \\
+{\bf {\large Instituto de Engenharia}} \\ 
+{\bf {\large Algoritmos e Programação de Computadores}} \\
+
+
+Segundo Semestre de 2014
+
+2\raisebox{1ex}{\underline{{\tiny o}}} Trabalho de Prático
+\end{center}\vspace*{-5mm}
+
+
+\begin{minipage}{18cm}
+\noindent
+\begin{center}
+\framebox[7.1cm][l]{\bf Leia com aten\c{c}ão as instruções abaixo.} 
+\end{center}
+\begin{itemize}
+
+
+\item Não serão aceitas soluções contendo estruturas não vistas em sala. Para este laboratório, poderão ser utilizadas apenas operações aritméticas, desvios condicionais ({\tt if}, {\tt else} e {\tt switch}), comandos iterativos ({\tt while}, {\tt do while} e {\tt for}) e o único {\tt header} permitido para inclusão é {\tt stdio.h}. Além disto, você pode criar quantas fun\c{c}ões achar necessário.
+
+\item Escreva quantas fun\c{c}ões achar necessário.
+
+\item A leitura e o entendimento do enunciado são partes da avalia\c{c}ão.
+
+\item O seu programa deve estar completamente contido em um único arquivo denominado {\tt simulacao.c}.
+
+\item Para a realização dos testes automáticos, a compilação se dará da seguinte forma: {\tt gcc simulacao.c -o simulacao -Wall -Werror -ansi -pedantic}.	
+
+\item Não se esqueça de incluir no início do programa uma breve descrição dos objetivos, das variáveis de entrada e saída, das pré-condi\c{c}ões assumidas e de seu nome e RGA. 
+
+\item Organize seu código e comente-o adequadamente.
+
+
+\end{itemize}
+\end{minipage} \hfill 
+
+\vspace*{-4mm}
+
+\newpage
+
+
+\vspace*{0.5cm}
+
+{\Large \centering
+ Enunciado
+ 
+}
+
+
+\noindent
+
+Muito antes das estradas e aeroportos chegarem em Mato Grosso, o transporte de mercadorias e pessoas era realizado em  expedi\c{c}ões fluviais.
+Nos séculos XVIII e XIX, por exemplo, quase todo fluxo comercial e migratório de nosso estado ocorreu por meio das expedi\c{c}ões, que mais tarde ficaram conhecidas como {\it mon\c{c}ões}. 
+%Por este motivo, estas expedi\c{c}ões desempenharam um importante papel na colonização da Região Centro-Oeste do Brasil. 
+
+ %Até mesmo o primeiro governador de Mato Grosso, Antônio Rolim de Moura Tavares, chegou em Cuiabá em uma mon\c{c}ão.
+
+Em geral, estas expedi\c{c}ões partiam da cidade de Porto Feliz em São Paulo em dire\c{c}ão à Cuiabá.
+Esta viagem era penosa e, em muitos casos, demorava mais de seis meses. Partia-se do rio Tietê, chegava-se ao rio Paraná, depois ao rio Pardo, aos afluentes do rio Paraguai, ao rio São Lourenço e, finalmente, ao rio Cuiabá.  Ao encontrar uma cachoeira, por exemplo, todos deveriam desembarcar e arrastar as numerosas embarca\c{c}ões. Definitivamente, não era um passeio.
+
+%Tais expedi\c{c}ões eram constiuídas por um grupo numeroso de canoas. 
+Na viagem de ida, transportava-se basicamente mantimentos, ferramentas, armas, munições e tecidos. Já, na volta, transportava-se principalmente peles e ouro. É fácil perceber, portanto, a importância de cada embarca\c{c}ão. Afinal, não é sempre que se encontra uma canoa cheia de ouro! Apesar desta importância e, principalmente, em virtude dos seguintes fatores, as canoas eram perdidas com grande facilidade:
+\begin{itemize}
+\item danos nas embarca\c{c}ões
+\item ataques  e
+\item falta de alimenta\c{c}ão.
+\end{itemize}
+
+Tais perdas eram tão comuns que os responsáveis pelas expedi\c{c}ões resolveram calcular a frequência com a qual elas aconteciam.
+Nesta análise estatística, descobriu-se que, neste cenário, as canoas se comportam mais ou menos como uma moeda jogada aleatoriamente. Tal como se pôde verificar, a probabilidade de uma canoa chegar ou não ao destino em seguran\c{c}a era de $50\%$. % A probabilidade de não chegar é também $50\%$. %No fim, é tudo uma questão de sorte.
+
+Os organizadores destas expedi\c{c}ões, no entanto, precisavam de um pouco mais de informa\c{c}ão. Eles estavam interessados em algum tipo de garantia de que ao menos $M$ canoas chegarão ao destino. Desta forma, seria possível esperar que ao menos uma quantidade de ouro chegasse em seguran\c{c}a.
+Nesta atividade, você terá a honra de participar deste momento histórico e ajudar os organizadores  a calcular a probabilidade de pelo menos $M$ canoas chegarem ao destino. 
+
+Sua missão é simular o comportamento das canoas e calcular esta probabilidade de acordo com o resultado desta simula\c{c}ão. 
+Uma maneira de se realizar um cálculo aproximado desta probabilidade  é escrever um programa que automaticamente realiza várias repeti\c{c}ões. Cada uma destas repeti\c{c}ões corresponde à uma simula\c{c}ão de uma expedi\c{c}ão. Quanto maior o número de repeti\c{c}ões mais preciso será o cálculo. 
+
+\newpage
+
+%O número de repeti\c{c}ões $NC$ deve ser uma das entradas do programa. As outras entradas devem ser o número total de canoas $N$ e o número a ser avaliado $M$.
+
+
+%\newpage
+
+{\Large \centering
+ Do objetivo e das restri\c{c}ões
+ 
+}
+
+Seu programa deve calcular a probabilidade $P$ de ao menos $M$ canoas, de um total de $N$, chegarem ao destino. Para tanto, deve-se realizar várias simula\c{c}oes de expedi\c{c}ões e contabilizar o número de expedi\c{c}ões em que pelo menos $M$ canoas chegaram ao destino.
+
+Seja ${\cal A}$ o conjunto contendo todas as expedi\c{c}ões simuladas em que ao menos $M$ canoas chegaram ao destino. A probabilidade $P$ pode ser aproximada por:
+\begin{equation}
+P = \frac{\mid{\cal A}\mid}{NC}
+\end{equation} 
+em que $NC$ representa o número de repeti\c{c}ões. $\mid{\cal A}\mid$ indica a quantidade de simula\c{c}ões em que ao menos $M$ canoas chegaram ao destino.
+
+Como há um total de $N$ canoas, para simular cada expedi\c{c}ão, deve-se simular o comportamento de cada uma delas. Uma vez que cada canoa comporta-se como uma moeda, é conveniente utilizar uma fun\c{c}ão aleatória que devolve os valores zero e um com probabilidade de $50\%$. Neste trabalho, você deve obrigatoriamente utilizar a fun\c{c}ão {\tt sucesso} a seguir. 
+
+
+\begin{verbatim}
+/* 
+* Descrição: Esta função simula o comportamento de uma canoa em uma 
+             expedição fluvial. A probabilidade de uma canoa chegar 
+             ou não ao destino é de 50%.
+* 
+* Entrada: (não há).
+* 
+* Saída: A função devolve o valor 1 (um) se a canoa chegou ao destino. 
+         Caso contrário, o valor 0 (zero) é devolvido. 
+*/
+int sucesso()
+{
+    // Código que gera uma sequencia pseudo-aleatória
+    static unsigned long long int seed = 123456789;
+    seed = (1103515245 * seed + 12345) % 2147483648;
+    // Teste da probabilidade de a conoa chegar ao destino
+    return seed >= 2147483648/2;
+}
+\end{verbatim}
+
+
+Nesta atividade, você pode supor que:
+\begin{itemize}
+\item o número total de canoas $N$ é sempre maior que o número a ser avaliado $M$. 
+\item o número de repeti\c{c}ões $NC$ é no máximo $10^9$. 
+\end{itemize} 
+
+Além disto, é importante lembrar que você deve {\bf organizar seu código em fun\c{c}ões} e {\bf comentá-lo adequadamente}.
+
+\newpage
+
+{\Large \centering
+ Da entrada e saída
+ 
+}
+
+Seu programa deve ler três valores inteiros $N$, $M$ e $NC$, que representam, respectivamente, o número total de canoas, a quantidade mínima esperada de canoas e o número de repeti\c{c}ões.
+
+Seu programa deve imprimir:
+
+\begin{itemize}
+\item ``P: ", seguido pelo valor total da probabilidade de ao menos $M$ canoas chegarem ao destino (em porcetagem). Apenas as duas primeiras casas decimais deste número devem ser impressos (use $\%.2$f$\%\%$).  Ao final, conforme os exemplos de execução abaixo, deve haver um ponto final e uma quebra de linha (``$\backslash${\tt n}").
+ 
+\end{itemize}	
+
+
+
+%\newpage
+
+Os dados apresentados nas Tabelas 1 e 2 ilustram a execu\c{c}ões esperadas para seu programa.
+
+\begin{table}[h!]
+\begin{center}
+   \begin{tabular}{|l|l| }
+   \hline
+ 	Entrada	& Saída esperada | Tela do computador \\ \hline
+    {\tt 10 5 1000} & {\tt P: $60.60\%$.} \\
+   & \\ \hline
+   \end{tabular} \\
+
+\end{center}
+\caption{Primeiro exemplo de execu\c{c}ão. Neste caso, os números 10, 5 e 1000 indicam o número total de canoas, a quantidade mínima esperada de canoas e o número de repeti\c{c}ões.}
+\end{table}
+
+\begin{table}[h!]
+\begin{center}
+   \begin{tabular}{|l|l| }
+   \hline
+ 	Entrada	& Saída esperada | Tela do computador \\ \hline
+    {\tt 98 50 100000} & {\tt P: $46.07\%$.} \\
+   & \\ \hline
+   \end{tabular} \\
+
+\end{center}
+\caption{Segundo exemplo de execu\c{c}ão. Neste caso, os números 98, 50 e 100000 indicam o número total de canoas, a quantidade mínima esperada de canoas e o número de repeti\c{c}ões.}
+\end{table}
+
+
+{\Large \centering
+ Do Cálculo da Nota
+ 
+}
+
+A nota desta tarefa será um número inteiro entre zero e dez, proporcional à quantidade de testes acertados pelo seu programa.
+
+
+\newpage
+
+
+
+
+
+
+\end{document}

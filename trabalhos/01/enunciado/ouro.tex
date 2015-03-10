@@ -1,0 +1,183 @@
+\documentclass[11pt]{article}
+\usepackage[brazil]{babel}
+\usepackage{isolatin1}
+\usepackage{charter}
+\usepackage[all]{xy}
+\usepackage{graphicx}
+
+
+\newcommand{\esp}{$\;\;\;\;\;$}
+\setlength{\parskip}{.5pc} 
+\setlength{\paperwidth}{190mm}  % tamanho carta
+\setlength{\paperheight}{219mm}
+\setlength{\textwidth}{41pc}
+\setlength{\textheight}{60pc}
+\setlength{\oddsidemargin}{-1cm}
+\setlength{\evensidemargin}{-1cm}
+\setlength{\topmargin}{-1cm}
+\begin{document}
+\parindent=0pt
+
+\begin{center}
+{\bf {\large Universidade Federal de Mato Grosso}} \\
+{\bf {\large Instituto de Engenharia}} \\ 
+{\bf {\large Algoritmos e Programação de Computadores}} \\
+
+
+Segundo Semestre de 2014
+
+1\raisebox{1ex}{\underline{{\tiny o}}} Trabalho de Prático
+\end{center}\vspace*{-5mm}
+
+
+\begin{minipage}{18cm}
+\noindent
+\begin{center}
+\framebox[7.1cm][l]{\bf Leia com aten\c{c}ão as instruções abaixo.} 
+\end{center}
+\begin{itemize}
+
+
+\item Não serão aceitas soluções contendo estruturas não vistas em sala. Para este laboratório, poderão ser utilizadas apenas operações aritméticas, desvios condicionais ({\tt if}, {\tt else} e {\tt switch}) e o único {\tt header} permitido para inclusão é {\tt stdio.h}.
+
+\item A leitura e o entendimento do enunciado são partes da avalia\c{c}ão.
+
+\item O seu programa deve estar completamente contido em um único arquivo denominado {\tt ouro.c}.
+
+\item Para a realização dos testes automáticos, a compilação se dará da seguinte forma: {\tt gcc ouro.c -o ouro -Wall -Werror -ansi -pedantic}.	
+
+\item Não se esqueça de incluir no início do programa uma breve descrição dos objetivos, das variáveis de entrada e saída, das pré-condi\c{c}ões assumidas e de seu nome e RA. 
+
+\item Organize seu código e comente-o adequadamente.
+
+
+\end{itemize}
+\end{minipage} \hfill 
+
+\vspace*{-4mm}
+
+\newpage
+
+
+\vspace*{0.5cm}
+
+{\Large \centering
+ Enunciado
+ 
+}
+
+
+\noindent
+Talvez você já saiba que o nosso querido estado de Mato Grosso já foi território espanhol. Portugueses e espanhóis foram atraídos pelos rumores de que havia, aqui, muita riqueza não explorada.
+
+Desta maneira, ninguém ficou muito surpreso quando, em 1718, um bandeirante chamado Pascoal Moreira Cabral Leme descobriu grandes jazidas de ouro no rio Coxipó. Esta descoberta deu início à corrida exploratória que ajudou a povoar nosso estado.
+
+Pouco se sabe sobre este bandeirante. Menos ainda se conhece sobre um suposto primo distante de Pascoal chamado de João Sutil Leme. Descobertas recentes sugerem, no entanto, que João Sutil mapeou as reservas de minério e conseguiu capturar uma enorme quantidade de ouro. O mapa de João Sutil Leme é ilustrado a seguir (Fig. 1).
+
+\begin{figure}[h!]
+  \centering    
+      \includegraphics[width=0.5\textwidth]{mapa.png}
+  \caption{Mapa do Tesouro.}
+\end{figure}
+
+
+O navio utilizado por ele, ao que se sabe, pode não suportar todos os tesouros escondidos nas ilhas, de modo que ele e sua tripulação precisaram decidir de quais ilhas retirar o tesouro antes de seu destino final. Os pesquisadores envolvidos neste estudo ligaram para UFMT e pediram sua ajuda para encontrar o caminho que eles poderiam ter tomado para conseguir o máximo de ouro possível.
+
+No mapa anterior, constam as quatro ilhas que existiam no arquipélago de São Benedito de Coxipó do Ouro, indicadas pelos números: 1, 2, 3, 4, além do destino final, representada pela letra F. A quantidade de tesouro (em kg) em cada ilha é fornecida como um número inteiro não negativo.
+
+
+
+
+
+
+
+
+\newpage
+
+{\Large \centering
+ Do objetivo e das restri\c{c}ões
+ 
+}
+
+O objetivo do seu programa é determinar o caminho que a tribulação de João poderia ter tomado para conseguir o máximo de ouro possível. É importante lembrar que o navio utilizado por eles possui um limite de carga que não pode ser ultrapassado. Além disso, leve em conta as seguintes restrições:
+
+\begin{itemize}
+\item A rota definida pelo seu programa não pode passar por uma ilha cujo acúmulo de tesouro leve a ultrapassar o limite de carga do navio.
+\item Não é possível passar mais de uma vez por uma mesma ilha.
+\item Devido às correntes marítimas e aos conhecimentos de navegação da tripulação, os únicos caminhos possíveis entre ilhas são os marcados no mapa. Não é possível ir da ilha 2 para o destino final, por exemplo.
+
+\end{itemize}
+
+
+{\Large \centering
+ Da entrada e saída
+ 
+}
+
+Seu programa deve ler cinco valores inteiros A, B, C e D, que representam, respectivamente, a quantidade de tesouro (em kg) existente em cada ilha 1, 2, 3 e 4 e o limite de carga do navio L (também em kg).
+
+Seu programa deve imprimir:
+
+\begin{itemize}
+\item ``Tesouro: ", seguido pelo valor total de ouro acumulado pelo caminho.  Ao final, conforme os exemplos de execução abaixo, deve haver um ponto final e uma quebra de linha (``$\backslash${\tt n}").
+\item ``Caminho: ", seguido pela lista das ilhas percorridas (na ordem em que foram visitadas), separadas por vírgula e um espaço. Como antes, ao final da lista, deve haver um ponto final e uma quebra de linha (``$\backslash${\tt n}").
+\end{itemize}	
+
+Caso haja mais de um caminho com o máximo valor total acumulado de tesouros, o programa deve usar como critério de desempate a ordem numérica, ou seja, sempre dar preferência a visitar ilhas com números menores antes. Para as comparações, o valor do destino final (F) deve ser considerado 0. 
+
+Por exemplo, se temos os caminhos ``1, 3, F." e ``1, 4, F." ~empatados, vence o caminho ``1, 3, F.", pois a segunda ilha do caminho vencedor (ilha 3) possui índice inferior em relação à segunda ilha do caminho perdedor (ilha 4).
+
+Se temos os caminhos ``1, 3, 4, F." ~e ``2, 4, F." ~empatados, vence o caminho ``1, 3, 4, F.", pois a primeira ilha percorrida no caminho vencedor (ilha 1) possui índice menor em relação à primeira ilha do caminho perdedor (ilha 2).
+
+Se temos os caminhos ``2, 3, F." ~e ``2, 3, 4, F." ~empatados, vence o caminho ``2, 3, F.", pois a terceira ilha percorrida no caminho vencedor (ilha F) possui índice menor em relação à terceira ilha do caminho perdedor (ilha 4).
+
+
+
+
+\newpage
+
+Os dados apresentados nas Tabelas 1 e 2 ilustram a execu\c{c}ões esperadas para seu programa.
+
+\begin{table}[h!]
+\begin{center}
+   \begin{tabular}{|l|l| }
+   \hline
+ 	Entrada	& Saída esperada | Tela do computador \\ \hline
+    {\tt 50 150 50 200 350} & {\tt Tesouro: 350.} \\
+ &  {\tt Caminho: 2, 4, F.} \\  & \\ \hline
+   \end{tabular} \\
+
+\end{center}
+\caption{Primeiro exemplo de execu\c{c}ão. Neste caso, os números 50, 150, 50 e 200 indicam a quantidade de tesouro existente nas ilhas 1, 2, 3 e 4, respectivamente. O  limite de carga do navio é de 350.}
+\end{table}
+
+\begin{table}[h!]
+\begin{center}
+   \begin{tabular}{|l|l| }
+   \hline
+ 	Entrada	& Saída esperada | Tela do computador  \\ \hline
+        {\tt 3105 2350 1640 320 3650} & {\tt Tesouro: 3425.} \\
+ &  {\tt Caminho: 1, 4, F.} \\ & \\  \hline
+   \end{tabular} \\
+
+\end{center}
+\caption{Segundo exemplo de execu\c{c}ão. Neste caso,   3105, 2350, 1640 e 320 indicam a quantidade de tesouro existente nas ilhas 1, 2, 3 e 4, respectivamente. O limite de carga do navio é de 3425.}
+\end{table}
+
+
+{\Large \centering
+ Do Cálculo da Nota
+ 
+}
+
+A nota desta tarefa será um número inteiro entre zero e dez, proporcional à quantidade de testes acertados pelo seu programa.
+
+
+\newpage
+
+
+
+
+
+
+\end{document}
