@@ -1,0 +1,10 @@
+\frametitle {if-else-if Encaixados}
+  \begin{block}{{\tt if-else-if} encaixados}
+    \begin{itemize}
+      \item Na construção if-else-if quando uma condição é verdadeira, o bloco de comandos
+      correspondente será executado.
+      \item Após a execução do bloco de comandos as outras alternativas não serão testadas.
+      \item O último {\bf else} (sem if) pode ser utilizado como uma opção padrão quando
+      nenhuma das condições dos ifs é verdadeira.
+    \end{itemize}
+  \end{block}

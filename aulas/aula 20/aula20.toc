@@ -1,0 +1,7 @@
+\beamer@endinputifotherversion {3.10pt}
+\select@language {portuges}
+\beamer@sectionintoc {1}{Introdu\c c\~ao}{3}{0}{1}
+\beamer@sectionintoc {2}{Matrizes}{16}{0}{2}
+\beamer@sectionintoc {3}{Exemplos}{33}{0}{3}
+\beamer@sectionintoc {4}{Matrizes e fun\c c\~oes}{37}{0}{4}
+\beamer@sectionintoc {5}{Exerc\IeC {\'\i }cios}{41}{0}{5}

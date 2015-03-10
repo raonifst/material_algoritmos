@@ -1,0 +1,21 @@
+\frametitle {Ponteiros - Exemplo}
+
+  \begin{exampleblock}{Ponteiros}
+    \begin{semiverbatim}
+int variavel;
+int *ponteiro1, *ponteiro2;
+
+variavel = 3;
+
+ponteiro1 = &variavel;
+ponteiro2 = ponteiro1;
+
+*ponteiro2 = 5;
+
+printf("\%d, \%d, \%d", variavel, *ponteiro1, *ponteiro2);
+\end{semiverbatim}
+  \end{exampleblock}
+
+  \pause
+
+  \alert{Irá imprimir: 5, 5, 5}.

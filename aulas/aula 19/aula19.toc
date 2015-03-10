@@ -1,0 +1,6 @@
+\beamer@endinputifotherversion {3.10pt}
+\select@language {portuges}
+\beamer@sectionintoc {1}{Introdu\c {c}\~ao}{3}{0}{1}
+\beamer@sectionintoc {2}{Exemplos}{8}{0}{2}
+\beamer@sectionintoc {3}{Inicializa\c {c}\~ao}{15}{0}{3}
+\beamer@sectionintoc {4}{Exerc\IeC {\'\i }cios}{16}{0}{4}

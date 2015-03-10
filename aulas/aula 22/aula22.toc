@@ -1,0 +1,5 @@
+\beamer@endinputifotherversion {3.10pt}
+\select@language {portuges}
+\beamer@sectionintoc {1}{Introdu\c c\~ao}{3}{0}{1}
+\beamer@sectionintoc {2}{Recurs\~ao}{27}{0}{2}
+\beamer@sectionintoc {3}{Pilha de chamadas}{39}{0}{3}

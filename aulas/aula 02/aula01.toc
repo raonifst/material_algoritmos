@@ -1,0 +1,12 @@
+\beamer@endinputifotherversion {3.10pt}
+\select@language {portuges}
+\beamer@sectionintoc {1}{Algoritmos}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Defini\c {c}\~ao}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{Caracteriza\c {c}\~ao}{26}{0}{1}
+\beamer@sectionintoc {2}{Organiza\c c\~ao de um computador}{35}{0}{2}
+\beamer@sectionintoc {3}{Vari\'aveis}{40}{0}{3}
+\beamer@sectionintoc {4}{Constantes}{54}{0}{4}
+\beamer@sectionintoc {5}{Atribui\c c\~ao}{56}{0}{5}
+\beamer@sectionintoc {6}{Estrutura de um Programa em C}{66}{0}{6}
+\beamer@sectionintoc {7}{Algumas Informa\c c\~oes Extras}{68}{0}{7}
+\beamer@sectionintoc {8}{Exerc\IeC {\'\i }cio}{73}{0}{8}

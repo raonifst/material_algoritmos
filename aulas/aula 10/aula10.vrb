@@ -1,0 +1,20 @@
+\frametitle {Exercício}
+
+  Escreva um programa que imprima uma tabela de números
+  ímpares com $m$ linhas e $n$ colunas ($m$ e $n$ são lidos
+  do teclado) como no seguinte formato de exemplo (para
+  $m = 3$ e $n = 4$).
+
+  \begin{exampleblock}{}
+  \begin{verbatim}
+                        01 03 05 07
+                        15 13 11 09
+                        17 19 21 23  \end{verbatim}
+  \end{exampleblock}
+
+  Dica: você pode utilizar o seguinte formato do \cod{printf} para
+  sempre imprimir o número com dois algarismos (completando
+  com zero antes se necessário): \cod{printf("\%02d", ... );}
+
+
+

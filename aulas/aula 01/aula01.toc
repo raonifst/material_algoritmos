@@ -1,0 +1,6 @@
+\beamer@endinputifotherversion {3.10pt}
+\select@language {portuges}
+\beamer@sectionintoc {1}{Por que aprender a programar?}{3}{0}{1}
+\beamer@sectionintoc {2}{O que esperar deste curso?}{15}{0}{2}
+\beamer@sectionintoc {3}{O que \'e necess\'ario?}{16}{0}{3}
+\beamer@sectionintoc {4}{Como me sair bem neste curso?}{18}{0}{4}

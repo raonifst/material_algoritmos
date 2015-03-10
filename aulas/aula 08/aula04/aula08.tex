@@ -1,0 +1,761 @@
+\documentclass{beamer}
+
+\usetheme{Boadilla}
+%\usetheme{Warsaw}
+%\setbeamercovered{transparent}
+\beamertemplatetransparentcoveredhigh
+\usepackage[portuges]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{ulem}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+
+\newcommand{\eng}[1]{\textsl{#1}}
+\newcommand{\cod}[1]{\texttt{#1}}
+
+
+\title[9002 --- Aula 08]{9002 --- Aula 08\\
+   Algoritmos e Programação de Computadores}
+
+\author[IEng - UFMT]{Instituto de Engenharia -- UFMT}
+
+\institute[2014/2]{Segundo Semestre de 2014}
+
+\date{13 de outubro de 2014}
+
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Roteiro}
+  \tableofcontents
+\end{frame}
+
+\section{Revisão}
+
+
+\begin{frame}
+  \frametitle{Revisão }
+  \begin{itemize}
+  \item Nas aulas anteriores, vimos como escrever programas capazes de executar
+    comandos de forma linear, e, se necessário, tomar decisões com relação à executar ou não um bloco de comandos.  
+  \end{itemize}
+	\vspace{-0.2cm}
+	\begin{figure}[!htb]
+     \centering
+     \includegraphics[scale=0.15]{passadas.png}
+		\vspace{-0.5cm}
+     \\{ {\bf Fig 1} - Fluxogramas dos algoritmos das aulas anteriores. }     
+	\end{figure}
+	
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Revisão }
+  \begin{itemize}
+  \item Vimos, ainda, um procedimento de {\bf simula\c{c}\~ao} (={\it teste de mesa}), que pode e \alert{deve} ser utilizado para testar o algoritmo. 
+	\item Esta técnica de simulação é composta apenas por dois passos:
+		\begin{itemize}
+			\item \alert{Reservar} espaço para cada variável
+			\item \alert{Executar} em sequência cada um dos passos do algoritmo.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Exemplo --- até 4}
+  \begin{itemize}
+%   \item Será que dá pra fazer com o que já temos?
+  \item Programa que imprime todos os números inteiros entre 1 e 4\\
+  
+    \vspace{15pt}
+  \begin{exampleblock}{}
+    \pause
+    $\ldots$ \\
+    \verb"printf("``\verb"1"''\verb");"\\
+    \pause
+    \verb"printf("``\verb"2"''\verb");"\\
+    \pause
+    \verb"printf("``\verb"3"''\verb");"\\
+    \pause
+    \verb"printf("``\verb"4"''\verb");"\\
+    $\ldots$\\
+  \end{exampleblock}
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemplo --- até 100}
+  \begin{itemize}
+  \item Programa que imprime todos os números inteiros entre 1 e 100\\
+    \vspace{15pt}
+  \begin{exampleblock}{}
+    \pause
+    $\ldots$ \\
+    \verb"printf("``\verb"1"''\verb");"\\
+    \pause
+    \verb"printf("``\verb"2"''\verb");"\\
+    \pause
+    \verb"printf("``\verb"3"''\verb");"\\
+    \pause
+    \verb"printf("``\verb"4"''\verb");"\\
+    \pause
+    \verb"printf("``\verb"5"''\verb");"\\
+    \pause
+    \verb"printf("``\verb"6"''\verb");"\\
+    \pause
+    \alert{\verb"..."}\\
+    \pause
+    \verb"printf("``\verb"99"''\verb");"\\
+    \pause
+    \verb"printf("``\verb"100"''\verb");"\\
+    $\ldots$ \\
+  \end{exampleblock}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemplo --- até $n$ dado}
+  \begin{itemize}
+  \item Programa que imprime todos os números inteiros entre 1 e $n$ (dado). Sabendo que os valores de $n$ variam entre 1 e 100. \\
+    \vspace{15pt}
+  \begin{exampleblock}{}
+    \pause
+    $\ldots$ \\
+    \verb"int n;"\\
+    \cod{scanf("\%d", \&n);}\\
+%     \verb"scanf("``\%\verb"d"''\verb",&n);"\\
+    \pause
+    \verb"printf("``\verb"1"''\verb");"\\
+    \pause
+    \verb"if (n>=2)"\\
+    \hspace{.2in}\verb"printf("``\verb"2"''\verb");"\\
+    \pause
+    \verb"if (n>=3)"\\
+    \hspace{.2in}\verb"printf("``\verb"3"''\verb");"\\
+    \pause
+    \alert{\verb"/* repete 96 vezes o bloco acima */"}\\
+    \pause
+    \verb"if (n>=100)"\\
+    \hspace{.2in}\verb"printf("``\verb"100"''\verb");"\\
+    $\ldots$ \\
+  \end{exampleblock}    
+  \end{itemize}
+\end{frame}
+
+\section{Comandos Repetitivos}
+
+\begin{frame}[fragile]
+\frametitle{Repetindo...}
+%   \frametitle{\verb"while (condicao) \{ comandos \}"}
+	Se observarmos com atenção, perceberemos que, nestes casos,  blocos de comandos são executados \alert{várias vezes} (repetidamente) para obter o resultado.
+		
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Estruturas de repetição}
+%   \frametitle{\verb"while (condicao) \{ comandos \}"}
+	\begin{itemize}
+		\item Permitem que uma sequência de comandos seja executada
+repetidas vezes. Cada uma destas execuções é chamada de {\it iteração}.
+		\item A execução termina quando um critério de parada é atingido.
+		\item Veremos o comando {\bf while} que implementa uma construção do tipo {\bf Enquanto-Faça}.
+			
+	\end{itemize}
+		
+\end{frame}
+
+\section{Construção Enquanto-Faça}
+
+
+\begin{frame}[fragile]
+	\frametitle{Construção {\it Enquanto-Faça}}
+	
+	\begin{itemize}
+	\item Nesta construção, o critério de parada é testado
+antes que a sequência de comandos da {\it ação} seja executada. Deste modo, a {\it ação} é executada {\bf enquanto} a condição for verdadeira.
+\end{itemize}
+
+	
+	\begin{figure}[!htb]
+     \centering
+     \includegraphics[scale=0.15]{rep1.png}
+		\vspace{-0.5cm}
+     \\{ {\bf Fig. 2} - Fluxograma. }     
+	\end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Construção {\it Enquanto-Faça}}
+	
+	Três questões são fundamentais: 
+	\begin{itemize}
+	\item Qual {\it ação} deve ser repetida? 
+	\item Quantas vezes a repetição deve ser realizada? 
+	\item Qual condição pode ser utilizada para representar esta repetição?
+	
+	\end{itemize}
+	\pause
+	\begin{block}{Importante}
+		Lembre-se de que um algoritmo deve sempre terminar. 
+		A condição projetada \alert{deve} deixar de ser verdadeira em algum momento. Por isto, a {\it ação} deve alterar as variáveis envolvidas na condição de parada. 
+		\end{block}	
+		
+
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Construção {\it Enquanto-Faça} }
+	Vamos refletir novamente sobre problema de imprimir os números inteiros entre 1 e 100. 
+	
+	\begin{itemize}
+	\item Qual {\it ação} deve ser executada? 
+	\pause
+	\\ \alert{R: Impressão dos números 1, 2, 3, ... 100}
+	\\ {Ideia: Utilizar uma variável, por exemplo, {\it i} para representar os números. Iniciar {\it i} com valor 1. Incrementar {\it i} repetidamente.}		
+	\pause	
+	\item Quantas vezes a {\it ação} deve ser repetida? 
+	\pause
+	\\ \alert{R. 100 vezes.}
+	\pause
+	\item Qual condição pode ser utilizada para representar esta repetição?
+	\pause
+	\\ \alert{R. Como a variável {\it i} indica quantas repetições foram executadas, podemos utilizá-la diretamente. Nossa condição pode ser, por exemplo, $i \leq 100$. }
+	
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}
+  \frametitle{Construção {\it Enquanto-Faça}  }
+  
+  \begin{figure}[!htb]
+     \centering
+     \includegraphics[scale=0.5]{100.png}
+		%\vspace{-0.5cm}
+     \\{{\bf Fig. 3} - Fluxograma. }     
+	\end{figure}
+	
+\end{frame}
+
+
+\section{Comando while}
+
+\begin{frame}[fragile]
+
+   \frametitle{Comando while}
+%   \frametitle{\verb"while (condicao) \{ comandos \}"}
+		
+  O comando while é utilizado para executar um bloco de comandos
+  enquando uma condição for satisfeita
+
+  \begin{block}{Sintaxe do {\tt while}}
+
+\begin{semiverbatim}
+while (\alert{condicao}) \{
+    ação;
+\}
+\end{semiverbatim}
+   
+  \end{block}
+  
+  \pause
+
+Funcionamento: \\
+
+ \begin{itemize}
+  \item \textbf{Passo 1}: Testa condição:\\
+      \hspace*{1cm} Se condição for \alert{verdadeira}, executa o Passo 2. \\
+      \hspace*{1cm} Se condição for \alert{falsa}, executa o Passo 4 (pula o bloco de comandos).
+  \item \textbf{Passo 2}: Executa o bloco de comandos.
+  \item \textbf{Passo 3}: Volta para o Passo 1.
+	\item \textbf{Passo 4}: Executa os comandos fora do bloco repetitivo.
+  \end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+	\frametitle{{Imprimindo os 100 primeiros números inteiros.}}
+ 
+\begin{exampleblock}{}
+    \pause
+    $\ldots$ \\
+    \cod{i = 1;}\\
+    \cod{while(i <= 100)~$\{$}\\
+    \hspace{.2in}\verb"printf("``\verb"%d"''\verb", i);"\\
+    \hspace{.2in}\verb"i = i + 1;"\\
+    \cod{$\}$}\\
+    $\ldots$ \\
+  \end{exampleblock}    
+	
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{{Imprimindo os 100 primeiros números inteiros.}  }
+  
+  \begin{figure}[!htb]
+     \centering
+     \includegraphics[scale=0.15]{relacao2.png}
+		%\vspace{-0.5cm}
+     \\{{Fig. 3} - Relação entre o fluxograma e a construção. }     
+	\end{figure}
+	
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+  \frametitle{Imprimindo os $n$ primeiros números inteiros.}
+\begin{exampleblock}{}
+\begin{verbatim}
+int i = 1, n;
+scanf("%d", &n);
+while (i <= n) {
+    printf("%d ", i);
+    i++;
+}
+\end{verbatim}
+
+\end{exampleblock}
+\end{frame}
+
+
+
+
+\begin{frame}
+
+  \frametitle{Exercício}
+
+
+  \begin{block}{Exercício}
+    Calcule a divisão inteira de dois numeros positivos usando apenas soma e subtração. 
+		
+  \end{block}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+
+   \frametitle{Solução --- em C}
+   \begin{exampleblock}{}
+\small
+    \begin{verbatim}
+  ...
+  scanf("%d %d", &dividendo, &divisor);
+
+  contador = 0;
+  while (dividendo >= divisor) {
+    dividendo = dividendo - divisor;
+    contador++;
+  }
+  ...
+    \end{verbatim}
+       \end{exampleblock}
+\end{frame}
+
+\section{Sumilação de código}
+
+
+\begin{frame}
+  \frametitle{Simulação Manual - Recapitulando}
+  
+  \begin{block}{Simulando código}
+  \begin{itemize}
+  \item Bem simples: Existem apenas 2 passos.
+    \begin{itemize}
+    \item ``\alert{Reservar}'' os espaços para os nossos objetos
+    \item ``\alert{Executar}'' em sequência cada um dos passos do algoritmo.
+    \end{itemize}
+
+  \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Simulando}
+  
+  \begin{exampleblock}{}
+\small
+    \begin{verbatim}
+  ...
+  scanf("%d %d", &dividendo, &divisor); /*1*/
+
+  contador = 0; /*2*/
+  while (dividendo >= divisor) { /*3*/
+    dividendo = dividendo - divisor; /*3.1*/
+    contador++; /*3.2*/
+  }
+  ...
+    \end{verbatim}
+       \end{exampleblock}
+
+  \vspace*{0.3cm}
+
+  \only<2-4>{{\bf Reservando espa\c{c}o para as variáveis } }
+
+  \only<3>{Após executar a \alert{linha 1}.
+
+    \begin{tabular}{|c|c|c|c|}		
+      \hline
+      Tipo & \verb"inteiro positivo" & \verb"inteiro positivo" & \verb"inteiro positivo" \\
+      \hline
+      Nome & \alert{\verb"dividendo"} & \alert{\verb"divisor"} &  \alert{\verb"contador"} \\
+      \hline
+      Valor & 21  & 7 & ? \\
+    \end{tabular}}
+
+\only<4>{Após executar a \alert{linha 2}.
+\begin{tabular}{|c|c|c|c|}		
+      \hline
+      Tipo & \verb"inteiro positivo" & \verb"inteiro positivo" & \verb"inteiro positivo" \\
+      \hline
+      Nome & \alert{\verb"dividendo"} & \alert{\verb"divisor"} &  \alert{\verb"contador"} \\
+      \hline
+      Valor & 21  & 7 & 0 \\
+    \end{tabular}}
+
+
+
+  \only<5>{Após executar a \alert{linha 3.1}.
+
+    \begin{tabular}{|c|c|c|c|}		
+      \hline
+      Tipo & \verb"inteiro positivo" & \verb"inteiro positivo" & \verb"inteiro positivo" \\
+      \hline
+      Nome & \alert{\verb"dividendo"} & \alert{\verb"divisor"} &  \alert{\verb"contador"} \\
+      \hline
+      Valor & 14  & 7 & 0 \\
+    \end{tabular}}
+
+  
+  \only<6>{Após executar a \alert{linha 3.2}.
+
+       \begin{tabular}{|c|c|c|c|}		
+      \hline
+      Tipo & \verb"inteiro positivo" & \verb"inteiro positivo" & \verb"inteiro positivo" \\
+      \hline
+      Nome & \alert{\verb"dividendo"} & \alert{\verb"divisor"} &  \alert{\verb"contador"} \\
+      \hline
+      Valor & 14  & 7 & 1 \\
+    \end{tabular}}
+
+  \only<7>{Após executar a \alert{linha 3.1}.
+
+      \begin{tabular}{|c|c|c|c|}		
+      \hline
+      Tipo & \verb"inteiro positivo" & \verb"inteiro positivo" & \verb"inteiro positivo" \\
+      \hline
+      Nome & \alert{\verb"dividendo"} & \alert{\verb"divisor"} &  \alert{\verb"contador"} \\
+      \hline
+      Valor & 7  & 7 & 1 \\
+    \end{tabular}}
+
+  \only<8>{Após executar a \alert{linha 3.2}
+	\begin{tabular}{|c|c|c|c|}		
+      \hline
+      Tipo & \verb"inteiro positivo" & \verb"inteiro positivo" & \verb"inteiro positivo" \\
+      \hline
+      Nome & \alert{\verb"dividendo"} & \alert{\verb"divisor"} &  \alert{\verb"contador"} \\
+      \hline
+      Valor & 7  & 7 & 2 \\
+    \end{tabular}}
+  
+	\only<9>{Após executar a \alert{linha 3.1}.
+	\begin{tabular}{|c|c|c|c|}		
+      \hline
+      Tipo & \verb"inteiro positivo" & \verb"inteiro positivo" & \verb"inteiro positivo" \\
+      \hline
+      Nome & \alert{\verb"dividendo"} & \alert{\verb"divisor"} &  \alert{\verb"contador"} \\
+      \hline
+      Valor & 0  & 7 & 2 \\
+    \end{tabular}}
+  
+	\only<10>{Após executar a \alert{linha 3.2}.
+	\begin{tabular}{|c|c|c|c|}		
+      \hline
+      Tipo & \verb"inteiro positivo" & \verb"inteiro positivo" & \verb"inteiro positivo" \\
+      \hline
+      Nome & \alert{\verb"dividendo"} & \alert{\verb"divisor"} &  \alert{\verb"contador"} \\
+      \hline
+      Valor & 0  & 7 & 3 \\
+    \end{tabular}}
+  
+	
+	
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Simulação Manual - Exercício}
+  
+  \begin{block}{Simulando código}
+  Simule o algoritmo para $dividendo$ igual à $35$ e $divisor$ igual à $6$.
+  \end{block}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+
+   \frametitle{Solução --- em C (completo)}
+   \begin{exampleblock}{}
+\small
+    \begin{verbatim}
+#include <stdio.h>
+int main() {
+  int dividendo, divisor, contador;
+
+  // lê dividendo e divisor
+  scanf("%d %d", &dividendo, &divisor);
+
+  // realiza a divisão  
+  contador = 0;
+  while (dividendo >= divisor) {
+    dividendo = dividendo - divisor;
+    contador++;
+  }
+
+  // mostra resultado da divisão
+  printf("%d\n", contador);
+  return 0;
+}
+    \end{verbatim}
+       \end{exampleblock}
+\end{frame}
+
+
+
+%\begin{frame}
+%  \frametitle{Introdução}
+%  \begin{itemize}
+%  \item Ex.: Programa que imprime 2 elevado a todos os números de 1 a n (dado)\\
+%    \vspace{15pt}
+
+%    \verb"printf("``\verb"2$^\wedge$1 = 2"''\verb");"\\
+%    \verb"if (n>=2)"\\
+%    \hspace{.2in}\verb"printf("``\verb"2$^\wedge$2 = 4"''\verb");"\\
+%    \alert{\verb"/*repete 97 vezes o bloco acima*/"}\\
+%    \verb"if (n>=100)"\\
+%    \hspace{.2in}\verb"printf("``\verb"2$^\wedge$100 = ???"''\verb");"\\
+%  \end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%  \frametitle{Introdução}
+%  \begin{itemize}
+%  \item Ex.: Programa que imprime 2 elevado a todos os números de 1 a n
+%    (dado)\\
+%    \vspace{15pt}
+%    \verb"int i=1, pot=2;"\\
+%    \verb"printf("``\verb"2$^\wedge$\%d = \%d"''\verb",i,pot);"\\
+%    \verb"i++; pot *=2;"\\
+%    \verb"if (n>=2) \{"\\
+%    \hspace{.2in}\verb"printf("``\verb"2$^\wedge$\%d = \%d"''\verb",i,pot);"\\
+%    \hspace{.2in}\verb"i++; pot *=2; \}"\\
+%    \alert{\verb"/*repete 97 vezes o bloco acima*/"}\\
+%    \verb"if (n>=100) \{"\\
+%    \hspace{.2in}\verb"printf("``\verb"2$^\wedge$\%d = \%d"''\verb",i,pot);"\\
+%    \hspace{.2in}\verb"i++; pot *=2; \}"\\
+%    \normalsize
+%  \end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%  \frametitle{Introdução}
+%  \begin{itemize}
+%  \item Ex.: Programa que imprime 2 elevado a todos os números de 1 a n (dado)\\
+
+%    \vspace{15pt}
+
+%    \verb"int i=1,pot=2;"\\
+%    \verb"if (i<=n) \{"\\
+%    \hspace{.2in}\verb"printf("``\verb"2$^\wedge$\%d = \%d"''\verb",i,pot);"\\
+%    \hspace{.2in}\verb"i++; pot *=2; \}"\\
+%    \alert{\verb"/*repete 98 vezes o bloco acima*/"}\\
+%    \verb"if (i<=n)  \{"\\
+%    \hspace{.2in}\verb"printf("``\verb"2$^\wedge$\%d = \%d"''\verb",i,pot);"\\
+%    \hspace{.2in}\verb"i++; pot *=2; \}"\\
+%    \normalsize
+%  \end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%  \frametitle{Introdução}
+%  \begin{itemize}
+%  \item Reparem, no exemplo anterior, que o trecho abaixo é
+%    executado 100 vezes\\
+%    \verb"if (i<=n)"\\
+%    \verb"\{"\\
+%    \hspace{.2in}\verb"printf("``\verb"2$^\wedge$\%d = \%d"''\verb",i,pot);"\\
+%    \hspace{.2in}\verb"i++;"\\
+%    \hspace{.2in}\verb"pot *=2;"\\
+%    \verb"\}"\\
+%  \end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%  \frametitle{Introdução}
+%  \begin{itemize}
+%  \item Para cada comparação, fazemos:
+%    \begin{enumerate}
+%    \item imprimimos o expoente e sua potência.
+%    \item incrementamos o expoente
+%    \item multiplicamos a potência
+%    \end{enumerate}
+%  \item Quando i supera n, todas as demais comparações retornam falso,
+%    e não são executadas.
+%  \end{itemize}
+
+%  \vspace{12pt}
+
+%  \begin{block}{Problema}
+%    n é limitado ao tamanho do nosso código.
+%  \end{block}
+
+%\end{frame}
+
+%\begin{frame}
+%  \frametitle{Introdução}
+%  \begin{itemize}
+%  \item Seria interessante fazer com que o código repetisse a
+%    comparação e executasse o comando dentro até que a condição fosse
+%    falsa
+%    \vspace{15pt}
+
+%    \verb"/* Enquanto for verdade que i<=n, execute */"\\
+%    \verb"\{"\\
+%    \hspace{.2in}\verb"printf("``\verb"2$^\wedge$\%d = \%d"''\verb",i,pot);"\\
+%    \hspace{.2in}\verb"i++; pot *=2;"\\
+%    \verb"\}"\\
+%  \end{itemize}
+%\end{frame}
+
+
+\begin{frame}
+  \frametitle{Casos especiais do while}
+  
+  \begin{block}{Casos especiais}
+  \begin{enumerate}
+  \item O que acontece se a condição for falsa na primeira vez? \\
+    \verb"while (a!=a) a = a+1;"\\
+
+    \vspace{12pt}
+
+    \onslide<2->{\alert{R: Ele nunca entra na repetição (\textit{loop}).}}
+
+    \vspace{12pt}
+
+  \item O que acontece se a condição for sempre verdadeira?\\
+    \verb"while (a==a) a = a+1;"\\
+
+    \vspace{12pt}
+
+    \onslide<2->{\alert{R: Ele entra na repetição e nunca sai (\textit{loop} infinito).}}
+
+    \vspace{12pt}
+
+
+  \end{enumerate}
+  \end{block}
+
+ \onslide<3->{O que acontece no programa de divisão quando o dividendo é menor que o divisor?}
+
+\end{frame}
+
+%\begin{frame}
+%  \frametitle{\verb"while (condicao) \{ comandos \}"}
+%  \begin{itemize}
+%  \item Estudando a estrutura ``normal'' do \verb"while" mais a fundo.\\
+%    \verb"while (i<=n)" $\leftarrow$ condição de repetição\\
+%    \verb"\{"\\
+%    \hspace{.2in}\verb"printf("``\verb"\%d "''\verb",i);"\\
+%    \hspace{.2in}\verb"i++;" $\leftarrow$ Comando de passo\\
+%    \verb"\}"\\
+%  \item O oposto (negação) da condição de repetição é conhecida como condição de parada:\\
+%    \verb"!(i<=n)" $\Rightarrow$ \verb"i>n" é a condição de parada.
+%  \end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%  \frametitle{\verb"while (condicao) \{ comandos \}"}
+%  \begin{itemize}
+%  \item \textit{loop} de fim determinado\\
+%    \verb"scanf("``\verb"\%d"''\verb",\&preco);"\\
+%    \verb"while (i<=n) \{"\\
+%    \hspace{.2in}\verb"total = total + preco;"\\
+%    \hspace{.2in}\verb"i++;"\\
+%    \hspace{.2in}\verb"scanf("``\verb"\%d"''\verb",\&preco);"\\
+%    \verb"\}"
+%  \end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%  \frametitle{\verb"while (condicao) \{ comandos \}"}
+%  \begin{itemize}
+%  \item \textit{loop} de fim indeterminado\\
+%    \verb"scanf("``\verb"\%d"''\verb",\&preco);"\\
+%    \verb"while (preco>0) \{"\\
+%    \hspace{.2in}\verb"total = total + preco;"\\
+%    \hspace{.2in}\verb"scanf("``\verb"\%d"''\verb",\&preco);"\\
+%    \verb"\}"
+%  \end{itemize}
+%\end{frame}
+
+
+
+\begin{frame}[fragile]
+  \frametitle{Exercício}
+  
+  \begin{enumerate}
+   \item Faça um programa que lê um número $n$ e imprime
+o resultado da soma
+%
+$$\sum_{i=1}^ni$$
+%
+
+    \item Faça um programa que lê um número $n$ e imprime o fatorial de $n$ (segundo exercício da lista).
+		
+		\item Faça um programa que lê dois números inteiros $n$ e $a$ e imprime o resultado de $a^n$.
+  \end{enumerate}
+
+
+\end{frame}
+
+\section{O que vem depois}
+
+\begin{frame}[fragile]
+  \frametitle{Nas próximas aulas...}
+  Nas próximas aulas veremos:
+  \begin{itemize}
+   \item Outras construções iteartivas e seus respectivos comandos em C: 
+			\begin{enumerate}
+				\item Para-Faça - for
+				\item Repita-Até - do...while
+			\end{enumerate}
+
+    \item Outros problemas cujas soluções envolvem o uso de comandos de repetição.
+  \end{itemize}
+
+
+\end{frame}
+
+
+
+\end{document}
+

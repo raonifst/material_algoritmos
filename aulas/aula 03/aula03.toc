@@ -1,0 +1,13 @@
+\beamer@endinputifotherversion {3.10pt}
+\select@language {portuges}
+\beamer@sectionintoc {1}{Revis\~ao}{3}{0}{1}
+\beamer@sectionintoc {2}{Representa\c {c}\~ao}{11}{0}{2}
+\beamer@sectionintoc {3}{Vari\'aveis}{16}{0}{3}
+\beamer@sectionintoc {4}{Constantes}{30}{0}{4}
+\beamer@sectionintoc {5}{Atribui\c c\~ao}{32}{0}{5}
+\beamer@sectionintoc {6}{Estrutura de um Programa em C}{42}{0}{6}
+\beamer@sectionintoc {7}{Algumas Informa\c c\~oes Extras}{44}{0}{7}
+\beamer@sectionintoc {8}{Exerc\IeC {\'\i }cio}{49}{0}{8}
+\beamer@sectionintoc {9}{Express\~oes aritm\'eticas}{51}{0}{9}
+\beamer@sectionintoc {10}{Convers\~ao de tipos}{92}{0}{10}
+\beamer@sectionintoc {11}{Exerc\IeC {\'\i }cios}{108}{0}{11}

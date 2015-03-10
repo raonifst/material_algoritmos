@@ -1,0 +1,485 @@
+\documentclass{beamer}
+\usetheme{Boadilla}
+%\usetheme{Warsaw}
+%\setbeamercovered{transparent}
+\beamertemplatetransparentcoveredhigh
+\usepackage[portuges]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+
+\newcommand{\eng}[1]{\textsl{#1}}
+\newcommand{\cod}[1]{\texttt{#1}}
+
+\title[9002 --- Aula 05]{9002 --- Aula 05\\
+   Algoritmos e Programação de Computadores}
+
+\author[IEng - UFMT]{Instituto de Engenharia -- UFMT}
+
+\institute[2014/2]{Segundo Semestre de 2014}
+
+\date{06 de outubro de 2014}
+
+
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+%\section*{Roteiro}
+
+\begin{frame}
+  \frametitle{Roteiro}
+  \tableofcontents
+\end{frame}
+
+\section{Revisão}
+\begin{frame}
+  \frametitle{Nas aulas passadas...} 
+  	
+  	\begin{itemize}
+  		\item 	Vimos como criar algoritmos descrevem instru\c{c}\~oes lineares.
+		\item Hoje veremos como fazer decisões. Vamos lá....
+  	\end{itemize}
+
+\end{frame}
+
+
+\section{Valores de Verdade}
+
+\begin{frame}
+
+  \frametitle{Valores de verdade (booleanos)} 
+  
+  \begin{alertblock}{Valor booleano}
+    Um valor booleano (a partir de \emph{George Boole}, matemático inglês)
+    é uma constante que indica o valor de verdade de uma sentença.
+    Pode ser \alert{verdadeiro} ou \alert{falso}.
+  \end{alertblock}  
+  
+  \begin{block}{Exemplos}
+    \begin{enumerate}
+    \item ``O céu é azul'' é uma sentença \alert{verdadeira}.
+    \item ``A lua é de queijo'' é uma sentença \alert{falsa}.
+    \end{enumerate}
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{Booleanos em C} 
+
+  \begin{block}{Representação de valores booleanos}
+    Em C um booleano é um valor inteiro:
+    \begin{enumerate}
+    \item \alert{Zero ($0$)} para \alert{falso}
+    \item \alert{Um ($1$),} ou qualquer outro número
+      diferente de zero, para \alert{verdadeiro}.
+    \end{enumerate}
+  \end{block}
+ 
+\end{frame}
+
+
+\section{Expressões relacionais}
+
+
+\begin{frame}[fragile]
+  \frametitle{Expressão}
+
+  \begin{itemize}
+  \item Já vimos que  constantes  e variáveis 
+    são expressões.
+    \begin{block}{Exemplo}
+\begin{verbatim}
+    a = 10;
+    a = b;
+\end{verbatim}
+    \end{block}
+  \item Vimos também que operações aritméticas também são expressões.
+    \begin{block}{Exemplo}
+\begin{verbatim}
+    a = 2 + 2;
+    a = 10 / (float) 3;
+    a = a + 1; 
+\end{verbatim}
+    \end{block}
+  \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+
+  \frametitle{Expressões relacionais} 
+  
+  Expressões relacionais são aquelas que realizam uma comparação
+  entre duas expressões e retornam um valor \alert{booleano}.
+ 
+\end{frame}
+
+
+
+\begin{frame}
+
+\frametitle{Operadores Relacionais} 
+
+  \begin{block}{Os operadores relacionais são:}
+    \begin{itemize}
+    \item \alert{$==$} : igualdade.
+    \item \alert{$!=$} : diferente.
+    \item \alert{$>$} : maior que.
+    \item \alert{$<$}: menor que.
+    \item \alert{$>=$} : maior ou igual que.
+    \item \alert{$<=$} : menor ou igual que.
+    \end{itemize}  
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{Expressões relacionais}
+
+  \begin{block}{}
+    \begin{itemize}
+    \item $<$expressao$>$ \alert{==} $<$expressao$>$: Retorna verdadeiro quando 
+      as expressões forem iguais.
+
+      Exemplo: {\tt a == b}
+
+    \item $<$expressao$>$ \alert{!=} $<$expressao$>$: Retorna verdadeiro quando as 
+      expressões forem diferentes.
+
+      Exemplo: {\tt a != b}
+
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+
+\begin{frame}
+
+  \frametitle{Expressões relacionais}
+
+  \begin{block}{}
+    \begin{itemize}
+
+      \item $<$expressao$>$ \alert{\tt >} $<$expressao$>$: Retorna verdadeiro quando a
+        expressão da esquerda tiver valor maior que a expressão da direita.
+
+        Exemplo: {\tt a > b}
+
+      \item $<$expressao$>$ \alert{\tt <} $<$expressao$>$: Retorna verdadeiro quando a
+        expressão da esquerda tiver valor menor que a expressão da direita.
+        
+        Exemplo: {\tt a < b}
+    \end{itemize}   
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{Expressões relacionais}
+
+  \begin{block}{}
+    \begin{itemize}
+
+      \item $<$expressao$>$ \alert{\tt >=} $<$expressao$>$: Retorna verdadeiro quando a
+        expressão da esquerda tiver valor maior ou igual que a expressão
+        da direita.
+
+        Exemplo: {\tt a >= b}
+
+      \item $<$expressao$>$ \alert{\tt <=} $<$expressao$>$: Retorna verdadeiro quando a
+        expressão da esquerda tiver valor menor ou igual que a expressão
+        da direita.
+
+        Exemplo: {\tt a <= b}
+    \end{itemize}   
+  \end{block}
+
+\end{frame}
+
+
+\section{Comandos condicionais}
+
+\begin{frame}
+
+  \frametitle{Comandos condicionais} 
+  
+  Um comando condicional é aquele que permite decidir se um
+  determinado bloco de comandos deve ou não ser executado, a partir do
+  resultado de uma expressão.
+
+  \begin{center}
+    \includegraphics[width=8cm]{exit.pdf}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{Comandos condicionais}
+
+   O principal comando condicional da linguagem C é o {\tt if}
+   
+   \begin{block}{A sintaxe do {\tt if}}    
+      
+      {\tt \alert{if} (booleano) 
+      
+       \hspace{16pt} {\sl comando}; } ou 
+       
+      {\tt \alert{if} (booleano) \{
+      
+       \hspace{16pt} {\sl comandos}
+       
+      \}}
+   \end{block}
+
+   Os comandos são executados somente se o valor do booleano 
+   for \alert{verdadeiro}.
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Bloco de comandos}
+
+  \begin{itemize}
+  \item É um conjunto de instruções agrupadas.
+  \item Limitada pelos caracteres \cod{\{} e \cod{\}}.
+%  \item Declaração de variáveis ``locais'':
+%    \begin{itemize}
+%    \item Devem ser sempre declaradas antes de qualquer outro comando.
+%    \item São válidas somente dentro do bloco.
+%    \end{itemize}
+  \end{itemize}  
+  
+  \begin{exampleblock}{Exemplo}
+    \verb"int main(void)"\\
+    \verb"{" \hspace{1cm} $\longleftarrow$ Início do bloco de comandos \\
+    \verb"  int a;"\\
+    \verb"  a=1;"\\
+    \verb"  return 0;"\\
+    \verb"}" \hspace{1cm} $\longleftarrow$ Fim do bloco de comandos \\ 
+  \end{exampleblock}
+\end{frame}
+
+
+\begin{frame}[fragile]
+
+  \frametitle{Comandos condicionais}
+
+  O programa abaixo determina se um valor é ímpar.
+
+  \begin{exampleblock}{}
+\begin{verbatim}
+#include <stdio.h>
+int main () {
+    int a;
+    scanf("%d", &a);
+    if (a % 2) {
+        printf ("O valor é ímpar.\n");    
+    }
+    return 0;
+}\end{verbatim}   
+  \end{exampleblock}
+
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{Comandos condicionais}
+
+  Uma variação do comando {\tt if} é o {\tt if/else}, cuja sintaxe é:
+  
+  \begin{block}{Sintaxe do {\tt if/else}}
+    {\tt \alert{if} (booleano) \{
+    
+    \hspace{16pt} {\sl comandos executados se a expressão é verdadeira}
+    
+    \} \alert{else} \{
+    
+    \hspace{16pt} {\sl comandos executados se a expressão é falsa}
+    
+    \}}
+  \end{block}
+
+    
+  
+\end{frame}
+
+\begin{frame}[fragile]
+
+  \frametitle{Comandos condicionais}
+
+  \begin{exampleblock}{}
+\begin{verbatim}
+if (cond1)
+  if (cond2)
+    comando1;
+else
+  comando2;  
+\end{verbatim}
+\end{exampleblock}
+
+
+
+Quando o {\tt comando2} é executado?
+\end{frame}
+
+\begin{frame}[fragile]
+
+  \frametitle{Comandos condicionais}
+  \begin{exampleblock}{}
+\begin{verbatim}
+if (cond1)
+  if (cond2)
+    comando1;
+  else
+    comando2;  
+\end{verbatim}
+\end{exampleblock}
+
+Quando o {\tt comando2} é executado?
+\end{frame}
+
+\begin{frame}[fragile]
+
+  \frametitle{Comandos condicionais}
+
+  \begin{exampleblock}{}
+\begin{verbatim}
+if (cond1) {
+  if (cond2)
+    comando1;
+} else
+  comando2;  
+\end{verbatim}
+\end{exampleblock}
+
+Quando o {\tt comando2} é executado?
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{if-else-if Encaixados}
+
+\begin{itemize}
+\item Como testar alternativas?
+\item \emph{Podemos usar vários ifs.}
+\end{itemize}
+
+  \begin{exampleblock}{}
+\begin{verbatim}
+#include <stdio.h>
+int main () {
+    int rga;
+    scanf("%d", &rga);
+    if (rga == 201421901004) 
+        printf("Abel Breno Ventura de Abreu\n");
+    if (rga == 201421904008)
+        printf("Ana Flavia Rosa Manzano\n"); 
+        
+    return 0;
+}
+\end{verbatim}
+\end{exampleblock}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{if-else-if Encaixados}
+
+\begin{itemize}
+\item Todos os testes condicionais serão executados!
+\item \emph{Como apenas uma alternativa é verdadeira, é melhor usar if-else-if}
+\end{itemize}
+  \begin{exampleblock}{}
+\begin{verbatim}
+#include <stdio.h>
+int main () {
+    int rga;
+    scanf("%d", &rga);
+    if (rga == 201421901004) 
+        printf("Abel Breno Ventura de Abreu\n");
+    else if (rga == 201421904008)
+        printf("Ana Flavia Rosa Manzano\n"); 
+    else printf("Nenhum aluno com RGA informado!");             
+    
+    return 0;
+}
+\end{verbatim}
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{if-else-if Encaixados}
+  \begin{block}{{\tt if-else-if} encaixados}
+    \begin{itemize}
+      \item Na construção if-else-if quando uma condição é verdadeira, o bloco de comandos
+      correspondente será executado.
+      \item Após a execução do bloco de comandos as outras alternativas não serão testadas.
+      \item O último {\bf else} (sem if) pode ser utilizado como uma opção padrão quando
+      nenhuma das condições dos ifs é verdadeira.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{Exercícios}
+
+  \begin{enumerate}
+
+  \item Escreva um programa que lê um número inteiro do teclado e imprime ``SIM''
+   se o número for par e maior do que 10, ou for ímpar e menor do que 50.
+   Caso contrário o programa deve imprimir ``NAO''. 
+
+  \item Escreva um programa que ordene três números inteiros lidos do teclado.
+    
+  \end{enumerate}
+  
+\end{frame}
+
+
+%\begin{frame}
+
+%  \frametitle{Exercícios}
+
+%  \begin{itemize}
+
+%    \item Escreva um programa que, dado duas datas, determine qual delas
+%      ocorreu cronologicamente antes em relação a outra. Cada data é 
+%      composta de 3 números inteiros, um representando o ano, outro o 
+%      mês e outro o dia.
+
+%    \item Escreva um programa que, dado o comprimento de três segmentos
+%      de reta, determine se eles formam um triângulo e, caso formem,
+%      diga se o triângulo é equilátero, isóceles ou escaleno.
+    
+%  \end{itemize}
+  
+%\end{frame}
+
+
+\begin{frame}
+
+  \frametitle{Na próxima aula...}
+
+  \begin{itemize}
+  	\item veremos mais detalhes sobre estes comandos condicionais.
+  	\item FIM!
+  \end{itemize}
+
+
+  
+\end{frame}
+
+\end{document}

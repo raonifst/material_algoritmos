@@ -1,0 +1,512 @@
+\documentclass{beamer}
+
+\usetheme{Boadilla}
+%\usetheme{Warsaw}
+%\setbeamercovered{transparent}
+\beamertemplatetransparentcoveredhigh
+\usepackage[portuges]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{ulem}
+
+\newcommand{\eng}[1]{\textsl{#1}}
+\newcommand{\cod}[1]{\texttt{#1}}
+
+\title[9002 --- Aula 17]{9002 --- Aula 17\\
+   Algoritmos e Programação de Computadores}
+
+\author[IEng - UFMT]{Instituto de Engenharia -- UFMT}
+
+\institute[2014/2]{Segundo Semestre de 2014}
+
+\date{24 de novembro de 2014}
+
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Roteiro}
+  \tableofcontents
+\end{frame}
+
+\section{Revisão}
+\begin{frame}
+  \frametitle{Recapitulando....}
+	\begin{itemize}
+	\item O que é um vetor?
+	\item Como declarar?
+	\item Como acessar suas posi\c{c}ões?
+	\pause \item Mãos a obra...
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}[containsverbatim]
+
+\frametitle{Exercício: Produto Interno de dois vetores}
+
+\begin{itemize}
+\item Ler dois vetores de dimensão 5 e computar o produto interno destes.
+\item Quais tipos de variáveis usar?
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[containsverbatim]
+
+\frametitle{Exercício: Produto Interno de dois vetores}
+
+Ler dois vetores de dimensão 5 e computar o produto interno destes.
+\begin{scriptsize}
+\begin{verbatim}
+#include <stdio.h>
+int main(){
+  double vetor1[5], vetor2[5], resultado;
+  int i;
+
+  for(i=0; i<5; i++){
+    printf("Entre com valor %d para vetor 1:",i+1);
+    scanf("%lf",&vetor1[i]);
+  }
+  for(i=0; i<5; i++){
+    printf("Entre com valor %d para vetor 2:",i+1);
+    scanf("%lf",&vetor2[i]);
+  }
+  
+  //calculando o produto interno
+  resultado = 0.0;
+  for(i=0; i < 5; i++){
+    resultado = resultado + ( vetor1[i]*vetor2[i] );
+  }
+  printf("\n\nO produto interno e: %lf\n",resultado);
+  
+  return 0;
+}
+\end{verbatim}
+\end{scriptsize}
+
+\end{frame}
+
+
+\section{Vetores em funções}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+  \frametitle{Vetores em funções}
+
+  \begin{itemize}
+ 
+ \item Vetores também podem ser passados como parâmetros em funções.
+  
+  \item Ao contrário dos tipos simples, vetores têm um
+    comportamento diferente quando usados como parâmetros de funções.
+
+   \item Quando uma variável simples é passada como parâmetro, seu valor é
+   atribuído para uma nova variável local da função.
+   
+   \item No caso de vetores, {\bf não é criado} um novo vetor!
+   
+   \item Isto significa que os valores de um vetor {\bf são alterados}
+dentro de uma função!
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+\frametitle{Vetores em funções}
+\begin{scriptsize}
+\begin{verbatim}
+#include <stdio.h>
+
+void fun1(int vet[], int tam){
+  int i;
+  for(i=0;i<tam;i++)
+     vet[i]=5;
+}
+
+int main(){
+  int x[10];
+  int i;
+
+  for(i=0;i<10;i++)
+    x[i]=8;
+
+  fun1(x,10);
+  for(i=0;i<10;i++)
+    printf("%d\n",x[i]);
+    
+  return 0;
+}
+\end{verbatim}
+\end{scriptsize}
+%  Veja o exemplo em \texttt{registro.c}.
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+\frametitle{Vetores em funções}
+
+\begin{itemize}
+\item Vetores não podem ser devolvidos por funções.
+\item Mas mesmo assim, podemos obter um resultado parecido com isso, usando o fato de que vetores são alterados dentro de funções.
+\end{itemize}
+
+\begin{scriptsize}
+\begin{verbatim}
+#include <stdio.h>
+
+int[] leVetor() {
+  int i, vet[100];
+  for (i = 0; i < 100; i++) {
+    printf("Digite um numero:");
+    scanf("%d", &vet[i]);
+  }
+  return vet;
+}
+\end{verbatim}
+\end{scriptsize}
+O código acima não compila, pois não podemos retornar um {\bf int[]} .
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+\begin{itemize}
+\item Mas como um vetor é alterado dentro de uma função, podemos criar a seguinte
+função:
+\end{itemize}
+\frametitle{Vetores em funções}
+\begin{scriptsize}
+\begin{verbatim}
+#include <stdio.h>
+
+void leVetor(int vet[], int tam){
+  int i;
+  for(i = 0; i < tam; i++){
+    printf("Digite numero:");
+    scanf("%d",&vet[i]);
+  }
+}
+
+void escreveVetor(int vet[], int tam){
+  int i;
+  for(i=0; i< tam; i++)
+    printf("vet[%d] = %d\n",i,vet[i]);
+}
+\end{verbatim}
+\end{scriptsize}
+%  Veja o exemplo em \texttt{registro.c}.
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+\frametitle{Vetores em funções}
+\begin{scriptsize}
+\begin{verbatim}
+int main(){
+  int vet1[10], vet2[20];
+
+  printf(" ------ Vetor 1 --------\n");
+  leVet(vet1, 10);
+  printf(" ------ Vetor 2 --------\n");
+  leVet(vet2, 20);
+
+  printf(" ------ Vetor 1 --------\n");
+  escreveVet(vet1, 10);
+  printf(" ------ Vetor 2 --------\n");
+  escreveVet(vet2, 20);
+  
+  return 0;
+}
+\end{verbatim}
+\end{scriptsize}
+%  Veja o exemplo em \texttt{registro.c}.
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Exercícios}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+\frametitle{Exercício}
+\begin{itemize}
+\item Crie uma função \\
+{\bf int maiorValor(int vet[], int tam)}\\
+que recebe como parâmetros um vetor e seu tamanho e devolve o maior valor armazenado
+no vetor.
+\end{itemize}
+%  Veja o exemplo em \texttt{registro.c}.
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+\frametitle{Exercício}
+\begin{itemize}
+\item Crie uma função \\
+{\bf double media(int vet[], int tam)}\\
+que recebe como parâmetros um vetor e seu tamanho e devolve a média
+dos valores armazenados no vetor.
+\end{itemize}
+%  Veja o exemplo em \texttt{registro.c}.
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Informações Extras: Inicialização de um vetor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+\frametitle{Informações Extras: Inicialização de um vetor}
+
+\begin{itemize}
+\item Em algumas situações é necessário declarar e já atribuir um conjunto de valores contantes
+para um vetor.
+\item Em C, isto é feito atribuindo-se uma lista de elementos para o vetor na sua criação da seguinte forma:
+
+\begin{block}{}
+\alert{$<$tipo$>$} identificador [] = \{elementos separados por vírgula\} ;
+\end{block}
+
+\item Exemplos:\\
+\begin{verbatim}
+double vet1[] = {2.3, 3.4, 4.5, 5.6};
+int vet2[] = {5, 4, 3, 10, -1, 0};
+\end{verbatim}
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+\frametitle{Informações Extras: Inicialização de um vetor}
+
+\begin{verbatim}
+#include <stdio.h>
+
+int main(){
+  double vet1[] = {2.3, 3.4, 4.5, 5.6};
+  int vet2[] = {5, 4, 3, 10, -1, 0};
+  int i;
+
+  for(i=0; i<4; i++)
+    printf("%lf\n", vet1[i]);
+
+  for(i=0; i<6; i++)
+    printf("%d\n", vet2[i]);
+
+}
+\end{verbatim}
+
+\end{frame}
+
+\section {O Problema da Busca}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+\frametitle{O Problema da Busca}
+
+Considere o seguinte problema:
+\begin{block}{}
+Há coleção de elementos (cada qual com um identificador único) e uma chave de busca.
+Deseja-se verificar se algum elemento desta coleção possui um identificador como o mesmo valor da chave de busca.
+\end{block}
+\end{frame}
+\begin{frame}[containsverbatim]
+\frametitle{O Problema da Busca}
+\begin{itemize}
+
+\item Em nossos exemplos, usaremos um vetor de inteiros para representar os identificadores da coleção.
+
+\item Note que apesar de usarmos inteiros, os algoritmos servem para buscar elementos em qualquer coleção
+de elementos que possuam chaves que possam ser comparadas.
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+\frametitle{O Problema da Busca}
+
+ O problema da busca é um dos mais básicos em Computação
+e possui diversas aplicações.
+	\pause
+	\begin{itemize}
+		\item E, por exemplo, pode ser utilizado para encontrar um aluno com um determinado número de carteira de  motorista, RG,  CPF ou coisa que o valha.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{O Problema da Busca}
+\begin{itemize}
+
+	
+\item Neste curso, veremos  algoritmos  simples para realizar a busca assumindo que dados estão em um vetor.
+\item Em cursos mais avançados (estruturas de dados, projeto e análise de algoritmos...) são estudados outros algoritmos e estruturas (que não um vetor) para
+armazenar e buscar elementos.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[containsverbatim]
+\frametitle{O Problema da Busca}
+\begin{itemize}
+\item Nos nossos  exemplos vamos criar a função:
+	\begin{itemize}
+	\item {\bf int busca(int vet[], int tam, int chave)}, que recebe um vetor
+	com um determinado tamanho, e uma chave para busca.
+	\item A função deve retornar o índice do vetor que contém a chave ou -1
+	caso a chave não esteja no vetor.
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+
+  \frametitle {O Problema da Busca}
+
+\begin{center}
+\includegraphics[scale=0.5]{busca.eps}
+\end{center}
+  Pode-se perceber que o valor (esperado) a ser devolvido pela  função é 5 e -1, respectivamente.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Busca Sequencial}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+\frametitle{Busca Sequencial}
+\begin{itemize}
+\item O algoritmo de busca sequencial pode ser enunciado em três simples passos:
+	\begin{itemize}
+	\item Percorrer vetor comparando a chave com cada elemento.
+	\item Se a chave for entrada, então  devolva o índice deste elemento.
+	\item Caso contrário (todo o vetor foi percorrido), devolva -1.
+	\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+\frametitle{Busca Sequencial}
+
+\begin{small}
+\begin{verbatim}
+int buscaSequencial(int vet[], int tam, int chave){
+  int i;
+  for(i=0; i<tam; i++){
+    if(vet[i] == chave)
+      return i;
+  }
+  return -1;
+}
+\end{verbatim}
+\end{small}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+\frametitle{Busca Sequencial}
+\vspace{-0.3cm}
+\begin{scriptsize}
+\begin{verbatim}
+#include <stdio.h>
+int buscaSequencial(int vet[], int tam, int chave);
+int main(){
+  int pos, vet[] = {20, 5, 15, 24, 67, 45, 1, 76, -1, -1}; //-1 indica
+                                                         //posição não usada
+  pos = buscaSequencial(vet, 8, 45);
+  if(pos != -1)
+    printf("A posicao da chave 45 no vetor é: %d\n", pos);
+  else
+    printf("A chave 45 não está no vetor! \n");
+    
+  pos = buscaSequencial(vet, 8, 100);
+  if(pos != -1)
+    printf("A posicao da chave 100 no vetor é: %d\n", pos);
+  else
+    printf("A chave 100 não está no vetor! \n");
+}
+
+int buscaSequencial(int vet[], int tam, int chave){
+  int i;
+  for(i=0; i<tam; i++){
+    if(vet[i] == chave)
+      return i;
+  }
+  return -1;
+}
+\end{verbatim}
+\end{scriptsize}
+
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{Exercício}
+\begin{itemize}
+\item Crie uma função \\
+{\bf int checa(int vet[], int tam, int C)}\\
+que recebe como parâmetros um vetor, seu tamanho e um inteiro $C$.
+A função deve retornar 1 caso existam dois elementos distintos do vetor tal que
+a multiplicação destes é  $C$.
+\item Exemplo: Se $vet = (2, 4, 5, -10, 7)$ e $C=35$ então a função deve devolver 1.
+Mas se $C=-1$ então a função deve devolver 0.
+\end{itemize}
+%  Veja o exemplo em \texttt{registro.c}.
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{FIM}
+Nas próximas aulas, estudaremos o problema da ordena\c{c}ão...
+\end{frame}
+
+\end{document}
+

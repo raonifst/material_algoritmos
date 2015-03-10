@@ -1,0 +1,344 @@
+\documentclass{beamer}
+
+\usetheme{Boadilla}
+%\usetheme{Warsaw}
+%\setbeamercovered{transparent}
+\beamertemplatetransparentcoveredhigh
+\usepackage[portuges]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{ulem}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+\newcommand{\eng}[1]{\textsl{#1}}
+\newcommand{\cod}[1]{\texttt{#1}}
+
+
+\title[9002 --- Aula 10]{9002 --- Aula 10\\
+   Algoritmos e Programação de Computadores}
+
+\author[IEng - UFMT]{Instituto de Engenharia -- UFMT}
+
+\institute[2014/2]{Segundo Semestre de 2014}
+
+\date{20 de outubro de 2014}
+
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Roteiro}
+  \tableofcontents
+\end{frame}
+
+\section{Revisão}
+
+
+\begin{frame}
+  \frametitle{Revisão }
+  Nas aulas anteriores...
+  \begin{itemize}
+  \item vimos como escrever programas capazes de executar
+    comandos repetidamente. 
+ 
+ \item vimos que processo de constru\c{c}ão está relacionado com a  resposta de três simples 
+       perguntas: O que deve ser repetido? Quantas vezes? Qual condi\c{c}ão?
+  
+  \item estudamos os comandos {\bf for} e {\bf while}.
+ 
+  \item vimos, ainda, como simular e testar estes algoritmos.
+  \end{itemize}
+	
+	
+\end{frame}
+
+\section{Comandos repetitivos aninhados}
+
+
+\begin{frame}[fragile]
+  \frametitle{Comandos repetitivos aninhados}
+  \begin{itemize}
+  \item É possível incluir um comando de repeti\c{c}ão dentro de outro?
+  \item Como simular códigos deste tipo?
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Exemplo}
+
+  Qual é a saída do código a seguir?
+  \begin{exampleblock}{}
+\begin{verbatim}
+int i, j;
+for(i = 1; i <= 5; i++) {
+    printf("Linha %d: ", i);
+    for(j = 0; j < 5; j++) {
+        printf("%d ", j);
+    }
+    printf("\n");
+}  \end{verbatim}
+  \end{exampleblock}
+
+  \pause
+  Saída:
+  \begin{exampleblock}{}
+\begin{verbatim}
+Linha 1: 0 1 2 3 4
+Linha 2: 0 1 2 3 4
+Linha 3: 0 1 2 3 4
+Linha 4: 0 1 2 3 4
+Linha 5: 0 1 2 3 4 \end{verbatim}
+  \end{exampleblock}
+\end{frame}
+
+
+
+
+
+\section{Exercícios}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Exercício}
+
+  Escreva um programa que imprima uma tabela de números
+  ímpares com $m$ linhas e $n$ colunas ($m$ e $n$ são lidos
+  do teclado) como no seguinte formato de exemplo (para
+  $m = 3$ e $n = 4$).
+
+  \begin{exampleblock}{}
+  \begin{verbatim}
+                        01 03 05 07
+                        15 13 11 09
+                        17 19 21 23  \end{verbatim}
+  \end{exampleblock}
+
+  Dica: você pode utilizar o seguinte formato do \cod{printf} para
+  sempre imprimir o número com dois algarismos (completando
+  com zero antes se necessário): \cod{printf("\%02d", ... );}
+
+
+
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{Exercícios}
+
+\begin{block}{Problema}
+Imprimir todas as possibilidades
+de resultados ao se jogar 4 dados de 6 faces.
+\end{block}
+
+\begin{itemize}
+\item Para cada possibilidade do primeiro dado, devemos imprimir
+todas as possibilidades dos 3 dados restantes.
+\item Para cada possibilidade do primeiro e segundo dado, devemos imprimir
+todas as possibilidades dos 2 dados restantes....
+\item Você consegue pensar em uma solução com laços aninhados?
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+\frametitle{Resposta}
+\begin{scriptsize}
+\begin{verbatim}
+int main(){
+  int d1, d2, d3, d4;
+
+  printf("\nD1  D2  D3  D4\n");
+  for(d1 = 1; d1 <= 6; d1++)
+    for(d2 = 1; d2 <= 6; d2++)
+      for(d3 = 1; d3 <= 6; d3++)
+        for(d4 = 1; d4 <= 6; d4++)
+           printf("%d   %d   %d   %d\n",d1,d2,d3,d4);
+  
+  return 0;
+
+}
+\end{verbatim}
+\end{scriptsize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection{Mega-Sena}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+\frametitle{Exercício}
+\begin{itemize}
+\item Na Mega-Sena, um jogo consiste de 6 números distintos com valores entre 1 e 60.
+\end{itemize}
+
+\begin{block}{Problema}
+Imprimir todos os jogos possíveis da Mega-Sena
+\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+\frametitle{Exercício}
+\begin{itemize}
+\item Partimos da mesma idéia dos dados: Gerar todos os possíveis valores para
+cada um dos 6 números do jogo.
+\item Problema: Os números do jogo devem ser distintos.
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+\frametitle{Exercício}
+\begin{scriptsize}
+\begin{verbatim}
+int main(){
+  int d1, d2, d3, d4, d5, d6;
+
+  for(d1 = 1; d1 <= 60; d1++)
+    for(d2 = 1; d2 <= 60; d2++)
+      for(d3 = 1; d3 <= 60; d3++)
+        for(d4 = 1; d4 <= 60; d4++)
+          for(d5 = 1; d5 <= 60; d5++)
+            for(d6 = 1; d6<= 60; d6++)
+               if( (d1!=d2) && (d1!=d3) &&..........)
+                     printf("%d,  %d,  %d,   %d,  %d,  %d\n",d1,d2,d3,d4,d5,d6);
+
+  return 0;
+
+}
+\end{verbatim}
+\end{scriptsize}
+Após incluir todos os testes para garantir que os números são distintos, temos a solução?
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+\frametitle{Exercício}
+
+\begin{itemize}
+\item Não temos uma solução válida, pois o programa irá imprimir jogos como:
+\begin{verbatim}
+12, 34, 8, 19, 4, 45
+34, 12, 8, 19, 4, 45
+34, 12, 19, 8, 4, 45
+\end{verbatim}
+\item Na verdade, todos estes jogos são um único jogo: 4, 8, 12, 19, 34, 45.
+\item Podemos assumir que um jogo é sempre apresentado com os números
+em ordem crescente.
+\item Dado que fixamos o valor de {\bf d1},  {\bf d2} necessariamente é maior que {\bf d1}. E com
+{\bf d1} e  {\bf d2}  fixados, d3 é maior que d2 etc.
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+\frametitle{Exercício}
+Solução correta:
+\begin{scriptsize}
+\begin{verbatim}
+int main(){
+  int d1, d2, d3, d4, d5, d6;
+
+  for(d1 = 1; d1 <= 60; d1++)
+    for(d2 = d1 + 1; d2 <= 60; d2++)
+      for(d3 = d2 +1; d3 <= 60; d3++)
+        for(d4 = d3 +1; d4 <= 60; d4++)
+          for(d5 = d4 +1; d5 <= 60; d5++)
+            for(d6 = d5 +1; d6<= 60; d6++)
+                     printf("%d,  %d,  %d,   %d,  %d,  %d\n",d1,d2,d3,d4,d5,d6);
+                     
+  return 0;
+
+}
+\end{verbatim}
+\end{scriptsize}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\section{Exercícios}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+\frametitle{Exercício}
+\begin{itemize}
+\item Faça um programa que leia um número $n$ e imprima $n$ linhas
+na tela com o seguinte formato (exemplo se $n=6$):
+\begin{verbatim}
+1
+1 2
+1 2 3
+1 2 3 4 
+1 2 3 4 5
+1 2 3 4 5 6
+\end{verbatim}
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+\frametitle{Exercício}
+\begin{itemize}
+\item Faça um programa que leia um número $n$ e imprima $n$ linhas
+na tela com o seguinte formato (exemplo se $n=6$):
+\begin{verbatim}
++ * * * * *
+* + * * * *
+* * + * * *
+* * * + * *
+* * * * + *
+* * * * * +
+\end{verbatim}
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Fim}
+\begin{frame}
+\frametitle{Nas próximas aulas...}
+\begin{itemize}
+\item Na próxima aula, resolveremos mais exercícios.
+\item FIM!
+\end{itemize}
+\end{frame}
+
+\end{document}
+

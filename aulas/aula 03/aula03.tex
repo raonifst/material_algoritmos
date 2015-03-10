@@ -1,0 +1,1267 @@
+\documentclass{beamer}
+\usetheme{Boadilla}
+%\usetheme{Warsaw}
+%\setbeamercovered{transparent}
+\beamertemplatetransparentcoveredhigh
+\usepackage[portuges]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+
+\newcommand{\eng}[1]{\textsl{#1}}
+\newcommand{\cod}[1]{\texttt{#1}}
+
+\title[9002 --- Aula 02]{9002 --- Aula 03\\
+   Algoritmos e Programação de Computadores}
+
+\author[IEng - UFMT]{Instituto de Engenharia -- UFMT}
+
+\institute[2014/2]{Segundo Semestre de 2014}
+
+\date{29 de setembro de 2014}
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+%\section*{Roteiro}
+
+\begin{frame}
+  \frametitle{Agenda}
+  \tableofcontents
+\end{frame}
+
+
+\section{Revisão}
+\begin{frame}
+  \frametitle{Na aula passada...}
+	
+	Estudamos algumas questões relacionadas à \alert{resolu\c{c}\~ao de problemas} computacionais.  
+	\pause
+	\begin{itemize}
+		\item O que é computador? \pause
+		\item Como interagir com o computador? \pause
+		\item O que é um algoritmo? \pause
+		\item  ...
+		
+	\end{itemize}		
+
+
+\end{frame}		
+
+\begin{frame}
+  \frametitle{De algoritmos a programas}
+
+	Visite http://light-bot.com/ :)
+ 
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Mais especificamente...}
+
+	Nos concentramos em alguns aspectos relacionados com `conteúdo' e aprendemos:
+	
+	\begin{itemize}
+		  
+  	\item que um algoritmo, quando executado,  associa {\bf objetos de entrada} com {\bf objetos de saída}, utilizando {\bf objetos auxiliares} e de {\bf controle}.
+		\item a identificar estes objetos.
+		\item a especificar nossos algoritmos utilizando estes objetos.
+	\end{itemize}
+	
+	  
+   
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Hoje...}
+	
+	Estudaremos mais algumas questões.... :)
+	
+\end{frame}		
+
+\section{Representa\c{c}ão}
+\begin{frame}
+  \frametitle{Formas de Representa\c{c}ão}
+	
+	Existe um jeito único de representar um algoritmo? \pause
+	\alert{NÃO!}
+	Exemplos:	\pause	
+	\begin{itemize}
+	\item Descri\c{c}ão narrativa
+	\item Fluxograma
+	\item Pseudo-código
+	\item \alert{Linguagem de programa\c{c}ão}
+	\end{itemize}
+		
+\end{frame}
+
+	
+
+
+\begin{frame}
+  \frametitle{De algoritmos a programas}
+
+  \begin{itemize}
+  \item Como transformar um algoritmo em linguagem que o computador
+    entenda?
+	
+  \end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}
+  \frametitle{Objetos}
+		
+	\begin{itemize}
+		\item Como os objetos de entrada, saída e auxiliares são definidos, especificados e manipulados na linguagem C?
+	\end{itemize}	 
+	
+	Os objetos de entrada e saída, tal como vimos conceitualmente,  são conhecidos nas linguagens de programa\c{c}ão como `variáveis'...
+	
+\end{frame}
+
+\section{Variáveis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Variáveis} 
+
+  \begin{alertblock}{Definição}
+  Variáveis são locais onde armazenamos valores. Toda
+  variável é caracterizada por um nome, que a identifica em um
+  programa e por um tipo, que determina o que pode ser armazenado
+  naquela variável.
+  \end{alertblock}
+  
+  \pause
+  
+\begin{itemize}
+\item Durante a execução do programa, um pedacinho da memória corresponde
+a variável.
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Declarando uma variável} 
+
+\begin{center}
+Declara-se da seguinte forma: {\bf $<$tipo\_variável$>$ $<$nome\_variável$>$ ;}
+\end{center}
+
+\pause
+
+\begin{block}{Exemplos corretos}
+\begin{itemize}
+\item int soma;
+\item float preco\_abacaxi;
+\item char  resposta;
+\end{itemize}
+\end{block}
+
+\pause
+
+\begin{block}{Exemplos incorretos}
+\begin{itemize}
+\item soma int;
+\item float preco\_abacaxi
+\end{itemize}
+\end{block}
+
+%  \begin{center}
+%    \begin{picture}(200,150)(-50,0)
+%      \put (70,75){\tt int soma;}
+      
+      % para o tipo
+
+%      \put (0,25){\color{red} Tipo da variável}
+%      \put (42,35){\vector(1,1){34}}
+
+      % para o nome
+
+%      \put (100,25){\color{red} Nome da variável}
+%      \put (145,35){\vector(-1,1){34}}
+
+%    \end{picture}
+%  \end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Variáveis inteiras} 
+
+Variáveis inteiras são utilizadas para armazenar valores inteiros, em formato binário.
+\begin{itemize}
+  \item Exemplo: $13_{10}$ = $1101_2$
+\end{itemize}
+\pause
+\begin{block}{Tipos inteiros em linguagem C}
+\begin{itemize}
+  \item {\bf int:} Inteiro cujo comprimento depende do computador. É
+    o inteiro mais utilizado. Em computadores \emph{Pentium}, ocupa
+    32 bits e pode armazenar valores de -2.147.483.648 a
+    2.147.483.647. 
+  \item {\bf unsigned int:} Inteiro cujo comprimento depende do
+    computador e que armazena somente valores positivos. Em
+    computadores \emph{Pentium}, ocupa 32 bits e pode armazenar
+    valores de 0 a 4.294.967.295.
+  \end{itemize}
+\end{block}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Variáveis inteiras} 
+
+\begin{block}{Mais tipos inteiros em linguagem C}
+  \begin{itemize}
+  \item {\bf long int:} Inteiro que ocupa 32 bits e pode armazenar
+    valores de -2.147.483.648 a 2.147.483.647, independente do
+    computador.
+  \item {\bf unsigned long int:} Inteiro que ocupa 32 bits e pode armazenar
+    valores de 0 a 4.294.967.295, independente do
+    computador.
+  \item {\bf short int:} Inteiro que ocupa 16 bits e pode armazenar
+    valores de -32.768 a 32.767.
+  \item {\bf unsigned short int:} Inteiro que ocupa 16 bits e pode armazenar
+    valores de 0 a 65.535.
+  \end{itemize}
+
+\end{block}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Variáveis de tipo caractere} 
+
+Variáveis utilizadas para armazenar letras e outros símbolos existentes
+em textos.
+  \begin{itemize}
+    \item Exemplos: \cod{\alert{'a'}, \alert{'A'}, \alert{'8'}, \alert{','}, \alert{' '}, \alert{'\$'}, ...}
+  \end{itemize}
+
+\pause 
+\begin{block}{Tipo de caractere em linguagem C}
+  \begin{itemize}
+    \item {\bf char:} Tipo caracter. Guarda apenas um caracter.
+  \end{itemize}
+\end{block}
+%  \item São, na verdade, variáveis inteiras que armazenam um número
+%    associado ao símbolo. A principal tabela de símbolos utilizada
+%    pelos computadores é a tabela ASCII (\emph{American Standard Code
+%    for Information Interchang}), mas existem outras (EBCDIC, Unicode,
+%    etc .. ).
+%  \item {\tt char:} Armazena um símbolo (no caso, o inteiro
+%    correspondente).  Seu valor pode ir de -128 a 127.
+%  \item {\tt unsigned char:} Armazena um símbolo (no caso, o inteiro
+%    correspondente).  Seu valor pode ir de 0 a 255.
+%  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Variáveis de tipo ponto flutuante} 
+
+   Armazenam valores reais, da seguinte forma 
+   de um produto e uma potência:  
+    \alert{$(-1)^{sinal} \cdot mantissa \cdot 2^{expoente}$}.
+    
+\begin{itemize}
+  \item Exemplo: 0,5 = $(-1)^0 \cdot 1 \cdot 2^{-1}$
+  \item Para o programador, funciona como se ele armazenasse números na 
+    forma decimal.
+  \item Possuem problemas de precisão (arredondamento).
+\end{itemize}
+
+
+\pause 
+\begin{block}{Tipo de ponto (vírgula) flutuante em linguagem C}
+  \begin{itemize}
+  
+  \item {\bf float:} Utiliza 32 bits, sendo 1 para o sinal, 8 para o
+    expoente e 23 para a mantissa. Pode armazenar valores de
+    $\pm10^{-38}$ a $\pm10^{38}$ \\
+
+  \item {\bf double:} Utiliza 64 bits, sendo 1 para o sinal, 11 para o
+    expoente e 52 para a mantissa. Pode armazenar valores de
+    $\pm10^{-308}$ a $\pm10^{308}$ \\
+  \end{itemize}
+\end{block}
+\end{frame}
+
+
+%\begin{frame}
+%  \frametitle{O endereço de uma variável} 
+  
+%  \begin{itemize}
+%  \item Toda variável tem um endereço de memória associado a ela. Esse
+%    endereço é o local onde essa variável é armazenada no sistema
+%    (como se fosse o endereço de uma casa, o local onde as pessoas
+%    ``são armazenadas'').
+%  \item Normalmente, o endereço das variáveis não são conhecidos quando
+%    o programa é escrito. 
+%  \item O endereço de uma variável é dependente do sistema
+%    computacional e também da implementação do compilador C que está
+%    sendo usado.
+%  \item O endereço de uma mesma variável pode mudar entre diferentes
+%    execuções de um mesmo programa C usando uma mesma máquina.
+%  \end{itemize}
+%\end{frame}
+
+
+%\begin{frame}
+%  \frametitle{Variáveis que guardam endereços} 
+  
+%  \begin{itemize}
+%  \item Armazenam o endereço de outras variáveis. 
+%  \item Para cada tipo de dados, existe um tipo para guardar o seu
+%    endereço, indicado por \cod{*} antes do nome da variável.
+%  \item \cod{int *endereço}: Endereço de uma variável inteira.
+%  \item \cod{float *endereço}: Endereço de uma variável de ponto flutuante.
+%  \item \cod{char *endereço}: Endereço de uma variável de caracter.
+%  \item Estas variáveis são chamadas \alert{apontadores}.
+%  \end{itemize}
+%\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+  \frametitle{Regras para nomes de variáveis em C} 
+
+
+\begin{block}{Regras para nomes de variáveis}
+  \begin{itemize}
+    \item \textbf{Deve} começar com uma letra  ou subcrito(\_).
+    \item \textbf{Nunca} pode começar com um número.
+    \item Pode conter letras maíusculas, minúsculas, números e subscrito.
+    \item Não se pode utilizar como parte do nome de uma variável:
+\begin{verbatim} 
+{ ( + - * / \ ; . , ?
+\end{verbatim}
+    \item Letras maiúsculas e minúsculas são diferentes:
+\begin{verbatim}
+int c;
+int C; 
+\end{verbatim}
+  \end{itemize} 
+\end{block}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Regras para nomes de variáveis em C} 
+
+  As seguintes palavras já tem um significado na linguagem C e por
+  esse motivo não podem ser utilizadas como nome de variáveis:
+  
+  \begin{block}{}
+          {
+            \tt
+            \center
+            \begin{tabular}{lllll}
+              auto  &   double   & int &     struct & break \\
+              enum &    register & typedef & char &   extern \\
+              return &  union &    const &   float &  short \\
+              unsigned &continue &for &      signed & void\\
+              default & goto &    sizeof&    volatile&do \\
+              if&       static &        while&&\\
+            \end{tabular}
+          } 
+   
+  \end{block}       
+\end{frame}
+
+
+\section{Constantes}
+
+\begin{frame}[fragile]
+  \frametitle{Constantes} 
+
+  Constantes são valores previamente determinados e que, por
+    algum motivo, devem aparecer dentro de um programa.
+
+\begin{itemize}
+    
+  \item Assim como as variáveis, também possuem um
+    tipo. Os tipos permitidos são exatamente os mesmos das variáveis,
+    mais o tipo \alert{\tt string}, que corresponde a uma sequência de
+    caracteres.
+  \item Exemplos:
+    \alert{\cod{85, 0.10, 'c', "Hello, world!"}}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Constantes} 
+\begin{block}{Exemplos de contantes}
+ \begin{itemize}
+\item {\bf inteira:} é um número na forma decimal\\
+    Exemplo: \cod{10}, \cod{145}, \cod{1000000}
+\item {\bf ponto flotuante:} é um número real, com parte \alert{fracionária}\\
+    Exemplo: \cod{2.3456}, \cod{32132131.5}, \cod{5.0}
+\item {\bf caractere:} é sempre representado 
+   por um símbolo entre aspas simples\\
+    Exemplo: \cod{'A'}
+\item {\bf string:} é um texto entre aspas duplas \\
+    Exemplo: \cod{"Hello, world!"}
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+
+%\begin{frame}
+%  \frametitle{Constantes do tipo de ponto flutuante} 
+
+%  \begin{itemize}
+    
+%  \item Um número decimal. Para a linguagem C, um número só pode ser
+%    considerado um número decimal se tiver uma parte ``não inteira'',
+%    mesmo que essa parte não inteira tenha valor zero. Utilizamos o 
+%    ponto para separarmos a parte inteira da parte ``não inteira''.
+
+%    Ex: \cod{10.0}, \cod{5.2}, \cod{3569.22565845}
+
+%  \item Um número inteiro ou decimal seguido da letra e e um
+%    expoente. Um número escrito dessa forma deve ser interpretado
+%    como:
+
+%    \begin{displaymath} 
+%      numero \cdot 10^{expoente}
+%    \end{displaymath} 
+
+%    Ex: \cod{2e2} (2e2 = $2 \cdot 10^2$ = 200.0)
+
+% \end{itemize}
+%\end{frame}
+
+
+%\begin{frame}
+%  \frametitle{Constantes do tipo caracter} 
+
+%  \begin{itemize}
+    
+%  \item Uma constante do tipo caracter é sempre representado 
+%    por uma letra entre aspas simples.
+
+%    Ex: \cod{'A'}
+    
+%  \item Toda constante do tipo caracter pode ser usada como uma
+%    constante do tipo inteiro. Nesse caso, o valor atribuído será o
+%    valor daquela letra na tabela ASCII.
+
+%  \end{itemize}
+%\end{frame}
+
+
+%\begin{frame}
+%  \frametitle{Constantes: Tabela ASCII}
+%  \scriptsize
+%  \begin{tabular}{r|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+%    & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 &10 &11 &12 &13 &14 &15 \\
+%    \hline
+%    0 & \multicolumn{16}{|c|}{Caracteres de Controle}\\
+%    16 & \multicolumn{16}{|c|}{}\\
+%    \hline
+%    32 &   & ! & " & \# & \$ & \% & \& & ' & ( & ) & * & + & , & - & . & / \\
+%    \hline
+%    48 & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & : & ; & $<$ & = & $>$ & ? \\
+%    \hline
+%    64 & @ & A & B & C & D & E & F & G & H & I & J & K & L & M & N & O \\
+%    \hline
+%    80 & P & Q & R & S & T & U & V & W & X & Y & Z & $[$ & $\slash$ & $]$ & $^{\bigwedge}$ & \_ \\
+%    \hline
+%    96 & \verb"`" & a & b & c & d & e & f & g & h & i & j & k & l & m & n & o \\
+%    \hline
+%    112 & p & q & r & s & t & u & v & w & x & y & z & \{ & | & \} & $^{\sim}$ &  \\
+%    \hline
+%  \end{tabular}
+%  \normalsize
+%\end{frame}
+
+
+
+%\begin{frame}
+%  \frametitle{Constantes do tipo string} 
+%
+%  \begin{itemize}
+%    
+%  \item Uma constante do tipo string é um texto entre aspas duplas
+%
+%    Ex: \cod{"Hello, world!"}
+%   
+%  \end{itemize}
+%
+%\end{frame}
+
+\section{Atribuição}
+
+\begin{frame}[fragile]
+  \frametitle{Comando de Atribuição}
+  \begin{itemize}
+\item O comando de atribuição em C é o sinal {\bf = }
+\item A sintaxe do uso do comando é:
+\begin{center}{\bf variável = valor ; }\end{center}
+\end{itemize}
+\pause
+\begin{exampleblock}{Exemplos} 
+\begin{verbatim}
+  int a;
+  float c;
+  a = 5;
+  c = 67.89505456;
+\end{verbatim}
+
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Comando de Atribuição}
+\begin{itemize}
+\item O comando de atribuição pode conter expressões do lado direito:
+   \begin{center}{\bf variável = expressão ; }\end{center}
+\item  Atribuir um valor de uma expressão a uma variável significa calcular
+    o valor daquela expressão e copiar aquele valor para uma
+    determinada variável.
+\end{itemize}
+\pause
+\begin{exampleblock}{Exemplos} 
+\begin{verbatim}
+  int a;
+  float c;
+  a = 5+5+10;
+  c = 67.89505456+8-9;
+\end{verbatim}
+\end{exampleblock}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Comando de Atribuição} 
+
+  No exemplo abaixo, a variável {\bf soma} recebe o valor calculado da
+  expressão {\bf a + b}
+
+%  \begin{center}
+    \begin{picture}(200,100)(-50,0)
+      \put (70,75){\tt soma = a + b;}
+      
+      % para o tipo
+
+      \put (20,25){\color{red} Variável}
+      \put (50,35){\vector(1,1){34}}
+
+      % para o nome
+
+      \put (125,25){\color{red} Expressão}
+      \put (145,35){\vector(-1,2){17}}
+
+    \end{picture}
+%  \end{center}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Atribuição}
+
+  \begin{itemize}
+  \item O operador de atribuição é o sinal de igual (=)
+  \end{itemize}
+
+\bigskip
+
+  \begin{tabular}{c c c}
+    \parbox{4cm}{À esquerda do operador de atribuição deve existir somente o
+    nome de uma \textbf{variável}.} &
+\parbox{1cm}{\large \centerline{=}} &
+\parbox{4cm}{ À direita, deve haver uma \textbf{expressão} cujo valor será calculado
+    e armazenado na variável}
+  \end{tabular}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Expressões Simples}
+
+\begin{block}{Expressões simples}
+   \begin{itemize}
+  \item Uma constante é uma expressão:
+
+    Exemplo: \alert{\tt a = 10;}
+
+  \item Uma variável é uma expressão:
+    
+    Exemplo: \alert{\tt a = b;}
+
+  %\item O endereço de uma variável também é uma expressão, e é obtido
+  %  colocando-se o símbolo \texttt{\&} antes do nome da variável.
+    
+ %   Ex: {\tt endereco = \&a;}
+
+  \end{itemize}
+\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+  \frametitle{Exemplos de atribuição}
+\alert{Sempre que uma variável for usada, ela deve ter sido {\bf declarada antes}.}
+
+\pause
+
+\begin{exampleblock}{Exemplos}
+\begin{verbatim}
+    int a,b;
+    float f,g;
+    char h;
+    
+    a = 10;
+    b = -15;
+    f = 10.0;
+    h = 'A';
+
+    a = b;
+    f = a;
+    a = (b+f+a);
+\end{verbatim}
+
+\end{exampleblock}
+
+
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+    \frametitle{Exemplos errados de atribuição}
+
+\begin{exampleblock}{Exemplos \alert{errados}}
+\begin{verbatim}
+    int a, b;
+    float f, g;
+    char h;
+    
+    a b = 10;
+    b = -15  
+    d = 90;  
+\end{verbatim}
+\end{exampleblock}
+\end{frame}
+
+
+\section{Estrutura de um Programa em C}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+  \frametitle{Estrutura Básica de um Programa em C} 
+
+\begin{exampleblock}{Estrutura básica de um programa C}
+  \begin{semiverbatim}
+{\it{}Declaração de bibliotecas Usadas}
+
+{\it{}Declaração de variáveis}
+
+\alert{int main()\{}
+  {\it{}Declaração de variáveis}
+  
+  {\it{}Comandos}
+  
+  ...
+  
+  {\it{}Comandos}
+  return 0;
+\alert{\}}
+\end{semiverbatim}
+\end{exampleblock}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+  \frametitle{Estrutura Básica de um Programa em C} 
+
+
+\begin{exampleblock}{Exemplo}
+\begin{verbatim}
+#include <stdio.h>
+
+int main(){
+    int a;
+    int b, c;
+
+    a = 7 + 9;
+    b = a + 10;
+    c = b - a;
+    
+    return 0;
+}
+\end{verbatim}
+\end{exampleblock}
+\end{frame}
+
+\section{Algumas Informações Extras}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Informações Extras: Constantes Inteiras} 
+
+  \begin{itemize}
+    
+  \item Um número na forma decimal é escrito normalmente 
+
+    Ex: \cod{10}, \cod{145}, \cod{1000000}
+
+  \item Um número na forma hexadecimal (base 16) é precedido de 0x
+
+    Ex: \cod{0xA} ($A_{16}$ = $10$), \cod{0x100} ($100_{16}$ = $256$) 
+
+  \item Um número na forma octal (base 8) é precedido de 0
+
+    Ex: \cod{010} ($10_{8}$ = $8$)
+
+  \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\begin{frame}
+  \frametitle{Informações Extras: Constantes do tipo de ponto flutuante} 
+
+  \begin{itemize}
+    
+  \item Em C, um número só é considerado \alert{ponto flutuante} ou 
+    fracionário se tiver uma parte ``não inteira'',
+    mesmo que essa parte tenha valor zero. Utilizamos o 
+    \alert{ponto} para separação:
+
+    Ex: \cod{10.0}, \cod{5.2}, \cod{3569.22565845}
+
+  \item Um número inteiro ou decimal seguido da letra \alert{e} e um
+    número é interpretado como:
+
+    \begin{displaymath} 
+      numero \cdot 10^{expoente}
+    \end{displaymath} 
+
+    Ex: \cod{2e2} = $2 \cdot 10^2$ = 200.0
+
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\begin{frame}
+  \frametitle{Informações Extras: Caracter} 
+\begin{itemize}
+  \item Caracteres são, na verdade, variáveis inteiras que armazenam um número
+    associado ao símbolo. A convenção normalmente adota é a tabela ASCII
+    (\emph{American Standard Code for Information Interchang}),
+    mas existem outras (EBCDIC, Unicode etc.).
+  \item {\tt char:} Armazena um símbolo (no caso, o inteiro
+    correspondente).  Seu valor pode ir de -128 a 127.
+  \item {\tt unsigned char:} Armazena um símbolo (no caso, o inteiro
+    correspondente).  Seu valor pode ir de 0 a 255.
+  \item Toda constante do tipo caracter pode ser usada como uma
+    constante do tipo inteiro. Nesse caso, o valor atribuído será o
+    valor daquela letra na tabela ASCII.
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+\begin{frame}
+  \frametitle{Informações Extras: Tabela ASCII}
+  \scriptsize
+  \begin{tabular}{r|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 &10 &11 &12 &13 &14 &15 \\
+    \hline
+    0 & \multicolumn{16}{|c|}{Caracteres de Controle}\\
+    16 & \multicolumn{16}{|c|}{}\\
+    \hline
+    32 &   & ! & " & \# & \$ & \% & \& & ' & ( & ) & * & + & , & - & . & / \\
+    \hline
+    48 & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & : & ; & $<$ & = & $>$ & ? \\
+    \hline
+    64 & @ & A & B & C & D & E & F & G & H & I & J & K & L & M & N & O \\
+    \hline
+    80 & P & Q & R & S & T & U & V & W & X & Y & Z & $[$ & $\slash$ & $]$ & $^{\bigwedge}$ & \_ \\
+    \hline
+    96 & \verb"`" & a & b & c & d & e & f & g & h & i & j & k & l & m & n & o \\
+    \hline
+    112 & p & q & r & s & t & u & v & w & x & y & z & \{ & | & \} & $^{\sim}$ &  \\
+    \hline
+  \end{tabular}
+  \normalsize
+  
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Informações Extras: Obtendo o tamanho de um tipo} 
+
+  O comando \cod{sizeof(tipo)} retorna o tamanho, em bytes, de um
+  determinado tipo.  (Um byte corresponde a 8 bits).
+
+  \begin{block}{Exemplo}
+    \cod{a = sizeof(int);}
+
+    Variável {\tt a} recebe o valor {\tt 4} (32 bits).
+  \end{block}
+\end{frame}
+
+\section{Exercício}
+
+
+\begin{frame}[fragile]
+  \frametitle{Exercício}
+
+  Complete e corrija o código abaixo.
+
+ \begin{exampleblock}{Tipos}
+\begin{verbatim}
+int main() {
+    10 = a;
+    b = -6;
+    c = 100000;
+    d = 33000.;
+    e = -80000,657;
+    f = 30;
+    g = a;
+    h = 'a';
+}
+\end{verbatim}
+    \end{exampleblock}
+	
+\end{frame}
+
+\begin{frame}
+  \frametitle{Expressões}
+
+  \begin{itemize}
+  \item Já vimos que  constantes e variáveis são expressões.
+  \item Uma expressão também pode ser é um conjunto de operações
+    aritméticas, lógicas ou relacionais utilizados para fazer
+    ``cálculos'' sobre os valores das variáveis.
+
+    \begin{block}{Exemplo}
+      {\tt a + b}
+
+      Calcula a soma de a e b
+    \end{block}
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Expressões aritméticas}
+
+\begin{frame}
+  \frametitle{Expressões Aritméticas}
+
+  Os operadores aritméticos são: +,-,*,/
+
+  \begin{block}{Expressões}
+    \begin{itemize}
+      \pause
+      \item $<$expressao$>$ \alert{+} $<$expressao$>$: Soma
+
+      Ex: {\tt a = a + b;}
+
+      \pause
+      \item $<$expressao$>$ \alert{-} $<$expressao$>$: Diferença
+
+      Ex: {\tt a = a - b;}
+
+      \pause
+      \item $<$expressao$>$ \alert{*} $<$expressao$>$: Produto 
+
+      Ex: {\tt a = a * b;}
+
+      \pause
+      \item $<$expressao$>$ \alert{/} $<$expressao$>$: Divisão
+
+      Ex: {\tt a = a / b;}
+
+      \pause
+      \item $<$expressao$>$ \alert{\%} $<$expressao$>$: Resto da divisão inteira 
+
+      Ex: {\tt a = a \% b;}
+
+      \pause
+      \item \alert{-} $<$expressao$>$: Inverte o sinal
+
+      Ex: {\tt a = -b;}
+    \end{itemize}
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Expressões}
+
+
+  \begin{block}{Criando expressões}
+    \begin{itemize}
+      \pause
+      \item Operadores aritméticas (e {\it todos} os demais) juntam várias expressões.
+      
+      \pause
+      \item Podemos formar expressões complexas combinando vários operadores
+
+        Exemplo: \cod{a = -b + 2 + c - (9 + d * 8)}
+    \end{itemize}
+  \end{block}
+
+  \pause
+
+  \begin{block}{Ordem de avaliação}
+    \begin{itemize}
+      \pause
+      \item Qual o valor da expressão \alert{\cod{5 + 10 \% 3}}?
+      
+      \pause
+      \item E da expressão \alert{\cod{5 * 10 \% 3}}?
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Precedência}
+
+  
+  \begin{alertblock}{Precedência}
+    {\bf Precedência} define a ordem em que os operadores serão calculados
+    quando o programa for executado.
+  \end{alertblock}
+
+  \pause
+
+  \begin{block}{Regras de precedência}
+    Em C, os operadores são calculados na seguinte ordem:
+    \begin{enumerate}
+      \pause
+      \item \alert{\bf *}, \alert{\bf \%} e \alert{\bf /}, na ordem em que aparecerem na expressão
+      \pause
+      \item \alert{\bf +} e \alert{\bf -}, na ordem em que aparecerem na expressão
+    \end{enumerate}
+  \end{block}
+
+  \pause
+
+  Exemplo: \alert{\cod{8 + 10 * 6}} vale \alert{68}. 
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Alterando a precedência}
+  
+  \begin{block}{Parênteses}
+    Para alterara  precedência devemos usar parênteses:
+    
+    \begin{itemize}
+      \pause
+      \item {\bf \alert{(}$<$expressao$>$\alert{)}} é uma expressão com o 
+        valor da expressão interna
+      
+      \pause
+      Exemplo: \cod{5 + 10 \% 3} retorna \alert{6}, mas \cod{(5 + 10) \% 3} retorna \alert{0}
+
+      \pause
+      \item {\bf Regra da paridade:}
+        \begin{itemize}
+          \item número de parênteses \alert{(} que abrem deve ser {\bf igual} ao
+          \item número de parênteses \alert{)} que fecham expressões
+        \end{itemize}
+
+    \end{itemize}
+  \end{block}
+  
+  \pause
+  
+  {\bf Dica:} Devemos usar parênteses sempre que não é claro
+    qual é a ordem de avaliação de uma expressão.
+\end{frame}
+
+
+\begin{frame}
+
+  \frametitle{Incremento(++) e Decremento($--$)}
+
+
+  \begin{block}{Operadores de incremento}
+    Algumas operação bastante comuns têm atalhos em C:
+    
+    \begin{itemize}
+      \pause
+      \item Incremento de variável: somam uma unidade a uma variável
+      
+      Exemplo: \alert{\bf \cod{c++}}
+
+      \pause
+      \item Decremento de variável: diminuem uma unidade de uma variável
+      
+      Exemplo: \alert{\bf \cod{$c--$}}
+    \end{itemize}
+  \end{block}
+  
+  \pause
+
+  \alert{\bf Atenção:} Dependendo da posição do operador de incremento,
+    a expresssão retorna um valor {\bf antes} ou {\bf depois} de alterar a variável.    
+\end{frame}
+
+
+\begin{frame}[fragile]
+
+  \frametitle{Incremento(++) e Decremento($--$)}
+
+  Para incrementar uma variável {\bf antes} de retornar o seu
+  valor colocamos o operador à esquerda:
+
+  \pause
+  
+  \begin{exampleblock}{Operador à esquerda da variável:} 
+\begin{verbatim}
+#include <stdio.h>
+
+int main (void) {
+    int a = 10;
+    printf ("%d", ++a);
+}\end{verbatim}
+  \end{exampleblock}
+
+  \pause
+    
+  {\bf Imprime 11}
+\end{frame}
+
+\begin{frame}[fragile]
+
+  \frametitle{Incremento(++) e Decremento($--$)}
+
+  Para primeiro retornar o valor da variável e {\bf depois}
+  incrementar uma variável colocamos o operador à direita:
+
+  \pause
+  
+  \begin{exampleblock}{Operador à direita da variável:} 
+\begin{verbatim}
+#include <stdio.h>
+
+int main (void) {
+    int a = 10;
+    printf ("%d", a++);
+}\end{verbatim}
+  \end{exampleblock}
+
+  \pause
+    
+  {\bf Imprime 10}
+\end{frame}
+
+\begin{frame}[fragile]
+
+  \frametitle{Incremento(++) e Decremento($--$)}
+
+  Em uma expressão, os operadores de incremento e decremento são
+  sempre calculados {\bf antes} dos demais operadores
+  (têm maior precedência)
+
+  \pause
+  
+  \begin{exampleblock}{Expressões confusas:} 
+\begin{verbatim}
+#include <stdio.h>
+
+int main (void) {
+    int a = 10;
+    printf ("%d", a * ++a);
+}\end{verbatim}
+  \end{exampleblock}
+
+
+  \pause
+    
+  {\bf Imprime 121}
+  
+  \pause
+
+  \medskip
+  
+  \alert{\bf Atenção:} Devemos {\bf evitar} utilizar expressões
+    confusas como essas.
+\end{frame}
+
+\begin{frame}[fragile]
+
+  \frametitle{Atribuições simplificadas}
+  
+  
+  \begin{block}{Atalhos}
+    Podemos simplificar algumas expressões comuns em C:
+    \begin{itemize}
+      \pause
+      \item Uma expressão da forma
+      
+      \alert{\cod{a = a + b;}}
+      
+      \pause
+      \item podem ser escritas de maneira {\bf equivalente} como
+      
+      \alert{\cod{a += b;}}
+    \end{itemize}  
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Atribuições simplificadas}
+
+  \begin{block}{Tabela de atribuições simplificadas}
+    \begin{center}\tt
+      \begin{tabular}{ccc}
+        \hline 
+        Comando & Exemplo & Correspondente a\\
+        \hline  
+        += & a += b; & a = a + b;  \\
+        -= & a -= b; & a = a - b; \\
+        $*$= & a *= b; & a = a * b; \\
+        /= & a /= b; & a = a / b; \\
+        \%= & a \%= b; & a = a \% b; \\
+        \hline
+      \end{tabular}
+    \end{center}
+  \end{block}
+\end{frame}
+
+
+\section{Conversão de tipos}
+
+\begin{frame}
+  \frametitle{Conversão de tipos}
+  
+  \begin{block}{Convertendo tipos}
+    \begin{itemize}
+      \pause
+      \item Para obter um valor em um tipo diferente podemos alguns tipos
+      
+      \pause
+      \item Existem duas maneiras: {\bf implícita} e {\bf explícita}.
+    \end{itemize}
+  \end{block} 
+  
+  \pause
+  
+  \begin{block}{Conversão implícita}
+    \begin{itemize}
+      \pause
+      \item O tamanho de destino é maior do que de origem
+      \pause
+      \item \alert{Não há perda de informação}
+
+      \pause
+      Exemplo 1: \cod{int a; short b; a = b;}\\
+      Exemplo 2: \cod{float a; int b=10; a = b;}
+    \end{itemize}
+  \end{block} 
+  
+  \pause
+  
+  \begin{block}{Conversão explícita}
+    \begin{itemize}
+      \pause
+      \item O tipo de destino é informado {\bf explicitamente}
+      \pause
+      \item \alert{Pode haver perda de informação}
+          
+      \pause
+      Exemplo correto: \cod{a = (int)( (float)b / (float)c );}\\
+      Exemplo {\bf incorreto}: \cod{int a; (float)a=1.0;}
+    \end{itemize}
+  \end{block} 
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Um uso da conversão de tipos}
+  
+  \begin{block}{Operação de divisão}
+    O operador de divisão \alert{\cod{/}} possui dois modos:
+    
+    \begin{enumerate}  
+      \pause
+      \item {\bf Inteiro:} se os dois argumentos forem inteiros\\
+      Exemplo: a expressão \cod{10 / 3} vale \alert{\cod{3}}.
+      
+      \pause
+      \item {\bf Ponto flutuante:} se pelo menos um argumento for flutuante\\
+      Exemplo: a expressão \cod{1.5 / 3} vale \alert{\cod{0.5}}.
+    \end{enumerate}
+  \end{block}
+
+  \pause
+ 
+  \begin{exampleblock}{Exemplo de conversão de tipos}\small
+\begin{verbatim}
+int main() {
+  int a, b;
+  float f;
+  a = 10;
+  b = 3;
+  f = a / (float) b;
+}\end{verbatim}    
+  \end{exampleblock}
+  
+  \pause
+  
+  O valor de {\tt f} será \cod{\bf 3.33333333}.
+  
+\end{frame}
+
+\section{Exercícios}
+
+\begin{frame}[fragile]
+  \frametitle{Exercícios} 
+
+  \begin{exampleblock}{}
+\begin{verbatim}
+#include <stdio.h>
+main(void){
+    int n, k;
+    n = 5;
+    k = 1 + 2 * 30 / (++n % 4 * -5);
+}\end{verbatim}
+  \end{exampleblock}
+
+  
+  \begin{enumerate}
+  \item Indique a ordem em que são executadas as operações.
+  \item Reescreva o programa de forma que cada comando contenha apenas uma
+        operação aritmética.
+  \end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Nas próximas aulas...}
+
+	\begin{itemize}
+\item		Nas próximas aulas veremos como interagir com os dispositivos de entrada e saída do computador.
+	
+\item	FIM!!!	
+\end{itemize}		
+
+	
+	
+\end{frame}
+
+
+\end{document}

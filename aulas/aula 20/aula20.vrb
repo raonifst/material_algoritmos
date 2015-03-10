@@ -1,0 +1,26 @@
+\frametitle {Exercício}
+
+  \begin{block}{Caca-palavras}
+    Escreva um programa que leia
+    uma matriz de caracteres
+    de dimensões $15 \times 20$
+    e depois leia uma palavra.
+    O programa deverá contar o número
+    de vezes que a palavra aparece.
+  \end{block}
+
+
+    \begin{exampleblock}{}
+      \begin{semiverbatim}
+                        OEAIAGBOOL
+                        IIWAXHHLHN
+                        PADUCAPNOC
+                        ZBMOUIZSAS
+                        OXEZOKOEUA
+                        QCRMAAPAO\alert<2>{H}
+                        D\alert<2>{HOMEM}TUF\alert<2>{O}
+                        HOOAJCMVG\alert<2>{M}
+                        NMFOANGMA\alert<2>{E}
+                        JEVJVCCSN\alert<2>{M}      \end{semiverbatim}
+    \end{exampleblock}
+

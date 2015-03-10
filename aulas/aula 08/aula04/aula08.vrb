@@ -1,0 +1,13 @@
+\frametitle {Nas próximas aulas...}
+  Nas próximas aulas veremos:
+  \begin{itemize}
+   \item Outras construções iteartivas e seus respectivos comandos em C:
+\begin{enumerate}
+\item Para-Faça - for
+\item Repita-Até - do...while
+\end{enumerate}
+
+    \item Outros problemas cujas soluções envolvem o uso de comandos de repetição.
+  \end{itemize}
+
+

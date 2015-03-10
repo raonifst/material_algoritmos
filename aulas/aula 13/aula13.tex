@@ -1,0 +1,659 @@
+\documentclass{beamer}
+
+\usetheme{Boadilla}
+%\usetheme{Warsaw}
+%\setbeamercovered{transparent}
+\beamertemplatetransparentcoveredhigh
+\usepackage[portuges]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{ulem}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+
+\newcommand{\eng}[1]{\textsl{#1}}
+\newcommand{\cod}[1]{\texttt{#1}}
+
+\title[9002 --- Aula 13]{9002 --- Aula 13\\
+   Algoritmos e Programação de Computadores}
+
+\author[IEng - UFMT]{Instituto de Engenharia -- UFMT}
+
+\institute[2014/2]{Segundo Semestre de 2014}
+
+\date{10 de novembro de 2014}
+
+
+  \begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Roteiro}
+  \tableofcontents
+\end{frame}
+
+\section{Revisão}
+\begin{frame}
+  \frametitle{Revisão }
+  Na aula anterior...
+  \begin{itemize}
+  \item vimos como organizar melhor nossos códigos com fun\c{c}ões.  
+  \item vimos como definir e invocar fun\c{c}ões.
+  \item aprendemos como simular códigos etc
+ 
+
+  \end{itemize}
+  
+  Nesta aula, aprofundaremos um pouco mais nosso conhecendo sobre este tema. Vamos lá...
+	
+	
+\end{frame}
+
+\section{Procedimentos}
+
+\begin{frame}[fragile]
+
+  \frametitle {Funções e procedimentos}
+
+  \begin{itemize}
+    \item Funções podem \alert<1-2>{apenas retornar} um valor
+    \pause
+    \item Também podem \alert<2>{apenas realizar um procedimento}
+    \pause
+  \end{itemize}
+
+  \begin{columns}
+
+    \column{0.45\linewidth}
+
+    \begin{exampleblock}{Função}
+    \begin{semiverbatim}
+\alert{int} soma(int a, int b) \{
+    \alert{return} a+b;
+\} \end{semiverbatim}
+    \end{exampleblock}
+
+    \pause
+
+    \column{0.45\linewidth}
+
+    \begin{exampleblock}{Procedimento}
+    \begin{semiverbatim}
+\alert{void} soma(int a, int b) \{
+    printf("Soma:\%d", a+b);
+\} \end{semiverbatim}
+    \end{exampleblock}
+
+  \end{columns}
+
+  \pause
+
+  \begin{block}{Procedimentos}
+  \begin{itemize}
+      \item Um \alert{procedimento} é uma função que não retorna
+        nenhum valor.
+      \pause
+      \item Procedimentos são indicados pela palavra-chave
+        especial {\bf void}.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]
+
+  \frametitle {A palavra-chave void}
+
+  \begin{itemize}
+      \item Em C, a palavra \texttt{void} representa a
+      ``ausência'' de algum objeto. Pode ser usado para
+      \begin{itemize}
+        \item<2-> indicar a ausência de um tipo de retorno,
+        \item<3-> explicitar a ausência de parâmetros em uma
+          função.
+      \end{itemize}
+  \end{itemize}
+
+ \begin{columns}[t]
+
+    \column{0.45\linewidth}
+
+    \onslide<2->{
+    \begin{exampleblock}{Sem tipo de retorno}\small
+        \cod{%
+          \alert{void} imprime\_numero(int n) \{\\
+          \hspace*{0.5cm} printf("Num: \%d\textbackslash{}n", n);\\
+          \}
+        }
+    \end{exampleblock}
+    }
+
+
+    \column{0.45\linewidth}
+
+
+    \onslide<3->{
+    \begin{exampleblock}{Sem parâmetros}\small
+        \cod{%
+          int obtem\_numero(\alert{void}) \{\\
+          \hspace*{0.5cm} int n; \\
+          \hspace*{0.5cm} scanf("\%d", \&n);\\
+          \hspace*{0.5cm} return n;\\
+          \}
+        }
+    \end{exampleblock}
+    }
+
+  \end{columns}
+
+\end{frame}
+
+\section {A função principal (main)}
+
+\begin{frame}[fragile]
+
+  \frametitle {A função main}
+
+  \begin{itemize}
+  \item O programa principal é uma função especial com tipo
+    de retorno \texttt{int}
+    \pause
+  \item A função \texttt{main}  é invocada automaticamente
+    pelo sistema operacional
+    \pause
+  \item O valor retornado deve valer:
+    \begin{itemize}
+      \item \alert{zero} caso tenha funcionado corretamente
+      \pause
+      \item \alert{qualquer outro valor} caso tenha ocorrido
+        um erro.
+      \pause
+    \end{itemize}
+  \end{itemize}
+
+  \begin{exampleblock}{Exemplo}
+    \small
+\begin{semiverbatim}
+\alert{int} main() \{
+    float dividendo, divisor;
+    scanf("\%f \%f", &dividendo, &divisor);
+    if (divisor == 0.0) \{
+        printf("Divisao por zero!");
+        return 1;
+    \} else \{
+        printf("Divisao: \%f.", dividendo / divisor);
+        return 0;
+    \}
+\} \end{semiverbatim}
+  \end{exampleblock}
+
+\end{frame}
+
+\section {Protótipos de função}
+
+\begin{frame}[fragile]
+
+  \frametitle {Declarando funções depois do \texttt{main}}
+
+  Considere o seguinte código.
+
+  \begin{exampleblock}{}
+\begin{verbatim}
+#include <stdio.h>
+
+int main () {
+    float a = 0, b = 5;
+    printf("%f\n", soma(a, b));
+    return 0;
+}
+
+float soma(float op1, float op2) {
+    return op1 + op2;
+}
+\end{verbatim}
+  \end{exampleblock}
+
+  \pause
+
+  \alert{Ocorre um erro de compilação! Por quê?}
+\end{frame}
+
+
+\begin{frame}[fragile]
+
+  \frametitle {Protótipos de funções}
+
+  \begin{itemize}
+  \item Para organizar melhor um programa e implementar
+    funções em partes distintas do arquivo são utilizados {\bf protótipos de funções}.
+   \pause
+
+  \item Protótipos de funções correspondem à primeira linha da declaração de uma função
+    contendo tipo de retorno, nome da função, parâmetros e {\bf um ponto e vírgula no final}.
+
+    \begin{block}{}
+      \begin{semiverbatim}
+\alert{tipo} nome(tipo \alert{parâmetro1}, \dots, tipo \alert{parâmetroN});\end{semiverbatim}
+    \end{block}
+   \pause
+
+  \item O protótipo de uma função deve vir sempre antes do
+    seu uso. A sua \alert{definição} pode aparecer em qualquer lugar do
+    programa.
+   \pause
+  \item É comum sempre colocar os protótipos de funções no início do seu arquivo.
+  \end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+
+  \frametitle {Protótipo de funções}
+
+
+  \begin{exampleblock}{}
+\begin{verbatim}
+#include <stdio.h>
+
+float soma (float op1, float op2);
+
+int main () {
+    float a = 0, b = 5;
+    printf ("%f\n", soma (a, b));
+    return 0;
+}
+
+float soma (float op1, float op2) {
+    return (op1 + op2);
+}\end{verbatim}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+
+  \frametitle {Protótipo de funções}
+\begin{small}
+  \begin{exampleblock}{}
+\begin{verbatim}
+#include <stdio.h>
+
+float soma (float op1, float op2);
+float subt (float op1, float op2);
+
+int main () {
+    float a = 0, b = 5;
+    printf ("%f\n  %f\n", soma (a, b), subt(a, b));
+    return 0;
+}
+
+float soma (float op1, float op2) {
+    return (op1 + op2);
+}
+
+float subt (float op1, float op2) {
+    return (op1 - op2);
+}\end{verbatim}
+  \end{exampleblock}
+  \end{small}
+\end{frame}
+
+\section {Escopo de variáveis}
+
+\begin{frame}
+
+  \frametitle{Variáveis locais e variáveis globais}
+
+  \begin{block}{Variável local}
+    Uma variável é chamada \alert{local} se ela foi declarada
+    dentro de uma função.
+    \begin{itemize}
+      \pause
+      \item A variável existe somente dentro da função
+      \pause
+      \item Quando a execução da função termina, a variável deixa de existir
+      \pause
+      \item \alert{Parâmetros são variáveis locais}
+    \end{itemize}
+  \end{block}
+  \pause
+  \begin{block}{Variável global}
+    Uma variável é chamada \alert{global} se ela for declarada
+    fora de qualquer função.
+    \begin{itemize}
+      \pause
+      \item A variável é visível em todas as funções
+      \pause
+      \item Qualquer função pode modificar a variável
+      \pause
+      \item A variável existe durante toda a execução do programa
+      \pause
+      \item \alert{Só deve ser usada em casos muito especiais}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Revisando a estrutura básica de um programa}
+
+\begin{semiverbatim}
+#include <stdio.h>
+
+\emph{Protótipos de funções}
+\emph{Declaração de variáveis globais}
+
+int main() \{
+    \emph{Declaração de variáveis locais}
+    \emph{Comandos}
+\}
+
+\emph{Outras funções}
+
+int exemplo_funcao(float parametro, int outro) \{
+    \emph{Declaração de variáveis locais}
+    \emph{Comandos}
+\}
+\end{semiverbatim}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Escopo de variáveis}
+
+  \begin{itemize}
+  \item O \alert{escopo} de uma variável determina onde ela pode ser acessada.
+  \pause
+  \item A regra de escopo em C é bem simples:
+  \begin{itemize}
+    \item As variáveis globais são visíveis por todas as funções.
+    \item As variáveis locais são visíveis apenas na função onde foram
+      declaradas.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle {Escopo de variáveis - Exemplo}
+  \begin{small}
+    \begin{exampleblock}{}
+    \footnotesize
+\begin{verbatim}
+#include <stdio.h>
+
+void funcao_a(void);
+int  funcao_b(int local_b);
+
+int global;
+
+int main() {
+    int local_main;
+    /* Neste ponto são visíveis global e local_main */
+}
+
+void funcao_a(void) {
+    int local_a;
+    /* Neste ponto são visíveis global e local_a */
+}
+
+int funcao_b(int local_b){
+    int local_c;
+    /* Neste ponto são visíveis global, local_b e local_c */
+}\end{verbatim}
+    \end{exampleblock}
+  \end{small}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Escopo de variáveis - Escondendo variáveis globais}
+
+  \begin{itemize}
+    \item É possível declarar variáveis locais com o mesmo nome de
+      variáveis globais.
+    \pause
+    \item Nesta situação, a variável local \alert{``esconde''} a variável
+      global.
+  \end{itemize}
+
+  \pause
+
+  \begin{exampleblock}{}
+\begin{verbatim}
+int nota;
+
+void a() {
+    int nota;
+    /* Neste ponto nota é a variável local. */
+}\end{verbatim}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Escopo de variáveis - Escondendo variáveis globais}
+  \begin{exampleblock}{}
+  \footnotesize
+\begin{verbatim}
+#include <stdio.h>
+
+int x;
+
+void fun1(){
+    printf("\n%d",x);
+}
+
+void fun2(){
+    int x;
+    printf("\n%d",x);
+}
+
+int main(){
+    x = 10;
+    fun1();
+}\end{verbatim}
+\end{exampleblock}
+\pause
+O que é impresso na chamada de fun1?
+\pause
+E se fosse chamada fun2?
+\end{frame}
+
+\section{Parâmetros por valor e por referência}
+
+\begin{frame}[fragile]
+  \frametitle{Passagem de parâmetros}
+
+  Considere o seguinte código:
+  \begin{exampleblock}{}
+\begin{verbatim}
+void trocar_valores(int x, int y) {
+    int aux;
+    aux = x;
+    x = y;
+    y = aux;
+}
+
+int main(){
+    int x = 4, y = 5;
+    trocar_valores(x, y);
+    printf("x=%d, y=%d", x, y);
+}
+\end{verbatim}
+  \end{exampleblock}
+  \pause
+  O que é impresso?
+  \pause
+  Por que não funcionou a troca?
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Passagem de parâmetros}
+
+  \begin{itemize}
+    \item Os parâmetros de função podem se passados de dois modos.
+    \pause
+    \begin{enumerate}
+      \item \alert{Por valor}: valores são \emph{copiados} {\bf (Esse é o modo padrão)}
+      \pause
+      \item \alert{Por referência}: uma \emph{referência} para a variável é passada
+    \end{enumerate}
+  \end{itemize}
+
+  \pause
+
+  \begin{columns}
+
+    \column{0.45\linewidth}
+
+    \begin{block}{Por valor}
+      \begin{itemize}
+        \item Apenas o resultado da expressão é passado
+        \item Pode ser qualquer expressão: constantes, somas, etc.
+        \item Os valores são atribuídos para os parâmetros formais
+        \item \alert{Não alteram} o valor das variáveis passadas
+      \end{itemize}
+    \end{block}
+
+    \pause
+
+    \column{0.45\linewidth}
+
+    \begin{block}{Por referência}
+      \begin{itemize}
+        \item Uma referência de uma variável é passada
+        \item Apenas variáveis podem ser utilizadas
+        \item A referência deve ser explícita com o operador \alert{\&}
+        \item \alert{Alteram} o valor das variáveis passadas
+      \end{itemize}
+    \end{block}
+
+  \end{columns}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Passagem por valor}
+
+  \begin{exampleblock}{}
+    \begin{semiverbatim}
+int obter_quadrado(int x) \{
+    return x*x;
+\}
+
+int main() \{
+    int x = 2;
+    printf("Quadrado de \%d eh \%d\\n", x, obter_quadrado(x));
+    printf("Quadrado de \%d eh \%d\\n", 3, obter_quadrado(3));
+\}\end{semiverbatim}
+  \end{exampleblock}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+  \frametitle{Passagem por referência}
+
+  \begin{itemize}
+    \item Obtemos uma referência para a variável com
+        o operador \alert{\&}
+    \item Para acessar a variável referenciada dentro da função
+        devemos preceder a variável com o símbolo \alert{*}
+  \end{itemize}
+
+  \pause
+
+  \begin{exampleblock}{}
+    \begin{semiverbatim}
+void calcular_quadrado(int x, int \alert{*quadrado}) \{
+    \alert{*quadrado} = x*x;
+\}
+
+int main() \{
+    int x = 2, quadrado;
+    calcular_quadrado(x, \alert{\&quadrado});
+    printf("Quadrado de \%d eh \%d\\n", x, quadrado);
+\}\end{semiverbatim}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Ponteiros}
+
+  \begin{block}{Ponteiros}
+    Em C, referências são implementadas por meio de ponteiros.
+    Ponteiros correspondem ao endereço da variável na memória.
+    \pause
+
+    Regras:
+    \begin{itemize}
+      \item Declaramos um ponteiro como \alert{{\it tipo} *{\it ponteiro}};
+      \pause
+      \item Obtemos um ponteiro de uma variável com o operador \alert{\&}
+      \pause
+      \item Obtemos a variável de um ponteiro com o operador \alert{*}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+
+
+
+\begin{frame}[fragile]
+  \frametitle{Ponteiros - Exemplo}
+
+  \begin{exampleblock}{Ponteiros}
+    \begin{semiverbatim}
+int variavel;
+int *ponteiro1, *ponteiro2;
+
+variavel = 3;
+
+ponteiro1 = &variavel;
+ponteiro2 = ponteiro1;
+
+*ponteiro2 = 5;
+
+printf("\%d, \%d, \%d", variavel, *ponteiro1, *ponteiro2);
+\end{semiverbatim}
+  \end{exampleblock}
+
+  \pause
+
+  \alert{Irá imprimir: 5, 5, 5}.
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Exercícios}
+
+  \begin{enumerate}
+    \item Escreva uma função que troca os valores de duas
+        variáveis inteiras.
+
+    \item Escreva uma função que decida se um número é produto
+        de dois números ímpares. Se for, a função deverá
+        retornar esses dois números em variáveis passadas
+        por referência.
+
+    \item Escreva uma função que decida se um número é produto
+        de quatro números ímpares. Se for, a função deverá
+        retornar os números em variáveis passadas
+        por referência. Tente utilizar a função anterior.
+  \end{enumerate}
+
+\end{frame}
+
+\section{Fim}
+\begin{frame}
+\frametitle{Nas próximas aulas...}
+\begin{itemize}
+\item Na próxima aula, resolveremos mais exercícios.
+\item FIM!
+\end{itemize}
+\end{frame}
+
+\end{document}
+

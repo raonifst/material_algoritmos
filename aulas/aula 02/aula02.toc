@@ -1,0 +1,8 @@
+\beamer@endinputifotherversion {3.10pt}
+\select@language {portuges}
+\beamer@sectionintoc {1}{Introdu\c {c}\~ao}{3}{0}{1}
+\beamer@sectionintoc {2}{Modelo Computacional}{8}{0}{2}
+\beamer@sectionintoc {3}{Algoritmos}{17}{0}{3}
+\beamer@subsectionintoc {3}{1}{Defini\c {c}\~ao}{17}{0}{3}
+\beamer@subsectionintoc {3}{2}{Caracteriza\c {c}\~ao}{24}{0}{3}
+\beamer@sectionintoc {4}{Algoritmos e Modelos}{28}{0}{4}

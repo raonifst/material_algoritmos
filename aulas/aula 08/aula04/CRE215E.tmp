@@ -1,0 +1,1122 @@
+\documentclass{beamer}
+
+\usetheme{Boadilla}
+%\usetheme{Warsaw}
+%\setbeamercovered{transparent}
+\beamertemplatetransparentcoveredhigh
+\usepackage[portuges]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{ulem}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+
+\newcommand{\eng}[1]{\textsl{#1}}
+\newcommand{\cod}[1]{\texttt{#1}}
+
+
+\title[Aula 04]{Aula 01\4\\
+   Introdução à Programação de Computadores}
+
+\author[IC -- UFMT]{Instituto de Computação -- UFMT}
+
+%\institute{27 de março de 2014}
+\date{27 de março de 2014}
+
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Roteiro}
+  \tableofcontents
+\end{frame}
+
+\section{Revisão}
+
+
+\begin{frame}
+  \frametitle{Revisão }
+  \begin{itemize}
+  \item Nas aulas anteriores, vimos como escrever programas capazes de executar
+    comandos de forma linear, e, se necessário, tomar decisões com relação a executar ou não um bloco de comandos.  
+  \end{itemize}
+	\vspace{-0.2cm}
+	\begin{figure}[!htb]
+     \centering
+     \includegraphics[scale=0.15]{passadas.png}
+		\vspace{-0.5cm}
+     \caption{Fluxogramas dos algoritmos das aulas anterios. }     
+	\end{figure}
+	
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Exemplo --- até 4}
+  \begin{itemize}
+%   \item Será que dá pra fazer com o que já temos?
+  \item Programa que imprime todos os números de 1 a 4\\
+  
+    \vspace{15pt}
+  \begin{exampleblock}{}
+    \pause
+    \verb"printf("``\verb"1"''\verb");"\\
+    \pause
+    \verb"printf("``\verb"2"''\verb");"\\
+    \pause
+    \verb"printf("``\verb"3"''\verb");"\\
+    \pause
+    \verb"printf("``\verb"4"''\verb");"\\
+  \end{exampleblock}
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemplo --- até 100}
+  \begin{itemize}
+  \item Programa que imprime todos os números de 1 a 100\\
+    \vspace{15pt}
+  \begin{exampleblock}{}
+    \pause
+    \verb"printf("``\verb"1"''\verb");"\\
+    \pause
+    \verb"printf("``\verb"2"''\verb");"\\
+    \pause
+    \verb"printf("``\verb"3"''\verb");"\\
+    \pause
+    \verb"printf("``\verb"4"''\verb");"\\
+    \pause
+    \verb"printf("``\verb"5"''\verb");"\\
+    \pause
+    \verb"printf("``\verb"6"''\verb");"\\
+    \pause
+    \alert{\verb"..."}\\
+    \pause
+    \verb"printf("``\verb"99"''\verb");"\\
+    \pause
+    \verb"printf("``\verb"100"''\verb");"\\
+  \end{exampleblock}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exemplo --- até $n$ dado}
+  \begin{itemize}
+  \item Ex.: Programa que imprime todos os números de 1 a n (dado)\\
+    \vspace{15pt}
+  \begin{exampleblock}{}
+    \pause
+    \verb"int n;"\\
+    \cod{scanf("\%d", \&n);}\\
+%     \verb"scanf("``\%\verb"d"''\verb",&n);"\\
+    \pause
+    \verb"printf("``\verb"1"''\verb");"\\
+    \pause
+    \verb"if (n>=2)"\\
+    \hspace{.2in}\verb"printf("``\verb"2"''\verb");"\\
+    \pause
+    \verb"if (n>=3)"\\
+    \hspace{.2in}\verb"printf("``\verb"3"''\verb");"\\
+    \pause
+    \alert{\verb"/* repete 96 vezes o bloco acima */"}\\
+    \pause
+    \verb"if (n>=100)"\\
+    \hspace{.2in}\verb"printf("``\verb"100"''\verb");"\\
+  \end{exampleblock}    
+  \end{itemize}
+\end{frame}
+
+\section{Comandos Repetitivos}
+
+\begin{frame}[fragile]
+\frametitle{Repetição}
+%   \frametitle{\verb"while (condicao) \{ comandos \}"}
+	Se observarmos com atenção, percebemos que em todos estes casos  executamos um bloco de
+    comandos \alert{várias vezes} para obter o resultado.
+		
+\end{frame}
+
+\section{Comando while}
+
+\begin{frame}[fragile]
+
+   \frametitle{Comando while}
+%   \frametitle{\verb"while (condicao) \{ comandos \}"}
+		
+  O comando while é utilizado para executar um bloco de comandos
+  enquando uma condição for satisfeita
+
+  \begin{block}{Sintaxe do {\tt while}}
+
+\begin{semiverbatim}
+while (\alert{condicao}) \{
+    comandos;
+\}
+\end{semiverbatim}
+   
+  \end{block}
+  
+  \pause
+
+Funcionamento: \\
+
+ \begin{itemize}
+  \item \textbf{Passo 1}: Testa condição:\\
+      \hspace*{1cm} Se condição for \alert{verdadeira}, vai para Passo 2. \\
+      \hspace*{1cm} Se condição for \alert{falsa}, pula o bloco de comandos.
+  \item \textbf{Passo 2}: Executa o bloco de comandos.
+  \item \textbf{Passo 3}: Volta para o Passo 1.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Imprimindo os 100 primeiros números inteiros}
+
+\begin{exampleblock}{}
+\begin{verbatim}
+int i = 1; 
+while (i <= 100) {
+    printf("%d ", i);
+    i++;
+}
+\end{verbatim}
+
+\end{exampleblock}
+
+  
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Imprimindo os $n$ primeiros números inteiros}
+\begin{exampleblock}{}
+\begin{verbatim}
+int i = 1, n;
+scanf("%d", &n);
+while (i <= n) {
+    printf("%d ", i);
+    i++;
+}
+\end{verbatim}
+
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Imprimindo as $n$ primeiras potências de 2}
+
+\begin{exampleblock}{}
+\begin{verbatim}
+int i = 1, n, pot = 2;
+scanf("%d", &n);
+while (i <= n) {
+    printf("2^%d = %d \n", i, pot);
+    i++;
+    pot = pot * 2;
+}
+\end{verbatim}
+\end{exampleblock}
+\end{frame}
+
+
+\begin{frame}
+
+  \frametitle{Exercício rápido}
+
+
+  \begin{block}{Exercício}
+    Calcule a divisão inteira de dois numeros usando apenas soma e
+    subtração.
+  \end{block}
+
+\end{frame}
+
+
+
+\begin{frame}
+
+  \frametitle{Solução}
+
+  \begin{itemize}
+  \item Duas variáveis: temporario, contador
+    \begin{enumerate}
+    \item temporario=dividendo;
+    \item contador=0;
+    \item Enquanto $temporario \geq divisor$
+      \begin{enumerate}
+      \item temporario = temporario - divisor
+      \item contador = contador + 1
+      \end{enumerate}
+    \item Exiba contador
+    \end{enumerate}
+  \end{itemize}
+
+  \begin{block}{Por que?}
+    Contador equivale a divisão inteira de dividendo por divisor
+  \end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]
+
+   \frametitle{Solução --- em C}
+   \begin{exampleblock}{}
+\small
+    \begin{verbatim}
+#include <stdio.h>
+
+int main() {
+  int dividendo, divisor, temporario, contador;
+
+  // lê dividendo e divisor
+  scanf("%d %d", &dividendo, &divisor);
+
+  // realiza a divisão
+  temporario = dividendo;
+  contador = 0;
+  while (temporario >= divisor) {
+    temporario = temporario - divisor;
+    contador++;
+  }
+
+  // mostra resultado da divisão
+  printf("%d\n", contador);
+}
+    \end{verbatim}
+       \end{exampleblock}
+\end{frame}
+
+
+
+%\begin{frame}
+%  \frametitle{Introdução}
+%  \begin{itemize}
+%  \item Ex.: Programa que imprime 2 elevado a todos os números de 1 a n (dado)\\
+%    \vspace{15pt}
+
+%    \verb"printf("``\verb"2$^\wedge$1 = 2"''\verb");"\\
+%    \verb"if (n>=2)"\\
+%    \hspace{.2in}\verb"printf("``\verb"2$^\wedge$2 = 4"''\verb");"\\
+%    \alert{\verb"/*repete 97 vezes o bloco acima*/"}\\
+%    \verb"if (n>=100)"\\
+%    \hspace{.2in}\verb"printf("``\verb"2$^\wedge$100 = ???"''\verb");"\\
+%  \end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%  \frametitle{Introdução}
+%  \begin{itemize}
+%  \item Ex.: Programa que imprime 2 elevado a todos os números de 1 a n
+%    (dado)\\
+%    \vspace{15pt}
+%    \verb"int i=1, pot=2;"\\
+%    \verb"printf("``\verb"2$^\wedge$\%d = \%d"''\verb",i,pot);"\\
+%    \verb"i++; pot *=2;"\\
+%    \verb"if (n>=2) \{"\\
+%    \hspace{.2in}\verb"printf("``\verb"2$^\wedge$\%d = \%d"''\verb",i,pot);"\\
+%    \hspace{.2in}\verb"i++; pot *=2; \}"\\
+%    \alert{\verb"/*repete 97 vezes o bloco acima*/"}\\
+%    \verb"if (n>=100) \{"\\
+%    \hspace{.2in}\verb"printf("``\verb"2$^\wedge$\%d = \%d"''\verb",i,pot);"\\
+%    \hspace{.2in}\verb"i++; pot *=2; \}"\\
+%    \normalsize
+%  \end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%  \frametitle{Introdução}
+%  \begin{itemize}
+%  \item Ex.: Programa que imprime 2 elevado a todos os números de 1 a n (dado)\\
+
+%    \vspace{15pt}
+
+%    \verb"int i=1,pot=2;"\\
+%    \verb"if (i<=n) \{"\\
+%    \hspace{.2in}\verb"printf("``\verb"2$^\wedge$\%d = \%d"''\verb",i,pot);"\\
+%    \hspace{.2in}\verb"i++; pot *=2; \}"\\
+%    \alert{\verb"/*repete 98 vezes o bloco acima*/"}\\
+%    \verb"if (i<=n)  \{"\\
+%    \hspace{.2in}\verb"printf("``\verb"2$^\wedge$\%d = \%d"''\verb",i,pot);"\\
+%    \hspace{.2in}\verb"i++; pot *=2; \}"\\
+%    \normalsize
+%  \end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%  \frametitle{Introdução}
+%  \begin{itemize}
+%  \item Reparem, no exemplo anterior, que o trecho abaixo é
+%    executado 100 vezes\\
+%    \verb"if (i<=n)"\\
+%    \verb"\{"\\
+%    \hspace{.2in}\verb"printf("``\verb"2$^\wedge$\%d = \%d"''\verb",i,pot);"\\
+%    \hspace{.2in}\verb"i++;"\\
+%    \hspace{.2in}\verb"pot *=2;"\\
+%    \verb"\}"\\
+%  \end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%  \frametitle{Introdução}
+%  \begin{itemize}
+%  \item Para cada comparação, fazemos:
+%    \begin{enumerate}
+%    \item imprimimos o expoente e sua potência.
+%    \item incrementamos o expoente
+%    \item multiplicamos a potência
+%    \end{enumerate}
+%  \item Quando i supera n, todas as demais comparações retornam falso,
+%    e não são executadas.
+%  \end{itemize}
+
+%  \vspace{12pt}
+
+%  \begin{block}{Problema}
+%    n é limitado ao tamanho do nosso código.
+%  \end{block}
+
+%\end{frame}
+
+%\begin{frame}
+%  \frametitle{Introdução}
+%  \begin{itemize}
+%  \item Seria interessante fazer com que o código repetisse a
+%    comparação e executasse o comando dentro até que a condição fosse
+%    falsa
+%    \vspace{15pt}
+
+%    \verb"/* Enquanto for verdade que i<=n, execute */"\\
+%    \verb"\{"\\
+%    \hspace{.2in}\verb"printf("``\verb"2$^\wedge$\%d = \%d"''\verb",i,pot);"\\
+%    \hspace{.2in}\verb"i++; pot *=2;"\\
+%    \verb"\}"\\
+%  \end{itemize}
+%\end{frame}
+
+
+\begin{frame}
+  \frametitle{Casos especiais do while}
+  
+  \begin{block}{Casos especiais}
+  \begin{enumerate}
+  \item O que acontece se a condição for falsa na primeira vez? \\
+    \verb"while (a!=a) a = a+1;"\\
+
+    \vspace{12pt}
+
+    \onslide<2->{\alert{R: Ele nunca entra na repetição (\textit{loop}).}}
+
+    \vspace{12pt}
+
+  \item O que acontece se a condição for sempre verdadeira?\\
+    \verb"while (a==a) a = a+1;"\\
+
+    \vspace{12pt}
+
+    \onslide<2->{\alert{R: Ele entra na repetição e nunca sai (\textit{loop} infinito).}}
+
+    \vspace{12pt}
+
+
+  \end{enumerate}
+  \end{block}
+
+ \onslide<3->{O que acontece no programa de divisão quando o dividendo é menor que o divisor?}
+
+\end{frame}
+
+%\begin{frame}
+%  \frametitle{\verb"while (condicao) \{ comandos \}"}
+%  \begin{itemize}
+%  \item Estudando a estrutura ``normal'' do \verb"while" mais a fundo.\\
+%    \verb"while (i<=n)" $\leftarrow$ condição de repetição\\
+%    \verb"\{"\\
+%    \hspace{.2in}\verb"printf("``\verb"\%d "''\verb",i);"\\
+%    \hspace{.2in}\verb"i++;" $\leftarrow$ Comando de passo\\
+%    \verb"\}"\\
+%  \item O oposto (negação) da condição de repetição é conhecida como condição de parada:\\
+%    \verb"!(i<=n)" $\Rightarrow$ \verb"i>n" é a condição de parada.
+%  \end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%  \frametitle{\verb"while (condicao) \{ comandos \}"}
+%  \begin{itemize}
+%  \item \textit{loop} de fim determinado\\
+%    \verb"scanf("``\verb"\%d"''\verb",\&preco);"\\
+%    \verb"while (i<=n) \{"\\
+%    \hspace{.2in}\verb"total = total + preco;"\\
+%    \hspace{.2in}\verb"i++;"\\
+%    \hspace{.2in}\verb"scanf("``\verb"\%d"''\verb",\&preco);"\\
+%    \verb"\}"
+%  \end{itemize}
+%\end{frame}
+
+%\begin{frame}
+%  \frametitle{\verb"while (condicao) \{ comandos \}"}
+%  \begin{itemize}
+%  \item \textit{loop} de fim indeterminado\\
+%    \verb"scanf("``\verb"\%d"''\verb",\&preco);"\\
+%    \verb"while (preco>0) \{"\\
+%    \hspace{.2in}\verb"total = total + preco;"\\
+%    \hspace{.2in}\verb"scanf("``\verb"\%d"''\verb",\&preco);"\\
+%    \verb"\}"
+%  \end{itemize}
+%\end{frame}
+
+
+
+\begin{frame}[fragile]
+  \frametitle{Exercício}
+  
+  \begin{enumerate}
+   \item Faça um programa que lê um número $n$ e imprima
+os valores da soma
+%
+$$\sum_{i=1}^ji$$
+%
+para $j$ de 1 até $n$.
+
+    \item Dê uma fórmula fechada para a soma acima.
+  \end{enumerate}
+
+
+\end{frame}
+
+
+%\section{Exemplos}
+
+%\begin{frame}
+%  \frametitle{MDC(x,y)}
+
+%  Supondo, sem perda de generalidade, que $x \geq y$, o $\text{MDC}(x, y)$
+%  é definido da seguinte forma:
+
+%  $$
+%  \text{MDC}(x, y)  =
+%  \begin{cases}
+%    y                        & \text{caso } x \bmod y = 0\\
+%    \text{MDC}(y, x \bmod y) & \text{caso contrário} \\
+%  \end{cases}
+%  $$
+
+%  \vspace{30pt}
+
+%  \begin{block}{Exercício}
+%    Complete o programa em \texttt{mdc.c}
+%  \end{block}
+
+
+%\end{frame}
+
+%\begin{frame}
+%  \frametitle{MDC(x,y)}
+
+%  \verb"x = maior;"\\
+%  \verb"y = menor;"\\
+%  \verb"do"\\
+%  \verb"\{"\\
+%  \hspace{.2in}\verb"r = x \% y;"\\
+%  \hspace{.2in}\verb"x = y;"\\
+%  \hspace{.2in}\verb"y = r;"\\
+%  \verb"\} while (r!=0);"\\
+
+%  \vspace{15pt}
+
+%  \begin{itemize}
+%  \item Repare que \verb"r" só é calculado dentro do \textit{loop}
+%  \end{itemize}
+
+%  \begin{itemize}
+%  \item Veja exemplo em \texttt{mdc-completo.c}
+%  \end{itemize}
+
+%\end{frame}
+
+%\begin{frame}[fragile]
+%  \frametitle{Soma de n valores inteiros}
+
+%\begin{verbatim}
+%  soma = 0;
+%  while (n > 0) {
+%    printf("número a ser somado: ");
+%    scanf("%d", &parcela);
+%    soma += parcela;
+%    n--;
+%  }
+%  printf("Soma: %d\n", soma);
+%\end{verbatim}
+
+%  \begin{itemize}
+%  \item Veja exemplo em \texttt{soma-n.c}
+%  \end{itemize}
+
+%\end{frame}
+
+
+%\begin{frame}[fragile]
+%  \frametitle{Soma até 0}
+
+%\begin{verbatim}
+%soma = 0;
+%printf("número a ser somado (0 para sair): ");
+%scanf("%d", &parcela);
+
+%while (parcela != 0) {
+%  soma += parcela;
+%  printf("número a ser somado (0 para sair): ");
+%  scanf("%d", &parcela);
+%}
+
+%printf("Soma: %d\n", soma);
+%\end{verbatim}
+
+%  \begin{itemize}
+%  \item Veja exemplo em \texttt{soma-ate-0.c}
+%  \end{itemize}
+
+%\end{frame}
+
+
+%\begin{frame}[fragile]
+%  \frametitle{Soma até 0}
+%\begin{verbatim}
+%soma = 0;
+
+%do {
+%  printf("número a ser somado (0 para sair): ");
+%  scanf("%d", &parcela);
+%  soma += parcela;
+%} while (parcela != 0);
+
+%printf("Soma: %d\n", soma);
+
+%\end{verbatim}
+
+%  \begin{itemize}
+%  \item Veja exemplo em \texttt{soma-ate-0-do-while.c}
+%  \end{itemize}
+
+%\end{frame}
+
+
+
+
+
+%\begin{frame}
+
+%  \frametitle{Exercícios}
+
+%  \begin{itemize}
+
+%  \item Dada uma letra, escreva na tela se essa letra é ou não uma
+%    vogal (pode considerar apenas letras minúsculas).
+
+%  \item Dado um caracter, escreva na tela se esse caracter é uma
+%    letra minúscula.
+
+%  \end{itemize}
+
+%\end{frame}
+
+%\begin{frame}
+
+%  \frametitle{Exercícios}
+
+%  \begin{itemize}
+
+%  \item Escreva um programa que recebe um operando, um operador
+%    aritmético e outro operando e calcule a operação indicada. As
+%    operações possíveis são soma(+), subtração($-$), multiplicação(*)
+%    e divisão(/).
+
+%    \begin{block}{Exemplo}
+%      {\tt 10 + 2}
+
+%      imprime 12 na tela.
+%    \end{block}
+
+%  \end{itemize}
+
+%\end{frame}
+
+%\begin{frame}[fragile]
+%
+%  \frametitle{Exercícios}
+%
+%  \begin{itemize}
+%
+%  \item
+%    Escreva um programa que mostre na tela um {\sl menu} de pratos
+%    (pelo menos 5), cada um associado a um número.
+
+%\begin{verbatim}
+%   Prato 1 - Miojo
+%   Prato 2 - Ensopado
+%\end{verbatim}
+
+
+%  \item Quando um número é selecionado, o programa deve exibir uma
+%    breve descrição do prato. Por exemplo, ao digitar 1, o programa
+%    mostra: ``Macarrão instantâneo''
+
+%  \end{itemize}
+
+%\end{frame}
+
+\section{Comando for}
+
+
+\begin{frame}[fragile]
+    \frametitle{Comando de repetição típico}
+
+    \begin{exampleblock}{}
+    \cod{\noindent
+      int i; \\
+      \alert<2>{i = 0}; \\
+      while (\alert<3>{i < 100}) \{ \\
+        \hspace*{1cm}printf("\%d", i);\\
+        \hspace*{1cm}\alert<4>{i = i + 1};\\
+      \}
+    }
+    \end{exampleblock}
+
+    Partes típicas:
+    \begin{itemize}
+      \item<2-> \alert<2>{\textbf{Início}}: Inicializa as variáveis (normalmente índices e acumuladores).
+      \item<3-> \alert<3>{\textbf{Condição}}: Valor booleano que indica a condição para executar.
+      \item<4-> \alert<4>{\textbf{Passo}}: Atualiza as variáveis (normalmente os índices).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Comando for}
+
+    \begin{block}{Sintaxe do \cod{for}}
+\begin{semiverbatim}
+for (\alert{inicio} ; \alert{condicao} ; \alert{passo}) \{
+    comandos;
+\}
+\end{semiverbatim}     
+    \end{block}
+
+    \only<1>{
+    Partes:
+    \begin{itemize}
+      \item \textbf{Início}: Um ou mais comandos de atribuição separadas por \alert{,}
+      \item \textbf{Condição}: Valor booleano que indica a condição para executar
+      \item \textbf{Passo}: Um ou mais comandos de atribuição separados por \alert{,}
+    \end{itemize}
+    }
+
+    \only<2>{
+  Funcionamento:
+  \begin{itemize}
+    \item \textbf{Passo 1}: Executa comandos em ``inicio''.
+    \item \textbf{Passo 2}: Testa condição.\\
+      \hspace*{1cm} Se condição for \alert{verdadeira}, vai para o Passo 3.\\
+      \hspace*{1cm} Se condição for \alert{falsa}, continua o programa.
+    \item \textbf{Passo 3}:\\
+      \hspace*{1cm} \textbf{(a)} Executa comandos.\\
+      \hspace*{1cm} \textbf{(b)} Executa comandos em ``passo''.\\
+      \hspace*{1cm} \textbf{(c)} Volta ao Passo 2.
+  \end{itemize}
+  }
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Imprimindo os 100 primeiros números inteiros}
+
+  \begin{exampleblock}{}
+\begin{verbatim}
+int i;
+for(i = 1; i<= 100; i=i+1){
+    printf("\n %d",i);
+}  \end{verbatim}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Imprimindo os $n$ primeiros números inteiros}
+
+  \begin{exampleblock}{}
+\begin{verbatim}
+int i, n;
+scanf("%d",&n);
+for(i=1; i<=n; i++){
+    printf("\n %d",i);
+}  \end{verbatim}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Imprimindo as $n$ primeiras potências de 2}
+
+  \begin{exampleblock}{}
+\begin{verbatim}
+int i, n, pot;
+pot = 2;
+scanf("%d",&n);
+for(i=1; i <= n; i++){
+    printf("\n %d",pot);
+    pot = pot *2;
+}  \end{verbatim}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Não atirarei mais aviões em aula}
+
+  \begin{center}
+    \includegraphics[width=11cm]{joke.pdf}
+  \end{center}
+\end{frame}
+
+
+\section{Comandos repetitivos aninhados}
+
+
+\begin{frame}[fragile]
+  \frametitle{Comandos repetitivos aninhados}
+
+  Linhas e colunas:
+  \begin{exampleblock}{}
+\begin{verbatim}
+int i, j;
+for(i = 1; i <= 5; i++) {
+    printf("Linha %d: ", i);
+    for(j = 0; j < 5; j++) {
+        printf("%d ", j);
+    }
+    printf("\n");
+}  \end{verbatim}
+  \end{exampleblock}
+
+  \pause
+  Produz:
+  \begin{exampleblock}{}
+\begin{verbatim}
+Linha 1: 0 1 2 3 4
+Linha 2: 0 1 2 3 4
+Linha 3: 0 1 2 3 4
+Linha 4: 0 1 2 3 4
+Linha 5: 0 1 2 3 4 \end{verbatim}
+  \end{exampleblock}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{ Médias das questões e provas}
+  \begin{exampleblock}{}
+  \small
+\begin{verbatim}
+int prova, questao;
+float media_provas, nota_prova, nota_questao;
+
+media_provas = 0.0;
+for(prova = 1; prova <= 3; prova++) {
+
+    nota_prova = 0.0;
+    for(questao = 1; questao <= 10; questao++) {
+
+        printf("Digite a nota questao %d da prova %d: ",
+              questao, prova);
+        scanf("%f", &nota_questao);
+        nota_prova += nota_questao;
+    }
+
+    media_provas += nota_prova;
+}
+media_provas = media_provas / 3.0;
+printf("A média das provas foi %f.\n", media_provas); \end{verbatim}
+  \end{exampleblock}
+
+\end{frame}
+
+
+\section{Término de comandos repetitivos}
+
+
+\begin{frame}[fragile]
+  \frametitle{Loop infinito}
+
+  Os programas abaixo terminam?
+
+  \begin{exampleblock}{}
+\begin{verbatim}
+int i, j;
+for(i = 1; i < 100; j++) {
+    for(j = 1; i < 100; j++) {
+        printf("Linha %d - Coluna %d \n", i, j);
+    }
+}  \end{verbatim}
+  \end{exampleblock}
+
+  \begin{exampleblock}{}
+\begin{verbatim}
+int i;
+for(i = 1; i > 0; i++) {
+    printf("%d \n", i);
+}\end{verbatim}
+  \end{exampleblock}
+
+  \pause
+
+  O segundo programa vai causar \alert{overflow} da variável inteira i.
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Exemplo de comando repetitivo}
+
+  Um coelho está a dois metros de sua esposa. Para chegar até ela,
+  ele salta uma vez a cada minuto. Primeiro dá um saldo de um metro,
+  depois de meio metro, depois de um quarto de metro e assim por diante.
+  Em quanto tempo ele chegará até ela?
+\end{frame}
+
+\begin{frame}
+  \frametitle{O coelho}
+
+  \begin{center}
+    \includegraphics[width=10cm]{coelho.pdf}
+  \end{center}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{O coelho}
+
+  Vamos escrever um programa para calcular esse tempo.
+  \begin{exampleblock}{}
+\begin{verbatim}
+int minutos;
+float distancia, tamanho_salto;
+
+minutos = 0;
+distancia = 0.0;
+tamanho_salto = 1.0;
+
+while (distancia < 2.0) {
+    minutos++;
+    distancia = distancia + tamanho_salto;
+
+    // prepara próximo salto
+    tamanho_salto = tamanho_salto / 2.0;
+}
+printf("O coelho gastara %d minutos.", minutos);  \end{verbatim}
+  \end{exampleblock}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Exercício}
+
+  Escreva um programa que imprima uma tabela de números
+  ímpares com $m$ linhas e $n$ colunas ($m$ e $n$ são lidos
+  do teclado) como no seguinte formato de exemplo (para
+  $m = 3$ e $n = 4$).
+
+  \begin{exampleblock}{}
+  \begin{verbatim}
+                        01 03 05 07
+                        15 13 11 09
+                        17 19 21 23  \end{verbatim}
+  \end{exampleblock}
+
+  Dica: você pode utilizar o seguinte formato do \cod{printf} para
+  sempre imprimir o número com dois algarismos (completando
+  com zero antes se necessário): \cod{printf("\%02d", ... );}
+
+
+
+\end{frame}
+
+
+%\section{Exemplos}
+
+%\begin{frame}
+%  \frametitle{MDC(x,y)}
+
+%  Supondo, sem perda de generalidade, que $x \geq y$, o $\text{MDC}(x, y)$
+%  é definido da seguinte forma:
+
+%  $$
+%  \text{MDC}(x, y)  =
+%  \begin{cases}
+%    y                        & \text{caso } x \bmod y = 0\\
+%    \text{MDC}(y, x \bmod y) & \text{caso contrário} \\
+%  \end{cases}
+%  $$
+
+%  \vspace{30pt}
+
+%  \begin{block}{Exercício}
+%    Complete o programa em \texttt{mdc.c}
+%  \end{block}
+
+
+%\end{frame}
+
+%\begin{frame}
+%  \frametitle{MDC(x,y)}
+
+%  \verb"x = maior;"\\
+%  \verb"y = menor;"\\
+%  \verb"do"\\
+%  \verb"\{"\\
+%  \hspace{.2in}\verb"r = x \% y;"\\
+%  \hspace{.2in}\verb"x = y;"\\
+%  \hspace{.2in}\verb"y = r;"\\
+%  \verb"\} while (r!=0);"\\
+
+%  \vspace{15pt}
+
+%  \begin{itemize}
+%  \item Repare que \verb"r" só é calculado dentro do \textit{loop}
+%  \end{itemize}
+
+%  \begin{itemize}
+%  \item Veja exemplo em \texttt{mdc-completo.c}
+%  \end{itemize}
+
+%\end{frame}
+
+%\begin{frame}[fragile]
+%  \frametitle{Soma de n valores inteiros}
+
+%\begin{verbatim}
+%  soma = 0;
+%  while (n > 0) {
+%    printf("número a ser somado: ");
+%    scanf("%d", &parcela);
+%    soma += parcela;
+%    n--;
+%  }
+%  printf("Soma: %d\n", soma);
+%\end{verbatim}
+
+%  \begin{itemize}
+%  \item Veja exemplo em \texttt{soma-n.c}
+%  \end{itemize}
+
+%\end{frame}
+
+
+%\begin{frame}[fragile]
+%  \frametitle{Soma até 0}
+
+%\begin{verbatim}
+%soma = 0;
+%printf("número a ser somado (0 para sair): ");
+%scanf("%d", &parcela);
+
+%while (parcela != 0) {
+%  soma += parcela;
+%  printf("número a ser somado (0 para sair): ");
+%  scanf("%d", &parcela);
+%}
+
+%printf("Soma: %d\n", soma);
+%\end{verbatim}
+
+%  \begin{itemize}
+%  \item Veja exemplo em \texttt{soma-ate-0.c}
+%  \end{itemize}
+
+%\end{frame}
+
+
+%\begin{frame}[fragile]
+%  \frametitle{Soma até 0}
+%\begin{verbatim}
+%soma = 0;
+
+%do {
+%  printf("número a ser somado (0 para sair): ");
+%  scanf("%d", &parcela);
+%  soma += parcela;
+%} while (parcela != 0);
+
+%printf("Soma: %d\n", soma);
+
+%\end{verbatim}
+
+%  \begin{itemize}
+%  \item Veja exemplo em \texttt{soma-ate-0-do-while.c}
+%  \end{itemize}
+
+%\end{frame}
+
+
+
+
+
+%\begin{frame}
+
+%  \frametitle{Exercícios}
+
+%  \begin{itemize}
+
+%  \item Dada uma letra, escreva na tela se essa letra é ou não uma
+%    vogal (pode considerar apenas letras minúsculas).
+
+%  \item Dado um caracter, escreva na tela se esse caracter é uma
+%    letra minúscula.
+
+%  \end{itemize}
+
+%\end{frame}
+
+%\begin{frame}
+
+%  \frametitle{Exercícios}
+
+%  \begin{itemize}
+
+%  \item Escreva um programa que recebe um operando, um operador
+%    aritmético e outro operando e calcule a operação indicada. As
+%    operações possíveis são soma(+), subtração($-$), multiplicação(*)
+%    e divisão(/).
+
+%    \begin{block}{Exemplo}
+%      {\tt 10 + 2}
+
+%      imprime 12 na tela.
+%    \end{block}
+
+%  \end{itemize}
+
+%\end{frame}
+
+%\begin{frame}[fragile]
+%
+%  \frametitle{Exercícios}
+%
+%  \begin{itemize}
+%
+%  \item
+%    Escreva um programa que mostre na tela um {\sl menu} de pratos
+%    (pelo menos 5), cada um associado a um número.
+
+%\begin{verbatim}
+%   Prato 1 - Miojo
+%   Prato 2 - Ensopado
+%\end{verbatim}
+
+
+%  \item Quando um número é selecionado, o programa deve exibir uma
+%    breve descrição do prato. Por exemplo, ao digitar 1, o programa
+%    mostra: ``Macarrão instantâneo''
+
+%  \end{itemize}
+
+%\end{frame}
+
+\end{document}
+

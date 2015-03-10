@@ -1,0 +1,580 @@
+\documentclass{beamer}
+%\documentclass[handout]{beamer}
+\usetheme{Boadilla}
+%\usetheme{Warsaw}
+%\setbeamercovered{transparent}
+\beamertemplatetransparentcoveredhigh
+\usepackage[portuges]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{ulem}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{wrapfig}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{comment}
+\usepackage{calc}
+
+\input header
+
+\newcommand{\eng}[1]{\textsl{#1}}
+\newcommand{\cod}[1]{\texttt{#1}}
+
+\title[9002 --- Aula 24]{9002 --- Aula 24\\
+   Algoritmos e Programação de Computadores}
+
+\author[IEng - UFMT]{Instituto de Engenharia -- UFMT}
+
+\institute[2014/2]{Segundo Semestre de 2014}
+
+\date{12 de dezembro de 2014}
+
+% contadores para as barras
+\newcounter{ordpos}
+\newcounter{ordalt}
+
+% barra vertical
+\newcommand{\bb}[1]{%
+  \setcounter{ordalt}{#1*5 + 10}
+  \addtocounter{ordpos}{5}
+  \put(\value{ordpos},0){\line(0,1){\value{ordalt}}}
+  \put(\value{ordpos},0){\line(1,0){10}}
+  \put(\value{ordpos},\value{ordalt}){\line(1,0){10}}
+  \addtocounter{ordpos}{1}
+  \put(\value{ordpos},5){#1}
+  \addtocounter{ordpos}{9}
+  \put(\value{ordpos},0){\line(0,1){\value{ordalt}}}
+}
+
+
+% seta apontando em baixo
+\newcommand{\se}{%
+  \setcounter{ordalt}{\value{ordpos} + 10}
+  \put(\value{ordalt},-15){\vector(0,1){10}}
+}
+% seta apontando em baixo vermelha
+\newcommand{\sr}{{\put(0,0){}\color{red}\se}}
+
+% barras verticais coloridas
+\newcommand{\br}[1]{{\put(0,0){}\color{red}\bb{#1}}}
+\newcommand{\bg}[1]{{\put(0,0){}\color{green}\bb{#1}}}
+\newcommand{\ba}[1]{{\put(0,0){}\color{blue}\bb{#1}}}
+
+% espaço de umaa barra
+\newcommand{\bi}[1]{\put(0,0){}\addtocounter{ordpos}{15}}
+
+% reinicia contadores de posição
+\newcommand{\ordreini}{\setcounter{ordpos}{0}}
+
+% fator de escala da figura
+\setlength{\unitlength}{0.4mm}
+
+
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Roteiro}
+  \tableofcontents
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Revisão}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Revisão}
+
+\begin{center}
+\includegraphics[scale=0.9]{bonecasrussas.jpg}
+\end{center}
+
+
+\begin{itemize}
+\item A idéia é que a solução de um problema pode ser expressa da
+seguinte forma:
+
+\begin{itemize}
+
+\item Definimos a solução para os casos básicos;
+
+\item Definimos como resolver o problema geral utilizando
+soluções do mesmo problema só que para casos menores.
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Divisão e Conquista}
+\begin{frame}[fragile]
+\frametitle{Divisão e Conquista}
+
+\begin{itemize}
+\item \alert{Dividir} o problema em um certo número de subproblemas;
+\item \alert{Conquistar} os subproblemas resolvendo-os recursivamente. Se o tamanho 
+do subproblema é suficientemente pequeno (caso base) resolva-o diretamente.
+\item \alert{Combine} as solu\c{c}ões dos subproblemas para encontrar uma solu\c{c}ão do 
+problema original.
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exponencia\c{c}ão binária}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Exponencia\c{c}ão binária}
+Podemos utilizar esta abordagem para definir a potência um outro algoritmo de exponencia\c{c}ão.\\
+
+Neste caso, $x^n$ é calculado:
+\begin{itemize}
+\item Caso  básico: 
+  	\begin{itemize}
+  	\item Se $n=0$ então $x^n = 1$.
+  	\end{itemize}
+\pause
+\item Caso Geral:
+  	\begin{itemize}
+  	\item Se $n>0$ e é par, então $x^n = (x^{n/2})^2$.
+  	\item Se $n>0$ e é ímpar, então $x^n = x(x^{(n-1)/2})^2$.
+  	\end{itemize}
+\end{itemize}
+Note como no caso geral definimos a solução do caso maior em termos
+de casos menores.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Exponencia\c{c}ão binária}
+Este algoritmo é mais eficiente do que o clássico. Por que?
+Quantas chamadas recursivas o algoritmo pode fazer?
+\begin{small}
+\begin{verbatim}
+double power(double a, int n)
+{
+   double m;
+   //Caso base
+   if(n == 0) 
+       return 1;
+   if(n == 1) 
+       return a;
+\end{verbatim}
+\end{small}
+\pause
+\begin{small}
+\begin{verbatim}
+   m = power2(a, n/2);
+   
+   if(n % 2)
+       return m*m*a;
+   else 
+       return m*m;		
+}
+\end{verbatim}
+\end{small}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Exponencia\c{c}ão: Algoritmo clássico}
+
+\begin{verbatim}
+double power(double a, int n)
+{
+   if(n == 0) return 1;
+   if(n == 1) return a;
+   return a*power(a, n-1);
+}
+\end{verbatim}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Exponencia\c{c}ão binária}
+\begin{itemize}
+\item Na exponencia\c{c}ão binária, a cada chamada recursiva o valor de $n$
+é dividido por 2. Ou seja, a cada chamada recursiva, o valor de $n$
+decai para pelo menos a metade. 
+
+\item Usando divisões inteiras faremos
+no máximo $\lceil (\log_2 n) \rceil +1$ chamadas recursivas.
+
+\item Enquanto isso, o algoritmo clássico executa faz $n$ multiplica\c{c}ões. 
+\end{itemize}
+\end{frame}
+
+
+\subsection{Busca Binária} %%%AQUI
+
+\begin{frame}[t]
+  \frametitle{Busca Binária}
+
+  \begin{center}
+    \begin{picture}(155,50)
+      \ordreini\small
+      \bb{ 1}\bb{ 2}\bb{ 3}\bb{ 5}\bb{ 6}\bb{ 7}\bb{ 9}
+    \end{picture}
+  \end{center}
+
+  \begin{block}{Problema}
+    Há cole\c{c}ão de elementos em \alert{ordem} (por exemplo, {\bf 1, 2, 3, 5, 6, 7 e 9}) e uma
+chave de busca (por exemplo, {\bf 4}). Deseja-se verificar se algum elemento desta cole\c{c}ão
+possui o mesmo valor da chave de busca.
+  \end{block}
+\end{frame}
+
+
+
+
+\begin{frame}[t!]
+  \frametitle{Busca Binária}
+	
+  \begin{center}
+    \begin{picture}(155,50)
+\ordreini\small
+\only<   1>{    \bb{ 1}\bb{ 2}\bb{ 3} \bb{ 5} \bb{ 6}\bb{ 7}\bb{ 9} \bi{} \bi{} \br{4}} 
+\only<   2>{    \bb{ 1}\bb{ 2}\bb{ 3}\sr \bb{ 5} \bb{ 6}\bb{ 7}\bb{ 9} \bi{} \bi{} \sr\br{4}} 
+\only<   3>{    \bb{ 1}\bb{ 2}\bb{ 3} \bi{} \bi{ }\bi{ }\bi{ } \bi{} \bi{} \br{4}} 
+\only<   4>{    \bb{ 1} \sr \bb{ 2}\bb{ 3} \bi{} \bi{ }\bi{ }\bi{ } \bi{} \bi{} \sr \br{4}} 
+\only<   5>{    \bi{ }\bb{ 3} \bi{} \bi{ }\bi{ }\bi{ } \bi{} \bi{}  \br{4}} 
+\only<   6,7>{    \bi{ } \sr \bb{ 3} \bi{} \bi{ }\bi{ }\bi{ } \bi{} \bi{}  \sr \br{4}} 
+    \end{picture}
+  \end{center}
+
+  \begin{block}{Ideia}
+  \begin{enumerate}  
+	\item<2,4,6> Comparar o elemento do meio do vetor com a chave.
+    \item<3,5> Redefinir o vetor e buscar recursivamente pela chave.
+    \item<7> Parar quando há um só elemento (base da recursão).    
+   
+
+  \end{enumerate}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Soma de um vetor}
+Vamos implementar!
+\pause
+\begin{verbatim}
+
+int buscaBinaria(int v[], int inicio, int fim, int chave)
+{
+    int m = (inicio+fim)/2;	
+	
+    if(inicio > fim) return 0;
+    if(inicio == fim) return  (v[m] == chave);
+    
+    if(chave == v[m])
+        return 1;
+    if(chave < v[m])
+        return buscaBinaria(v, inicio, m-1, chave);
+    else
+        return buscaBinaria(v, m+1, fim, chave);
+
+}
+\end{verbatim}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Recursão com várias chamadas}
+\begin{itemize}
+\item Não há necessidade da função recursiva ter apenas
+uma chamada para si própria.
+\item A função pode fazer várias chamadas para si própria.
+\item A função pode  ainda fazer chamadas recursivas indiretas. Neste caso
+a função 1, por exemplo, chama uma outra função 2 que por sua vez chama
+a função 1.  
+\end{itemize}
+\end{frame}
+
+
+\subsection{Soma de um Vetor}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Soma de um vetor}
+\begin{itemize}
+\item Dado um vetor, vamos definir $S(i,n)$ como a soma de $n$ elementos a partir da posição
+$i$. 
+\item Com isso temos a seguinte definição
+recursiva para a soma dos elementos de um vetor:
+	\begin{itemize}
+	\item Se $n=1$ então $S(i,n) = v[i]$.
+	\pause
+	\item Se $n>1$ então $S(i,n) = S(i,\lceil n/2 \rceil) + S(i+\lceil n/2 \rceil, \lfloor n/2 \rfloor)$.
+	\end{itemize}
+\pause
+\item Observações
+	\begin{itemize}
+		\item $n = \lceil n/2 \rceil + \lfloor n/2 \rfloor$.
+		\item Dada uma posição $i$ e quantidade $x= \lceil n/2 \rceil$ de elementos incluindo $x$, a próxima posição
+		a ser considerada será $(i+x)$.
+	\end{itemize}
+\item Para computarmos a soma de todos os elementos de um vetor com $n$ elementos, devemos calcular $S(0,n)$.
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Soma de um vetor}
+O código recursivo segue abaixo.
+Basta implementarmos funções para calcular o teto e o chão
+da divisão de dois números.
+\begin{verbatim}
+int soma(int v[], int i, int n){
+  if(n == 1)
+    return v[i];
+  else{
+    return soma(v, i, teto(n,2)) +
+      soma(v, i+teto(n,2), chao(n,2));
+  }
+}
+\end{verbatim}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Soma de um vetor}
+\begin{verbatim}
+int teto(int numerador, int denominador){
+  if(numerador % denominador == 0) //se divisão for inteira
+    return (numerador/denominador);
+  else
+    return (numerador/denominador + 1);
+}
+
+
+int chao(int numerador, int denominador){
+    return (numerador/denominador);
+}\end{verbatim}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Soma de um vetor}
+\begin{itemize}
+\item Abaixo temos um exemplo de execução da função para
+o vetor v=[1, 2, 1, 4, 3, 5, 3, 2].
+
+\item Há uma indicação da ordem em que ocorrem as sucessivas chamadas
+recursivas.
+
+\item Em cada balão é apresentado apenas a parte do vetor que
+está sendo considerada pela função naquele momento.
+
+\item A chamada da função deve ser: {\bf somar(v, 0, 8)}.
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Soma de um vetor}
+
+\begin{figure}[h]
+\centering
+\makebox[6cm]{\scalebox{.60}{\includegraphics{somavetor2.eps}}}
+\end{figure}
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{comment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Torres de Hanoi}
+\begin{figure}[h]
+\centering
+\makebox[6cm]{\scalebox{.70}{\includegraphics{hanoi.png}}}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Torres de Hanoi}
+\begin{itemize}
+\item Inicialmente temos 5 discos de diâmetros diferentes na estaca A.
+\item O problema das torres de Hanoi consiste em transferir os cinco discos
+da estaca A para a estaca C (pode-se usar a estaca B como auxiliar).
+\item Porém deve-se respeitar algumas regras:
+\begin{itemize}
+\item Apenas o disco do topo de uma estaca pode ser movido.
+\item Nunca um disco de diâmetro maior pode ficar sobre um disco de diâmetro menor.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Torres de Hanoi}
+\begin{itemize}
+\item Vamos considerar o problema geral onde há $n$ discos.
+\item Vamos usar indução para obtermos um algoritmo para este
+problema.
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Torres de Hanoi}
+\begin{teorema} É possível resolver o problema das torres de
+Hanoi com $n$ discos.
+\end{teorema}
+\begin{prova}
+\begin{itemize}
+\pause
+\item Base da Indução: $n=1$. Neste caso temos apenas um disco. Basta
+mover este disco da estaca A para a estaca C.
+\pause
+\item Hipótese de Indução: Sabemos como resolver o problema quando há
+$n-1$ discos.
+\end{itemize}
+\end{prova}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Torres de Hanoi}
+\begin{prova}
+\begin{itemize}
+\item Passo de Indução: Devemos resolver o problema para $n$ discos assumindo
+que sabemos resolver o problema com $n-1$ discos.
+\pause
+\item Por hipótese de indução sabemos mover os $n-1$ primeiros discos
+da estaca A para a estaca B usando a estaca C como auxiliar.
+\pause
+\item Depois de movermos estes $n-1$ discos, movemos o maior disco (que
+continua na estaca A) para a estaca C.
+\pause
+\item Novamente pela hipótese de indução sabemos mover os $n-1$ discos
+da estaca B para a estaca C usando a estaca A como auxiliar. \\
+
+\item Com isso temos uma solução para o caso onde há $n$ discos.
+\end{itemize}
+\end{prova}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Torres de Hanoi: Passo de Indução}
+\begin{itemize}
+\item Olhem que maravilha que é a indução.
+\item Nos fornece um algoritmo e ainda por cima temos
+uma demonstração formal de que ele funciona!
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Torres de Hanoi: Algoritmo}
+Problema: Mover $n$ discos de A para C.
+\begin{enumerate}
+\item Se $n=1$ então mova o único disco de A para C e pare.
+\item Caso contrário ($n>1$) desloque de forma recursiva os $n-1$ primeiros discos de A para B,
+usando C como auxiliar.
+\item Mova o último disco de A para C.
+\item Mova, de forma recursiva, os $n-1$ discos de B para C, usando A como  auxiliar.
+\end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Torres de Hanoi: Algoritmo}
+\begin{tiny}
+\begin{verbatim}
+#include <stdio.h>
+
+void hanoi(int n, char estacaIni, char estacaFim, char estacaAux);
+
+int main(){
+  hanoi(4, 'A', 'C' , 'B');
+  printf("\n");
+}
+
+//Discos são numerados de 1 até n
+
+void hanoi(int n, char estacaIni, char estacaFim, char estacaAux){
+ if(n==1)
+    printf("\nMova disco %d da estaca %c para %c.", n,  estacaIni, estacaFim);
+  else{
+    hanoi(n-1,estacaIni,estacaAux,estacaFim);
+    printf("\nMova disco %d da estaca %c para %c.", n,  estacaIni, estacaFim);
+    hanoi(n-1,estacaAux,estacaFim,estacaIni);
+  }
+}
+\end{verbatim}
+\end{tiny}
+\end{frame}
+
+\end{comment}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Exercício}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Exercício}
+
+\begin{enumerate}
+\item Escreva uma fun\c{c}ão recursiva que encontra o maior (ou um dos maiores) elemento de um vetor.
+\item Escreva uma fun\c{c}ão recursiva que verifica se os elementos de um vetor formam um P.A. de razão 2.
+\end{enumerate}
+\end{frame}
+
+
+
+\end{document}

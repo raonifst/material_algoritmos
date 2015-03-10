@@ -1,0 +1,6 @@
+\frametitle {Exercício}
+
+\begin{enumerate}
+\item Escreva uma fun\c{c}ão recursiva que encontra o maior (ou um dos maiores) elemento de um vetor.
+\item Escreva uma fun\c{c}ão recursiva que verifica se os elementos de um vetor formam um P.A. de razão 2.
+\end{enumerate}

@@ -1,0 +1,330 @@
+\documentclass{beamer}
+
+\usetheme{Boadilla}
+%\usetheme{Warsaw}
+%\setbeamercovered{transparent}
+\beamertemplatetransparentcoveredhigh
+\usepackage[portuges]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{ulem}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+\usepackage{calc}
+
+\newcommand{\eng}[1]{\textsl{#1}}
+\newcommand{\cod}[1]{\texttt{#1}}
+
+\title[9002 --- Aula 27]{9002 --- Aula 27\\
+   Algoritmos e Programação de Computadores}
+
+\author[IEng - UFMT]{Instituto de Engenharia -- UFMT}
+
+\institute[2014/2]{Segundo Semestre de 2014}
+
+\date{26 de janeiro de 2015}
+
+
+% contadores para as barras
+\newcounter{ordpos}
+\newcounter{ordalt}
+
+% barra vertical
+\newcommand{\bb}[1]{%
+  \setcounter{ordalt}{#1*5 + 10}
+  \addtocounter{ordpos}{5}
+  \put(\value{ordpos},0){\line(0,1){\value{ordalt}}}
+  \put(\value{ordpos},0){\line(1,0){10}}
+  \put(\value{ordpos},\value{ordalt}){\line(1,0){10}}
+  \addtocounter{ordpos}{1}
+  \put(\value{ordpos},5){#1}
+  \addtocounter{ordpos}{9}
+  \put(\value{ordpos},0){\line(0,1){\value{ordalt}}}
+}
+
+
+% seta apontando em baixo
+\newcommand{\se}{%
+  \setcounter{ordalt}{\value{ordpos} + 10}
+  \put(\value{ordalt},-15){\vector(0,1){10}}
+}
+% seta apontando em baixo vermelha
+\newcommand{\sr}{{\put(0,0){}\color{red}\se}}
+
+% barras verticais coloridas
+\newcommand{\br}[1]{{\put(0,0){}\color{red}\bb{#1}}}
+\newcommand{\bg}[1]{{\put(0,0){}\color{green}\bb{#1}}}
+\newcommand{\ba}[1]{{\put(0,0){}\color{blue}\bb{#1}}}
+
+% espaço de umaa barra
+\newcommand{\bi}[1]{\put(0,0){}\addtocounter{ordpos}{15}}
+
+% reinicia contadores de posição
+\newcommand{\ordreini}{\setcounter{ordpos}{0}}
+
+% fator de escala da figura
+\setlength{\unitlength}{0.4mm}
+
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Roteiro}
+  \tableofcontents
+\end{frame}
+
+\section{Introdução}
+
+\begin{frame}[t]
+  \frametitle{Introdução}
+
+  \begin{center}
+    \begin{picture}(155,50)
+      \ordreini\small
+      \bb{ 1}\bb{ 9}\bb{ 3}\bb{ 7}\bb{ 6}\bb{ 2}\bb{ 3}\bb{ 8}\bb{ 5}
+    \end{picture}
+  \end{center}
+
+  \begin{block}{Problema 1}
+    Suponha que temos um vetor desordenado com 10 números.
+    Como fazer com que números {\it pequenos} (menores
+    que 5) fiquem antes dos números {\it grandes} 
+    (maiores que 5)?
+  \end{block}
+\end{frame}
+
+
+\begin{frame}[t]
+  \frametitle{Considere a função}
+
+  \begin{center}
+    \begin{picture}(155,50)
+      \ordreini\small
+      \bb{ 1}\bb{ 9}\bb{ 3}\bb{ 7}\bb{ 6}\bb{ 2}\bb{ 3}\bb{ 8}\bb{ 5}
+    \end{picture}
+  \end{center}
+
+  \begin{block}{}
+    \begin{itemize}
+     \item \cod{int particionar(int vetor[], int ini, int fim)}
+     \pause
+     \begin{itemize}
+      \item<2-> a primeira parte do vetor contém elementos {\bf ``pequenos''}
+      \item<3-> a segunda parte do vetor contém elementos {\bf ``grandes''}
+%       \pause
+%       \item a função retorna a última posição dos elementos pequenos
+     \end{itemize}
+    \end{itemize}
+  \end{block}  
+
+  \vspace*{0.1cm}
+  
+  \begin{center}
+    \begin{picture}(155,50)
+      \ordreini\small
+      \only<2->{\bg{ 1}\bg{ 5}\bg{ 3}\bg{ 3}\bg{ 2}}
+      \only<3->{\br{ 6}\br{ 7}\br{ 8}\br{ 9}}
+    \end{picture}
+  \end{center}
+
+\end{frame}
+
+\begin{frame}[t]
+  \frametitle{Combinando}
+
+  \begin{center}
+    \begin{picture}(155,50)
+      \ordreini\small
+      \only<1>{\bg{ 1}\bg{ 5}\bg{ 3}\bg{ 3}\bg{ 2}}
+      \only<2->{\bb{ 1}\bb{ 2}\bb{ 3}\bb{ 3}\bb{ 5}}
+      \se
+      \only<1-2>{\br{ 6}\br{ 7}\br{ 8}\br{ 9}}
+      \only<3->{\bb{ 6}\bb{ 7}\bb{ 8}\bb{ 9}}
+    \end{picture}
+  \end{center}
+
+  \begin{block}{Problema 2}
+    Suponha que o subvetor
+    \begin{itemize}
+     \item  da posição {\bf pos} a {\bf fim}: contenha apenas elementos grandes
+     \item  da posição {\bf ini} a {\bf pos - 1}: contenha apenas elementos pequenos
+    \end{itemize}
+    
+    Como ordenar?
+    
+    \pause
+    \begin{itemize}
+     \item  Ordenamos recursivamente o \alert{primeiro subvetor}
+     \pause
+     \item  Depois o \alert{segundo subvetor}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+\section{Divisão e conquista novamente}
+
+\begin{frame}[fragile]
+  \frametitle{Divisão e conquista novamente}
+
+  \begin{block}{Quick Sort}
+    \pause
+    \begin{itemize}
+     \item \alert{\bf Divisão:} Separamos elementos pequenos e grandes
+     \pause
+     \item \alert{\bf Conquista:} Ordenamos cada subvetor
+    \end{itemize}
+  \end{block}
+  
+  \pause
+  
+    \begin{exampleblock}{QuickSort}
+    \footnotesize
+\begin{verbatim}
+void quick_sort(int vetor[], int ini, int fim) {
+    int pos;
+    
+    if (ini < fim){
+        pos = particionar(vetor, ini, fim);
+
+        quick_sort(vetor, ini, pos - 1);
+        quick_sort(vetor, pos, fim);
+    }
+}   
+\end{verbatim}
+  \end{exampleblock}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Como particionar um vetor?}
+
+  \begin{block}{Ideia}
+    \begin{itemize}
+      \pause
+      \item Escolhemos um valor \alert{pivô}
+      \pause
+      \item Separamos o vetor em duas partes:
+      \begin{enumerate}
+       \item {\bf primeira}: apenas elementos menores ou iguais ao pivô
+       \item {\bf segunda}: apenas elementos maiores que o pivô
+      \end{enumerate}
+    \end{itemize}
+  \end{block}
+
+  \pause
+  
+  \begin{block}{Algoritmo}
+    \begin{enumerate}
+     \pause 
+     \item Obtemos o valor do pivô:
+      \begin{itemize}
+       \item escolhemos sempre o valor do último elemento
+      \end{itemize}
+     \pause
+     \item Procuramos elementos fora de ordem:
+       \begin{itemize}
+        \item {\bf do início ao fim}: em busca de elementos \alert{maiores} que o pivô
+        \item {\bf do fim ao início}: em busca de elementos \alert{menores ou iguais} ao pivô
+       \end{itemize}
+     \pause
+     \item Trocamos os elementos em posições erradas
+    \end{enumerate}
+
+   
+  \end{block}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Algoritmo de particionamento}
+
+  \begin{exampleblock}{Particionar vetor}
+    \footnotesize
+\begin{verbatim}
+int particionar(int vetor[], int ini, int fim) {
+    int pivo;
+    
+    pivo = vetor[fim];
+    
+    while (ini < fim) {
+        while (ini < fim && vetor[ini] <= pivo)
+            ini++;
+        
+        while (ini < fim && vetor[fim] > pivo)
+            fim--;
+        
+        troca(&vetor[ini], &vetor[fim]);
+    }
+    
+    return ini; // ini é a posição do primeiro elemento grande
+}
+\end{verbatim}
+  \end{exampleblock}
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Particionamento}
+
+  \begin{center}
+    \begin{picture}(150,50)(0,-10)
+\ordreini\small
+\only<   1>{    \bb{ 1}\bb{ 9}\bb{ 3}\bb{ 7}\bb{ 6}\bb{ 2}\bb{ 3}\bb{ 8}    \bb{ 5}\bi{  }\bi{  }\bi{  }}
+\only<   2>{    \bb{ 1}\bb{ 9}\bb{ 3}\bb{ 7}\bb{ 6}\bb{ 2}\bb{ 3}\bb{ 8}    \ba{ 5}\bi{  }\bi{  }\ba{ 5}}
+\only<   3>{    \bb{ 1}\bb{ 9}\bb{ 3}\bb{ 7}\bb{ 6}\bb{ 2}\bb{ 3}\bb{ 8}    \bb{ 5}\bi{  }\bi{  }\ba{ 5}}
+\only<   4>{\se \bg{ 1}\bb{ 9}\bb{ 3}\bb{ 7}\bb{ 6}\bb{ 2}\bb{ 3}\bb{ 8}    \bb{ 5}\bi{  }\bi{  }\ba{ 5}}
+\only<   5>{\bg{ 1}\se \br{ 9}\bb{ 3}\bb{ 7}\bb{ 6}\bb{ 2}\bb{ 3}\bb{ 8}    \bb{ 5}\bi{  }\bi{  }\ba{ 5}}
+\only< 6-7>{\bg{ 1}\se \br{ 9}\bb{ 3}\bb{ 7}\bb{ 6}\bb{ 2}\bb{ 3}\bb{ 8}\sr \bg{ 5}\bi{  }\bi{  }\ba{ 5}}
+\only< 8-9>{\bg{ 1}\se \bg{ 5}\bb{ 3}\bb{ 7}\bb{ 6}\bb{ 2}\bb{ 3}\bb{ 8}\sr \br{ 9}\bi{  }\bi{  }\ba{ 5}}
+\only<  10>{\bg{ 1}\bg{ 5}\se \bg{ 3}\bb{ 7}\bb{ 6}\bb{ 2}\bb{ 3}\bb{ 8}\sr \br{ 9}\bi{  }\bi{  }\ba{ 5}}
+\only<  11>{\bg{ 1}\bg{ 5}\bg{ 3}\se \br{ 7}\bb{ 6}\bb{ 2}\bb{ 3}\bb{ 8}\sr \br{ 9}\bi{  }\bi{  }\ba{ 5}}
+\only<  12>{\bg{ 1}\bg{ 5}\bg{ 3}\se \br{ 7}\bb{ 6}\bb{ 2}\bb{ 3}\sr \br{ 8}\br{ 9}\bi{  }\bi{  }\ba{ 5}}
+\only<  13>{\bg{ 1}\bg{ 5}\bg{ 3}\se \br{ 7}\bb{ 6}\bb{ 2}\sr \bg{ 3}\br{ 8}\br{ 9}\bi{  }\bi{  }\ba{ 5}}
+\only<  14>{\bg{ 1}\bg{ 5}\bg{ 3}\se \bg{ 3}\bb{ 6}\bb{ 2}\sr \br{ 7}\br{ 8}\br{ 9}\bi{  }\bi{  }\ba{ 5}}
+\only<  15>{\bg{ 1}\bg{ 5}\bg{ 3}\bg{ 3}\se \br{ 6}\bb{ 2}\sr \br{ 7}\br{ 8}\br{ 9}\bi{  }\bi{  }\ba{ 5}}
+\only<  16>{\bg{ 1}\bg{ 5}\bg{ 3}\bg{ 3}\se \br{ 6}\sr \bg{ 2}\br{ 7}\br{ 8}\br{ 9}\bi{  }\bi{  }\ba{ 5}}
+\only<  17>{\bg{ 1}\bg{ 5}\bg{ 3}\bg{ 3}\se \bg{ 2}\sr \br{ 6}\br{ 7}\br{ 8}\br{ 9}\bi{  }\bi{  }\ba{ 5}}
+\only<  18>{\bg{ 1}\bg{ 5}\bg{ 3}\bg{ 3}\bg{ 2}\se \br{ 6}\br{ 7}\br{ 8}\br{ 9}\bi{  }\bi{  }\ba{ 5}}
+    \end{picture}
+
+  \end{center}
+
+  \begin{block}{Algoritmo}
+    \begin{enumerate}
+     \item<2-> Obtemos o valor do pivô:
+     \item<3-> Procuramos elementos fora de ordem:
+       \begin{itemize}
+        \item<4-> {\bf do início ao fim}: em busca de elementos \alert{maiores} que o pivô
+        \item<6-> {\bf do fim ao início}: em busca de elementos \alert{menores ou iguais} ao pivô
+       \end{itemize}
+     \item<7-> Trocamos os elementos em posições erradas
+     \item<9-> Continuamos passo 2 \alert<18>{até índices se encontrarem}
+    \end{enumerate}
+
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exercício}
+
+  \begin{block}{}
+    \begin{enumerate}
+      \item Aplique o algoritmo de particionamento sobre o vetor $(13,19,9,5,12,21,7,4,11,2,6,6)$ com pivô igual a 6.
+      \item Modifique o algoritmo QuickSort para ordenar vetores em ordem decrescente.
+    \end{enumerate}
+  \end{block}
+
+\end{frame}
+
+
+\end{document}
+
+  

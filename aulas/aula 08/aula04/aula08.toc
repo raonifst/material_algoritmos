@@ -1,0 +1,8 @@
+\beamer@endinputifotherversion {3.10pt}
+\select@language {portuges}
+\beamer@sectionintoc {1}{Revis\~ao}{3}{0}{1}
+\beamer@sectionintoc {2}{Comandos Repetitivos}{27}{0}{2}
+\beamer@sectionintoc {3}{Constru\c c\~ao Enquanto-Fa\c ca}{29}{0}{3}
+\beamer@sectionintoc {4}{Comando while}{39}{0}{4}
+\beamer@sectionintoc {5}{Sumila\c c\~ao de c\'odigo}{47}{0}{5}
+\beamer@sectionintoc {6}{O que vem depois}{64}{0}{6}

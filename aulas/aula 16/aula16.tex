@@ -1,0 +1,704 @@
+\documentclass{beamer}
+
+\usetheme{Boadilla}
+%\usetheme{Warsaw}
+%\setbeamercovered{transparent}
+\beamertemplatetransparentcoveredhigh
+\usepackage[portuges]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{ulem}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+
+\newcommand{\eng}[1]{\textsl{#1}}
+\newcommand{\cod}[1]{\texttt{#1}}
+
+\title[9002 --- Aula 16]{9002 --- Aula 16\\
+   Algoritmos e Programação de Computadores}
+
+\author[IEng - UFMT]{Instituto de Engenharia -- UFMT}
+
+\institute[2014/2]{Segundo Semestre de 2014}
+
+\date{18 de novembro de 2014}
+
+
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Roteiro}
+  \tableofcontents
+\end{frame}
+
+\section{Introdução}
+
+\begin{frame}[fragile]
+
+  \frametitle{Três notas}
+
+  Como armazenar 3 notas?
+
+  \begin{exampleblock}{}
+\begin{semiverbatim}\pause
+float nota1, nota2, nota3;
+\pause
+printf("Nota do aluno 1: ");
+scanf("\%f", \&nota1);
+\pause
+printf("Nota do aluno 2: ");
+scanf("\%f", \&nota2);
+\pause
+printf("Nota do aluno 3: ");
+scanf("\%f", \&nota3);\end{semiverbatim}
+    \end{exampleblock}
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+
+  \frametitle{Cem notas}
+
+  Como armazenar exatamente 100 notas?
+
+
+  \begin{exampleblock}{}
+\begin{semiverbatim}\pause
+float nota1, nota2, nota3, \alert{\bf{}...}, nota100;
+\pause
+printf("Nota do aluno 1: ");
+scanf("\%f", \&nota1);
+\pause
+printf("Nota do aluno 2: ");
+scanf("\%f", \&nota2);
+\pause
+\alert{\bf{}...}
+\pause
+printf("Nota do aluno 100: ");
+scanf("\%f", \&nota100);\end{semiverbatim}
+    \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+
+  \frametitle{Até cem notas}
+
+  Como armazenar 100 notas, no máximo?
+
+  \begin{exampleblock}{}
+\begin{semiverbatim}
+\pause
+int n;
+float nota1, nota2, nota3, \alert{\bf{}...}, nota100;
+\pause
+printf("Número de notas: ");
+scanf("\%d", &n);
+\pause
+printf("Notas dos alunos: ");
+\pause
+if (n >= 1)
+  scanf("\%f", \&nota1);\pause
+if (n >= 2)
+  scanf("\%f", \&nota2);\pause
+\alert{\bf{}...}\pause
+if (n >= 100)
+  scanf("\%f", \&nota100);\end{semiverbatim}
+    \end{exampleblock}
+\end{frame}
+
+\section {Vetores}
+
+\begin{frame}
+  \frametitle{Vetores --- Definição}
+
+  \begin{alertblock}{Vetor}
+    Vetor é uma coleção de variáveis de um mesmo tipo
+    referenciada por um nome comum.
+  \end{alertblock}
+
+  \pause
+
+  \begin{block}{Características}
+  \begin{itemize}
+    \item Cada variável é acessada por por meio de índice
+    \pause
+    \item O tamanho máximo $n$ da coleção é pré-definido
+        (deve ser constante)
+    \pause
+    \item Os índices \alert{devem} estar em um intervalo definido,
+        normalmente de $0$ a $n-1$ ou de $1$ a $n$.
+  \end{itemize}
+ \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+
+  \frametitle{Declaração de um vetor}
+
+  \begin{block}{Vetor de tamanho $N$}
+    \alert{$<$tipo$>$} identificador[\alert{$N$}];
+  \end{block}
+
+  \pause
+
+  {\bf Em C:}
+  \begin{itemize}
+    \item A primeira variável do vetor tem índice \alert{$0$}
+    \item e a última variável do vetor tem índice \alert{$N - 1$}.
+  \end{itemize}
+
+  \pause
+
+  \begin{exampleblock}{Exemplo}
+\begin{verbatim}
+float notas[100];
+int medias[100];
+char nome[200];\end{verbatim}
+  \end{exampleblock}
+\end{frame}
+
+
+\begin{frame}[fragile]
+
+  \frametitle{Usando um vetor}
+
+  \begin{block}{Acessando a variável na posição $i$}
+    a = vetor[\alert{$i$}];
+  \end{block}
+
+  \pause
+
+  \begin{itemize}
+    \item A posição $i$ pode ser qualquer valor inteiro
+    \item Podemos usar constantes ou variáveis para a posição
+  \end{itemize}
+
+  \pause
+
+  \begin{exampleblock}{Exemplo}
+  \small
+\begin{verbatim}
+float notas[10], ultima_nota;
+int i;
+
+// todos tiraram nota 8.5
+for(i = 0; i < 10; i++) {
+  notas[i] = 8.5;
+}
+
+// o último aluno ganhou um ponto de bônus
+notas[9] = notas[9] + 1.0;
+ultima_nota = notas[9];\end{verbatim}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Vetores - Melhores práticas}
+
+  \begin{block}{Cuidados}
+    \begin{itemize}
+      \item O tamanho do vetor é constante (não pode ser mudado durante a execução)
+      \pause
+      \item {\bf Então}, escolher sempre um bom tamanho para o vetor
+          \pause
+          \begin{itemize}
+            \item Se for muito \alert{grande}, haverá desperdício de memória
+            \item Se for muito \alert{pequeno}, faltará espaço para os dados
+          \end{itemize}
+      \bigskip
+      \pause
+      \item Sempre verificar duas vezes os índices dos vetores
+      \pause
+      \item {\bf Porque} índices fora dos limites causam efeitos indesejados
+        \pause
+        \begin{itemize}
+          \item Alteram valores de outras variáveis
+          \item Causam \alert{segmentation fault} (tentativa de acesso a
+            um endereço de memória que não existe)
+        \end{itemize}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}[t,fragile]
+  \frametitle{Vetores - Representação na memória}
+
+  \begin{center}
+    \onslide<2-> {
+      \begin{tabular}{|c|c|c|c|c|c|c|c|}
+        \hline
+        Nome & d & \multicolumn{5}{|c|}{vetor} & f \\
+        \hline
+        Índice & - & 0 & 1 & 2 & 3 & 4 & - \\
+        \hline
+        &\only<1-5>{\onslide<3->{0}}\only<6->{1}& & & & \onslide<4->{9} & & \onslide<5->{5} \\
+        \hline
+      \end{tabular}
+    }
+  \end{center}
+
+  Vamos executar o seguinte código:
+
+  \begin{exampleblock}{}
+\begin{semiverbatim}
+\alert<2>{int d, vetor[5], f;}
+\alert<3>{d = 0;             }
+\alert<4>{vetor[3]  = 9;     }
+\alert<5>{vetor[5]  = 5;     }
+\alert<6>{vetor[-1] = 1;     }
+\alert<7>{printf("\%d", d);  } \end{semiverbatim}
+  \end{exampleblock}
+
+  \begin{itemize}
+    \item<8->O programa irá imprimir 1!
+    \item<9->Dependendo de como o compilador organiza a memória,
+        o programa pode sair com {\it segmentation fault}
+  \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+
+  \frametitle{Até cem notas - Com vetor}
+  \begin{exampleblock}{}
+\begin{verbatim}
+int numero_notas, i;
+float notas[100];
+
+printf("Número de notas: ");
+scanf("%d", &numero_notas);
+
+for (i = 0; i < numero_notas; i++) {
+    printf("Nota do aluno %d: ", i + 1);
+    scanf("%f", &notas[i]);
+}\end{verbatim}
+    \end{exampleblock}
+
+    \bigskip
+    \pause
+
+    \alert{O programa acima está correto?}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+
+  \frametitle{Até cem notas - Com vetor (evitando erros)}
+
+  \begin{exampleblock}{}
+\begin{verbatim}
+int numero_notas, i;
+float notas[100];
+
+printf("Número de notas: ");
+scanf("%d", &numero_notas);
+
+if (numero_notas > 100) {
+    printf("ATENÇÃO: Número de alunos muito grande.\n");
+    printf("Lendo apenas os 100 primeiros...\n");
+    numero_notas = 100;
+}
+
+for (i = 0; i < numero_notas; i++) {
+    printf("Nota do aluno %d: ", i + 1);
+    scanf("%f", &notas[i]);
+}\end{verbatim}
+    \end{exampleblock}
+\end{frame}
+
+%\section{Strings}
+%
+%\begin{frame}[fragile]
+%  \frametitle{Trabalhando com texto}
+%
+%  \begin{block}{Problema}
+%    Escreva um programa que leia um nome de uma
+%    cidade e imprima as letras do nome na ordem inversa.
+%    Por exemplo, se o nome for \alert{ROMA}, deverá imprimir
+%    \alert{AMOR}.
+%  \end{block}
+%
+%  \pause
+%
+%  \begin{block}{Nome}
+%    Como podemos representar um nome em C?
+%    \pause
+%    \begin{itemize}
+%      \item Cada nome é uma coleção de caracteres.
+%      \pause
+%      \item Então podemos usar um vetor de caracteres.
+%    \end{itemize}
+%  \end{block}
+%\end{frame}
+%
+%
+%\begin{frame}[fragile]
+%  \frametitle{Lendo um nome}
+%
+%  \begin{block}{Estratégia}
+%    \begin{itemize}
+%      \item Declaramos um vetor com espaço suficiente para um nome grande.
+%      \pause
+%      \item Lemos cada letra do nome e armazenamos em uma posição do vetor.
+%      \pause
+%      \item Quando o nome acabar, o usuário deverá digitar o caractere \verb|'-'|.
+%    \end{itemize}
+%  \end{block}
+%
+%  \pause
+%
+%  \begin{exampleblock}{Lendo o nome}
+%  \small
+%\begin{verbatim}
+%char nome[30], caractere;
+%int i = 0;
+%
+%do {
+%    printf("Digite o próximo caractere: ");
+%    scanf("%c", &caractere);
+%    nome[i] = caratere;
+%    i++;
+%} while(caractere != '-');
+%\end{verbatim}
+%  \end{exampleblock}
+%
+%  \pause
+%
+%  \alert{E se o nome da cidade fosse \alert{Passa-Quatro}?}
+%\end{frame}
+%
+%
+%\begin{frame}[fragile]
+%  \frametitle{Cadeia de caracteres ({\it string})}
+%
+%  \begin{block}{}
+%    \begin{itemize}
+%      \item Em C, textos são representados por vetores de caracteres
+%      \pause
+%      \item Para representar o final do texto, usamos o valor
+%          inteiro \alert{zero}.
+%      \pause
+%      \item Na tabela ASCII, o número zero não corresponde a
+%          nenhum caractere! (Às vezes é representado como ``caractere
+%          nulo'' \alert{\cod{'\textbackslash{}0'}}).
+%    \end{itemize}
+%  \end{block}
+%
+%  \pause
+%
+%  \begin{alertblock}{Cadeia de caracteres}
+%    Um vetor de caracteres terminado com o caractere
+%    \cod{'\textbackslash{}0'} é denominado uma {\bf cadeia de caracteres}
+%    (ou {\bf string}).
+%  \end{alertblock}
+%
+%  \pause
+%  \bigskip
+%
+%  ATENÇÃO: Sempre se lembre do caractere de fim da string.
+%  Por exemplo, para armazenar a palavra ``ROMA'' precisamos
+%  de um vetor de tamanho {\bf 5}!
+%
+%\end{frame}
+%
+%
+%\begin{frame}[fragile]
+%  \frametitle{Lendo e imprimindo strings}
+%
+%  \begin{itemize}
+%    \item As funções \cod{scanf} e \cod{printf} facilitam
+%        a leitura e impressão de strings.
+%    \pause
+%    \item Utilizamos o símbolo de string \alert{\cod{\%s}}.
+%  \end{itemize}
+%
+%  \pause
+%
+%  \begin{exampleblock}{Lendo e imprimindo}
+%
+%\begin{verbatim}
+%char nome[30];
+%
+%printf("Escreva o nome: ");
+%scanf("%s", nome);
+%
+%printf("O nome digitado foi %s", nome);\end{verbatim}
+%  \end{exampleblock}
+%
+%  \pause
+%  \bigskip
+%
+%  \alert{Note que para strings não é utilizado o operador $\&$.}
+%\end{frame}
+%
+%
+%\begin{frame}[fragile]
+%  \frametitle{Invertendo um nome}
+%
+%  \begin{exampleblock}{}
+%  \small
+%\begin{verbatim}
+%char nome[30], nome_invertido[30];
+%int i, tamanho;
+%
+%// lê o nome
+%printf("Escreva o nome: ");
+%scanf("%s", nome);
+%
+%// descobre o número de caracteres do nome
+%for (tamanho = 0; nome[tamanho] != '\0'; tamanho++);
+%
+%// copia o nome em outro vetor na ordem inversa
+%for (i = 0; i < tamanho; i++)
+%    nome_invertido[i] = nome[tamanho - i - 1];
+%
+%// coloca o caractere de final de string no nome invertido
+%nome_invertido[tamanho] = '\0';
+%
+%printf("O nome invertido é %s", nome_invertido);\end{verbatim}
+%  \end{exampleblock}
+%\end{frame}
+%
+%
+%
+
+\begin{frame}[fragile]
+  \frametitle{Parênteses: definindo constantes}
+
+  Quantas vezes aparece o 60?
+  E se o número de alunos mudar?
+
+  \begin{exampleblock}{}
+  \small
+\begin{verbatim}
+#include <stdio.h>
+
+int main() {
+    float provas[60], exercicios[60], media_turma;
+    int i;
+
+    printf("Notas das provas e exercícios dos alunos: ");
+    for (i = 0; i < 60; i++)
+        scanf("%f %f", &provas[i], &exercicios[i]);
+
+    for (media_turma = 0, i = 0; i < 60; i++)
+        media_turma += (provas[i] + exercicios[i])/2;
+    media_turma = media_turma / 60;
+
+    printf("Media da turma: %f\n", media_turma);
+}\end{verbatim}
+  \end{exampleblock}
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Parênteses: definindo constantes}
+
+  Podemos dar um nome uma constante! Basta usar a diretiva
+  \alert{\cod{\#define}}.
+
+  \begin{exampleblock}{}
+  \small
+\begin{verbatim}
+#include <stdio.h>
+
+#define NUM_ALU 60
+
+int main() {
+    float provas[NUM_ALU], exercicios[NUM_ALU], media_turma;
+    int i;
+
+    printf("Notas das provas e exercícios dos alunos: ");
+    for (i = 0; i < NUM_ALU; i++)
+        scanf("%f %f", &provas[i], &exercicios[i]);
+
+    for (media_turma = 0, i = 0; i < NUM_ALU; i++)
+        media_turma += (provas[i] + exercicios[i])/2;
+    media_turma = media_turma / NUM_ALU;
+
+    printf("Media da turma: %f\n", media_turma);
+}\end{verbatim}
+  \end{exampleblock}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Nas próximas aulas...}
+  \begin{itemize}
+	\item 	Nas próximas aulas veremos outros aspectos da linguagens relacionados ao uso de vetores e
+	importantes algoritmos :)
+	
+	\item FIM!!
+  
+  \end{itemize}
+\end{frame}
+
+%\section{Vetores em funções}
+%
+%\begin{frame}
+%  \frametitle{Vetores em funções}
+%
+%  \begin{itemize}
+%    \item Para acessar uma posição do vetor, usamos
+%        o nome do vetor com colchete. Exemplo: \cod{vetor[3]}
+%    \pause
+%    \item E se quisermos referenciar toda a coleção?
+%    \pause
+%    \item Quando escrevemos o nome do vetor sem os colchetes,
+%        obtemos uma \alert{referência} para a coleção inteira. Exemplo: \cod{vetor}
+%  \end{itemize}
+%
+%  \pause
+%  \medskip
+%
+%  \begin{block}{Consequências para funções}
+%    \begin{itemize}
+%      \item {\bf Consequência 1:} \alert{sempre} passamos vetores por referência!
+%      \pause
+%      \item {\bf Consequência 2:} quando alteramos os valores de um vetor passado
+%      por parâmetro, estamos {\bf alterando o vetor original}.
+%    \end{itemize}
+%  \end{block}
+%\end{frame}
+%
+%
+%\begin{frame}[fragile]
+%  \frametitle{Vetores em funções - Exemplo}
+%
+%  \begin{exampleblock}{}
+%  \footnotesize
+%\begin{verbatim}
+%#include <stdio.h>
+%
+%void funcao(int vetor[], int n) {
+%  int i;
+%  for (i = 0; i < n; i++)
+%      vetor[i] = 5;
+%}
+%int main() {
+%  int vetor[10], i;
+%
+%  for (i = 0; i < 10; i++)
+%      vetor[i] = 8;
+%
+%  funcao(vetor, 10);
+%
+%  for(i = 0; i < 10; i++)
+%      printf("%d ", vetor[i]);
+%}\end{verbatim}
+%  \end{exampleblock}
+%
+%  \pause
+%
+%  Irá imprimir dez vezes o número 5!
+%
+%\end{frame}
+%
+%
+%
+%\begin{frame}[fragile]
+%  \frametitle{Lendo e imprimindo vetores}
+%
+%  \begin{exampleblock}{}
+%  \footnotesize
+%\begin{verbatim}
+%#include <stdio.h>
+%
+%#define NUM_ELEM1 10
+%#define NUM_ELEM2 30
+%
+%void ler_vetor(int vetor[], int n) {
+%    int i;
+%    for (i = 0; i < n; i++) {
+%        printf("vetor[%d]: ", i);
+%        scanf("%d", &vetor[i]);
+%    }
+%}
+%
+%void escrever_vetor(int vetor[], int n) {
+%    int i;
+%    for (i = 0; i < n; i++)
+%          printf("vetor[%d]: %d \n", i, vetor[i]);
+%}\end{verbatim}
+%  \end{exampleblock}
+%
+%\end{frame}
+%
+%\begin{frame}[fragile]
+%  \frametitle{Lendo e imprimindo vetores}
+%
+%  \begin{exampleblock}{}
+%  \footnotesize
+%\begin{verbatim}
+%int main() {
+%    int vetor1[NUM_ELEM1];
+%    int vetor2[NUM_ELEM2];
+%
+%    printf("Digite os dados do primeiro vetor: ");
+%    ler_vetor(vetor1, NUM_ELEM1);
+%
+%    printf("Digite os dados do segundo vetor: ");
+%    ler_vetor(vetor2, NUM_ELEM2);
+%
+%    printf("Primeiro vetor: ");
+%    escrever_vetor(vetor1, NUM_ELEM1);
+%
+%    printf("Segundo vetor: ");
+%    escrever_vetor(vetor2, NUM_ELEM2);
+%}\end{verbatim}
+%  \end{exampleblock}
+%
+%\end{frame}
+%
+%
+%\begin{frame}[fragile]
+%  \frametitle{Exercícios}
+%
+%  \begin{enumerate}
+%    \small
+%    \item Escreva um programa que lê duas strings do teclado
+%        com até 80 caracteres e informa se elas são iguais.
+%    \item Escreva uma função que lê uma palavra do teclado
+%        e informa se ela é palíndroma. (Exemplos de palíndromos:
+%        ARARA, RADAR, REVIVER)
+%    \item (Pequeno desafio) O histograma de um conjunto de
+%        dados é um gráfico da frequência com que cada valor
+%        aparece. Escreva um programa que leia um vetor
+%        de tamanho informado pelo usuário e com valores
+%        inteiros entre 1 e 9 e imprima o histograma
+%        na mesma forma que o exemplo: para um vetor
+%        de tamanho 20 com os valores
+%        1, 1, 1, 1,
+%        2, 2, 2,
+%        3, 3,
+%        4,
+%        6,
+%        7,
+%        8, 8, 8,
+%        9, 9, 9, 9, 9
+%        deverá imprimir:
+%        \begin{exampleblock}{}
+%\begin{verbatim}
+%                          +---------+
+%                          |        *|
+%                          |*       *|
+%                          |**     **|
+%                          |***    **|
+%                          |**** ****|
+%                          +---------+
+%                           123456789\end{verbatim}
+%        \end{exampleblock}
+%  \end{enumerate}
+%\end{frame}
+%
+\end{document}
+

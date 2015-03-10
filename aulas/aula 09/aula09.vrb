@@ -1,0 +1,12 @@
+\frametitle {Imprimindo as $n$ primeiras potências de 2}
+
+  \begin{exampleblock}{}
+\begin{verbatim}
+int i, n, pot;
+pot = 2;
+scanf("%d",&n);
+for(i=1; i <= n; i++){
+    printf("\n %d",pot);
+    pot = pot *2;
+}  \end{verbatim}
+  \end{exampleblock}

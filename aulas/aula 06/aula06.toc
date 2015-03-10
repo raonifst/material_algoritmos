@@ -1,0 +1,6 @@
+\beamer@endinputifotherversion {3.10pt}
+\select@language {portuges}
+\beamer@sectionintoc {1}{Revis\~ao}{3}{0}{1}
+\beamer@sectionintoc {2}{Express\~oes l\'ogicas}{4}{0}{2}
+\beamer@sectionintoc {3}{Mais Comandos condicionais}{10}{0}{3}
+\beamer@sectionintoc {4}{Legibilidade de c\'odigo}{17}{0}{4}

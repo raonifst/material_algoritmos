@@ -1,0 +1,534 @@
+\documentclass{beamer}
+
+\usetheme{Boadilla}
+%\usetheme{Warsaw}
+%\setbeamercovered{transparent}
+\beamertemplatetransparentcoveredhigh
+\usepackage[portuges]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{ulem}
+\usepackage{comment}
+
+\newcommand{\eng}[1]{\textsl{#1}}
+\newcommand{\cod}[1]{\texttt{#1}}
+
+\title[9002 --- Aula 12]{9002 --- Aula 12\\
+   Algoritmos e Programação de Computadores}
+
+\author[IEng - UFMT]{Instituto de Engenharia -- UFMT}
+
+\institute[2014/2]{Segundo Semestre de 2014}
+
+\date{10 de novembro de 2014}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Roteiro}
+  \tableofcontents
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Revisão}
+\begin{frame}
+  \frametitle{Revisão }
+  Nas aulas anteriores...
+  \begin{itemize}
+  \item vimos como escrever programas lineares, com decisão e repeti\c{c}ão.  
+ 
+
+  \end{itemize}
+  
+  Nesta aula, veremos como organizar melhor os códigos utilizando fun\c{c}ões...
+	
+	
+\end{frame}
+
+\section{Introdu\c{c}ão}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+
+  \frametitle {Funções} 
+
+\begin{itemize}
+\item Um ponto chave na resolução de um problema complexo é conseguir ``quebrá-lo" em
+subproblemas menores.
+
+\item Ao criarmos um programa para resolver um problema, é crítico quebrar um código
+grande em partes menores, fáceis de serem entendidas e administradas. 
+
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+
+  \frametitle {Funções} 
+
+  \begin{block}{Funções}
+    São estruturas que agrupam um conjunto de comandos, que são
+    executados quando a função é chamada/invocada.
+    
+    \begin{quote}
+      \verb'scanf("%d", &x);'
+    \end{quote}
+  \end{block}
+
+  \begin{block}{Funções}
+    As funções podem retornar um valor ao final de sua execução.
+    
+    \begin{quote}
+      \verb'x = sqrt(4);'
+    \end{quote}
+  \end{block}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+
+  \frametitle{Porque utilizar funções?}
+
+  \begin{itemize}
+  \item Evitar que os blocos do programa fiquem grandes demais e,
+    por conseqüência, mais difíceis de ler e entender.
+    
+  \item Separar o programa em partes que possam ser logicamente
+    compreendidos de forma isolada.
+
+  \item Permitir o reaproveitamento de código já construído (por você
+    ou por outros programadores).
+    
+  \item Evitar que um trecho de código seja repetido várias vezes
+    dentro de um mesmo programa, minimizando erros e facilitando
+    alterações. 
+  \end{itemize}
+  
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Definição}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+
+  \frametitle {Definindo uma função} 
+
+  Uma função é definida da seguinte forma:
+
+  \begin{block}{}
+  \begin{small}
+    \begin{semiverbatim}
+\alert{tipo} nome(tipo \alert{parâmetro1}, \dots, tipo \alert{parâmetroN}) \{
+      \alert{comandos;}
+      return \alert{valor de retorno};
+\}    \end{semiverbatim}
+  \end{small}
+  \end{block}    
+
+  \begin{itemize}
+    \item Toda função deve ter um tipo ({\bf int, char, float, etc}). Esse tipo determina qual será o 
+      tipo de seu valor de retorno.
+    \item Os {\bf parâmetros} são variáveis, que são inicializadas com valores indicados durante a invocação
+    da função.
+    \item O comando {\bf return} devolve para o invocador da função o resultado da execução
+    desta.
+  \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+
+  \frametitle {Definindo uma função: Exemplo} 
+
+  A função abaixo recebe como parâmetro dois valores inteiros.
+  A função faz a soma destes valores, e devolve o resultado.
+
+  \begin{block}{}
+  \begin{small}
+  \begin{verbatim}
+    int soma (int a, int b) {
+       int c;
+       c = a + b;
+       return c;
+    }
+  \end{verbatim}
+  \end{small}
+  \end{block}
+\begin{itemize}
+\item Notem  que o valor de retorno (variável {\bf c})  é do mesmo tipo  da função.
+\item Quando o comando {\bf return} é executado, a função para de executar e retorna
+o valor indicado para quem fez a invocação (ou chamada) da função.
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+
+  \frametitle {Definindo uma função: Exemplo} 
+
+  \begin{block}{}
+     \begin{small}  
+   \begin{verbatim}
+    int soma (int a, int b) {
+       int c;
+       c = a + b;
+       return c;
+    }
+    \end{verbatim}
+    \end{small}
+  \end{block}
+\begin{itemize}
+\item Qualquer função pode invocar esta função, passando como parâmetro
+dois valores inteiros, que serão atribuídos para as variáveis {\bf a}  e {\bf b} respectivamente.
+\begin{small}  
+\begin{verbatim}
+int main(){
+  int r;
+  r = soma(12, 90);
+  r = soma (-9, 45);
+}
+\end{verbatim}
+\end{small}
+
+
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+
+  \frametitle {Definindo uma função: Exemplo} 
+A lista de parâmetros de uma função pode ser vazia.
+  \begin{block}{}
+     \begin{small}  
+   \begin{verbatim}
+    int leNumero () {
+       int c;
+       printf("Digite um número:");
+       scanf("%d", &c);
+       return c;
+    }
+    \end{verbatim}
+    \end{small}
+  \end{block}
+\begin{itemize}
+\item O retorno será usado pelo invocador da função:
+\begin{small}  
+\begin{verbatim}
+int main(){
+  int r;
+  r = leNumero();
+  printf("Numero digitado: %d\n", r);
+}
+\end{verbatim}
+\end{small}
+
+
+\end{itemize}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+
+  \frametitle{Definindo uma função}
+
+  \begin{itemize}
+    \item Funções só podem ser definidas fora de outras funções.
+     \begin{itemize}
+     \item Lembre-se que o corpo do programa principal (\texttt{main()}) é
+      uma função. Veremos isto com mais detalhes na próxima aula.
+      \end{itemize}
+    \item Isto está errado:
+    
+    \begin{small}
+    \begin{verbatim}
+    int main(){
+         int f1(int a, int b){
+              return (a+b);
+         }
+         c = f1(9, 90);
+    }
+    \end{verbatim}
+    \end{small}
+  \end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Invocação}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+
+  \frametitle {Invocando uma função} 
+
+
+  Uma forma clássica de realizarmos a invocação (ou chamada) de uma função é 
+  atribuindo o seu valor à uma variável:
+  
+  \begin{block}{}
+    \texttt{x = soma(4, 2);}
+  \end{block}
+  
+  Na verdade, o resultado da chamada de uma função é uma expressão e
+  pode ser usada em qualquer lugar que aceite uma expressão:
+
+  \begin{block}{Exemplo}
+    \verb'printf("Soma de a e b: %d\n", soma(a, b));'
+  \end{block}
+
+  
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+
+  \frametitle{Invocando uma função}
+
+  \begin{itemize}
+  \item  Na chamada da função, para cada um dos parâmetros desta, devemos fornecer um
+    valor de mesmo tipo, e na mesma ordem dos parâmetros. 
+  \item Ao chamar uma função passando variáveis como parâmetros, estamos usando apenas
+    os seus valores que serão copiados para as variáveis parâmetros da função.
+    \begin{itemize}
+        \item Os valores das variáveis na chamada da função não são
+         afetados por alterações dentro da função.
+    \end{itemize}
+  \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Exemplos}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+
+  \frametitle {Exemplo de função} 
+Veja um exemplo de uso de funções:
+\begin{scriptsize}
+\begin{verbatim}
+#include <stdio.h>
+
+int soma(int a, int b){
+  int c;
+  c = a + b;
+  return c;
+}
+
+int main(){
+  int res, x1=4, x2=-10;
+
+  res = soma(5,6);
+  printf("Primeira soma: %d\n",res);
+  
+  res = soma(x1,x2);
+  printf("Segunda soma: %d\n",res);
+}
+\end{verbatim}
+\end{scriptsize}
+
+Obs: Todo programa  começa executando os comandos da função {\bf main}.
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+
+  \frametitle{Exemplo de função}
+
+Uma função pode não ter parâmetros, basta não informá-los:
+
+\begin{scriptsize}
+\begin{verbatim}
+#include <stdio.h>
+
+int leNumero(){
+ int n;
+ printf("Digite um numero:");
+ scanf("%d",&n);
+ return n;
+}
+
+int soma(int a, int b){
+  return (a+b);
+}
+
+int main(){
+  int x1, x2;
+  x1 = leNumero();
+  x2 = leNumero();
+  printf("Soma e: %d\n",soma(x1,x2));
+}
+\end{verbatim}
+\end{scriptsize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+\frametitle {Exemplo de função} 
+\begin{scriptsize}
+\begin{verbatim}
+#include <stdio.h>
+
+int somaEsquisita (int x, int y) {
+  x = x + 1;
+  y = y + 1;
+  return (x + y);
+}
+
+int main () {
+  int a, b;
+
+  a=10;
+  b=5;
+  printf ("Soma de a e b: %d\n", a + b);
+  printf ("Soma de x e y: %d\n", soma(a, b));
+  printf ("a: %d\n", a);
+  printf ("b: %d\n", b);
+  return 0;
+}
+\end{verbatim}
+\end{scriptsize}
+Os valores de {\it a} e {\it b} não são alterados por operações feitas
+em {\it x} e {\it y} !
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+
+  \frametitle{Exemplo de função}
+ 
+ A expressão contida dentro do comando \texttt{return} é
+ chamado de valor de retorno (é a resposta da função).
+Nada após ele será executado.
+ 
+\begin{scriptsize}
+\begin{verbatim}
+int leNumero(){
+ int n;
+ printf("Digite um numero:");
+ scanf("%d",&n);
+ return n;
+ printf("bla bla bla bla");
+}
+
+int soma(int a, int b){
+  return (a+b);
+}
+
+int main(){
+  int x1, x2;
+  x1 = leNumero();
+  x2 = leNumero();
+  printf("Soma e: %d\n",soma(x1,x2));
+}
+\end{verbatim}
+\end{scriptsize}
+Não imprime {\it bla bla bla bla}!
+ 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Exercícios}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+
+\frametitle {Exercício}
+\begin{itemize}
+\item Escreva uma função que computa a potência $a^b$ para
+valores $a$ e $b$ passados por parâmetro (não use bibliotecas como
+math.h). Sua função
+deve ter o seguinte protótipo:
+\begin{center}
+{\bf double pot(double a, double b);}
+\end{center}
+
+\item Use a função anterior e crie um programa que imprima todas as potências: $$2^0, 2^1, \ldots, 2^{10}, 3^0, \ldots, 3^{10}, \ldots, 10^{10}.$$
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+
+\frametitle {Exercício}
+\begin{itemize}
+\item Escreva uma função que computa o fatorial de um número $n$ passado por parâmetro.
+Sua função deve ter o seguinte protótipo:
+\begin{center}
+{\bf long fat(long n);}
+OBS: Caso $n\le0$ seu programa deve retornar 1.
+\end{center}
+
+\item Use a função anterior e crie um programa que imprima os valores de $n!$ para
+$n=1,\ldots,20$.
+\end{itemize}
+\end{frame}
+
+\section{Fim}
+\begin{frame}
+\frametitle{Nas próximas aulas...}
+\begin{itemize}
+\item Na próxima aula, veremos outros aspectos de fun\c{c}ões.
+\item FIM!
+\end{itemize}
+\end{frame}
+
+\end{document}

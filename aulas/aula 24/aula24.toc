@@ -1,0 +1,8 @@
+\beamer@endinputifotherversion {3.10pt}
+\select@language {portuges}
+\beamer@sectionintoc {1}{Revis\~ao}{3}{0}{1}
+\beamer@sectionintoc {2}{Divis\~ao e Conquista}{4}{0}{2}
+\beamer@subsectionintoc {2}{1}{Exponencia\c {c}\~ao bin\'aria}{5}{0}{2}
+\beamer@subsectionintoc {2}{2}{Busca Bin\'aria}{11}{0}{2}
+\beamer@subsectionintoc {2}{3}{Soma de um Vetor}{22}{0}{2}
+\beamer@sectionintoc {3}{Exerc\IeC {\'\i }cio}{29}{0}{3}

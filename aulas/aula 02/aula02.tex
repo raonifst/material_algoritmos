@@ -1,0 +1,598 @@
+\documentclass{beamer}
+\usetheme{Boadilla}
+%\usetheme{Warsaw}
+%\setbeamercovered{transparent}
+\beamertemplatetransparentcoveredhigh
+\usepackage[portuges]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+
+\newcommand{\eng}[1]{\textsl{#1}}
+\newcommand{\cod}[1]{\texttt{#1}}
+
+\title[9002 --- Aula 02]{9002 --- Aula 02\\
+   Algoritmos e Programação de Computadores}
+
+\author[IEng - UFMT]{Instituto de Engenharia -- UFMT}
+
+\institute[2014/2]{Segundo Semestre de 2014}
+
+\date{22 de setembro de 2014}
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+%\section*{Roteiro}
+
+\begin{frame}
+  \frametitle{Agenda}
+  \tableofcontents
+\end{frame}
+
+
+\section{Introdu\c{c}ão}
+\begin{frame}
+  \frametitle{Resolvendo Problemas}
+
+	O tópico central deste curso é a \alert{resolu\c{c}\~ao de problemas} computacionais.  
+
+\end{frame}		
+
+\begin{frame}
+  \frametitle{Resolvendo Problemas}
+
+	Algumas questões importantes: 
+	 
+  \begin{itemize}  
+  \pause
+  \item Quais são os tipos de problemas que podem ser resolvidos computacionalmente? \pause Todos?
+  \pause
+  \item O que significa resolver um problema computacionalmente?
+  
+  \end{itemize}
+\end{frame}	
+
+\section{Modelo Computacional}
+\begin{frame}
+  \frametitle{Computador?}
+ O que é um {\it computador}?
+
+\begin{center}
+    \begin{tabular}{c}
+	{\includegraphics[width=8cm]{pc.png}}
+    \end{tabular}
+  \end{center}	  
+\pause
+\alert{Qual} computador?
+\end{frame}	
+
+\begin{frame}
+  \frametitle{Modelagem}
+
+\alert{Modelos} são importantes porque capturam o espírito de fenômenos e objetos estudados.
+
+\end{frame}	
+
+\begin{frame}
+  \frametitle{Modelagem}
+
+Modelos
+\begin{itemize}
+	\item Capturam a \alert{essência} de um determinado objeto.
+	\item Em geral, não possuem a mesma escala do objeto.
+	\item Omitem alguns \alert{detalhes} do objeto.	
+	\item São limitados.
+\end{itemize}  
+
+\end{frame}	
+
+\begin{frame}
+  \frametitle{Modelo Computacional}
+
+Objeto que:
+\begin{itemize}
+	\item recebe dados (entrada);
+	\item armazena e recupera dados (memória);
+	\item realiza opera\c{c}ões de acordo com conjuntos de instru\c{c}ões (processamento) e
+	\item produz um resultado (saída).
+\end{itemize}  
+
+\end{frame}	
+
+\begin{frame}
+  \frametitle{Modelo Computacional}
+
+Como escolher as instru\c{c}ões?
+\pause
+
+Os tipos de problemas que podem ser resolvidos computacionalmente dependem do conjunto de instru\c{c}ões escolhido?
+
+\end{frame}	
+
+\begin{frame}
+  \frametitle{Modelo Computacional}
+
+Para responder estas perguntas, vamos precisar primeiro entender como interagir com este modelo. 
+\pause
+Esta intera\c{c}ão é realizada utilizando um \alert{algoritmo}. Vamos lá!!!
+\end{frame}	
+
+
+\section{Algoritmos}
+\subsection{Defini\c{c}ão}
+\begin{frame}
+  \frametitle{Algoritmos: defini\c{c}ão}
+
+  	\begin{itemize}
+   
+  \item Uma sequência \alert{finita} de passos, \alert{precisos} e \alert{bem definidos}, para a
+    realização de uma tarefa, em que detalhes e formalismos dependem do `leitor'.
+  
+   \item \alert{Receita}  para resolver um determinado \alert{problema}. 
+  
+  \end{itemize}
+  \pause
+  \begin{block}{Exemplo de algoritmo}
+    como você descreveria os passos necessários para preparar um macarrão instantâneo?
+  \end{block}
+
+ 
+\end{frame}		
+
+\begin{frame}
+  \frametitle{Algoritmos: defini\c{c}ão}
+	{\bf Algoritmo do macarrão instantâneo:}
+	\begin{enumerate}
+	\item ir até a cozinha.
+	\item procurar pelas embalagens de macarrão.
+	\item repetir, para cada embalagem:
+		\begin{enumerate}
+			\item ferver 2 copos de água em uma panela.
+			\item abrir a embalagem.
+			\item colocar o macarrão na panela e cozinhar por 3 minutos.
+			\item mexer para soltar os fios do macarrão.
+			\item retirar do fogo, deixar escorrer a água e juntar em uma travessa.
+		\end{enumerate}			
+	\item acrescentar azeite e sal na travessa.
+	\item servir.
+	\end{enumerate}
+	 
+\end{frame}
+
+\begin{frame}
+  \frametitle{Algoritmos: defini\c{c}ão}
+
+	{\bf Objetos  de entrada:}
+  	\begin{itemize}
+  	\item macarrão instantâneo.
+  	\item azeite.
+  	\item sal.
+  	\end{itemize}
+  	
+  	{\bf Objetos  auxiliares:}
+  	\begin{itemize}
+  	\item panela.
+  	\item travessa.
+  	\item fogão.
+  	\item cozinheiro.
+  	\end{itemize}
+  	
+	{\bf Objeto  de saída:}
+  	\begin{itemize}
+  	\item macarrão cozido.
+  	\end{itemize}
+
+  	
+  	
+  	{\bf Objeto de controle:}
+  	\begin{itemize}
+  	\item receita (algoritmo).
+  	\end{itemize}
+  	
+\end{frame}
+
+\begin{frame}
+  \frametitle{Algoritmos: defini\c{c}ão}
+
+  \pause
+  \begin{block}{Exemplo de algoritmo}
+    Como você descreveria este mesmo algoritmo para náufrago? Quais são os objetos de entrada, auxiliares e saída, por exemplo?
+  \end{block}  
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Algoritmos: defini\c{c}ão}
+
+	 \begin{center}
+    \begin{tabular}{c}
+	{\includegraphics[width=10cm]{algoritmo-1.png}}
+    \end{tabular}
+  \end{center}	
+  
+ 
+\end{frame}
+
+
+%\begin{frame}
+%  \frametitle{Algoritmos: defini\c{c}ão}
+%
+%	 \begin{block}{Um pouco de história:}	
+%	 	Os historiadores da palavra algoritmo encontraram a origem no sobrenome, Al-Khwarizmi, do matemático persa do século IX 
+%		Mohamed ben Musa, cujas obras foram traduzidas no ocidente cristão no século XII, tendo uma delas recebido o nome 
+%		{\it Algorithmi de numero indorum}, sobre os algoritmos usando o sistema de numeração decimal (indiano). 
+%		\\ Fonte: \url{pt.wikipedia.org/wiki/Algoritmo}. 
+%	\end{block}
+%		
+%\end{frame}
+
+\subsection{Caracteriza\c{c}ão}
+\begin{frame}
+  \frametitle{Algoritmos: caracteriza\c{c}ão}
+
+	\begin{block}{Recapitulando...}
+	  \begin{itemize}
+	  \item Sequência \alert{finita} de passos, \alert{precisos} e \alert{bem definidos}, para a resolu\c{c}ão de um 							\alert{problema}.
+	   \end{itemize}
+	\end{block}
+
+	Isto implica que:
+	\begin{enumerate}
+	\item o número de passos é finito.
+	\item o texto deve ser uma receita metódica, passo-a-passo, que inclui um passo inicial, um passo final e o passo seguinte em qualquer instante da execu\c{c}ão.
+	\item cada passo contém uma instru\c{c}ão \alert{elementar} para o leitor. Por exemplo,
+	\pause
+	
+		 \only<2>{\vspace*{0.5cm}{ ``... juntar dois ovos ...'' é elementar para um  cozinheiro  } }
+		 \only<3>{\vspace*{0.5cm}{  `` ... se hoje você puder provar que a cotação do dólar vai subir 10\% no próximo mês, compre \$ 1.000,00 ...''  não é elementar para muitas pessoas :)}}
+		 
+	\end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Exercício}	
+
+	\begin{block} {Exercício}
+		Considere a seguinte situa\c{c}ão hipotética. Há três pequenas caixas lacradas em uma sala. Você sabe que elas estão cheias de ouro em pó, mas não conhece a quantidade exata de cada uma delas. 
+		\begin{itemize}
+			\item Como você faria para ordenar as tais caixas  de acordo com sua quantidade de ouro utilizando uma balan\c{c}a de pratos? 
+			\item Quantos vezes a balan\c{c}a foi utilizada?
+			
+			
+		\end{itemize}				
+		
+	 
+	\end{block}	  
+  
+\end{frame}
+
+\section{Algoritmos e Modelos}
+\begin{frame}
+  \frametitle{De volta ao computador...}
+	Quais é o conjunto de instru\c{c}ões de nosso {\it computador}? 
+	Sobretudo
+	\begin{itemize}
+	\item opera\c{c}ões ariteméticas,
+	\item compara\c{c}ões e
+	\item repeti\c{c}ões.
+	\end{itemize}
+\end{frame}  
+
+\begin{frame}
+  \frametitle{Algoritmos}
+  	{\bf Um exemplo com números...}
+	\begin{block}{Problema:}
+	Encontrar  máximo divisor comum ou MDC  entre dois  números inteiros positivos. 
+	Lembre-se de que MDC é o maior número inteiro que é fator de ambos os números. Assim, por exemplo, como os divisores comuns entre 12 e 18 são 1,2,3 e 6, o MDC deles é igual à 6.
+	\end{block}
+	
+	\begin{block}{Ideia:}	
+	??????
+	\end{block}
+	
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Exemplo}
+  	{\bf Um exemplo com números...}
+
+	\begin{block}{Ideia}	
+	Utilizar o algoritmo de Euclides, como nos tempos do colégio :)
+	\end{block}	
+
+	\begin{block}{Mas, antes, uma pergunta:  }	
+	Quais são os nosso objetos auxiliares, de entrada e saída para este problema?
+	\end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Algoritmos: defini\c{c}ão}
+  	{\bf Um exemplo com números...}
+
+	{\bf Objetos  de entrada:}
+  	\begin{itemize}
+  	\item dois números inteiros positivos $M$ e $N$.
+  	\end{itemize}
+  	
+  	{\bf Objetos  auxiliares:}
+  	\begin{itemize}
+  	\item lápis, papel, borracha e \alert{você}.  	
+  	\end{itemize}
+  	
+	{\bf Objeto  de saída:}
+  	\begin{itemize}
+  	\item um número inteiro positivo $Z$ com o resultado do MDC de $M$ e $N$.
+  	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}
+  \frametitle{Algoritmos: defini\c{c}ão}
+  	{\bf Um exemplo com números...}
+
+	
+	\begin{block}{Algoritmo de Euclides}	
+	\begin{enumerate}
+	\item Se $M$ é igual $N$, então $MDC$, $Z$, é M (ou N); pare!
+  	\item Caso contrário:
+  		\begin{enumerate}
+  			 \item se  $M$ é maior que  $N$,  então substitua $M$ por ($M$-$N$) e repita a partir do passo 1
+			 \item se $N$ é maior que $M$,  então substitua $N$ por ($N$-$M$) e repita a partir do passo 1
+		\end{enumerate}  		
+	\end{enumerate}
+	\end{block}
+	
+
+	\begin{block}{E ai, funciona?}
+	Como testamos isso?
+	\end{block}
+	
+\end{frame}
+
+\begin{frame}
+  \frametitle{Simulando o código}
+
+	Vamos recordar o nosso modelo computacional...	
+	
+\end{frame}
+
+\begin{frame}
+  \frametitle{Por que simular?}
+  
+  \begin{block}{Simula\c{c}ão}
+  \begin{itemize}
+
+  \item Eventualmente, simplesmente olhar o código pode não trazer a
+    tona o erro.
+
+  \pause
+
+  \item Por isso, utiliza-se uma técnica de simulação do código
+    \begin{itemize}
+    \item Pode ser automatizada (utilizando um \textit{debugger})
+
+    \pause
+
+    \item Pode ser feita manualmente, utilizando papel e caneta ({\bf teste de mesa}).
+    \end{itemize}
+  \end{itemize}
+  
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Simulação Manual}
+  
+  \begin{block}{Simulando código}
+  \begin{itemize}
+  \item Bem simples: Existem apenas 2 passos.
+    \begin{itemize}
+    \item ``\alert{Reservar}'' os espaços para os nossos objetos
+    \item ``\alert{Executar}'' em sequência cada um dos passos do algoritmo.
+    \end{itemize}
+
+  \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Simulando}
+  \begin{block}{Algoritmo de Euclides}
+    \begin{enumerate}
+    \item Defina $M$ igual à $10$ e $N$ igual à $6$. 
+	\item Se $M$ é igual $N$, então $MDC$, $Z$, é M (ou N); pare!
+  	\item Caso contrário:
+  		\begin{enumerate}
+  			 \item se  $M$ é maior que  $N$,  então substitua $M$ por ($M$-$N$) e repita a partir do passo 2
+			 \item se $N$ é maior que $M$,  então substitua $N$ por ($N$-$M$) e repita a partir do passo 2
+		\end{enumerate}  		
+	\end{enumerate}
+	
+  \end{block}
+
+  \vspace*{0.3cm}
+
+  \only<2-4>{{\bf Reservando espa\c{c}o para os objetos } }
+
+  \only<3>{Após executar a \alert{linha 1}.
+
+    \begin{tabular}{|c|c|c|c|}
+      \hline
+      Tipo & \verb"inteiro positivo" & \verb"inteiro positivo" & \verb"inteiro positivo" \\
+      \hline
+      Nome & \alert{\verb"M"} & \alert{\verb"N"} & \alert{\verb"Z"} \\
+      \hline
+      Valor & 10  & 6 & ? \\
+    \end{tabular}}
+
+  \only<4>{Após executar a \alert{linha 3.1}.
+
+    \begin{tabular}{|c|c|c|c|}
+      \hline
+      Tipo & \verb"inteiro positivo" & \verb"inteiro positivo" & \verb"inteiro positivo" \\
+      \hline
+      Nome & \alert{\verb"M"} & \alert{\verb"N"} & \alert{\verb"Z"} \\
+      \hline
+      Valor & 4  & 6 & ? \\
+    \end{tabular}}
+
+
+  \only<5-9>{{\bf Execução} }
+
+  \only<6>{Após executar a \alert{linha 3.2}.
+
+       \begin{tabular}{|c|c|c|c|}
+      \hline
+      Tipo & \verb"inteiro positivo" & \verb"inteiro positivo" & \verb"inteiro positivo" \\
+      \hline
+      Nome & \alert{\verb"M"} & \alert{\verb"N"} & \alert{\verb"Z"} \\
+      \hline
+      Valor & 4  & 2 & ? \\
+    \end{tabular}}
+
+  \only<7>{Após executar a \alert{linha 3.1}.
+
+      \begin{tabular}{|c|c|c|c|}
+      \hline
+      Tipo & \verb"inteiro positivo" & \verb"inteiro positivo" & \verb"inteiro positivo" \\
+      \hline
+      Nome & \alert{\verb"M"} & \alert{\verb"N"} & \alert{\verb"Z"} \\
+      \hline
+      Valor & 2  & 2 & ? \\
+    \end{tabular}}
+
+
+  \only<8>{Após executar a \alert{linha 2}.}
+  \only<9>{\alert{{\bf Opa!} Terminamos...}}
+  \only<8-9>{
+
+      \begin{tabular}{|c|c|c|c|}
+      \hline
+      Tipo & \verb"inteiro positivo" & \verb"inteiro positivo" & \verb"inteiro positivo" \\
+      \hline
+      Nome & \alert{\verb"M"} & \alert{\verb"N"} & \alert{\verb"Z"} \\
+      \hline
+      Valor & 2  & 2 & 2 \\
+    \end{tabular}}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Simulação Manual}
+  
+  \begin{block}{Simulando código}
+  Simule o algoritmo para $M$ igual à $36$ e $N$ igual à $21$.
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Algoritmos}
+	
+	\begin{block}{A parte difícil de garantir}
+	\begin{itemize}
+	\item Partindo de objetos  de entrada \alert{válidos}, o algoritmo \alert{termina} com a resultado \alert{correto}.
+	\item Partindo de objetos  de entrada \alert{inválidos}, o algoritmo pode produzir lixo e não \alert{terminar}.
+	
+	\end{itemize}
+	\end{block}
+	
+	\begin{block}{Exemplo}	
+	O algoritmo para o problema do MDC sempre \alert{termina}
+	\end{block}
+	
+	
+\end{frame}
+
+\begin{frame}
+  \frametitle{Termina?}
+
+  \begin{block}{Algoritmo de Euclides}
+    \begin{enumerate}
+	\item Se $M$ é igual $N$, então $MDC$, $Z$, é M (ou N); pare!
+  	\item Caso contrário:
+  		\begin{enumerate}
+  			 \item se  $M$ é maior que  $N$,  então substitua $M$ por ($M$-$N$) e repita a partir do passo 2
+			 \item se $N$ é maior que $M$,  então substitua $N$ por ($N$-$M$) e repita a partir do passo 2
+		\end{enumerate}  		
+	\end{enumerate}
+  \end{block}
+
+		
+	\begin{block}{Exemplo:}
+	Quando $M$ e $N$ são positivos, temos que:
+	\begin{enumerate}
+	\item a cada execu\c{c}ão $M$ ou $N$ \alert{sempre} diminuem.
+	\item $M$ e $N$ sempre são positivos, pois
+		\begin{itemize}
+		\item $M - N$ é maior que $1$, se $M$ é maior que $N$;
+		\item $N - M$ é maior que $1$, se $N$ é maior que $M$;
+		\end{itemize}
+	\item não podemos passar de $M$ igual à $N$ igual à $1$.
+	\end{enumerate}
+
+	Logo, o algoritmo \alert{termina}!!	
+	
+	\end{block}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Algoritmos}
+
+	\begin{block}{Contra-exemplo}
+		O que acontece quando os valores dos objetos não são válidos (quando $M$ e/ou  $N$ não são positivos)?
+		\\Considere como contra-exemplo para simula\c{c}ão o caso em que $M$ é igual à $5$ e $N$ é igual à $-1$ e mostre o que 				acontece.
+	\end{block}
+	
+\end{frame}
+
+\begin{frame}
+  \frametitle{Algoritmos}
+	
+	\begin{block}{A parte difícil de garantir - Outro exemplo}
+	\begin{itemize}
+	\item Imagine que você criou um algoritmo que recebe um número inteiro $N$ e procura os $N$ primeiros números perfeitos. 
+	\item Atualmente, conhecemos apenas 48 números perfeitos, logo, não sabemos se o algoritmo termina quando $N=49$, por exemplo.
+	
+	\end{itemize}
+	\end{block}
+	
+	\begin{block}{Defini\c{c}ão: Número perfeito}
+	Um número inteiro é dito perfeito se a soma de todos os seus divisores positivos próprios (excluindo ele mesmo) é igual ao 	 próprio 	número. Por exemplo,  $6$ é um número perfeito, pois é igual à $1+2+3$.
+	
+	
+	\end{block}
+	
+\end{frame}
+
+\begin{frame}
+  \frametitle{Nas próximas aulas...}
+	
+	\begin{itemize}
+	\item Veremos como codificar este algoritmos em C...
+	
+	\end{itemize}
+	
+	
+\end{frame}
+
+\begin{frame}
+  \frametitle{FIM}
+	
+	FIM!!!
+	
+	
+\end{frame}
+
+
+\end{document}

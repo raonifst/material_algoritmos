@@ -1,0 +1,8 @@
+\beamer@endinputifotherversion {3.10pt}
+\select@language {portuges}
+\beamer@sectionintoc {1}{Revis\~ao}{3}{0}{1}
+\beamer@sectionintoc {2}{Vetores em fun\c c\~oes}{7}{0}{2}
+\beamer@sectionintoc {3}{Exerc\IeC {\'\i }cios}{12}{0}{3}
+\beamer@sectionintoc {4}{Informa\c c\~oes Extras: Inicializa\c c\~ao de um vetor}{14}{0}{4}
+\beamer@sectionintoc {5}{O Problema da Busca}{16}{0}{5}
+\beamer@sectionintoc {6}{Busca Sequencial}{22}{0}{6}

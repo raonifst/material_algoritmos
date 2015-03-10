@@ -1,0 +1,53 @@
+\par   \frametitle{Um pouco de maniqueísmo - Documentação}
+
+  \begin{columns}
+    \small
+    \column{0.45\linewidth}
+    \begin{block}{\color{red}{Mal}}
+\begin{verbatim}
+#include <stdio.h>
+int main() {
+  float r;
+  float v;
+  scanf("%f", &r);
+  v = (4.0*3.1425*r*r*r)/3.0;
+  printf("%f", v);
+}
+
+
+
+
+
+\end{verbatim}
+   \pause
+   \emph{O que esse programa faz???}
+
+   \pause
+   \emph{O valor de pi está errado, com quem eu falo???}
+  \end{block}
+
+    \pause
+    \column{0.45\linewidth}
+    \begin{block}{\color{blue}{Bem}}
+\begin{verbatim}
+/* DESCRIÇÃO: Lê o raio de
+      uma esfera pelo teclado
+      e imprime o seu volume.
+   ENTRADA: o raio da esfera
+   SAÍDA: o volume da esfera
+   PRÉ-CONDIÇÃO: O raio deve
+      ser maior que zero.
+   AUTOR: Nome do Aluno */
+#include <stdio.h>
+int main() {
+  float r;
+  float v;
+  scanf("%f", &r);
+  v = (4.0*3.1415*r*r*r)/3.0;
+  printf("%f", v);
+  return 0;
+}
+\end{verbatim}
+    \end{block}
+  \end{columns}
+

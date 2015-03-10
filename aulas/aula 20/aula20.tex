@@ -1,0 +1,566 @@
+\documentclass{beamer}
+
+\usetheme{Boadilla}
+%\usetheme{Warsaw}
+%\setbeamercovered{transparent}
+\beamertemplatetransparentcoveredhigh
+\usepackage[portuges]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{ulem}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+
+\newcommand{\eng}[1]{\textsl{#1}}
+\newcommand{\cod}[1]{\texttt{#1}}
+
+\title[9002 --- Aula 20]{9002 --- Aula 20\\
+   Algoritmos e Programação de Computadores}
+
+\author[IEng - UFMT]{Instituto de Engenharia -- UFMT}
+
+\institute[2014/2]{Segundo Semestre de 2014}
+
+\date{02 de dezembro de 2014}
+
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Roteiro}
+  \tableofcontents
+\end{frame}
+
+\section{Introdução}
+
+\begin{frame}[fragile]
+
+  \frametitle{Questões da prova}
+
+  Como armazenar a nota de cada uma\\
+  de 10 questões da prova de {\bf um} aluno?
+
+
+  \begin{exampleblock}{}
+\begin{semiverbatim}\pause
+float questoes[10];
+int i;
+\pause
+for (i = 0; i < 10; i++) \{
+    printf("Nota da questao \%d: ", i);
+    scanf("\%f", \&questao[i]);
+\}
+\end{semiverbatim}
+    \end{exampleblock}
+
+  \pause
+
+  \alert{E se fossem {\bf 100} alunos?}
+\end{frame}
+
+\begin{frame}[fragile]
+
+  \frametitle{Cem alunos}
+
+  Como armazenar a nota de cada uma\\
+  de 10 questões das provas 100 alunos?
+
+  \begin{exampleblock}{}
+\begin{semiverbatim}\pause
+float questoes1[10], questoes2[10], \alert{\bf{}...}, questoes100[10];
+int i;
+\pause
+for (i = 0; i < 10; i++) \{
+    printf("Nota da questao \%d do aluno {\bf{}1}: ", i);
+    scanf("\%f", \&questao{\bf{}1}[i]);
+\}
+\pause
+\alert{\bf{}...}
+\pause
+for (i = 0; i < 10; i++) \{
+    printf("Nota da questao \%d do aluno {\bf{}100}: ", i);
+    scanf("\%f", \&questao{\bf{}100}[i]);
+\}
+\end{semiverbatim}
+    \end{exampleblock}
+
+\end{frame}
+
+
+\begin{frame}
+ \frametitle{Cem alunos -- Melhorando}
+
+ \begin{block}{Revendo vetores}
+    Já vimos esse problema:
+    \begin{itemize}
+      \item Problema: queríamos armazenar 100 variáveis como \cod{float nota}\\
+      \smallskip
+      \pause
+      {\bf Solução:} usar um vetor de variáveis: \cod{\alert{float notas}{\bf [100]}}
+      \pause
+      \bigskip
+      \item Problema: agora queremos 100 vetores como \cod{float questoes[10]}\\
+      \smallskip
+      \pause
+      {\bf Solução:} usar um vetor de {\bf vetores}: \cod{\alert{float questoes}{\bf [100]}\alert{[10]}}
+    \end{itemize}
+ \end{block}
+\end{frame}
+
+
+
+\section{Matrizes}
+
+\begin{frame}
+  \frametitle{Vetores --- Definição}
+
+  \begin{alertblock}{Matriz}
+    Matriz é uma coleção de vetores.
+  \end{alertblock}
+
+  \pause
+
+  \begin{block}{Características}
+  \begin{itemize}
+    \item É um vetor como outro qualquer
+    \pause
+    \item Cada vetor é acessado por por meio de um índice primário
+    \pause
+    \item Cada variável simples é acessada por por meio de um índice secundário
+  \end{itemize}
+ \end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]
+
+  \frametitle{Declarando uma matriz}
+
+  \begin{block}{Matriz de tamanho $M \times N$}
+    \alert{$<$tipo$>$} identificador [\alert{$<$linhas$>$}]  [\alert{$<$colunas$>$}]  {\bf ;}
+  \end{block}
+
+  \pause
+
+
+  \begin{itemize}
+  \item Uma matriz possui $linhas \times colunas$ variáveis do tipo \alert{$<$tipo$>$}
+  \pause
+
+  \item As linhas são numeradas de 0 a $linhas - 1$
+  \pause
+
+  \item As colunas são numeradas de 0 a $colunas - 1$
+
+  \end{itemize}
+
+
+  \pause
+
+  \bigskip
+
+  \begin{block}{Geralmente denotamos}
+  \begin{itemize}
+  \item o número de {\it{}linhas} por \alert{$m$}
+  \item o número de {\it{}colunas} por \alert{$n$}
+  \end{itemize}
+  \end{block}
+
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+
+  \frametitle{Exemplo de declaração de matriz}
+
+  \begin{exampleblock}{}
+  \begin{verbatim}
+int matriz [5][4];  \end{verbatim}
+  \end{exampleblock}
+
+  \vspace{20pt}
+
+  \begin{center}
+    \begin{tabular}{|l|c|c|c|c|}
+      \cline{2-5}
+      \multicolumn{1}{l|}{}&0&1&2&3\\ \hline
+      0&&&&\\ \hline
+      1&&&&\\ \hline
+      2&&&&\\ \hline
+      3&&&&\\ \hline
+      4&&&&\\ \hline
+    \end{tabular}
+  \end{center}
+
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{Declarando uma vetor de múltiplas dimensões}
+
+  \begin{block}{Vetor com $n$ dimensões}
+    \alert{$<$tipo$>$} identificador
+    [\alert{$<dim_1>$}]
+    [\alert{$<dim_2>$}]
+    \alert{$\dots$}
+    [\alert{$<dim_n>$}]
+  \end{block}
+
+  \pause
+
+  \begin{itemize}
+
+  \item Possui $dim_1 \times dim_2 \times \dots \times \dim_N$
+    variáveis do tipo \texttt{\alert{$<$tipo$>$}}
+
+  \pause
+
+  \item Cada dimensão é numerada de 0 a $dim_i - 1$
+
+  \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+
+  \frametitle{Acessando uma matriz}
+
+    Em qualquer lugar onde você escreveria
+    uma variável no seu programa, você pode usar
+    um elemento de sua matriz, da seguinte forma:
+
+    \pause
+
+    \vspace{12pt}
+
+    \begin{block}{}
+      \texttt{nome\_da\_matriz} [\texttt{\alert{$<$linha$>$}}]
+      [\texttt{\alert{$<$coluna$>$}}]
+    \end{block}
+
+    \vspace{12pt}
+    \pause
+
+    Ex: \verb% matriz[1][10]% --- Refere-se a variável na $2^a$
+    linha e na $11^a$ coluna da matriz.
+
+    \pause
+
+  \begin{center}
+  \alert{O compilador não verifica se você utilizou valores válidos para
+    a linha e para a coluna.}
+  \end{center}
+
+
+
+\end{frame}
+
+
+\section {Exemplos}
+
+\begin{frame}[fragile]
+
+  \frametitle{Exemplos com Matrizes}
+
+  Lendo uma matriz $4 \times 5$ do teclado:
+
+  \begin{exampleblock}{Lendo matriz}
+   \begin{verbatim}
+int i, j;
+int matriz[4][5]
+
+for (i = 0; i < 4; i++) {
+    for (j = 0; j < 5; j++) {
+        printf ("Valor da linha %d, coluna %d: ", i, j);
+        scanf ("%d", &matriz[i][j]);
+    }
+}\end{verbatim}
+  \end{exampleblock}
+
+\end{frame}
+
+\begin{frame}[fragile]
+
+  \frametitle{Exemplos com Matrizes}
+
+  Imprimindo uma matriz $4 \times 5$ do teclado:
+
+  \begin{exampleblock}{Escrevendo uma matriz}
+   \begin{verbatim}
+int i, j;
+int matriz[4][5]
+
+for (i = 0; i < 4; i++) {
+    printf("Linha %d: ", i);
+
+    for (j = 0; j < 5; j++) {
+        printf("%d ", matriz[i][j];
+    }
+
+    printf("\n");
+}\end{verbatim}
+  \end{exampleblock}
+\end{frame}
+
+
+
+
+%%%%%%%%%%AQUI
+\begin{frame}[containsverbatim]
+
+  \frametitle{Inicialização de Matrizes}
+
+\begin{itemize}
+\item No caso de matrizes, usa-se chaves para delimitar as linhas:
+\begin{block}{Exemplo}
+int vet[2][5] = \{ \{10, 20, 30, 40, 50\} , \{60, 70, 80, 90, 100 \}  \} ;\\
+\end{block}
+\item No caso tridimensional, cada índice da primeira dimensão se refere a uma matriz inteira:
+
+\begin{block}{Exemplo}
+int v3[2][3][4] = \{ \\
+    \{ \{1, 2, 3, 4\}, \{5, 6, 7, 8\}, \{9, 10, 11, 12\} \},\\
+    \{ \{0, 0, 0, 0\}, \{5, 6, 7, 8\}, \{0, 0, 0, 0\} \}, \\
+  \};
+  \end{block}
+
+
+\end{itemize}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+  \frametitle{Inicialização de Matrizes}
+  
+\begin{scriptsize}
+\begin{verbatim}
+int main(){
+  int i,j,k;
+  int v1[5] = {1,2,3,4,5};
+  int v2[2][3] = { {1,2,3}, {4,5,6}};
+  int v3[2][3][4] = {
+    { {1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12} },
+    { {0, 0, 0, 0}, {5, 6, 7, 8}, {0, 0, 0, 0} }
+  };
+  .
+  .
+  .
+  .  
+}
+\end{verbatim}
+\end{scriptsize}
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Matrizes e funções}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+  \frametitle{Matrizes e funções}
+
+  \begin{itemize}
+  \item Ao passar um {\bf vetor simples} como parâmetro, não é necessário fornecer o
+    seu tamanho na declaração da função. 
+
+  \item Quando o {\bf vetor é multi-dimensional} a possibilidade de não
+    informar o tamanho na declaração se restringe à primeira dimensão
+    apenas.
+  \end{itemize}
+
+  \begin{block}{}
+\begin{verbatim}
+void mostra_matriz(int mat[][10], int n_linhas) {
+  ...
+}
+\end{verbatim}
+  \end{block}
+
+%  Veja o exemplo em {\tt matriz.c}.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+  \frametitle{Matrizes e funções}
+
+\begin{itemize}
+\item Pode-se criar uma função deixando de indicar a primeira dimensão:
+\begin{small}
+\begin{verbatim}
+void mostra_matriz(int mat[][10], int n_linhas) {
+  ...
+}
+\end{verbatim}
+\end{small}
+
+\item Ou pode-se criar uma função indicando todas as dimensões:
+\begin{small}
+\begin{verbatim}
+void mostra_matriz(int mat[5][10], int n_linhas) {
+  ...
+}
+\end{verbatim}
+\end{small}
+
+
+\item Mas não pode-se deixar de indicar outras dimensões (exceto a primeira):
+\begin{small}
+\begin{verbatim}
+void mostra_matriz(int mat[5][], int n_linhas) {
+  //ESTE NÃO FUNCIONA
+  ...
+}
+\end{verbatim}
+\end{small}
+
+\end{itemize}
+%  Veja o exemplo em {\tt matriz.c}.
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+\frametitle{Vetores multi-dimensionais em funções}
+\begin{scriptsize}
+\begin{verbatim}
+
+void mostra_matriz(int mat[][10], int n_linhas) {
+  int i, j;
+
+  for (i = 0; i < n_linhas; i++) {
+    for (j = 0; j < 10; j++)
+      printf("%2d ", mat[i][j]);
+    printf("\n");
+  }
+}
+
+int main() {
+  int mat[][10] = { { 0,  1,  2,  3,  4,  5,  6,  7,  8,  9},
+                    {10, 11, 12, 13, 14, 15, 16, 17, 18, 19},
+                    {20, 21, 22, 23, 24, 25, 26, 27, 28, 29},
+                    {30, 31, 32, 33, 34, 35, 36, 37, 38, 39},
+                    {40, 41, 42, 43, 44, 45, 46, 47, 48, 49},
+                    {50, 51, 52, 53, 54, 55, 56, 57, 58, 59},
+                    {60, 61, 62, 63, 64, 65, 66, 67, 68, 69},
+                    {70, 71, 72, 73, 74, 75, 76, 77, 78, 79}};
+		 
+  mostra_matriz(mat, 8);
+  return 0;
+}
+\end{verbatim}
+\end{scriptsize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+\frametitle{Vetores multi-dimensionais em funções}
+
+{\bf Lembre-se que vetores (multi-dimensionais ou não) são alterados quando passados como
+parâmetro em uma função}
+
+\begin{scriptsize}
+\begin{verbatim}
+
+void   teste (int mat[2][2]) {
+  int i, j;
+
+  for (i = 0; i < 2; i++) {
+    for (j = 0; j < 2; j++){
+         mat[i][j] = -1;
+    }
+  }
+}
+
+int main() {
+  int mat[2][2] = { { 0, 1},
+                    { 2, 3} };
+		 
+  teste(mat);
+  //Neste ponto mat tem todas as suas posições com valor -1
+  
+  return 0;
+}
+\end{verbatim}
+\end{scriptsize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%AQUI
+
+\section{Exercícios}
+
+\begin{frame}[fragile]
+  \frametitle{Exercício}
+
+  \begin{block}{Caca-palavras}
+    Escreva um programa que leia
+    uma matriz de caracteres
+    de dimensões $15 \times 20$
+    e depois leia uma palavra.
+    O programa deverá contar o número
+    de vezes que a palavra aparece.
+  \end{block}
+
+
+    \begin{exampleblock}{}
+      \begin{semiverbatim}
+                        OEAIAGBOOL
+                        IIWAXHHLHN
+                        PADUCAPNOC
+                        ZBMOUIZSAS
+                        OXEZOKOEUA
+                        QCRMAAPAO\alert<2>{H}
+                        D\alert<2>{HOMEM}TUF\alert<2>{O}
+                        HOOAJCMVG\alert<2>{M}
+                        NMFOANGMA\alert<2>{E}
+                        JEVJVCCSN\alert<2>{M}      \end{semiverbatim}
+    \end{exampleblock}
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Exercício}
+
+  \begin{enumerate}
+    \item Escreva uma programa que lê duas matrizes, uma matriz $A$ de dimensões
+$4 \times 6$ e outra matriz $B$ de dimensões $6 \times 10$ e imprima uma
+terceira matriz $C = A \times B$.
+    \item Escreva uma programa que lê uma matriz de dimensões $5 \times 5$ e
+verifique se ela  é simétrica.
+    \item Escreva uma programa que lê dois números $m$ e $n$ menores que 100 e depois
+lê uma matriz de dimensões $m \times n$. O programa deverá imprimir a matriz
+transposta.
+  \end{enumerate}
+
+\end{frame}
+
+\end{document}
+

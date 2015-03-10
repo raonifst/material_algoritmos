@@ -1,0 +1,9 @@
+\beamer@endinputifotherversion {3.10pt}
+\select@language {portuges}
+\beamer@sectionintoc {1}{Revis\~ao}{3}{0}{1}
+\beamer@sectionintoc {2}{Procedimentos}{4}{0}{2}
+\beamer@sectionintoc {3}{A fun\c c\~ao principal (main)}{13}{0}{3}
+\beamer@sectionintoc {4}{Prot\'otipos de fun\c c\~ao}{18}{0}{4}
+\beamer@sectionintoc {5}{Escopo de vari\'aveis}{26}{0}{5}
+\beamer@sectionintoc {6}{Par\^ametros por valor e por refer\^encia}{45}{0}{6}
+\beamer@sectionintoc {7}{Fim}{63}{0}{7}

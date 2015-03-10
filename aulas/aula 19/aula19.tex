@@ -1,0 +1,324 @@
+\documentclass{beamer}
+
+\usetheme{Boadilla}
+%\usetheme{Warsaw}
+%\setbeamercovered{transparent}
+\beamertemplatetransparentcoveredhigh
+\usepackage[portuges]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{ulem}
+
+\newcommand{\eng}[1]{\textsl{#1}}
+\newcommand{\cod}[1]{\texttt{#1}}
+
+\title[9002 --- Aula 19]{9002 --- Aula 19\\
+   Algoritmos e Programação de Computadores}
+
+\author[IEng - UFMT]{Instituto de Engenharia -- UFMT}
+
+\institute[2014/2]{Segundo Semestre de 2014}
+
+\date{01 de dezembro de 2014}
+
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Roteiro}
+  \tableofcontents
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introdu\c{c}ão}
+
+\begin{frame}[containsverbatim]
+\frametitle{Cadeias de Caracteres} 
+\begin{itemize}
+\item A linguagem C não possui, explicitamente, o tipo para {\it cadeias de caracteres}.
+\item Podemos, porém, considerar um vetor de caracteres como uma {\it cadeia}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{Cadeias de Caracteres} 
+\begin{itemize}
+\item Em C, uma cadeia de caracteres é sempre terminada pelo caracter especial:  '\textbackslash0'
+\item {\bf Portanto, sempre, reserve um espa\c{c}o para um caracter a mais do que precisa!}
+  \begin{itemize}
+    \item Se por exemplo estivermos trabalhando com strings de 10 caracteres:
+    \begin{verbatim}
+     char st[11];
+    \end{verbatim}
+  \end{itemize} 
+
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+\frametitle{Cadeias de Caracteres} 
+\begin{itemize}
+\item Para ler ou imprimir usamos o operador especial $\%s$.
+\begin{verbatim}
+#include <stdio.h>
+int main(){
+  char nome[80];
+
+  printf("\nEntre com nome:");
+  scanf("%s", nome);
+  
+  printf("O nome digitado foi: %s", nome);
+  
+  return 0;
+}
+\end{verbatim}
+\item {\bf Note que neste caso não é utilizado o $\&$ no comando {\it scanf}}.
+\end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+\frametitle{Cadeias de Caracteres} 
+\begin{itemize}
+\item Para ler {\bf incluindo espaços} use a opção:    \%[ \^{}   \textbackslash n ].
+\begin{verbatim}
+#include <stdio.h>
+int main(){
+  char nome[80];
+
+  printf("\nEntre com nome:");
+  scanf("%[^\n]", nome);
+
+  printf("O nome digitado foi: %s", nome);
+  
+  return 0;
+}
+\end{verbatim}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[containsverbatim]
+\frametitle{Cadeias de Caracteres} 
+\begin{itemize}
+\item Pode-se utilizar ainda a fun\c{c}ão {\bf fgets}.
+\begin{verbatim}
+#include <stdio.h>
+int main(){
+  char nome[80];
+  
+  printf("\nEntre com nome:");
+  fgets(nome, 80, stdin);
+
+  printf("O nome digitado foi: %s", nome);
+  
+  return 0;
+}
+\end{verbatim}
+\end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Exemplos}
+
+
+\begin{frame}[containsverbatim]
+\frametitle{Exemplos} 
+Como calcular o tamanho de uma cadeia de caracteres?
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{Exemplos} 
+\begin{scriptsize}
+\begin{verbatim}
+#include <stdio.h>
+
+int tamanho(char str[])
+{
+  int tam = 0;
+  while(str[tam] != '\0')
+    tam++;
+  
+  return tam;    
+}
+
+int main()
+{
+  char palavra[100];
+
+  scanf("%s", palavra);  
+  printf("Voce digitou uma palavra com %d letras", tamanho(palavra));	
+	
+  return 0;
+}
+
+\end{verbatim}
+\end{scriptsize}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+\frametitle{Exemplos} 
+\begin{itemize}
+\item Como ler uma cadeia de carateres e imprimir sua inversa? 
+Assuma que a cadeia tem no máximo 80 caracteres.
+
+\end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+\frametitle{Exemplos} 
+\begin{scriptsize}
+\begin{verbatim}
+#include <stdio.h>
+int main(){
+  char st[80], stInv[80];
+  int tam, i, j;
+
+  printf("Entre com o string: ");
+  scanf("%s",st);
+
+  tam = tamanho(st);
+  
+  stInv[tam] = '\0';
+
+  j = tam-1;
+  i = 0;
+  while(i<tam){
+    stInv[j] = st[i];
+    i++;
+    j--;
+  }
+
+  printf("A inversa e: %s\n",stInv);
+  return 0;
+}
+\end{verbatim}
+\end{scriptsize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+\frametitle{Exemplos} 
+Ou...
+\begin{scriptsize}
+\begin{verbatim}
+#include <stdio.h>
+int main(){
+  char st1[80], stInversa[80];
+  int i, j , tam;
+
+  printf("Digite um texto (max. 80):");
+  scanf("%s",st1);
+
+  tam = tamanho(st);
+
+  stInversa[tam] = '\0';
+  for(j = tam-1, i = 0 ; j >= 0 ;  j--, i++){
+    stInversa[j] = st1[i];
+  }
+  
+  printf("A inversa e: %s\n", stInversa);
+  return 0;
+}
+\end{verbatim}
+\end{scriptsize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+\frametitle{Exemplos} 
+\begin{itemize}
+\item Como ler uma cadeia de carateres e imprimir sua inversa? 
+Assuma que a cadeia tem no máximo 80 caracteres.
+\item {\bf Não utilizar um vetor adicional.} 
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+\frametitle{Exemplos} 
+\begin{scriptsize}
+\begin{verbatim}
+#include <stdio.h>
+int main(){
+  char st1[80], aux;
+  int i, j, tam;
+
+  printf("Digite um texto (max. 80):");
+  scanf("%s",st1);
+
+  tam=tamanho(st1);
+  
+  i = 0;
+  j = tam -1;
+  while(i < j){
+    aux = st1[i];
+    st1[i] = st1[j];
+    st1[j] = aux;
+    i++; j--;
+  }
+  
+  printf("A inversa:%s\n",st1);
+  
+  return 0;
+}
+\end{verbatim}
+\end{scriptsize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Inicializa\c{c}ão}
+\begin{frame}[containsverbatim]
+  \frametitle{Inicialização}
+
+\begin{itemize}
+\item {\it Cadeias de caracteres} podem ser definidas diretamente.
+\begin{block}{Exemplo}
+char frase[100] = "sim isto é possível";\\
+\end{block}
+\end{itemize}
+\end{frame}
+
+
+\section{Exercícios}
+\begin{frame}[containsverbatim]
+\frametitle{Exercícios} 
+\begin{enumerate}
+\item Escreva uma fun\c{c}ão que recebe uma cadeia de caracteres contendo uma frase e 
+imprime a última palavra desta frase. As palavras, neste caso, são separadas por sinais (',', '.', ';', '!' etc) ou espa\c{c}os.
+
+\item Escreva uma fun\c{c}ão que recebe uma cadeia de caracteres contendo uma expressão matemática e verifica se os parênteses foram colocados adequadamente. Na expressão ``2*(2+(3-8)))'', por exemplo, há um um `)'- fecha-parêntese - sobrando.
+\end{enumerate}
+\end{frame}
+
+\end{document}

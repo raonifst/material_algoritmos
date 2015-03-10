@@ -1,0 +1,432 @@
+\documentclass{beamer}
+
+\usetheme{Boadilla}
+%\usetheme{Warsaw}
+%\setbeamercovered{transparent}
+\beamertemplatetransparentcoveredhigh
+\usepackage[portuges]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{ulem}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+
+\newcommand{\eng}[1]{\textsl{#1}}
+\newcommand{\cod}[1]{\texttt{#1}}
+
+\title[9002 --- Aula 22]{9002 --- Aula 22\\
+   Algoritmos e Programação de Computadores}
+
+\author[IEng - UFMT]{Instituto de Engenharia -- UFMT}
+
+\institute[2014/2]{Segundo Semestre de 2014}
+
+\date{08 de dezembro de 2014}
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Roteiro}
+  \tableofcontents
+\end{frame}
+
+
+\section {Introdução}
+
+\begin{frame}
+  \frametitle{Introdução}
+
+  Considere o problema a seguir.
+  \begin{center}
+    \includegraphics{triangulos1.pdf}
+    \qquad
+    \includegraphics{triangulos2.pdf}
+  \end{center}
+
+  \begin{block}{Problema}
+    Quantos triângulos de pé (ver exemplos coloridos)
+    podemos encontrar em uma grade de triângulos com
+    altura $n$?
+  \end{block}
+
+\end{frame}
+
+
+
+\begin{frame}[t]
+  \frametitle{Triângulos}
+  \begin{center}
+    \includegraphics{triangulos-base1.pdf}
+
+    Para uma grade de altura $n = 1$, temos $t(1) = 1$ triângulo.
+  \end{center}
+\end{frame}
+
+\begin{frame}[t]
+  \frametitle{Triângulos}
+  \begin{center}
+    \includegraphics{triangulos-base2.pdf}
+
+    Para uma grade de altura $n = 2$, temos $t(2) = 4$ triângulos:\\
+    2 com a ponta superior e outros 2 novos.
+  \end{center}
+\end{frame}
+
+\begin{frame}[t]
+  \frametitle{Triângulos}
+  \begin{center}
+    \includegraphics{triangulos1.pdf}
+
+    E para $n = 4$?
+
+    \pause
+
+    Podemos encontrar algum padrão?
+  \end{center}
+\end{frame}
+
+\begin{frame}[t]
+  \frametitle{Triângulos}
+  \begin{center}
+    \includegraphics{triangulos3.pdf}
+
+    É fácil contar \alert{apenas} os triângulos\\
+    com a ponta no triângulo superior: $4$.
+
+    \pause
+
+    Além desses, quantos faltam?
+
+  \end{center}
+\end{frame}
+
+\begin{frame}[t]
+  \frametitle{Triângulos}
+  \begin{center}
+    \only<1>{\includegraphics{triangulos4.pdf}}
+    \only<2->{\includegraphics{triangulos5.pdf}}
+
+    Faltam os triângulos do lado direito
+
+    \pause
+
+    e os triângulos do lado esquerdo.
+
+    \pause
+
+    Mas como calcular o número de triângulos
+    de um certo lado?
+  \end{center}
+\end{frame}
+
+\begin{frame}[t]
+  \frametitle{Triângulos}
+  \begin{center}
+    \includegraphics{triangulos7.pdf}
+
+    Caímos no mesmo problema anterior...
+
+    \pause
+
+    ...mas agora para $n = 3$.
+
+    \pause
+
+    Podemos repetir o mesmo procedimento,
+    para $n = 2$ e $n = 1$.
+  \end{center}
+
+\end{frame}
+
+\begin{frame}[t]
+  \frametitle{Triângulos}
+  \begin{center}
+    \only<1-2>{\includegraphics{triangulos5.pdf}}
+    \only<3->{\includegraphics{triangulos6.pdf}}
+
+    Suponha que já sabemos:\\
+    $t(1) = 1, t(2) = 4, t(3) = 10$.
+
+    \pause
+
+    Como podemos calcular $t(4)$?
+
+    \vspace*{0.3cm}
+
+    \pause
+    Somamos os triângulos superiores\\
+    aos os triângulos da esquerda e da direita
+    e subtraímos a interseção.
+
+    \pause
+
+    $t(4) = 4 + t(3) + t(3) - t(2) = 20.$
+  \end{center}
+\end{frame}
+
+\begin{frame}[t]
+  \frametitle{Triângulos}
+  \begin{center}
+    \includegraphics{triangulos6.pdf}
+
+    E para calcular o número de triângulos
+    $t(n)$ para um $n$ qualquer?
+
+    \vspace*{0.3cm}
+
+    \begin{itemize}
+      \item Se $n = 0$, então $t(n) = 0$.
+      \pause
+      \item Se $n = 1$, então $t(n) = 1$.
+      \pause
+      \item Do contrário, $t(n) = $ \pause $n + 2 \cdot t(n-1) - t(n-2)$.
+    \end{itemize}
+  \end{center}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Triângulos - programando}
+
+  Escreva uma função que calcule o número de triângulos
+  em pé de uma grade de tamanho $n$.
+
+  \pause
+
+  \begin{exampleblock}{}
+\begin{verbatim}
+int triangulos(int n) {
+  if (n == 0)
+      return 0;
+  else if (n == 1)
+      return 1;
+  else
+      return n + 2*triangulos(n-1) - triangulos(n-2);
+}\end{verbatim}
+  \end{exampleblock}
+
+  \pause
+
+  Observe que a função \cod{triangulos} chama a própria
+  função \cod{triangulos}. {\bf Isso é chamado de \alert{recursão}}.
+
+\end{frame}
+
+\section{Recursão}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+  \frametitle{Recursão}
+
+  \begin{center}
+    \includegraphics{matrioshka.jpg}
+  \end{center}
+
+  \begin{block}{Recursão}
+    A ideia é que um problema pode ser resolvido da
+    seguinte maneira:
+
+    \begin{itemize}
+      \pause
+      \item \alert{Primeiramente}, definimos as soluções para casos básicos.
+      \pause
+      \item \alert{Em seguida}, tentamos reduzir o problema
+        para instâncias menores.
+      \pause
+      \item \alert{Finalmente}, combinamos o resultado das instâncias
+        menores para obter um resultado do problema original.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+  \frametitle{Exemplo - Fatorial}
+
+  Certos problemas são naturalmente recursivos.
+
+  \begin{block}{Problema}
+    O fatorial de $n$ é definido como:
+    $$
+      n! =
+      \begin{cases}
+        1               &      \mbox{se } n = 0 \\
+        n \cdot (n-1)!  &      \mbox{se } n > 0.
+      \end{cases}
+    $$
+    Escreva um programa para calcular o valor do fatorial de um número.
+  \end{block}
+
+  \pause Qual é a \alert{base} da recursão? \\
+  \pause {\bf Resposta:} o caso $n = 0$.
+
+  \vspace*{0.2cm}
+
+  \pause A que \alert{instância menor} nós reduzimos o problema? \\
+  \pause {\bf Resposta:} para a instância $(n - 1)!$.
+
+  \vspace*{0.2cm}
+
+  \pause Como nós \alert{combinamos} o resultado para resolver o problema original? \\
+  \pause {\bf Resposta:} multiplicando por $n$ o resultado do problema menor.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+  \frametitle{Exemplo - Fatorial}
+
+
+  \begin{exampleblock}{}
+    \begin{semiverbatim}
+  int fatorial(int n) \{
+      int x, y;
+
+      \alert{// Caso base}
+      if (n == 0) \{
+          return 1;
+
+      \alert{// Caso geral}
+      \} else \{
+          \alert{// reduzimos o problema para instância menor x}
+          x = n - 1;
+          y = fatorial(x);
+
+          \alert{// combinamos o resultado y da instância menor}
+          return n * y;
+      \}
+  \}\end{semiverbatim}
+  \end{exampleblock}
+
+  \begin{verbatim}
+  \end{verbatim}
+\end{frame}
+
+
+\section{Pilha de chamadas}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Pilha de chamadas}
+
+  \begin{block}{Lidando com variáveis da função}
+    \begin{itemize}
+      \item Toda função tem suas próprias variáveis locais
+
+      \pause
+
+      \item {\bf Então}, cada chamada da função \cod{fatorial}
+          cria as variáveis $n$, $x$ e $y$.
+
+      \vspace*{0.4cm}
+      \pause
+
+      \item Mas chamamos a função fatorial várias vezes:
+          \alert{\cod{fatorial(n)}}, \alert{\cod{fatorial(n-1)}}, ...,
+          \alert{\cod{fatorial(1)}} e \alert{\cod{fatorial(0)}}!
+
+      \pause
+
+      \item {\bf Então}, em um dado instante, podem existir várias
+          variáveis $n$, $x$ e $y$, um trio para cada chamada.
+    \end{itemize}
+  \end{block}
+
+  \pause
+
+  \begin{alertblock}{Pilha de chamadas}
+    Para manter várias cópias de variáveis locais de uma função,
+    elas são colocadas em uma {\bf pilha de chamada} (ou {\bf pilha de execução})
+    toda vez que uma função é chamada e são retiradas da pilha quando a função termina.
+  \end{alertblock}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Pilha de chamadas - Fatorial}
+
+  Estado da pilha de chamadas para {\it fatorial(4)}:
+
+  \begin{center}
+    \includegraphics[width=7.5cm]{fat.pdf}
+  \end{center}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Exercício}
+
+  \begin{enumerate}
+    \item Escreva uma função que calcula o número
+        de triângulos virados de ponta-a-cabeça (os triângulos com
+        uma ponta em baixo e duas em cima) em uma
+        grade de triângulos de altura $n$.
+
+    \item Escreva uma função recursiva que calcule
+        o $n$-ésimo valor da sequência de Fibonacci.
+  \end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Exercício - Torres de Hanói}
+
+  \begin{center}
+    \includegraphics[width=7cm]{hanoi.jpeg}
+  \end{center}
+
+  \begin{block}{Problema}
+    A torre de Hanói é um brinquedo com três estacas A, B e C e
+    discos de tamanhos diferentes. O objetivo é mover todos os
+    discos da estaca A para a estaca C respeitando as seguintes
+    regras:
+
+    \begin{itemize}
+      \item Apenas um disco pode ser movido de cada vez.
+      \item Um disco só pode ser colocado sobre um disco maior.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Exercício - Torres de Hanói}
+
+  \begin{enumerate}
+    \item Entre no endereço \url{http://www6.ufrgs.br/psicoeduc/hanoi/}
+        e resolva a torre de Hanói para o número
+        de discos $n = 3$, $n = 4$ e $n = 5$.
+
+    \item Tente escrever uma programa em C que leia um número $n$ do
+        teclado e instrua o usuário a resolver a torre de Hanói
+        com $n$ discos.
+
+        \only<1>{{\it Se precisar de dicas, veja a próxima página.}}
+
+        \only<2>{{\it Responda às seguintes perguntas:}}
+
+        \pause
+
+        \begin{enumerate}
+          \item É difícil resolver o problema quando temos apenas
+              um ou dois discos? Esses casos são básicos?
+          \item Se soubermos resolver o problema de mover os discos
+              da estaca A para C, como podemos resolver o problema
+              de mover os discos da estaca B para a C?
+          \item Se tivermos dez discos na estaca A, mas os nove
+              discos superiores estiverem colados, como podemos
+              mover todos para a estaca C?
+        \end{enumerate}
+  \end{enumerate}
+
+\end{frame}
+
+\end{document}

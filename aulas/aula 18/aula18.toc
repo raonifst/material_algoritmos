@@ -1,0 +1,5 @@
+\beamer@endinputifotherversion {3.10pt}
+\select@language {portuges}
+\beamer@sectionintoc {1}{Introdu\c c\~ao}{3}{0}{1}
+\beamer@sectionintoc {2}{Ordena\c c\~ao por sele\c c\~ao}{16}{0}{2}
+\beamer@sectionintoc {3}{Ordena\c c\~ao por inser\c c\~ao}{51}{0}{3}

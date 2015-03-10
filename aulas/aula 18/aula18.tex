@@ -1,0 +1,526 @@
+\documentclass{beamer}
+
+\usetheme{Boadilla}
+%\usetheme{Warsaw}
+%\setbeamercovered{transparent}
+\beamertemplatetransparentcoveredhigh
+\usepackage[portuges]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{ulem}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+\usepackage{calc}
+
+\newcommand{\eng}[1]{\textsl{#1}}
+\newcommand{\cod}[1]{\texttt{#1}}
+
+\title[9002 --- Aula 18]{9002 --- Aula 18\\
+   Algoritmos e Programação de Computadores}
+
+\author[IEng - UFMT]{Instituto de Engenharia -- UFMT}
+
+\institute[2014/2]{Segundo Semestre de 2014}
+
+\date{25 de novembro de 2014}
+
+
+
+% contadores para as barras
+\newcounter{ordpos}
+\newcounter{ordalt}
+
+% barra vertical
+\newcommand{\bb}[1]{%
+  \setcounter{ordalt}{#1*5 + 10}
+  \addtocounter{ordpos}{5}
+  \put(\value{ordpos},0){\line(0,1){\value{ordalt}}}
+  \put(\value{ordpos},0){\line(1,0){10}}
+  \put(\value{ordpos},\value{ordalt}){\line(1,0){10}}
+  \addtocounter{ordpos}{1}
+  \put(\value{ordpos},5){#1}
+  \addtocounter{ordpos}{9}
+  \put(\value{ordpos},0){\line(0,1){\value{ordalt}}}
+}
+
+
+% seta apontando em baixo
+\newcommand{\se}{%
+  \setcounter{ordalt}{\value{ordpos} + 10}
+  \put(\value{ordalt},-15){\vector(0,1){10}}
+}
+% seta apontando em baixo vermelha
+\newcommand{\sr}{{\put(0,0){}\color{red}\se}}
+
+% barras verticais coloridas
+\newcommand{\br}[1]{{\put(0,0){}\color{red}\bb{#1}}}
+\newcommand{\bg}[1]{{\put(0,0){}\color{green}\bb{#1}}}
+
+% espaço de umaa barra
+\newcommand{\bi}[1]{\put(0,0){}\addtocounter{ordpos}{15}}
+
+% reinicia contadores de posição
+\newcommand{\ordreini}{\setcounter{ordpos}{0}}
+
+% fator de escala da figura
+\setlength{\unitlength}{0.4mm}
+
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Roteiro}
+  \tableofcontents
+\end{frame}
+
+\section{Introdução}
+
+\begin{frame}
+  \frametitle{Introdução}
+
+  \begin{center}
+    \begin{picture}(110,50)
+      \ordreini\small
+      \bb{ 7}\bb{ 2}\bb{ 3}\bb{ 5}\bb{ 6}\bb{ 1}\bb{ 4}
+    \end{picture}
+    \onslide<2>{
+    \alert{$\Rightarrow$}
+    \begin{picture}(110,50)
+      \ordreini\small
+      \bg{ 1}\bg{ 2}\bg{ 3}\bg{ 4}\bg{ 5}\bg{ 6}\bg{ 7}
+    \end{picture}
+    }
+  \end{center}
+
+  \begin{block}{Problema}
+    Escreva um programa que recebe uma lista de números
+    inteiros e imprima-os em ordem crescente.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Ordenação}
+
+  \begin{block}{Ordenação}
+    \begin{itemize}
+      \item Vamos estudar algoritmos para ordenar conjuntos de elementos
+      \pause
+      \item Os elementos podem ser de qualquer tipo que possamos comparar:
+      \pause
+      \begin{itemize}
+        \item números inteiros,
+        \pause
+        \item nomes de pessoas,
+        \pause
+        \item times de futebol... :)
+      \end{itemize}
+      \pause
+      \item Os algoritmos podem ordenar \alert{crescente}  ou
+        \alert{decrescentemente}, dependendo da direção da comparação.
+    \end{itemize}
+  \end{block}
+
+  \pause
+
+  \begin{block}{Estratégias}
+    Existem várias estratégias para ordenar:
+    \pause
+    \begin{itemize}
+      \item Selecionar o menor a cada vez e colocar na ponta
+      \pause
+      \item Trocar itens fora de ordem
+      \pause
+      \item Outras?
+    \end{itemize}
+    \pause
+    Estratégias diferentes levam a algoritmos diferentes.
+  \end{block}
+\end{frame}
+
+\section{Ordenação por seleção}
+
+\begin{frame}
+  \frametitle{Ordenação por seleção}
+
+  \begin{center}
+    \begin{picture}(110,50)
+      \ordreini\small
+      \onslide<1-9>{\bb{ 7}}
+      \onslide<1-4>{\bb{ 2}}
+      \onslide<1-5>{\bb{ 3}}
+      \onslide<1-7>{\bb{ 5}}
+      \onslide<1-8>{\bb{ 6}}
+      \onslide<1-3>{{\put(0,0){}\color<3>{red}\bb{ 1}}} % put para contornar bug do beamer
+      \onslide<1-6>{\bb{ 4}}
+    \end{picture}
+    \onslide<4->{\alert<4>{$\Rightarrow$}}
+    \begin{picture}(110,50)
+      \ordreini\small
+      \onslide<4->{\bg{ 1}}
+      \onslide<5->{\bg{ 2}}
+      \onslide<6->{\bg{ 3}}
+      \onslide<7->{\bg{ 4}}
+      \onslide<8->{\bg{ 5}}
+      \onslide<9->{\bg{ 6}}
+      \onslide<10->{\bg{ 7}}
+    \end{picture}
+  \end{center}
+
+  \pause
+
+  \begin{block}{Ideia}
+    \begin{itemize}
+      \item Inicialmente temos uma lista de itens desordenados
+      \pause
+      \item Selecionamos o menor elemento
+      \pause
+      \item Movemos o item para uma nova lista
+      \pause
+      \item Repetimos tudo com a lista restante (\alert{preta})
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Ordenação por seleção - Melhorando}
+
+  \begin{center}
+    \begin{picture}(110,50)
+      \ordreini\small
+      \only<1-2>{\bb{ 7}\bb{ 3}\bb{ 2}\bb{ 5}\bb{ 6}\bb{ 1}\bb{ 4}}
+      % troca 1
+      \only<3>{\bb{ 7}\bb{ 3}\bb{ 2}\bb{ 5}\bb{ 6}\br{ 1}\bb{ 4}}
+      \only<4>{\br{ 7}\bb{ 3}\bb{ 2}\bb{ 5}\bb{ 6}\br{ 1}\bb{ 4}}
+      \only<5>{\bg{ 1}\bb{ 3}\bb{ 2}\bb{ 5}\bb{ 6}\bb{ 7}\bb{ 4}}
+
+      % troca 2
+      \only<6>{\bg{ 1}\br{ 3}\br{ 2}\bb{ 5}\bb{ 6}\bb{ 7}\bb{ 4}}
+      \only<7>{\bg{ 1}\bg{ 2}\bb{ 3}\bb{ 5}\bb{ 6}\bb{ 7}\bb{ 4}}
+
+      % troca 3
+      \only<8>{\bg{ 1}\bg{ 2}\br{ 3}\bb{ 5}\bb{ 6}\bb{ 7}\bb{ 4}}
+      \only<9>{\bg{ 1}\bg{ 2}\bg{ 3}\bb{ 5}\bb{ 6}\bb{ 7}\bb{ 4}}
+
+      % troca 4
+      \only<10>{\bg{ 1}\bg{ 2}\bg{ 3}\br{ 5}\bb{ 6}\bb{ 7}\br{ 4}}
+      \only<11>{\bg{ 1}\bg{ 2}\bg{ 3}\bg{ 4}\bb{ 6}\bb{ 7}\bb{ 5}}
+
+      % troca 5
+      \only<12>{\bg{ 1}\bg{ 2}\bg{ 3}\bg{ 4}\br{ 6}\bb{ 7}\br{ 5}}
+      \only<13>{\bg{ 1}\bg{ 2}\bg{ 3}\bg{ 4}\bg{ 5}\bb{ 7}\bb{ 6}}
+
+      % troca 6
+      \only<14>{\bg{ 1}\bg{ 2}\bg{ 3}\bg{ 4}\bg{ 5}\br{ 7}\br{ 6}}
+      \only<15>{\bg{ 1}\bg{ 2}\bg{ 3}\bg{ 4}\bg{ 5}\bg{ 6}\bb{ 7}}
+
+      % troca 7
+      \only<16>{\bg{ 1}\bg{ 2}\bg{ 3}\bg{ 4}\bg{ 5}\bg{ 6}\br{ 7}}
+      \only<17>{\bg{ 1}\bg{ 2}\bg{ 3}\bg{ 4}\bg{ 5}\bg{ 6}\bg{ 7}}
+    \end{picture}
+  \end{center}
+
+  \pause
+
+  \begin{block}{Ideia}
+    \begin{itemize}
+      \item Não precisamos de uma nova lista! Basta:
+      \pause
+      \begin{enumerate}
+        \item \alert{Selecionar} o menor elemento
+        \pause
+        \item \alert{Trocar} com o primeiro elemento da lista
+        \pause
+        \item Continuar com a lista restante (\alert{preta})
+      \end{enumerate}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Convenções}
+
+  \begin{block}{Algoritmo de ordenação}
+    \begin{itemize}
+      \item Vamos implementar uma função para ordenar inteiros
+      \pause
+      \item A função terá os seguintes parâmetros:
+      \pause
+      \begin{itemize}
+        \item \alert{\cod{int vetor[]}}: vetor de inteiros onde os elementos estão
+        \pause
+        \item \alert{\cod{int n}}: o número de elemento do vetor
+      \end{itemize}
+      \pause
+      \item A função deverá ordenar o vetor passado \alert{crescentemente}
+    \end{itemize}
+  \end{block}
+
+  \pause
+
+  Para trocar dois valores, vamos sempre usar a seguinte função:
+\begin{exampleblock}{Trocar dois valores inteiros}
+\begin{verbatim}
+void trocar(int *a, int *b) {
+    int aux = *a;
+    *a = *b;
+    *b = aux;
+}\end{verbatim}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Algoritmo de ordenação por seleção ({\it Selection-Sort})}
+
+  \begin{exampleblock}{Menor elemento não ordenado (na lista preta)}
+    \small
+\begin{verbatim}
+int menor_elemento(int vetor[], int n, int primeiro) {
+    int i, menor = primeiro;
+    for (i = primeiro + 1; i < n; i++) {
+        if (vetor[i] < vetor[menor])
+            menor = i;
+    }
+    return menor;
+}\end{verbatim}
+  \end{exampleblock}
+
+  \pause
+
+  \begin{exampleblock}{Ordenação por seleção}
+    \small
+\begin{verbatim}
+int ordenar_selecao(int vetor[], int n) {
+    int i, menor;
+    for (i = 0; i < n; i++) {
+        menor = menor_elemento(vetor, n, i);
+        trocar(&vetor[i], &vetor[menor]);
+    }
+}\end{verbatim}
+  \end{exampleblock}
+\end{frame}
+
+
+
+\section{Ordenação por inserção}
+
+\begin{frame}
+  \frametitle{Ordenação por inserção}
+
+  \begin{center}
+    \begin{picture}(110,50)
+      \ordreini\small
+      \onslide<1-3>{{\put(0,0){}\color<3>{red}\bb{ 7}}} % put para contornar bug do beamer
+      \onslide<1-5>{\bb{ 2}}
+      \onslide<1-7>{\bb{ 3}}
+      \onslide<1-9>{\bb{ 5}}
+      \onslide<1-11>{\bb{ 6}}
+      \onslide<1-13>{\bb{ 1}}
+      \onslide<1-15>{\bb{ 4}}
+    \end{picture}
+    \onslide<4->{\alert<4>{$\Rightarrow$}}
+    \begin{picture}(110,50)
+      \ordreini\small
+      \only<14>{\br{ 1}}\only<15->{\bg{ 1}}
+      \only<6>{ \br{ 2}}\only<7->{ \bg{ 2}}
+      \only<8>{ \br{ 3}}\only<9->{ \bg{ 3}}
+      \only<16>{\br{ 4}}\only<17->{\bg{ 4}}
+      \only<10>{\br{ 5}}\only<11->{\bg{ 5}}
+      \only<12>{\br{ 6}}\only<13->{\bg{ 6}}
+      \only<4>{ \br{ 7}}\only<5->{ \bg{ 7}}
+    \end{picture}
+  \end{center}
+
+  \pause
+
+  \begin{block}{Ideia}
+    \begin{itemize}
+      \item Inicialmente temos uma lista de itens desordenados
+      \pause
+      \item Retiramos o primeiro elemento
+      \pause
+      \item Inserimos este item em uma nova lista \alert{na ordem}
+      \pause
+      \item Repetimos tudo com a lista restante (\alert{preta})
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Ordenação por inserção - No mesmo vetor}
+
+  \begin{center}
+    \begin{picture}(150,50)(0,-10)
+      \ordreini\small
+      % inicial
+      \only<1-2>{\bb{ 7}\bb{ 3}\bb{ 2}\bb{ 5}\bb{ 6}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\bi{  }}
+      % primeiro elemento ordenado
+      \only<3>{\bg{ 7}\bb{ 3}\bb{ 2}\bb{ 5}\bb{ 6}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\bi{  }}
+      % retiro o primeiro preto
+      \only<4>{\bg{ 7}\bi{ 3}\bb{ 2}\bb{ 5}\bb{ 6}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\br{ 3}}
+      % procura posicao pro 3
+      \only<5>{\se\bg{ 7}\bi{ 3}\bb{ 2}\bb{ 5}\bb{ 6}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\br{ 3}}
+      \only<6>{\sr\bg{ 7}\bi{ 3}\bb{ 2}\bb{ 5}\bb{ 6}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\br{ 3}}
+      % desloca 3
+      \only<7>{\sr\bi{ 3}\bg{ 7}\bb{ 2}\bb{ 5}\bb{ 6}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\br{ 3}}
+      % insere 3
+      \only<8>{\bg{ 3}\bg{ 7}\bb{ 2}\bb{ 5}\bb{ 6}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\bi{  }}
+
+      % retiro o 2
+      \only<9>{\bg{ 3}\bg{ 7}\bi{  }\bb{ 5}\bb{ 6}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\br{ 2}}
+      % procuro
+      \only<10>{\se\bg{ 3}\bg{ 7}\bi{  }\bb{ 5}\bb{ 6}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\br{ 2}}
+      \only<11>{\sr\bg{ 3}\bg{ 7}\bi{  }\bb{ 5}\bb{ 6}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\br{ 2}}
+      % desloco
+      \only<12>{\sr\bg{ 3}\bi{  }\bg{ 7}\bb{ 5}\bb{ 6}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\br{ 2}}
+      \only<13>{\sr\bi{  }\bg{ 3}\bg{ 7}\bb{ 5}\bb{ 6}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\br{ 2}}
+      % insiro
+      \only<14>{\bg{ 2}\bg{ 3}\bg{ 7}\bb{ 5}\bb{ 6}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\bi{  }}
+
+      % retiro o 5
+      \only<15>{\bg{ 2}\bg{ 3}\bg{ 7}\bi{ 5}\bb{ 6}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\br{ 5}}
+      \only<16>{\se\bg{ 2}\bg{ 3}\bg{ 7}\bi{ 5}\bb{ 6}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\br{ 5}}
+      \only<17>{\bg{ 2}\se\bg{ 3}\bg{ 7}\bi{ 5}\bb{ 6}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\br{ 5}}
+      \only<18>{\bg{ 2}\bg{ 3}\se\bg{ 7}\bi{ 5}\bb{ 6}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\br{ 5}}
+      \only<19>{\bg{ 2}\bg{ 3}\sr\bg{ 7}\bi{ 5}\bb{ 6}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\br{ 5}}
+      \only<20>{\bg{ 2}\bg{ 3}\sr\bi{ 5}\bg{ 7}\bb{ 6}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\br{ 5}}
+      \only<21>{\bg{ 2}\bg{ 3}\bg{ 5}\bg{ 7}\bb{ 6}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\bi{  }}
+
+      % retiro o 6
+      \only<22>{\bg{ 2}\bg{ 3}\bg{ 5}\bg{ 7}\bi{ 6}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\br{ 6}}
+      \only<23>{\bg{ 2}\bg{ 3}\bg{ 5}\sr\bg{ 7}\bi{ 6}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\br{ 6}}
+      \only<24>{\bg{ 2}\bg{ 3}\bg{ 5}\sr\bi{ 6}\bg{ 7}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\br{ 6}}
+      \only<25>{\bg{ 2}\bg{ 3}\bg{ 5}\bg{ 6}\bg{ 7}\bb{ 1}\bb{ 4}\bi{  }\bi{  }\bi{  }}
+
+      % retiro o 1
+      \only<26>{\bg{ 2}\bg{ 3}\bg{ 5}\bg{ 6}\bg{ 7}\bi{ 1}\bb{ 4}\bi{  }\bi{  }\br{ 1}}
+      \only<27>{\sr\bg{ 2}\bg{ 3}\bg{ 5}\bg{ 6}\bg{ 7}\bi{ 1}\bb{ 4}\bi{  }\bi{  }\br{ 1}}
+      \only<28>{\sr\bi{ 1}\bg{ 2}\bg{ 3}\bg{ 5}\bg{ 6}\bg{ 7}\bb{ 4}\bi{  }\bi{  }\br{ 1}}
+      \only<29>{\bg{ 1}\bg{ 2}\bg{ 3}\bg{ 5}\bg{ 6}\bg{ 7}\bb{ 4}\bi{  }\bi{  }\bi{  }}
+
+      % retiro o 4
+      \only<30>{\bg{ 1}\bg{ 2}\bg{ 3}\bg{ 5}\bg{ 6}\bg{ 7}\bi{ 4}\bi{  }\bi{  }\br{ 4}}
+      \only<31>{\bg{ 1}\bg{ 2}\bg{ 3}\sr\bg{ 5}\bg{ 6}\bg{ 7}\bi{ 4}\bi{  }\bi{  }\br{ 4}}
+      \only<32>{\bg{ 1}\bg{ 2}\bg{ 3}\sr\bi{ 4}\bg{ 5}\bg{ 6}\bg{ 7}\bi{  }\bi{  }\br{ 4}}
+      \only<33>{\bg{ 1}\bg{ 2}\bg{ 3}\bg{ 4}\bg{ 5}\bg{ 6}\bg{ 7}\bi{  }\bi{  }\bi{  }}
+    \end{picture}
+
+  \end{center}
+
+  \pause
+
+  \begin{block}{Ideia}
+    \begin{itemize}
+      \item Como usar apenas um vetor?
+      \pause
+      \begin{enumerate}
+        \item<3-> O primeiro elemento já está ordenado
+        \item<4-> \alert{Retirar} o primeiro elemento desordenado
+        \item<5-> \alert{Procurar} a posição em que deve ser inserido
+        \item<7-> \alert{Deslocar} os elementos ordenados seguintes
+        \item<8-> \alert{Inserir} o elemento retirado na ordem correta
+        \item<9-> Continuar com a lista restante (\alert{preta})
+      \end{enumerate}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Algoritmo de ordenação por inserção ({\it Insertion-Sort})}
+
+  \begin{exampleblock}{Posição de inserção (na lista verde)}
+    \small
+\begin{verbatim}
+int posicao_elemento(int vetor[], int ultimo, int elemento) {
+    int i;
+    for (i = 0; i <= ultimo && vetor[i] <= elemento; i++);
+    return i;
+}\end{verbatim}
+  \end{exampleblock}
+
+  \pause
+
+  \begin{exampleblock}{Deslocar parte do vetor}
+    \small
+\begin{verbatim}
+void deslocar_subvetor(int vetor[], int primeiro, int ultimo) {
+    int i;
+    for (i = ultimo; i >= primeiro; i--) {
+        vetor[i+1] = vetor[i];
+    }
+}\end{verbatim}
+  \end{exampleblock}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Algoritmo de ordenação por inserção ({\it Insertion-Sort})}
+
+  \begin{exampleblock}{Ordenação por inserção}
+\begin{verbatim}
+int ordenar_insercao(int vetor[], int n) {
+    int i, posicao;
+    int elemento;
+
+    for (i = 1; i < n; i++) {
+        elemento = vetor[i];
+        posicao = posicao_elemento(vetor, i-1, elemento);
+        deslocar_subvetor(vetor, posicao, i-1);
+        vetor[posicao] = elemento;
+    }
+}\end{verbatim}
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Exercício 1}
+
+  \begin{enumerate}
+    \item Reescreva a função \cod{ordenar\_selecao}
+        para que ela \alert{não} utilize as funções
+        auxiliares (\cod{menor\_elemento} e \cod{trocar}).
+        Faça o mesmo para a função \cod{ordenar\_insercao}.
+
+    \item Na função \cod{ordenar\_selecao}, é realmente
+        necessária a última iteração do laço de repetição?
+        Por quê? E para a função \cod{ordenar\_insercao}?
+  \end{enumerate}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Exercício 2}
+
+  \begin{exampleblock}{Ordenação da bolha ({\it Bubble-Sort})}
+    \small
+\begin{verbatim}
+void ordenar_bolha(int vetor[], int n) {
+    int i, j;
+    for (i = n - 1; i > 0; i--) {
+        for (j = 0; j < i; j++) {
+            if (vet[j] < vet[j+1])
+                trocar(&vetor[j], &vetor[j+1]);
+        }
+    }
+}
+\end{verbatim}
+  \end{exampleblock}
+
+  \begin{enumerate}
+    \item Explique o que faz e qual é a ideia do algoritmo.
+    \item Faça um teste de mesa para um vetor com elementos
+        $(5, 4, 3, 2, 1)$ e para um vetor com elementos
+        $(1, 4, 3, 2, 5)$. Conte as trocas.
+    \item Você consegue dizer por que o algoritmo tem
+        esse nome? Por quê?
+  \end{enumerate}
+
+\end{frame}
+
+
+\end{document}
+

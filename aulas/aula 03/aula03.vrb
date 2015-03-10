@@ -1,0 +1,19 @@
+\frametitle {Exercícios}
+
+  \begin{exampleblock}{}
+\begin{verbatim}
+#include <stdio.h>
+main(void){
+    int n, k;
+    n = 5;
+    k = 1 + 2 * 30 / (++n % 4 * -5);
+}\end{verbatim}
+  \end{exampleblock}
+
+
+  \begin{enumerate}
+  \item Indique a ordem em que são executadas as operações.
+  \item Reescreva o programa de forma que cada comando contenha apenas uma
+        operação aritmética.
+  \end{enumerate}
+

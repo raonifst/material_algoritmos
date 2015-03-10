@@ -1,0 +1,483 @@
+\documentclass{beamer}
+\usetheme{Boadilla}
+%\usetheme{Warsaw}
+%\setbeamercovered{transparent}
+\beamertemplatetransparentcoveredhigh
+\usepackage[portuges]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+
+\newcommand{\eng}[1]{\textsl{#1}}
+\newcommand{\cod}[1]{\texttt{#1}}
+
+\title[9002 --- Aula 04]{9002 --- Aula 04\\
+   Algoritmos e Programação de Computadores}
+
+\author[IEng - UFMT]{Instituto de Engenharia -- UFMT}
+
+\institute[2014/2]{Segundo Semestre de 2014}
+
+\date{30 de setembro de 2014}
+
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\section*{Roteiro}
+
+\begin{frame}
+ \frametitle{Roteiro}
+ \tableofcontents
+\end{frame}
+
+
+\section{Saída de dados}
+
+\begin{frame}
+  \frametitle{Escrevendo na tela} 
+
+  \begin{itemize}
+    
+  \item Podemos imprimir um de {\it texto puro} utilizando o comando {\tt printf}.
+O texto pode ser uma constante do tipo cadeia de caracteres.
+  
+  \pause
+
+    \begin{block}{Exemplo}
+      \cod{printf("Ola Pessoal!");}
+      
+      Saída: {\tt Ola Pessoal!}
+    \end{block}
+
+  \pause
+
+  \item No meio da constante com a cadeias de caracteres pode haver comandos especiais.
+ O símbolo especial \cod{$\backslash$n} é responsável por pular uma linha na saída.
+
+  \pause
+
+  \begin{block}{Exemplo}
+      \cod{printf("Ola Pessoal! $\backslash$n Ola Pessoal");}
+      
+      Saída: {\tt Ola Pessoal! \\ Ola Pessoal}
+    \end{block}
+
+
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Escrevendo o conteúdo de uma variável na tela} 
+
+  \begin{itemize}
+    
+    \item Podemos imprimir também o \alert{conteúdo de uma 
+    variável} utilizando {\tt printf}.
+    \pause
+    \item Utilizamos símbolos especiais no texto para representar
+    um trecho deve \alert{substituído} por uma variável
+    \pause
+    \item Passamos uma lista de variáveis ou constantes
+    a serem substituídas, separadaspor vírgula.
+    \pause
+
+    \begin{block}{Exemplo}
+      \cod{printf("A variável \alert{\%s} contém o valor \alert{\%d}", \alert{"a"}, \alert{a});}
+      
+      imprime {\tt A variável a contém o valor 10}
+    \end{block}
+
+  \pause
+  \item Nesse caso, \%s foi substituído por uma constante
+    do tipo {\tt string} enquanto \%d foi substituído por
+    uma variável do tipo inteiro.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Formatos inteiros} 
+
+  \begin{description}
+
+    \item [\%d] --- Escreve um inteiro na tela.
+
+      \begin{block}{Exemplo}
+	{\tt printf ("\%d", 10);} 
+
+	imprime {\tt 10}
+      \end{block}
+
+      \begin{block}{Exemplo}
+        {\tt int a=12;}\\
+	{\tt printf ("O valor e \%d", a);}\\ 
+
+	imprime {\tt O valor e 12}
+      \end{block}
+
+    \end{description}
+\end{frame}
+
+
+%\begin{frame}
+%  \frametitle{Formatos inteiros} 
+
+%  \begin{description}
+
+%    \item [\%$<numero>$d] --- Escreve um inteiro na tela, preenchendo
+%      com espaços a esquerda para que ele ocupe pelo menos $<numero>$ casas
+%      na tela.
+
+%      \begin{block}{Exemplo}
+%	{\tt printf ("\%4d", 10);} 
+
+%	imprime {\tt $<espaco><espaco>$10}
+%      \end{block}
+%    \end{description}
+%\end{frame}
+
+
+%\begin{frame}
+%  \frametitle{Formatos inteiros} 
+
+%  \begin{description}
+%  \item [\%0$<numero>$d] --- Escreve um inteiro na tela, preenchendo
+%    com zeros a esquerda para que ele ocupe pelo menos comprimento
+%    $<numero>$.
+
+%    \begin{block}{Exemplo}
+%      {\tt printf ("\%04d", 10);} 
+
+%      imprime {\tt 0010}
+%    \end{block}
+
+%    \end{description}
+%\end{frame}
+
+
+%\begin{frame}
+%  \frametitle{Formatos inteiros} 
+
+%  \begin{description}
+%  \item [\%$<numero_1>$.0$<numero_2>$d] --- Escreve um inteiro na tela,
+%    preenchendo com espaços a esquerda para que ele ocupe pelo menos
+%    $<numero_1>$ casas na tela e com zeros para que ele possua pelo menos
+%    comprimento $<numero_2>$.
+
+%    \begin{block}{Exemplo}
+%      {\tt printf ("\%6.04d", 10);} 
+
+%      imprime {\tt $<espaco><espaco>$0010}
+%    \end{block}
+
+%    \end{description}
+%\end{frame}
+
+
+\begin{frame}
+  \frametitle{Formatos inteiros} 
+
+  \begin{itemize}
+  \item A letra \alert{d} pode ser substituida pelas letras \alert{u}
+    e \alert{l}, ou as duas, quando desejamos escrever variáveis do
+    tipo unsigned ou long, respectivamente.
+    
+    \begin{block}{Exemplo}
+      {\tt printf ("\%d", 4000000000);} 
+      
+      escreve {\tt -294967296} na tela, enquanto que 
+      
+      {\tt printf ("\%u", 4000000000);} 
+      
+      escreve {\tt 4000000000}.
+    \end{block}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Formatos ponto flutuante} 
+
+  \begin{description}
+  \item [\%f] --- Escreve um ponto flutuante na tela.
+
+    \begin{block}{Exemplo}
+      {\tt printf ("\%f", 10.0);} 
+
+      imprime {\tt 10.000000}
+    \end{block}
+
+    \end{description}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Formatos ponto flutuante} 
+
+  \begin{description}
+  \item [\%e] --- Escreve um ponto flutuante na tela, em notação científica
+
+    \begin{block}{Exemplo}
+      {\tt printf ("\%e", 10.02545);} 
+
+      imprime {\tt 1.002545e+01}
+    \end{block}
+
+    \end{description}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Formatos ponto flutuante} 
+
+  \begin{description}
+  \item [\%.$<decimais>$f] --- Escreve um ponto flutuante
+    na tela, com $<decimais>$ casas decimais.
+
+    \begin{block}{Exemplo}
+      {\tt printf ("\%.2f", 10.1111);} 
+      
+      imprime {\tt 10.11}
+    \end{block}
+
+    \end{description}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Formatos ponto flutuante} 
+
+  \begin{itemize}
+  \item A letra \alert{f} pode ser substituida pelas letras
+    \alert{lf}, para escrever um {\tt double} ao invés de um {\tt
+      float}
+
+    \begin{block}{Exemplo}
+      {\tt printf ("\%6.2lf", 10.0);} 
+    
+      imprime {\tt $<espaco>$10.00}
+    \end{block}
+
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Formato caracter} 
+
+  \begin{description}
+  \item [\%c] --- Escreve uma letra.
+
+    \begin{block}{Exemplo}
+      {\tt printf ("\%c", 'A');} 
+
+      imprime {\tt A}
+    \end{block}
+
+  \end{description}
+  Note que {\tt printf ("\%c", 65)} também imprime a letra A.
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Formato {\tt string}} 
+
+  \begin{description}
+  \item [\%s] --- Escreve uma string
+
+    \begin{block}{Exemplo}
+      {\tt printf ("\%s", "Meu primeiro programa");} 
+      
+      imprime {\tt Meu primeiro programa}
+    \end{block}
+  \end{description}
+\end{frame}
+
+
+
+\section{Entrada de dados}
+
+
+\begin{frame}
+  \frametitle{A função {\tt scanf}} 
+
+  \begin{itemize}
+  \item Realiza a leitura de um texto a partir do teclado.
+  \item Parâmetros:
+    \begin{itemize}
+    \item Uma cadeia de caracteres, indicando os tipos das variáveis que serão lidas
+      e o formato dessa leitura.
+    \item Uma lista de variáveis.
+    \end{itemize}
+  \item Aguarda que o usuário digite um valor e atribui o valor
+    digitado à variável.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{A função {\tt scanf}} 
+  
+  O programa abaixo é composto de quatro passos:
+  \begin{enumerate}
+  \item Cria uma variável {\tt n};
+  \item Escreve na tela {\tt Digite um número:}
+  \item Lê o valor do número digitado
+  \item Imprime o valor do número digitado
+  \end{enumerate}
+
+  \begin{exampleblock}{Exemplo}
+  \begin{verbatim}
+  #include <stdio.h>
+  int main(){
+    int n;
+    printf("Digite um número: ");
+    scanf("%d",&n);
+    printf("O valor digitado foi %d\n",n);
+    return 0;
+  }\end{verbatim}
+  \end{exampleblock}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{A função {\tt scanf}} 
+
+  \begin{exampleblock}{Leitura de várias variáveis}
+  \begin{verbatim}
+  #include <stdio.h>
+  main(){
+    int m, n, o;
+    printf("Digite três números: ");
+    scanf("%d %d %d",&m, &n, &o);
+    printf("O valores digitados foram\
+            %d %d %d\n", m, n, o);
+    return 0;
+  }\end{verbatim}
+  \end{exampleblock}
+\end{frame}
+
+
+%\begin{frame}
+%  \frametitle{O operador ``address-of'' \& de C}
+
+%  Toda variável tem um endereço de memória associado a ela. Esse
+%  endereço é o local onde essa variável é armazenada no sistema. O
+%  operador \& retorna o endereço de uma determinada variável
+
+%  \begin{block}{Exemplo}
+%    {\tt printf ("\%d", \&valor);}
+
+%    Imprime o endereço da variável {\tt valor}.
+%  \end{block}
+
+%\end{frame}
+
+
+%\begin{frame}
+%  \frametitle{O operador ``address-of'' \& de C}
+
+%  \begin{itemize}
+%  \item É necessário usar o operador {\tt \&} no comando {\tt scanf},
+%    pois esse operador indica que o valor digitado deve ser colocado
+%    no endereço referente a uma variável.
+%  \item {\bf Esquecer de colocar o {\tt \&} comercial é um erro muito
+%      comum que pode ocasionar erros de execução}.
+
+%  \end{itemize}
+%\end{frame}
+
+
+%\begin{frame}[fragile]
+%  \frametitle{O operador ``address-of'' \& de C}
+
+%  O programa abaixo imprime o valor e o endereço da variável:
+%  \begin{verbatim}
+%  #include <stdio.h>
+%  int main(void){
+%    int n = 8;    
+%    printf("valor %d, endereço 0x%x\n",n,&n);
+%  }
+%  \end{verbatim}
+%\end{frame}
+
+
+\begin{frame}
+  \frametitle{Formatos de leitura de variável}
+  
+  Os formatos de leitura são muito semelhantes aos formatos de escrita
+  utilizados pelo {\tt printf}. A tabela a seguir mostra alguns
+  formatos possíveis de leitura
+
+  \begin{tabular} {|l|l|}
+    \hline Código & Função \\ \hline
+    \%c & Lê um único caracter \\  
+    \%s & Lê uma série de caracteres \\
+    \%d & Lê um número decimal \\
+    \%u & Lê um decimal sem sinal \\
+    \%l & Lê um inteiro longo \\
+    \%f & Lê um número em ponto flutuante \\
+    \%lf & Lê um double \\ \hline
+  \end{tabular}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Um parêntese: comentários} 
+
+  \begin{itemize}
+    
+  \item O código fonte pode conter comentários direcionados unicamente
+    ao programador. Estes comentários devem estar delimitados pelos
+    símbolos \cod{/*} e \cod{*/}, e são ignorados pelo compilador.
+
+    \begin{block}{Exemplo}
+\begin{verbatim}
+#include <stdio.h>
+
+/* Este é o meu primeiro programa. */
+//Isto tambem é um comentário
+main() {
+  printf("Hello, world!\n");
+  return 0;
+} 
+\end{verbatim}
+    \end{block}
+
+  \item Comentários são úteis para descrever o algoritmo usado e para
+    explicitar suposições não óbvias sobre a implementação.
+
+  \end{itemize}
+\end{frame}
+
+
+
+\section{Exercício}
+
+\begin{frame}[fragile]
+  \frametitle{Exercício}
+
+Resolu\c{c}ão da segunda lista de exercícios.
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Nas próximas aulas...}
+
+\begin{itemize}
+\item Veremos como realizar decisões em nossos algoritmos :)
+\item FIM!!
+\end{itemize}
+
+\end{frame}
+
+
+
+
+
+\end{document}

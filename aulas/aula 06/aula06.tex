@@ -1,0 +1,730 @@
+\documentclass{beamer}
+\usetheme{Boadilla}
+%\usetheme{Warsaw}
+%\setbeamercovered{transparent}
+% \beamertemplatetransparentcoveredhigh
+\usepackage[portuges]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+
+\newcommand{\eng}[1]{\textsl{#1}}
+\newcommand{\cod}[1]{\texttt{#1}}
+
+\title[9002 --- Aula 06]{9002 --- Aula 06\\
+   Algoritmos e Programação de Computadores}
+
+\author[IEng - UFMT]{Instituto de Engenharia -- UFMT}
+
+\institute[2014/2]{Segundo Semestre de 2014}
+
+\date{07 de outubro de 2014}
+
+
+
+\begin{document}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+%\section*{Roteiro}
+
+\begin{frame}
+  \frametitle{Roteiro}
+  \tableofcontents
+\end{frame}
+
+\section{Revisão}
+\begin{frame}
+  \frametitle{Na aula passada...} 
+    
+    \begin{itemize}
+    \item Vimos como criar algoritmos que realizam decisões... 
+	\item Vimos também como definir {\bf expressões relacionais} e {\bf comandos condicionais} simples e encaixados...
+    \end{itemize}      
+	
+  \end{frame}
+
+\section{Expressões lógicas}
+
+\begin{frame}
+
+  \frametitle{Expressões lógicas} 
+  
+  Expressões lógicas são aquelas que realizam uma operação lógica
+  ({\tt ou}, {\tt e}, {\tt não}, etc...) e retornam verdadeiro ou falso
+  (como as expressões relacionais).
+
+\end{frame}
+
+\begin{frame}
+
+\frametitle{Operadores Lógicos}
+
+  \begin{block}{Os operadores lógicos são}
+    \begin{itemize}
+    \item \alert{\cod{\&\&}} : operador E
+    \item \alert{\cod{||}} : operador OU
+    \item \alert{\cod{!}} : operador NÃO 
+    \end{itemize}   
+  \end{block}
+
+
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Expressões lógicas}
+
+  \begin{itemize}
+
+  \item $<$expressao$>$ \alert{\tt \&\&} $<$expressao$>$: Retorna verdadeiro quando ambas
+    as expressões são verdadeiras. Sua tabela verdade é:
+
+    \begin{block}{}
+      \begin{center}
+        \begin{tabular}{|c|c|c|}
+          \hline
+          $Op_1$&$Op_2$&$Ret$\\
+          \hline
+          V&V&V\\
+          V&F&F\\
+          F&V&F\\
+          F&F&F\\
+          \hline
+        \end{tabular}
+      \end{center}
+    \end{block}
+    
+    \begin{block}{Exemplo}
+      \cod{a == 0 \&\& b == 0}
+    \end{block}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Expressões lógicas}
+
+  \begin{itemize}
+
+  \item $<$expressao$>$ \alert{\tt ||} $<$expressao$>$: Retorna verdadeiro
+    quando pelo menos uma das expressões é verdadeiras. Sua tabela
+    verdade é:
+
+    \begin{block}{}
+      \begin{center}
+        \begin{tabular}{|c|c|c|}
+          \hline
+          $Op_1$&$Op_2$&$Ret$\\
+          \hline
+          V&V&V\\
+          V&F&V\\
+          F&V&V\\
+          F&F&F\\
+          \hline
+        \end{tabular}
+      \end{center}
+    \end{block}
+    
+    \begin{block}{Exemplo}
+      \cod{a == 0 || b == 0}
+    \end{block}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Expressões lógicas}
+
+  \begin{itemize}
+
+  \item \alert{\tt !} $<$expressao$>$: Retorna verdadeiro quando a expressão
+    é falsa e vice-versa. Sua tabela verdade é:
+
+    \begin{block}{}
+      \begin{center}
+        \begin{tabular}{|c|c|}
+          \hline
+          $Op_1$&$Ret$\\
+          \hline
+          V&F\\
+          F&V\\
+          \hline
+        \end{tabular}
+      \end{center}
+    \end{block}
+    
+    \begin{block}{Exemplo}
+      \cod{!(a == 0)}
+    \end{block}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Simplificações úteis}
+
+  \begin{block}{Equivalências}
+  \begin{itemize}
+    \item {\tt !(a == b)} é equivalente a {\tt a != b}
+    \item {\tt !(a != b)} é equivalente a {\tt a == b}
+    \item {\tt !(a > b)} é equivalente a {\tt a <= b}
+    \item {\tt !(a < b)} é equivalente a {\tt a >= b}
+    \item {\tt !(a >= b)} é equivalente a {\tt a < b}
+    \item {\tt !(a <= b)} é equivalente a {\tt a > b}
+  \end{itemize}
+  \end{block}
+\end{frame}
+
+
+%\begin{frame}
+%  \frametitle{Lei de De Morgan 1}
+
+%  \begin{itemize}
+%  \item {\tt !a \&\& !b} é equivalente a {\tt !(a || b)}
+%  \end{itemize}
+  
+%  \begin{block}{}
+%    \begin{center}
+%      \begin{tabular}{|c|c|c|c|c|c|c|}
+%	\hline
+%	{\tt a}&{\tt b}&{\tt a||b}&{\tt \alert{!(a||b)}}&
+%	{\tt !a}&{\tt !b}& {\tt \alert{!a\&\&!b}}\\
+%	\hline
+%	V&V&V&F&F&F&F\\
+%	V&F&V&F&F&V&F\\
+%	F&V&V&F&V&F&F\\
+%	F&F&F&V&V&V&V\\
+%	\hline
+ %     \end{tabular}
+ %  \end{center}
+%  \end{block}
+%\end{frame}
+
+
+%\begin{frame}
+%  \frametitle{Lei de De Morgan 2}
+
+%  \begin{itemize}
+%  \item {\tt !a || !b} é equivalente a {\tt !(a \&\& b)}
+%  \end{itemize}
+  
+%  \begin{block}{}
+%    \begin{center}
+%      \begin{tabular}{|c|c|c|c|c|c|c|}
+%	\hline
+%	{\tt a}&{\tt b}&{\tt a\&\&b}&{\tt \alert{!(a\&\&b)}}&
+%	{\tt !a}&{\tt !b}& {\tt \alert{!a||!b}}\\
+%	\hline
+%	V&V&V&F&F&F&F\\
+%	V&F&F&V&F&V&V\\
+%	F&V&F&V&V&F&V\\
+%	F&F&F&V&V&V&V\\
+%	\hline
+ %     \end{tabular}
+%    \end{center}
+%  \end{block}
+%\end{frame}
+
+
+\section{Mais Comandos condicionais}
+
+\begin{frame}[fragile]
+
+  \frametitle{Combinando comandos condicionais}
+
+Às vezes podemos simplificar
+\begin{exampleblock}{}
+\begin{verbatim}
+if (cond1) {
+  if (cond2) {
+    if (!cond3) {
+      comando;
+    }
+  }
+}
+\end{verbatim}
+\end{exampleblock}
+
+por
+
+\begin{exampleblock}{}
+\begin{verbatim}
+if (cond1 && cond2 && !cond3) {
+  comando;
+}
+\end{verbatim}
+\end{exampleblock}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{if-else-if Encaixados}
+
+\begin{itemize}
+\item Várias vezes a construção if-else-if alterna entre valores \alert{inteiros}:
+\end{itemize}
+\begin{exampleblock}{}
+\begin{verbatim}
+#include <stdio.h>
+int main () {
+    long rga;
+    scanf("%ld", &rga);
+    if (rga == 201421901004) 
+        printf("Abel Breno Ventura de Abreu\n");
+    else if (rga == 201421904008)
+        printf("Ana Flavia Rosa Manzano\n"); 
+    else printf("Nenhum aluno com RGA informado!");             
+    
+    return 0;
+}
+\end{verbatim}
+\end{exampleblock}
+\end{frame}
+
+
+\begin{frame}
+  
+  \frametitle{O comando \texttt{switch} } 
+  
+  \begin{itemize}
+    
+  \item O objetivo do comando {\tt switch} é simplificar uma expressão
+    onde as condições ocorrem sobre uma variável \alert{inteira} (pode ser \alert{caractere}): 
+
+    \vspace{20pt}
+
+    \begin{block}{Sintaxe}
+    
+    {\tt switch (variável inteira) \{
+      
+      \hspace{16pt} case valor1:
+
+      \hspace{32pt} {\sl comandos} 
+      
+      \hspace{32pt} break;
+      
+      \hspace{16pt} case valor2: 
+
+      \hspace{32pt} {\sl comandos} 
+      
+      \hspace{32pt} break;
+
+      \}
+    }
+
+    \end{block}
+
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+
+  \frametitle{O comando \texttt{switch} } 
+
+
+\begin{block}{}
+\begin{verbatim}
+ switch(rga) {
+    case 201421901004: 
+       printf("Abel Breno Ventura de Abreu\n");
+       break;
+    case 201421904008:
+        printf("Ana Flavia Rosa Manzano\n");
+        break;
+    
+  }
+\end{verbatim}
+\end{block}
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{O comando {\tt switch} } 
+  
+  \begin{itemize}
+    
+  \item Os comandos começam a ser executados a partir do 
+    ponto onde o valor da variável corresponde ao valor antes dos dois
+    pontos (:).
+
+  \item Executa todos os comandos até que encontre um comando {\tt break}
+    ou que chegue ao final do bloco de comandos do {\tt switch}
+
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}
+
+  \frametitle{Valor padrão} 
+  
+  \begin{itemize}
+    
+  \item Você pode utilizar uma condição {\tt default}.
+    A execução dentro da alternativa {\tt default} ocorre se nenhuma outra
+    condição foi verdadeira (assim como o último else do if-else-if encaixados). 
+
+    \vspace{20pt}
+
+    \begin{block}{Sintaxe do {\tt switch}}
+    
+    {\tt \alert{switch} (variável inteira) \{
+      
+      \hspace{16pt} case valor: {\sl comandos} break;
+    
+      \hspace{16pt} \alert{default:} {\sl comandos} 
+     
+      \}
+    }
+
+    \end{block}
+
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}[fragile]
+
+  \frametitle{Valor padrão} 
+
+\begin{exampleblock}{}
+\begin{verbatim}
+   switch(rga) {
+    case 201421901004: 
+       printf("Abel Breno Ventura de Abreu\n");
+       break;
+    case 201421904008:
+        printf("Ana Flavia Rosa Manzano\n");
+        break; 
+      default:
+          printf("O aluno não está matriculado\n");
+  }
+\end{verbatim}
+    \end{exampleblock}
+\end{frame}
+
+
+
+
+\section{Legibilidade de código}
+
+\begin{frame}
+  \frametitle{Legibilidade de código}
+
+  \begin{block}{Legibilidade}
+    É a qualidade do código que permite o fácil entendimento
+    por seres humanos (programadores).
+  \end{block}
+
+  \begin{block}{Importância}
+    \begin{itemize}
+      \item Um código é escrito uma vez e lido várias vezes.
+
+      \item Várias pessoas podem ler e entender um mesmo programa.
+
+      \item É mais fácil fazer alterações futuras ou aproveitar em
+         outros projetos.      
+    \end{itemize}
+  \end{block}
+ 
+\end{frame}
+
+\begin{frame}
+  \frametitle{Legibilidade de código}
+
+  Para um código ser legível, ele deve ter as seguintes características.
+
+  \begin{block}{Características}
+    \begin{itemize}
+      \item Comentários que resumem o que faz um \alert{conjunto} de comandos.
+
+      \item Formatação bem definida (indentação, espaçamentos, nomes)
+
+      \item Documentação adequada de cada programa ou algoritmo.
+    \end{itemize}
+  \end{block}
+ 
+\end{frame}
+
+
+\begin{frame}[fragile]
+
+  \frametitle{Um pouco de maniqueísmo - Comentários}
+
+  \begin{columns}
+    \small
+    \column{0.45\linewidth}
+    \begin{block}{\color{red}{Mal}}
+\begin{verbatim}
+#include <stdio.h>
+#include <math.h>
+int main() {
+    // declara três variáveis
+    float x, y, z;
+    // lê um valor do teclado
+    scanf("%f", &x);
+    // lê outro valor
+    scanf("%f", &y);
+    // calcula o x ao quadrado
+    // mais y ao quadrado
+    z = x*x + y*y;
+    // tira a raiz de z
+    z = sqrt(z);
+    // mostra o valor de z
+    printf("%f\n", z);    
+    return 0;
+}
+\end{verbatim}
+    \end{block}
+
+    \pause
+    \column{0.45\linewidth}
+    \begin{block}{\color{blue}{Bem}}
+\begin{verbatim}
+#include <stdio.h>
+#include <math.h>
+int main() {
+    // catetos e hipotenusa
+    float x, y, z;
+    // lê valores dos catetos
+    scanf("%f", &x);
+    scanf("%f", &y);
+
+    // aplica Pitágoras
+    z = x*x + y*y;
+    z = sqrt(z);
+
+    // devolve a hipotenusa
+    printf("%f\n", z);    
+    return 0;
+}
+\end{verbatim}
+    \end{block}
+  \end{columns}
+
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+
+  \frametitle{Um pouco de maniqueísmo - Indentação}
+
+  \begin{columns}
+    \small
+    \column{0.45\linewidth}
+    \begin{block}{\color{red}{Mal}}
+\begin{verbatim}
+#include <stdio.h>
+int main() {
+int n;
+
+printf("n: "); scanf("%d",&n);
+
+if(n==1){printf("Unidade");}
+
+else if (n>=0) {
+if (n%3)
+  printf("Deixa resto\n");
+else   printf("Não deixa");
+
+}else{printf("Negativo");}}
+
+  
+
+\end{verbatim}
+    \end{block}
+
+    \pause
+    \column{0.45\linewidth}
+    \begin{block}{\color{blue}{Bem}}
+\begin{verbatim}
+#include <stdio.h>
+int main() {
+   int n;
+   printf("n: ");
+   scanf("%d",&n);
+
+   if (n==1) {
+      printf("Unidade");
+   } else if (n>=0) {
+      if (n%3)
+         printf("Deixa resto");
+      else
+         printf("Não deixa");
+   } else {
+       printf("Negativo");
+   }   
+   return 0;
+}
+\end{verbatim}
+    \end{block}
+  \end{columns}
+
+\end{frame}
+
+
+  
+
+
+
+\begin{frame}[fragile]
+
+  \frametitle{Um pouco de maniqueísmo - Nome de variáveis}
+
+  \begin{columns}
+    \small
+    \column{0.45\linewidth}
+    \begin{block}{\color{red}{Mal}}
+\begin{verbatim}
+#include <stdio.h>
+int main() {
+  float n1, n2, n3, n4, aluno;
+  int exercices;
+
+  scanf("%d %f%f",&exercices,
+      &n1, &n3);  
+  n2 = 4.0;
+  n4 = 6.0;
+  if (exercices > 7)
+    n4 = 7.0;
+  aluno = (n1*n2 + n3*n4)/10;
+  printf("%f", aluno);
+}
+
+
+
+\end{verbatim}
+    \end{block}
+
+    \pause
+    \column{0.45\linewidth}
+    \begin{block}{\color{blue}{Bem}}
+\begin{verbatim}
+#include <stdio.h>
+int main() {
+  float nota1, nota2;
+  float peso1, peso2;
+  float media;
+  int exercicios;
+
+  scanf("%d %f%f", &exercicios,
+      &nota1, &nota2);  
+  peso1 = 4.0;
+  peso2 = 6.0;
+  if (exercicios > 7)
+    peso2 = 7.0;
+  media = (nota1*peso1 +
+           nota2*peso2)/10;
+  printf("%f", media);
+  return 0;
+}
+\end{verbatim}
+    \end{block}
+  \end{columns}
+
+\end{frame}
+
+
+
+
+\begin{frame}[fragile]
+
+  \frametitle{Um pouco de maniqueísmo - Documentação}
+
+  \begin{columns}
+    \small
+    \column{0.45\linewidth}
+    \begin{block}{\color{red}{Mal}}
+\begin{verbatim}
+#include <stdio.h>
+int main() {
+  float r;
+  float v;
+  scanf("%f", &r);  
+  v = (4.0*3.1425*r*r*r)/3.0;
+  printf("%f", v);
+}
+
+
+
+
+
+\end{verbatim}
+   \pause
+   \emph{O que esse programa faz???}
+
+   \pause
+   \emph{O valor de pi está errado, com quem eu falo???}
+  \end{block}
+
+    \pause
+    \column{0.45\linewidth}
+    \begin{block}{\color{blue}{Bem}}
+\begin{verbatim}
+/* DESCRIÇÃO: Lê o raio de
+      uma esfera pelo teclado
+      e imprime o seu volume.
+   ENTRADA: o raio da esfera
+   SAÍDA: o volume da esfera
+   PRÉ-CONDIÇÃO: O raio deve
+      ser maior que zero.
+   AUTOR: Nome do Aluno */
+#include <stdio.h>
+int main() {
+  float r;
+  float v;
+  scanf("%f", &r);  
+  v = (4.0*3.1415*r*r*r)/3.0;
+  printf("%f", v);
+  return 0;
+}
+\end{verbatim}
+    \end{block}
+  \end{columns}
+
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Exercícios}
+
+
+  \begin{enumerate}
+  \item Refazer os exercícios da aula anterior. Dessa vez, utilize operadores lógicos
+        para simplificar o código.
+    
+
+   \item Escreva um programa que, dadas duas datas, determine qual delas
+     ocorreu cronologicamente antes. Cada data é 
+     composta por 3 números inteiros: o ano, o mês e o dia.
+
+   \item Troque seus códigos com algum colega de sala. Corrija o código do seu
+     colega e verifique se ele é legível. Atente-se para comentários, indentação, etc.
+  \end{enumerate}
+  
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Na Próxima aula...}
+
+  \begin{itemize}
+  	\item colocaremos a mão na massa mais um pouco :)
+  	\item FIM.
+  \end{itemize}
+  
+  
+\end{frame}
+
+
+
+\end{document}

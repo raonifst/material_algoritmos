@@ -1,0 +1,7 @@
+\frametitle {Pilha de chamadas - Fatorial}
+
+  Estado da pilha de chamadas para {\it fatorial(4)}:
+
+  \begin{center}
+    \includegraphics[width=7.5cm]{fat.pdf}
+  \end{center}

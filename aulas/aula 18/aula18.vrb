@@ -1,0 +1,26 @@
+\frametitle {Exercício 2}
+
+  \begin{exampleblock}{Ordenação da bolha ({\it Bubble-Sort})}
+    \small
+\begin{verbatim}
+void ordenar_bolha(int vetor[], int n) {
+    int i, j;
+    for (i = n - 1; i > 0; i--) {
+        for (j = 0; j < i; j++) {
+            if (vet[j] < vet[j+1])
+                trocar(&vetor[j], &vetor[j+1]);
+        }
+    }
+}
+\end{verbatim}
+  \end{exampleblock}
+
+  \begin{enumerate}
+    \item Explique o que faz e qual é a ideia do algoritmo.
+    \item Faça um teste de mesa para um vetor com elementos
+        $(5, 4, 3, 2, 1)$ e para um vetor com elementos
+        $(1, 4, 3, 2, 5)$. Conte as trocas.
+    \item Você consegue dizer por que o algoritmo tem
+        esse nome? Por quê?
+  \end{enumerate}
+

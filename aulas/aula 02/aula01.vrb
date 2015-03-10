@@ -1,0 +1,19 @@
+\frametitle {Exercício}
+
+  Complete e corrija o código abaixo.
+
+ \begin{exampleblock}{Tipos}
+\begin{verbatim}
+int main() {
+    10 = a;
+    b = -6;
+    c = 100000;
+    d = 33000.;
+    e = -80000,657;
+    f = 30;
+    g = a;
+    h = 'a';
+}
+\end{verbatim}
+    \end{exampleblock}
+

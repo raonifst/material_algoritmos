@@ -1,0 +1,25 @@
+\frametitle {Algoritmo de particionamento}
+
+  \begin{exampleblock}{Particionar vetor}
+    \footnotesize
+\begin{verbatim}
+int particionar(int vetor[], int ini, int fim) {
+    int pivo;
+
+    pivo = vetor[fim];
+
+    while (ini < fim) {
+        while (ini < fim && vetor[ini] <= pivo)
+            ini++;
+
+        while (ini < fim && vetor[fim] > pivo)
+            fim--;
+
+        troca(&vetor[ini], &vetor[fim]);
+    }
+
+    return ini; // ini é a posição do primeiro elemento grande
+}
+\end{verbatim}
+  \end{exampleblock}
+
