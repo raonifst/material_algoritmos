@@ -1,0 +1,55 @@
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+ 
+\begin{document}
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+\title{Universidade Federal de Mato Grosso\\
+Instituto de Engenharia}
+
+
+
+
+\author{Algoritmos e Programa\c{c}\~ao de Computadores - 2014/2 \\
+{\bf Desafio 2 - Problema do Sorteio}} %if necessary, replace with your course title
+\date{13 de outubro de 2014}
+\maketitle
+
+
+\section{Enunciado}
+Mostre como sortear um n\'umero inteiro entre 1 e 8 utilizando apenas uma moeda (n\~ao viciada). Sua solu\c{c}\~ao deve gerar os n\'umeros com {\bf distribui\c{c}\~ao uniforme}, realizando o menor n\'umero de lan\c{c}amentos poss\'ivel. 
+
+
+\section{C\'alculo da Nota}
+Para encorajar a otimiza\c{c}\~ao do n\'umero de lan\c{c}amentos, a nota deste desafio, $D_2$, ser\'a calculada da seguinte maneira:
+\begin{equation}
+D_2 = \begin{cases} 1, & \mbox{se } n \leq 2 \\ e^{\frac{-(n-3)^2}{100}}, & \mbox{caso contr\'ario,}  \end{cases}%.
+\end{equation}
+em que $n$ corresponde ao n\'umero de lan\c{c}amentos. Evidentemente, $n$ \'e um n\'umero natural maior que $0$. Lembre-se de que $D_2$ ser\'a acrescentada \`a nota da segunda Prova Te\'orica.
+
+\section{Prazo de Entrega}
+
+O texto manuscrito contendo a solu\c{c}\~ao desta atividade deve ser entregue ao professor, impreteri\-vel\-mente, at\'e o dia {\bf 16 de dezembro de 2014.}
+
+\end{document}

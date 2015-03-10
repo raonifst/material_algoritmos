@@ -1,0 +1,58 @@
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+ 
+\begin{document}
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+\title{Universidade Federal de Mato Grosso\\
+Instituto de Engenharia}
+
+
+
+
+\author{Algoritmos e Programa\c{c}\~ao de Computadores - 2014/2 \\
+{\bf Desafio 1 - Problema da Moeda Falsa}} %if necessary, replace with your course title
+\date{16 de setembro de 2014}
+\maketitle
+
+
+\section{Enunciado}
+Considere o problema de encontrar uma moeda falsa utilizando uma balan\c{c}a de pratos, enunciado a seguir. H\'a um conjunto de {\bf 27 moedas} e apenas {\bf uma delas}, a falsa, \'e {\bf mais leve} que as demais. Mostre como encontrar a solu\c{c}\~ao realizando o menor n\'umero de pesagens poss\'ivel.
+
+
+
+
+
+\section{C\'alculo da Nota}
+Para encorajar a otimiza\c{c}\~ao do uso da balan\c{c}a, a nota deste desafio, $D_1$, ser\'a calculada da seguinte maneira:
+\begin{equation}
+D_1 = \begin{cases} 1, & \mbox{se } n \leq 2 \\ e^{\frac{-(n-3)^2}{100}}, & \mbox{caso contr\'ario,}  \end{cases}%.
+\end{equation}
+em que $n$ corresponde ao n\'umero de vezes em que a balan\c{c}a \'e utilizada no pior caso. Evidentemente, $n$ \'e um n\'umero natural maior que $0$. Lembre-se de que $D_1$ ser\'a acrescentada \`a nota da primeira Prova Te\'orica.
+
+\section{Prazo de Entrega}
+
+O texto manuscrito contendo a solu\c{c}\~ao do desafio deve ser entregue ao professor, impreteri\-vel\-mente, at\'e o dia {\bf 30 de setembro de 2014.}
+
+\end{document}
